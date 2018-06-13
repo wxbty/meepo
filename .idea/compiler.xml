@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bytejta-core" />
         <module name="bytejta-supports-dubbo" />
+        <module name="com.myfav" />
         <module name="commyfav" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
       <module name="bytejta-sample-provider" target="1.5" />
       <module name="bytejta-supports-dubbo" target="1.5" />
       <module name="bytejtasupports" target="1.5" />
+      <module name="commyfav" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
