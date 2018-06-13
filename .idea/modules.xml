@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bytejta-core/bytejta-core.iml" filepath="$PROJECT_DIR$/bytejta-core/bytejta-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bytejta-supports-dubbo/bytejta-supports-dubbo.iml" filepath="$PROJECT_DIR$/bytejta-supports-dubbo/bytejta-supports-dubbo.iml" />
+    </modules>
+  </component>
+</project>
