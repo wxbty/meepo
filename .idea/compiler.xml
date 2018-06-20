@@ -7,15 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="com.myfav" />
-        <module name="commyfav" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bytejta-core" target="1.5" />
-      <module name="bytejta-sample-provider" target="1.5" />
-      <module name="bytejta-supports-dubbo" target="1.5" />
-      <module name="bytejtasupports" target="1.5" />
-      <module name="commyfav" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
