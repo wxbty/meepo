@@ -6,8 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bytejta-core" />
-        <module name="bytejta-supports-dubbo" />
         <module name="com.myfav" />
         <module name="commyfav" />
       </profile>
