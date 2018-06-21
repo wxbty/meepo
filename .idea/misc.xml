@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-core/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/pom.xml" />
       </list>
     </option>
   </component>

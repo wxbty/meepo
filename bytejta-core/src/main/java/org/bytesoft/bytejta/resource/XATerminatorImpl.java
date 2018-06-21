@@ -156,6 +156,7 @@ public class XATerminatorImpl implements XATerminator {
             } finally {
                 //关闭自建创建的连接
                 try {
+                    stmt.execute("set global general_log=off");
                     rs.close();
                     conn.close();
                 } catch (Exception e) {
