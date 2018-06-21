@@ -115,7 +115,7 @@
 
 	<root>
 		<level value="INFO"/>
-        <!--<appender-ref ref="STDOUT" />-->
+        <appender-ref ref="STDOUT" />
 		<appender-ref ref="DebugFile"/>
         <appender-ref ref="InfoFile" />
 		<appender-ref ref="WarnFile" />
