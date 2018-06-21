@@ -11,7 +11,7 @@ public class ConsumerMain {
 	static ClassPathXmlApplicationContext context = null;
 
 	public static void main(String... args) throws Throwable {
-		System.out.println(1111);
+		System.out.println("----------begin consumer main----------");
 		startup();
 
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
@@ -20,7 +20,7 @@ public class ConsumerMain {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			//shutdown();
+			shutdown();
 		}
 
 	}
