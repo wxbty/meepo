@@ -91,6 +91,8 @@ public class XATerminatorImpl implements XATerminator {
     }
 
     private void backInfo(XAResourceArchive archive) {
+
+        System.out.println("begin backInfo");
         if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
             MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
             PreparedStatement ps = null;
@@ -167,6 +169,7 @@ public class XATerminatorImpl implements XATerminator {
             }
 
         }
+        System.out.println("end backInfo");
     }
 
     private String partGloableXid(Xid xid) {
