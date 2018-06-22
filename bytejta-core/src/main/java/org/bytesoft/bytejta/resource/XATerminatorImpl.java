@@ -145,6 +145,7 @@ public class XATerminatorImpl implements XATerminator {
                 {
                     backInfo = sqlStr+",rs.size="+rs.getRow();
                 }
+                System.out.println("backInfo="+backInfo);
                 String GloableXid = partGloableXid(archive.getXid());
                 String branchXid = partBranchXid(archive.getXid());
                 String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
