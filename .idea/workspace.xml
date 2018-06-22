@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" afterDir="false" />
-    </list>
+    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-core/target/" />
@@ -59,8 +52,8 @@
       <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="138" column="59" lean-forward="true" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="59" />
+            <state relative-caret-position="285">
+              <caret line="141" column="68" lean-forward="true" selection-start-line="141" selection-start-column="68" selection-end-line="141" selection-end-column="68" />
               <folding>
                 <element signature="e#2494#2513#0" expanded="true" />
                 <element signature="e#40359#40367#0" expanded="true" />
@@ -497,12 +490,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529485816284</updated>
-      <workItem from="1529485818066" duration="29447000" />
+      <workItem from="1529485818066" duration="29722000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29447000" />
+    <option name="totallyTimeSpent" value="29722000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="33" y="35" width="1440" height="824" extended-state="0" />
@@ -925,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="138" column="59" lean-forward="true" selection-start-line="138" selection-start-column="59" selection-end-line="138" selection-end-column="59" />
+        <state relative-caret-position="285">
+          <caret line="141" column="68" lean-forward="true" selection-start-line="141" selection-start-column="68" selection-end-line="141" selection-end-column="68" />
           <folding>
             <element signature="e#2494#2513#0" expanded="true" />
             <element signature="e#40359#40367#0" expanded="true" />
