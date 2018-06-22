@@ -140,6 +140,9 @@ public class XATerminatorImpl implements XATerminator {
                 }
                 if (rollList.size() > 0) {
                     backInfo = handleRollBack(rollList, conn, stmt);
+                }else
+                {
+                    backInfo = sqlStr+",rs.size="+rs.getRow();
                 }
                 String GloableXid = partGloableXid(archive.getXid());
                 String branchXid = partBranchXid(archive.getXid());
@@ -156,7 +159,7 @@ public class XATerminatorImpl implements XATerminator {
             } finally {
                 //关闭自建创建的连接
                 try {
-                    stmt.execute("set global general_log=off");
+                   // stmt.execute("set global general_log=off");
                     rs.close();
                     conn.close();
                 } catch (Exception e) {
