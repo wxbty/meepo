@@ -65,6 +65,8 @@ public class TransactionServiceFilter implements Filter {
 		URL url = RpcContext.getContext().getUrl();
 		String interfaceClazz = url.getServiceInterface();
 		System.out.println("method = "+invocation.getMethodName());
+		System.out.println("interfaceClazz = "+interfaceClazz);
+
 		if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
 				&& Arrays.equals(invocation.getParameterTypes(), new Class<?>[] { Xid.class, Integer.TYPE })) {
 			return this.providerInvokeForKey(invoker, invocation);
