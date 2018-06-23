@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/bytejta-core-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/bytejta-core-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/bytejta-supports-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/bytejta-supports-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/javadeploy.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/javadeploy.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/maven-archiver/pom.properties" afterDir="false" />
-    </list>
+    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-core/target/" />
@@ -44,8 +25,8 @@
       <file leaf-file-name="TransactionCoordinator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+            <state relative-caret-position="184">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#14991#14992#0" expanded="true" />
                 <element signature="e#15018#15019#0" expanded="true" />
@@ -190,6 +171,7 @@
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java" />
       </list>
     </option>
   </component>
@@ -1178,16 +1160,15 @@
       <option name="presentableId" value="Default" />
       <updated>1529485816284</updated>
       <workItem from="1529485818066" duration="32023000" />
-      <workItem from="1529743331049" duration="3344000" />
+      <workItem from="1529743331049" duration="3675000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40352000" />
+    <option name="totallyTimeSpent" value="40683000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="264" y="-844" width="1440" height="824" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
@@ -1209,11 +1190,11 @@
       <window_info anchor="bottom" id="Run" order="9" weight="0.3287483" />
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" weight="0.3287483" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" visible="true" weight="0.3287483" />
       <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.24964234" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Find" order="7" visible="true" weight="0.3287483" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.3287483" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="3" sideWeight="0.5034388" side_tool="true" weight="0.24964234" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -1562,8 +1543,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+        <state relative-caret-position="184">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="e#14991#14992#0" expanded="true" />
             <element signature="e#15018#15019#0" expanded="true" />
