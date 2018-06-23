@@ -141,14 +141,15 @@ public class TransactionServiceFilter implements Filter {
 
 		Class<?>[] parameterTypeArray = invocation.getParameterTypes();
 		Class<?> parameterType = (parameterTypeArray == null || parameterTypeArray.length == 0) ? null : parameterTypeArray[0];
-		System.out.println("parameterType ="+parameterType.getName());
+
 		if (parameterTypeArray == null || parameterTypeArray.length == 0) {
 			System.out.println("parameterTypeArray.size="+parameterTypeArray.length+",parameterType="+parameterType.getName());
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		} else if (Xid.class.equals(parameterType) == false) {
+			System.out.println("parameterType != Xid");
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		}
-
+		System.out.println("parameterType ="+parameterType.getName());
 		RpcResult result = new RpcResult();
 
 		Object[] arguments = invocation.getArguments();
