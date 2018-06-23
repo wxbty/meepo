@@ -143,7 +143,7 @@ public class TransactionServiceFilter implements Filter {
 		Class<?> parameterType = (parameterTypeArray == null || parameterTypeArray.length == 0) ? null : parameterTypeArray[0];
 
 		if (parameterTypeArray == null || parameterTypeArray.length == 0) {
-			System.out.println("parameterTypeArray.size="+parameterTypeArray.length+",parameterType="+parameterType.getName());
+			System.out.println("parameterTypeArray.size is null");
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		} else if (Xid.class.equals(parameterType) == false) {
 			System.out.println("parameterType != Xid");
