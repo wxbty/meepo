@@ -67,6 +67,10 @@ public class TransactionServiceFilter implements Filter {
 		System.out.println("method = "+invocation.getMethodName());
 		System.out.println("interfaceClazz = "+interfaceClazz);
 
+		if(StringUtils.equals(invocation.getMethodName(),"commit"))
+		{
+			System.out.println("aaaa");
+		}
 		if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
 				&& Arrays.equals(invocation.getParameterTypes(), new Class<?>[] { Xid.class, Integer.TYPE })) {
 			return this.providerInvokeForKey(invoker, invocation);

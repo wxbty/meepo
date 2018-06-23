@@ -77,11 +77,7 @@ public class TransactionCoordinator implements RemoteCoordinator, TransactionBea
 		transactionManager.associateThread(transaction);
 		// this.transactionStatistic.fireBeginTransaction(transaction);
 
-		try {
-			transaction.participantStart();
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
+
 		return transaction;
 	}
 

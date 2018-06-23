@@ -379,6 +379,7 @@ public class TransactionImpl implements Transaction {
 			throw ex;
 		} finally {
 			if (unFinishExists == false) {
+				System.out.println("-------------xxxxxxxxxxx-----1、-------- trans will be prepared");
 				this.transactionStatus = Status.STATUS_PREPARED;
 				archive.setStatus(this.transactionStatus);
 				this.transactionListenerList.onPrepareSuccess(xid);
@@ -592,6 +593,7 @@ public class TransactionImpl implements Transaction {
 		this.transactionListenerList.onPrepareSuccess(xid);
 
 		if (vote == XAResource.XA_RDONLY) {
+			System.out.println("-------------xxxxxxxxxxx-----2、-------- trans will be prepared");
 			this.transactionStatus = Status.STATUS_PREPARED;// .setStatusPrepared();
 			this.transactionVote = XAResource.XA_RDONLY;
 			archive.setVote(XAResource.XA_RDONLY);
@@ -1203,6 +1205,7 @@ public class TransactionImpl implements Transaction {
 		}
 
 		if (unPrepareExists == false) {
+			System.out.println("-------------xxxxxxxxxxx-----3、-------- trans will be prepared");
 			this.transactionStatus = Status.STATUS_PREPARED;
 
 			TransactionArchive archive = this.getTransactionArchive();
@@ -1676,6 +1679,7 @@ public class TransactionImpl implements Transaction {
 		try {
 			TransactionStrategy currentStrategy = this.getTransactionStrategy();
 			 currentStrategy.start(xid);
+			System.out.println("-------------xxxxxxxxxxx-----4、-------- trans will be prepared");
 			this.transactionStatus = Status.STATUS_PREPARED;
 			archive.setStatus(this.transactionStatus);
 			return 0;
