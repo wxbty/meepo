@@ -141,7 +141,9 @@ public class TransactionServiceFilter implements Filter {
 
 		Class<?>[] parameterTypeArray = invocation.getParameterTypes();
 		Class<?> parameterType = (parameterTypeArray == null || parameterTypeArray.length == 0) ? null : parameterTypeArray[0];
+		System.out.println("parameterType ="+parameterType.getName());
 		if (parameterTypeArray == null || parameterTypeArray.length == 0) {
+			System.out.println("parameterTypeArray.size="+parameterTypeArray.length+",parameterType="+parameterType.getName());
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		} else if (Xid.class.equals(parameterType) == false) {
 			return this.wrapResultForProvider(invoker, invocation, null, false);
@@ -158,6 +160,7 @@ public class TransactionServiceFilter implements Filter {
 
 		Transaction transaction = transactionRepository.getTransaction(globalXid);
 		if (transaction == null) {
+			System.out.println("transaction is null ");
 			InvocationResult wrapped = new InvocationResult();
 			wrapped.setError(new XAException(XAException.XAER_NOTA));
 			wrapped.setVariable(RemoteCoordinator.class.getName(), transactionCoordinator.getIdentifier());
@@ -165,12 +168,14 @@ public class TransactionServiceFilter implements Filter {
 			result.setException(null);
 			result.setValue(wrapped);
 		} else {
+			System.out.println("transaction ="+transaction.toString());
 			TransactionContext transactionContext = transaction.getTransactionContext();
 			String propagatedBy = String.valueOf(transactionContext.getPropagatedBy());
 
 			String remoteAddr = invocation.getAttachment(RemoteCoordinator.class.getName());
 
 			if (StringUtils.equals(propagatedBy, remoteAddr)) {
+				System.out.println("propagatedBy = remoteAddr ="+remoteAddr);
 				return this.wrapResultForProvider(invoker, invocation, propagatedBy, false);
 			}
 
@@ -277,7 +282,7 @@ public class TransactionServiceFilter implements Filter {
 
 	public Result wrapResultForProvider(Invoker<?> invoker, Invocation invocation, String propagatedBy,
                                         boolean attachRequired) {
-
+		System.out.println("begin wrapResultForProvider,invocation="+invocation.toString()+",invoker="+invoker.toString());
 		try {
 			RpcResult result = (RpcResult) invoker.invoke(invocation);
 			if (result.hasException()) {
