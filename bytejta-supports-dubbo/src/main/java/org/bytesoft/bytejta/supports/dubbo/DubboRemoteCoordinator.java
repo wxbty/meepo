@@ -46,11 +46,13 @@ public class DubboRemoteCoordinator implements InvocationHandler {
 					return this.invocationContext == null ? null
 							: String.format("%s:%s:%s", serverHost, serviceKey, serverPort);
 				} else if ("getApplication".equals(methodName)) {
+					System.out.println("invoke DubboRemoteCoordinator-getApplication");
 					if (this.invocationContext == null) {
 						return null;
 					} else if (StringUtils.isNotBlank(this.invocationContext.getServiceKey())) {
 						return this.invocationContext.getServiceKey();
 					} else {
+						System.out.println("go invokeCoordinator");
 						return this.invokeCoordinator(proxy, method, args);
 					}
 				} else {
@@ -92,6 +94,8 @@ public class DubboRemoteCoordinator implements InvocationHandler {
 
 	public Object invokeCoordinator(Object proxy, Method method, Object[] args) throws Throwable {
 		try {
+			System.out.println("proxy class="+proxy.getClass()+",method="+method.getName()+",args="+args.toString());
+			System.out.println("remoteCoordinator="+remoteCoordinator);
 			return method.invoke(this.remoteCoordinator, args);
 		} catch (InvocationTargetException ex) {
 			throw ex.getTargetException();
