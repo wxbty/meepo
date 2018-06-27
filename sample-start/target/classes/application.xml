@@ -20,7 +20,7 @@
 	<context:component-scan base-package="com.bytesvc.service" />
 
 	<bean id="mysql" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/inst01" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/inst1" />
 		<property name="user" value="root" />
 		<property name="password" value="123456" />
 	</bean>
