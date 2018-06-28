@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-core/target/" />
@@ -65,11 +61,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="117" selection-start-line="117" selection-end-line="117" />
+            <state relative-caret-position="292">
+              <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="162" column="57" selection-start-line="162" selection-start-column="46" selection-end-line="162" selection-end-column="57" />
+              <folding>
+                <element signature="e#2494#2513#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -117,18 +125,17 @@
       <find>175</find>
       <find>35.189.175.173</find>
       <find>txc_undo_log</find>
-      <find />
-      <find />
-      <find />
+      <find>XA START</find>
+      <find>XA P</find>
+      <find>XA END</find>
       <find>accountService</find>
-      <find />
-      <find />
+      <find>XA STA</find>
+      <find>------pre go--------</find>
       <find>CONTENT_PRODUCT_NOT_EXISTED·</find>
       <find>XATerminatorImpl</find>
-      <find />
-      <find />
+      <find>Save old data for update</find>
       <find>enlistResource</find>
-      <find />
+      <find>Got ping response for sessionid</find>
       <find>slf4j-log4j12</find>
       <find>dataSource1</find>
       <find>jdbcTemplate1</find>
@@ -137,6 +144,7 @@
       <find>UncategorizedSQLException</find>
       <find>System.out.println</find>
       <find>enlist:</find>
+      <find>begin backInfo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,9 +197,9 @@
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionBeanFactoryImpl.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" />
         <option value="$PROJECT_DIR$/sample-start/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
       </list>
     </option>
   </component>
@@ -234,225 +242,6 @@
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
               <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-              <item name="supports" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-              <item name="supports" type="462c0819:PsiDirectoryNode" />
-              <item name="jdbc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
-              <item name="supports" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="transaction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="transaction" type="462c0819:PsiDirectoryNode" />
-              <item name="archive" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
-              <item name="transaction" type="462c0819:PsiDirectoryNode" />
-              <item name="internal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
-              <item name="comsumerService" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -1125,16 +914,15 @@
       <updated>1529485816284</updated>
       <workItem from="1529485818066" duration="32023000" />
       <workItem from="1529743331049" duration="3675000" />
-      <workItem from="1530105137235" duration="20247000" />
+      <workItem from="1530105137235" duration="20643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63520000" />
+    <option name="totallyTimeSpent" value="63916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.3287483" />
@@ -1146,7 +934,7 @@
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="10" visible="true" weight="0.39889959" />
+      <window_info anchor="bottom" id="Debug" order="10" weight="0.39889959" />
       <window_info anchor="bottom" id="TODO" order="13" />
       <window_info anchor="bottom" id="Messages" order="2" weight="0.3287483" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
@@ -1156,8 +944,8 @@
       <window_info anchor="bottom" id="Run" order="9" weight="0.26547456" />
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" weight="0.3287483" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.3287483" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.3287483" />
@@ -1465,16 +1253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="322" column="43" lean-forward="true" selection-start-line="322" selection-start-column="43" selection-end-line="322" selection-end-column="43" />
-          <folding>
-            <element signature="e#2494#2513#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6-sources.jar!/org/slf4j/LoggerFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2">
@@ -1543,8 +1321,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        <state relative-caret-position="292">
+          <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="162" column="57" selection-start-line="162" selection-start-column="46" selection-end-line="162" selection-end-column="57" />
+          <folding>
+            <element signature="e#2494#2513#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1625,7 +1413,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

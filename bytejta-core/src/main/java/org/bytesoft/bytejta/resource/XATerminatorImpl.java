@@ -1207,6 +1207,7 @@ public class XATerminatorImpl implements XATerminator {
     private boolean rollback(List<String> list, Connection connection, Statement stmt) {
         for (String rollsql : list) {
             try {
+                System.out.println("exec back sql="+rollsql);
                 stmt.execute(rollsql);
             } catch (SQLException e) {
                 e.printStackTrace();
