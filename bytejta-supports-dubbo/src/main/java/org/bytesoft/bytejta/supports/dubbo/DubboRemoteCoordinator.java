@@ -94,8 +94,6 @@ public class DubboRemoteCoordinator implements InvocationHandler {
 
 	public Object invokeCoordinator(Object proxy, Method method, Object[] args) throws Throwable {
 		try {
-			System.out.println("proxy class="+proxy.getClass()+",method="+method.getName()+",args="+args.toString());
-			System.out.println("remoteCoordinator="+remoteCoordinator);
 			return method.invoke(this.remoteCoordinator, args);
 		} catch (InvocationTargetException ex) {
 			throw ex.getTargetException();
