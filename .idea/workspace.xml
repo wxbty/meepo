@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
@@ -26,11 +24,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+            <state relative-caret-position="277">
+              <caret line="79" column="55" selection-start-line="79" selection-start-column="55" selection-end-line="79" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="22" column="73" selection-start-line="22" selection-start-column="73" selection-end-line="22" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -112,9 +128,9 @@
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" />
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" />
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.java" />
-        <option value="$PROJECT_DIR$/sample-start/pom.xml" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
+        <option value="$PROJECT_DIR$/sample-start/pom.xml" />
       </list>
     </option>
   </component>
@@ -135,8 +151,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="43" />
-    <option name="y" value="55" />
+    <option name="x" value="-34" />
+    <option name="y" value="52" />
     <option name="width" value="1440" />
     <option name="height" value="803" />
   </component>
@@ -502,15 +518,16 @@
       <updated>1529485816284</updated>
       <workItem from="1529485818066" duration="32023000" />
       <workItem from="1529743331049" duration="3675000" />
-      <workItem from="1530105137235" duration="2924000" />
+      <workItem from="1530105137235" duration="4117000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46197000" />
+    <option name="totallyTimeSpent" value="47390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.3287483" />
@@ -532,8 +549,8 @@
       <window_info anchor="bottom" id="Run" order="9" weight="0.3287483" />
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.3287483" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.3287483" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.3287483" />
@@ -825,13 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="22" column="68" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ProviderMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -884,13 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="133" column="36" lean-forward="true" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -900,8 +903,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="70" column="20" lean-forward="true" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+        <state relative-caret-position="277">
+          <caret line="79" column="55" selection-start-line="79" selection-start-column="55" selection-end-line="79" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="22" column="73" selection-start-line="22" selection-start-column="73" selection-end-line="22" selection-end-column="73" />
         </state>
       </provider>
     </entry>

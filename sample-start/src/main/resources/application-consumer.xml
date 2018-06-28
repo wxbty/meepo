@@ -17,41 +17,9 @@
 
 	<context:component-scan base-package="com.bytesvc.comsumerService" />
 
-	<bean id="mysql1" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/inst1" />
-		<property name="user" value="root" />
-		<property name="password" value="123456" />
-	</bean>
-	<bean id="dataSourceWrap1" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
-		<property name="xaDataSource" ref="mysql1" />
-	</bean>
-	<bean id="dataSource1" class="org.apache.commons.dbcp2.managed.BasicManagedDataSource" destroy-method="close">
-		<property name="transactionManager" ref="transactionManager" />
-		<property name="xaDataSourceInstance" ref="dataSourceWrap1" />
-
-		<property name="maxTotal" value="50" />
-		<property name="initialSize" value="20" />
-		<property name="maxWaitMillis" value="60000" />
-		<property name="minIdle" value="6" />
-		<property name="logAbandoned" value="true" />
-		<property name="removeAbandonedOnMaintenance" value="true" />
-		<property name="removeAbandonedOnBorrow" value="true" />
-		<property name="removeAbandonedTimeout" value="1800" />
-
-		<property name="testWhileIdle" value="true" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<property name="validationQuery" value="select 'x' " />
-		<property name="validationQueryTimeout" value="1" />
-		<property name="timeBetweenEvictionRunsMillis" value="30000" />
-		<property name="numTestsPerEvictionRun" value="20" />
-	</bean>
-	<bean id="jdbcTemplate1" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource1" />
-	</bean>
 
 	<bean id="mysql2" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/inst2" />
+		<property name="url" value="jdbc:mysql://132.232.104.14:3306/inst2" />
 		<property name="user" value="root" />
 		<property name="password" value="123456" />
 	</bean>
