@@ -46,7 +46,6 @@ public class DubboRemoteCoordinator implements InvocationHandler {
 					return this.invocationContext == null ? null
 							: String.format("%s:%s:%s", serverHost, serviceKey, serverPort);
 				} else if ("getApplication".equals(methodName)) {
-					System.out.println("invoke DubboRemoteCoordinator-getApplication");
 					if (this.invocationContext == null) {
 						return null;
 					} else if (StringUtils.isNotBlank(this.invocationContext.getServiceKey())) {

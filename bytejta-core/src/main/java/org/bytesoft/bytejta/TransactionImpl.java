@@ -109,7 +109,6 @@ public class TransactionImpl implements Transaction {
 
 	public synchronized int participantPrepare() throws RollbackRequiredException, CommitRequiredException {
 
-		System.out.println("------pre go--------");
 		if (this.transactionStatus == Status.STATUS_ROLLEDBACK) {
 			throw new RollbackRequiredException();
 		} else if (this.transactionStatus == Status.STATUS_ROLLING_BACK) {
@@ -127,7 +126,6 @@ public class TransactionImpl implements Transaction {
 			throw new CommitRequiredException();
 		} /* else active, marked_rollback, preparing {} */
 
-		System.out.println("------pre go1--------");
 		// stop-timing
 		TransactionTimer transactionTimer = beanFactory.getTransactionTimer();
 		transactionTimer.stopTiming(this);
@@ -167,7 +165,6 @@ public class TransactionImpl implements Transaction {
 		try {
 			TransactionStrategy currentStrategy = this.getTransactionStrategy();
 			int vote = currentStrategy.prepare(xid);
-			System.out.println("------pre go3--------");
 			this.transactionStatus = Status.STATUS_PREPARED;
 			archive.setStatus(this.transactionStatus);
 			this.transactionVote = vote;

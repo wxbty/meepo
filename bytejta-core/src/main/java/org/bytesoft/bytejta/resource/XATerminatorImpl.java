@@ -141,7 +141,7 @@ public class XATerminatorImpl implements XATerminator {
                     backInfo = handleRollBack(rollList, conn, stmt);
                 }else
                 {
-                    backInfo = sqlStr+",rs.size="+rs.getRow();
+                    backInfo = "warn:can not find exe sql,select sql ="+sqlStr ;
                 }
                 System.out.println("backInfo="+backInfo);
                 String GloableXid = partGloableXid(archive.getXid());
@@ -1078,7 +1078,6 @@ public class XATerminatorImpl implements XATerminator {
             throws JSQLParserException {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Insert insertStatement = (Insert) statement;
-//        System.out.println(insertStatement.toString());
         String string_tablename = insertStatement.getTable().getName();
         return string_tablename;
     }

@@ -27,10 +27,6 @@ import org.bytesoft.transaction.xa.XidFactory;
 public class TransactionBeanFactoryImpl implements TransactionBeanFactory {
 
 
-	static
-	{
-		System.out.println("begin init TransactionBeanFactoryImpl");
-	}
 	private TransactionManager transactionManager;
 	private XidFactory xidFactory;
 	private TransactionTimer transactionTimer;

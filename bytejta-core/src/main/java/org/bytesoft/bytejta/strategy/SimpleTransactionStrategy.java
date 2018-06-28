@@ -44,7 +44,6 @@ public class SimpleTransactionStrategy implements TransactionStrategy {
 
 	public int start(Xid xid) throws RollbackRequiredException, CommitRequiredException {
 		try {
-			System.out.println("-----start--------");
 			this.terminator.start(xid,1);
 			return 0;
 		} catch (XAException xaex) {
@@ -57,7 +56,6 @@ public class SimpleTransactionStrategy implements TransactionStrategy {
 	public int prepare(Xid xid) throws RollbackRequiredException, CommitRequiredException {
 
 		try {
-			System.out.println("-----prepare--------");
 			return this.terminator.prepare(xid);
 		} catch (XAException xaex) {
 			throw new RollbackRequiredException();
@@ -70,7 +68,6 @@ public class SimpleTransactionStrategy implements TransactionStrategy {
 	public void commit(Xid xid)
 			throws HeuristicMixedException, HeuristicRollbackException, IllegalStateException, SystemException {
 		try {
-			System.out.println("-----commit--------");
 			this.terminator.commit(xid, false);
 		} catch (XAException xaex) {
 			switch (xaex.errorCode) {
@@ -93,7 +90,6 @@ public class SimpleTransactionStrategy implements TransactionStrategy {
 	public void rollback(Xid xid)
 			throws HeuristicMixedException, HeuristicCommitException, IllegalStateException, SystemException {
 		try {
-			System.out.println("-----rollback--------");
 			this.terminator.rollback(xid);
 		} catch (XAException xaex) {
 			switch (xaex.errorCode) {

@@ -141,10 +141,8 @@ public class TransactionServiceFilter implements Filter {
 		Class<?> parameterType = (parameterTypeArray == null || parameterTypeArray.length == 0) ? null : parameterTypeArray[0];
 
 		if (parameterTypeArray == null || parameterTypeArray.length == 0) {
-			System.out.println("parameterTypeArray.size is null");
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		} else if (Xid.class.equals(parameterType) == false) {
-			System.out.println("parameterType != Xid");
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		}
 		RpcResult result = new RpcResult();
@@ -158,7 +156,6 @@ public class TransactionServiceFilter implements Filter {
 
 		Transaction transaction = transactionRepository.getTransaction(globalXid);
 		if (transaction == null) {
-			System.out.println("transaction is null ");
 			InvocationResult wrapped = new InvocationResult();
 			wrapped.setError(new XAException(XAException.XAER_NOTA));
 			wrapped.setVariable(RemoteCoordinator.class.getName(), transactionCoordinator.getIdentifier());
@@ -172,7 +169,6 @@ public class TransactionServiceFilter implements Filter {
 			String remoteAddr = invocation.getAttachment(RemoteCoordinator.class.getName());
 
 			if (StringUtils.equals(propagatedBy, remoteAddr)) {
-				System.out.println("propagatedBy = remoteAddr ="+remoteAddr);
 				return this.wrapResultForProvider(invoker, invocation, propagatedBy, false);
 			}
 

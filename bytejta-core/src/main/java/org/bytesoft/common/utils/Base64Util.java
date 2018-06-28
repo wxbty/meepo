@@ -116,7 +116,7 @@ public class Base64Util {
 
         //System.out.println(encode("steps".getBytes()));
         try {
-            System.out.println(new String(decode("IkJFRUYgQ0hFRUtTIFdJVEggQ0FSUk9UUyI=")));
+            System.out.println(new String(decode("dXBkYXRlIHRiX2FjY291bnRfb25lIHNldCBhbW91bnQgPSA3ODk1LjAgd2hlcmUgYWNjdF9pZD0xMDAx")));
         }catch(Exception e)
         {
             e.printStackTrace();
