@@ -69,7 +69,6 @@ public class XATerminatorImpl implements XATerminator {
             if (prepared) {
                 globalVote = archive.getVote() == XAResource.XA_RDONLY ? globalVote : XAResource.XA_OK;
             } else {
-                openGeneralLog(archive);
                 int branchVote = archive.prepare(archive.getXid());
                 archive.setVote(branchVote);
                 if (branchVote == XAResource.XA_RDONLY) {
@@ -759,30 +758,6 @@ public class XATerminatorImpl implements XATerminator {
     }
 
 
-    private void openGeneralLog(XAResourceArchive archive) {
-        if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
-            MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
-            Statement stmt = null;
-            String backInfo = null;
-            try {
-                Connection conn = connection.getConnection();
-                stmt = conn.createStatement();
-                stmt.execute("set global general_log=on");
-                stmt.execute("set global log_output='table'");
-                stmt.execute("set @@global.expire_logs_days=1");
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    stmt.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
 
     public void end(Xid xid, int flags) throws XAException {
         throw new XAException(XAException.XAER_RMFAIL);
