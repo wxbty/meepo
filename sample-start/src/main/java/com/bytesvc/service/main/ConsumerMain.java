@@ -20,7 +20,7 @@ public class ConsumerMain {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			shutdown();
+			//shutdown();
 		}
 
 	}

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="" />
+    <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-core/target/" />
@@ -25,7 +27,7 @@
       <file leaf-file-name="ConsumerMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
+            <state relative-caret-position="315">
               <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
             </state>
           </provider>
@@ -34,7 +36,7 @@
       <file leaf-file-name="bytejta-supports-core.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
+            <state relative-caret-position="315">
               <caret line="21" column="75" selection-start-line="21" selection-start-column="75" selection-end-line="21" selection-end-column="75" />
             </state>
           </provider>
@@ -43,7 +45,7 @@
       <file leaf-file-name="TransactionManagerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionManagerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
+            <state relative-caret-position="1005">
               <caret line="98" selection-start-line="98" selection-end-line="98" />
             </state>
           </provider>
@@ -52,11 +54,8 @@
       <file leaf-file-name="TransactionImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="8550">
               <caret line="632" column="21" selection-start-line="632" selection-start-column="21" selection-end-line="632" selection-end-column="21" />
-              <folding>
-                <element signature="e#24126#24238#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -64,8 +63,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+            <state relative-caret-position="1995">
+              <caret line="133" column="31" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -73,11 +72,8 @@
       <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="162" column="57" selection-start-line="162" selection-start-column="46" selection-end-line="162" selection-end-column="57" />
-              <folding>
-                <element signature="e#2494#2513#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="978">
+              <caret line="1214" column="13" selection-start-line="1211" selection-start-column="37" selection-end-line="1214" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -85,7 +81,7 @@
       <file leaf-file-name="Runnable.java" pinned="false" current-in-tab="false">
         <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/java/lang/Runnable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
+            <state relative-caret-position="480">
               <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
             </state>
           </provider>
@@ -94,7 +90,7 @@
       <file leaf-file-name="CommonTransactionStrategy.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
+            <state relative-caret-position="705">
               <caret line="72" column="20" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="22" />
             </state>
           </provider>
@@ -103,7 +99,7 @@
       <file leaf-file-name="TransactionListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
+            <state relative-caret-position="285">
               <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
             </state>
           </provider>
@@ -112,7 +108,7 @@
       <file leaf-file-name="TransactionListenerAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionListenerAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="375">
               <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
             </state>
           </provider>
@@ -234,7 +230,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
@@ -242,6 +237,62 @@
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
               <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -748,6 +799,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -915,14 +967,16 @@
       <workItem from="1529485818066" duration="32023000" />
       <workItem from="1529743331049" duration="3675000" />
       <workItem from="1530105137235" duration="20643000" />
+      <workItem from="1530177319334" duration="804000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63916000" />
+    <option name="totallyTimeSpent" value="64720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.3287483" />
@@ -936,7 +990,6 @@
       <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.39889959" />
       <window_info anchor="bottom" id="TODO" order="13" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.3287483" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="1" />
       <window_info anchor="bottom" id="Java Enterprise" order="3" />
@@ -944,18 +997,19 @@
       <window_info anchor="bottom" id="Run" order="9" weight="0.26547456" />
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.3287483" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.3287483" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.2532189" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.3287483" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="3" sideWeight="0.5034388" side_tool="true" weight="0.24964234" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.3287483" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.3287483" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1148,13 +1202,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/App.java" />
     <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1234,21 +1282,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
+        <state relative-caret-position="315">
           <caret line="21" column="75" selection-start-line="21" selection-start-column="75" selection-end-line="21" selection-end-column="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
+        <state relative-caret-position="315">
           <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionManagerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
+        <state relative-caret-position="1005">
           <caret line="98" selection-start-line="98" selection-end-line="98" />
         </state>
       </provider>
@@ -1269,21 +1317,21 @@
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
+        <state relative-caret-position="480">
           <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
+        <state relative-caret-position="285">
           <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionListenerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="375">
           <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
         </state>
       </provider>
@@ -1297,7 +1345,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
+        <state relative-caret-position="705">
           <caret line="72" column="20" selection-start-line="72" selection-start-column="16" selection-end-line="72" selection-end-column="22" />
         </state>
       </provider>
@@ -1311,28 +1359,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="8550">
           <caret line="632" column="21" selection-start-line="632" selection-start-column="21" selection-end-line="632" selection-end-column="21" />
-          <folding>
-            <element signature="e#24126#24238#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="133" column="31" lean-forward="true" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
+        <state relative-caret-position="1995">
+          <caret line="133" column="31" selection-start-line="133" selection-start-column="31" selection-end-line="133" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="162" column="57" selection-start-line="162" selection-start-column="46" selection-end-line="162" selection-end-column="57" />
-          <folding>
-            <element signature="e#2494#2513#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="978">
+          <caret line="1214" column="13" selection-start-line="1211" selection-start-column="37" selection-end-line="1214" selection-end-column="13" />
         </state>
       </provider>
     </entry>
