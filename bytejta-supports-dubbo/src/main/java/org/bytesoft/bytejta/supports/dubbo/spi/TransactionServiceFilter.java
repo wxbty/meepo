@@ -64,13 +64,7 @@ public class TransactionServiceFilter implements Filter {
 	public Result providerInvoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 		URL url = RpcContext.getContext().getUrl();
 		String interfaceClazz = url.getServiceInterface();
-		System.out.println("method = "+invocation.getMethodName());
-		System.out.println("interfaceClazz = "+interfaceClazz);
 
-		if(StringUtils.equals(invocation.getMethodName(),"commit"))
-		{
-			System.out.println("aaaa");
-		}
 		if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
 				&& Arrays.equals(invocation.getParameterTypes(), new Class<?>[] { Xid.class, Integer.TYPE })) {
 			return this.providerInvokeForKey(invoker, invocation);
@@ -153,7 +147,6 @@ public class TransactionServiceFilter implements Filter {
 			System.out.println("parameterType != Xid");
 			return this.wrapResultForProvider(invoker, invocation, null, false);
 		}
-		System.out.println("parameterType ="+parameterType.getName());
 		RpcResult result = new RpcResult();
 
 		Object[] arguments = invocation.getArguments();
@@ -173,7 +166,6 @@ public class TransactionServiceFilter implements Filter {
 			result.setException(null);
 			result.setValue(wrapped);
 		} else {
-			System.out.println("transaction ="+transaction.toString());
 			TransactionContext transactionContext = transaction.getTransactionContext();
 			String propagatedBy = String.valueOf(transactionContext.getPropagatedBy());
 
@@ -287,7 +279,6 @@ public class TransactionServiceFilter implements Filter {
 
 	public Result wrapResultForProvider(Invoker<?> invoker, Invocation invocation, String propagatedBy,
                                         boolean attachRequired) {
-		System.out.println("begin wrapResultForProvider,invocation="+invocation.toString()+",invoker="+invoker.toString());
 		try {
 			RpcResult result = (RpcResult) invoker.invoke(invocation);
 			if (result.hasException()) {

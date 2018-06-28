@@ -138,7 +138,6 @@ public class XATerminatorImpl implements XATerminator {
                     rollList.add(rs.getString("argument"));
                 }
                 if (rollList.size() > 0) {
-                    System.out.println("rollList.size() ="+rollList.size());
                     backInfo = handleRollBack(rollList, conn, stmt);
                 }else
                 {

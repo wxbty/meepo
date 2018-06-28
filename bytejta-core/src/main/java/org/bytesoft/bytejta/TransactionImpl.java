@@ -165,8 +165,6 @@ public class TransactionImpl implements Transaction {
 
 		try {
 			TransactionStrategy currentStrategy = this.getTransactionStrategy();
-
-			System.out.println("------pre go2--------"+currentStrategy.getClass().getName());
 			int vote = currentStrategy.prepare(xid);
 			System.out.println("------pre go3--------");
 			this.transactionStatus = Status.STATUS_PREPARED;

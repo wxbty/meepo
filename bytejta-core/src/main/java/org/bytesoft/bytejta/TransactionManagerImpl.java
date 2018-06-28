@@ -42,7 +42,6 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 	private int timeoutSeconds = 5 * 6000;
 	private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
 
-	private static int num =0;
 
 	public void begin() throws NotSupportedException, SystemException {
 		if (this.getTransaction() != null) {
@@ -79,7 +78,6 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 
 	public void commit() throws RollbackException, HeuristicMixedException, HeuristicRollbackException, SecurityException,
 			IllegalStateException, SystemException {
-		System.out.println(num++);
 		Transaction transaction = this.desociateThread();
 		if (transaction == null) {
 			throw new IllegalStateException();
