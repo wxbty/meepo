@@ -15,6 +15,7 @@
  */
 package org.bytesoft.bytejta;
 
+import com.mysql.jdbc.jdbc2.optional.ConnectionWrapper;
 import com.mysql.jdbc.jdbc2.optional.JDBC4MysqlXAConnection;
 import com.mysql.jdbc.jdbc2.optional.MysqlXAConnection;
 import org.apache.commons.lang3.StringUtils;
@@ -53,8 +54,8 @@ import javax.transaction.*;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
+import java.lang.reflect.Field;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
@@ -870,7 +871,7 @@ public class TransactionImpl implements Transaction {
 					ByteUtils.byteArrayToString(branchXid.getGlobalTransactionId()), archive,
 					ByteUtils.byteArrayToString(branchXid.getBranchQualifier()), flag);
 
-			openGeneralLog(archive);
+		openGeneralLog(archive);
 			switch (flag) {
 			case XAResource.TMNOFLAGS:
 				long expired = this.transactionContext.getExpiredTime();
@@ -939,19 +940,24 @@ public class TransactionImpl implements Transaction {
 			Statement stmt = null;
 			String backInfo = null;
 			try {
-				Connection conn = connection.getConnection();
+				Field mc = MysqlXAConnection.class.getDeclaredField("underlyingConnection");
+				mc.setAccessible(true);
+				Object mymc = mc.get(connection);
+				com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection)mymc;
 				stmt = conn.createStatement();
 				stmt.execute("set global general_log=on");
 				stmt.execute("set global log_output='table'");
 				stmt.execute("set @@global.expire_logs_days=1");
 
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+				if(stmt!=null) {
+					try {
+						stmt.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
