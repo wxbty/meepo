@@ -15,7 +15,6 @@
  */
 package org.bytesoft.bytejta;
 
-import com.mysql.jdbc.jdbc2.optional.ConnectionWrapper;
 import com.mysql.jdbc.jdbc2.optional.JDBC4MysqlXAConnection;
 import com.mysql.jdbc.jdbc2.optional.MysqlXAConnection;
 import org.apache.commons.lang3.StringUtils;
@@ -55,9 +54,10 @@ import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
 import java.lang.reflect.Field;
-import java.sql.Connection;
 import java.sql.Statement;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TransactionImpl implements Transaction {
 	static final Logger logger = LoggerFactory.getLogger(TransactionImpl.class);
@@ -559,9 +559,9 @@ public class TransactionImpl implements Transaction {
 			throws HeuristicRollbackException, HeuristicMixedException, CommitRequiredException, SystemException {
 		TransactionLogger transactionLogger = beanFactory.getTransactionLogger();
 
-		TransactionStrategy currentStrategy = this.getTransactionStrategy();
+		final TransactionStrategy currentStrategy = this.getTransactionStrategy();
 
-		TransactionXid xid = this.transactionContext.getXid();
+		final TransactionXid xid = this.transactionContext.getXid();
 
 		TransactionArchive archive = this.getTransactionArchive();// new TransactionArchive();
 		this.transactionStatus = Status.STATUS_PREPARING;// .setStatusPreparing();
@@ -594,7 +594,6 @@ public class TransactionImpl implements Transaction {
 		this.transactionListenerList.onPrepareSuccess(xid);
 
 		if (vote == XAResource.XA_RDONLY) {
-			System.out.println("-------------xxxxxxxxxxx-----2、-------- trans will be prepared");
 			this.transactionStatus = Status.STATUS_PREPARED;// .setStatusPrepared();
 			this.transactionVote = XAResource.XA_RDONLY;
 			archive.setVote(XAResource.XA_RDONLY);
@@ -614,17 +613,27 @@ public class TransactionImpl implements Transaction {
 
 			boolean unFinishExists = true;
 			try {
-				currentStrategy.commit(xid);
+				//异步提交，直接返回结果，优化性能
+				ExecutorService service = Executors.newCachedThreadPool();
+				service.execute(new Runnable() {
+
+					public void run() {
+						try {
+							currentStrategy.commit(xid);
+						} catch (HeuristicMixedException e) {
+							transactionListenerList.onCommitHeuristicMixed(xid);
+							logger.error("HeuristicMixedException",e);
+						} catch (HeuristicRollbackException e) {
+							transactionListenerList.onCommitHeuristicRolledback(xid);
+							logger.error("HeuristicRollbackException",e);
+						} catch (SystemException e) {
+							transactionListenerList.onCommitFailure(xid);
+							logger.error("SystemException",e);
+						}
+					}
+				});
+
 				unFinishExists = false;
-			} catch (HeuristicMixedException ex) {
-				this.transactionListenerList.onCommitHeuristicMixed(xid);
-				throw ex;
-			} catch (HeuristicRollbackException ex) {
-				this.transactionListenerList.onCommitHeuristicRolledback(xid);
-				throw ex;
-			} catch (SystemException ex) {
-				this.transactionListenerList.onCommitFailure(xid);
-				throw ex;
 			} catch (RuntimeException ex) {
 				this.transactionListenerList.onCommitFailure(xid);
 				throw ex;
