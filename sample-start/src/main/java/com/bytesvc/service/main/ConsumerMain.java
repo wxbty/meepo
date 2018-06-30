@@ -11,7 +11,7 @@ public class ConsumerMain {
 	static ClassPathXmlApplicationContext context = null;
 
 	public static void main(String... args) throws Throwable {
-		System.out.println("-------test jdelpoy---begin consumer main----------");
+		System.out.println("-------remove test---begin consumer main----------");
 		startup();
 
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
