@@ -11,7 +11,7 @@ public class ConsumerMain {
 	static ClassPathXmlApplicationContext context = null;
 
 	public static void main(String... args) throws Throwable {
-		System.out.println("-------very test good---begin consumer main----------");
+		System.out.println("-------best---begin consumer main----------");
 		startup();
 
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
