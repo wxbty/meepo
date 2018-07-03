@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GenericTransferServiceImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GenericTransferServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+            <state relative-caret-position="225">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -76,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="1209" column="48" lean-forward="true" selection-start-line="1209" selection-start-column="37" selection-end-line="1209" selection-end-column="48" />
+            <state relative-caret-position="193">
+              <caret line="1200" selection-start-line="1200" selection-end-line="1200" />
             </state>
           </provider>
         </entry>
@@ -119,17 +119,17 @@
       <find>175</find>
       <find>35.189.175.173</find>
       <find>txc_undo_log</find>
-      <find />
-      <find />
-      <find />
+      <find>XA START</find>
+      <find>XA P</find>
+      <find>XA END</find>
       <find>accountService</find>
-      <find />
-      <find />
+      <find>XA STA</find>
+      <find>------pre go--------</find>
       <find>CONTENT_PRODUCT_NOT_EXISTED·</find>
       <find>XATerminatorImpl</find>
-      <find />
+      <find>Save old data for update</find>
       <find>enlistResource</find>
-      <find />
+      <find>Got ping response for sessionid</find>
       <find>slf4j-log4j12</find>
       <find>dataSource1</find>
       <find>jdbcTemplate1</find>
@@ -138,7 +138,8 @@
       <find>UncategorizedSQLException</find>
       <find>System.out.println</find>
       <find>enlist:</find>
-      <find />
+      <find>begin backInfo</find>
+      <find>backInfo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -191,10 +192,10 @@
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionBeanFactoryImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" />
         <option value="$PROJECT_DIR$/sample-start/pom.xml" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
       </list>
     </option>
   </component>
@@ -545,12 +546,12 @@
       <workItem from="1530254042796" duration="1355000" />
       <workItem from="1530364100158" duration="785000" />
       <workItem from="1530368560841" duration="122000" />
-      <workItem from="1530586637481" duration="1586000" />
+      <workItem from="1530586637481" duration="3578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69374000" />
+    <option name="totallyTimeSpent" value="71366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
@@ -576,11 +577,11 @@
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Run" order="9" weight="0.26420453" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.33948863" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.26037195" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.33948863" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.26037195" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.3287483" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.328125" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="3" sideWeight="0.5034388" side_tool="true" weight="0.24964234" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
@@ -928,6 +929,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="1200" selection-start-line="1200" selection-end-line="1200" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -944,15 +952,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="1209" column="48" lean-forward="true" selection-start-line="1209" selection-start-column="37" selection-end-line="1209" selection-end-column="48" />
+        <state relative-caret-position="225">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
