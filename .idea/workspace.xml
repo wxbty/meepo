@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
@@ -24,20 +24,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConsumerMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConsumerMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="227">
+              <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bytejta-supports-core.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml">
+      <file leaf-file-name="Base64Util.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="75" selection-start-line="21" selection-start-column="75" selection-end-line="21" selection-end-column="75" />
+            <state relative-caret-position="266">
+              <caret line="119" column="27" lean-forward="true" selection-start-line="119" selection-start-column="27" selection-end-line="119" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -187,7 +187,6 @@
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionManagerImpl.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" />
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" />
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.java" />
@@ -196,6 +195,7 @@
         <option value="$PROJECT_DIR$/sample-start/pom.xml" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" />
       </list>
     </option>
   </component>
@@ -236,6 +236,51 @@
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
               <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -349,7 +394,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ConsumerMain (1)">
+  <component name="RunManager" selected="Application.Base64Util">
     <configuration name="Base64Util" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.bytesoft.common.utils.Base64Util" />
       <module name="bytejta-core" />
@@ -455,9 +500,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Base64Util" />
         <item itemvalue="Application.ConsumerMain (1)" />
         <item itemvalue="Application.ProviderMain (2)" />
-        <item itemvalue="Application.Base64Util" />
         <item itemvalue="Application.ProviderMain (1)" />
         <item itemvalue="Application.ProviderMain" />
       </list>
@@ -480,15 +525,16 @@
       <workItem from="1530254042796" duration="1355000" />
       <workItem from="1530364100158" duration="785000" />
       <workItem from="1530368560841" duration="122000" />
-      <workItem from="1530586637481" duration="609000" />
+      <workItem from="1530586637481" duration="1238000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68397000" />
+    <option name="totallyTimeSpent" value="69026000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.3287483" />
@@ -707,13 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="23" column="45" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/App.java" />
     <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -885,8 +924,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+        <state relative-caret-position="227">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="119" column="27" lean-forward="true" selection-start-line="119" selection-start-column="27" selection-end-line="119" selection-end-column="27" />
         </state>
       </provider>
     </entry>
