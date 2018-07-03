@@ -602,7 +602,9 @@ public class XATerminatorImpl implements XATerminator {
 
     private void invokeRollback(XAResourceArchive archive) throws XAException {
         try {
+            System.out.println("bengin invokeRollback");
             if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
+                System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection");
                 MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
                 PreparedStatement ps = null;
                 //拼接PREPARE语句，在general_log查找执行中的sql
@@ -647,6 +649,7 @@ public class XATerminatorImpl implements XATerminator {
                         rollList.add(rs.getString("rollback_info"));
                     }
                     if (rollList.size() > 0) {
+                        System.out.println("bengin  invokeRollback rollbackinfo="+rs.getString("rollback_info"));
                         backInfo = decodeRollBackSql(rollList);
                         if(!rollback(backInfo, conn, stmt))
                         {
@@ -1194,6 +1197,7 @@ public class XATerminatorImpl implements XATerminator {
     private List<String> decodeRollBackSql(List<String> list) {
         List<String> backSql = new ArrayList<String>();
         for (String rollsql : list) {
+            System.out.println("begin decodeRollBackSql rollsql");
             List<String> tmpsql = new ArrayList<String>();
             tmpsql = JSONObject.parseArray(rollsql, String.class);
             backSql.addAll(backSql);
