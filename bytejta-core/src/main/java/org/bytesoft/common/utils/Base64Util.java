@@ -1,5 +1,7 @@
 package org.bytesoft.common.utils;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.ByteArrayOutputStream;
 
 public class Base64Util {
@@ -114,6 +116,8 @@ public class Base64Util {
 
     public static void main(String[] args) {
 
+        String str = "&quot;name&quot;,&quot;remark&quot;,&quot;picture&quot;,&quot;isDiy&quot;,&quot;cookingTime&quot;,&quot;cookingMiniTime&quot;,&quot;cookingMAXTime&quot;,&quot;workMode&quot;,&quot;tagName&quot;";
+        System.out.println(StringEscapeUtils.unescapeHtml4(str));
         //System.out.println(encode("steps".getBytes()));
         try {
             System.out.println(new String(decode("dXBkYXRlIHRiX2FjY291bnRfb25lIHNldCBhbW91bnQgPSA3ODg5LjAgd2hlcmUgYWNjdF9pZD0xMDAx")));
