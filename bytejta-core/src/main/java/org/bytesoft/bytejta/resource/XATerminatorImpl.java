@@ -70,6 +70,7 @@ public class XATerminatorImpl implements XATerminator {
                 globalVote = archive.getVote() == XAResource.XA_RDONLY ? globalVote : XAResource.XA_OK;
             } else {
                 int branchVote = archive.prepare(archive.getXid());
+
                 archive.setVote(branchVote);
                 if (branchVote == XAResource.XA_RDONLY) {
                     archive.setReadonly(true);
@@ -79,6 +80,11 @@ public class XATerminatorImpl implements XATerminator {
                 }
                 transactionLogger.updateResource(archive);
                 backInfo(archive);
+                //二阶段提交改为一阶段提交+后续清理,提交操作放在生成sql后执行
+                if(branchVote == XAResource.XA_OK)
+                {
+                    this.invokeTwoPhaseCommit(archive);
+                }
             }
 
             logger.info("[{}] prepare: xares= {}, branch= {}, vote= {}",
@@ -617,6 +623,7 @@ public class XATerminatorImpl implements XATerminator {
                 List rollList = new ArrayList<String>();
                 List<String> backInfo = null;
                 Connection conn = null;
+                System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---1");
                 try {
                     Connection myconn = connection.getConnection();
                     ConnectionWrapper connwap = (ConnectionWrapper) myconn;
@@ -648,8 +655,9 @@ public class XATerminatorImpl implements XATerminator {
                     while (rs.next()) {
                         rollList.add(rs.getString("rollback_info"));
                     }
+                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---2，size="+rollList.size());
                     if (rollList.size() > 0) {
-                        System.out.println("bengin  invokeRollback rollbackinfo="+rs.getString("rollback_info"));
+                        System.out.println("bengin  invokeRollback rollbackinfo="+rollList.get(0));
                         backInfo = decodeRollBackSql(rollList);
                         if(!rollback(backInfo, conn, stmt))
                         {

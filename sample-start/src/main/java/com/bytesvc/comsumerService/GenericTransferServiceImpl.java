@@ -22,7 +22,7 @@ public class GenericTransferServiceImpl implements ITransferService {
 		this.remoteAccountService.decreaseAmount(sourceAcctId, amount);
 		this.increaseAmount(targetAcctId, amount);
 
-		 throw new ServiceException("rollback");
+		// throw new ServiceException("rollback");
 	}
 
 	private void increaseAmount(String acctId, double amount) throws ServiceException {
