@@ -31,6 +31,7 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.update.Update;
+import org.bytesoft.bytejta.supports.resource.CommonResourceDescriptor;
 import org.bytesoft.common.utils.Base64Util;
 import org.bytesoft.common.utils.ByteUtils;
 import org.bytesoft.transaction.TransactionBeanFactory;
@@ -70,7 +71,7 @@ public class XATerminatorImpl implements XATerminator {
                 globalVote = archive.getVote() == XAResource.XA_RDONLY ? globalVote : XAResource.XA_OK;
             } else {
                 int branchVote = archive.prepare(archive.getXid());
-
+                //二阶段提交改为一阶段提交+后续清理,提交操作放在生成sql后执行
                 archive.setVote(branchVote);
                 if (branchVote == XAResource.XA_RDONLY) {
                     archive.setReadonly(true);
@@ -80,11 +81,8 @@ public class XATerminatorImpl implements XATerminator {
                 }
                 transactionLogger.updateResource(archive);
                 backInfo(archive);
-                //二阶段提交改为一阶段提交+后续清理,提交操作放在生成sql后执行
-                if(branchVote == XAResource.XA_OK)
-                {
-                    this.invokeTwoPhaseCommit(archive);
-                }
+
+
             }
 
             logger.info("[{}] prepare: xares= {}, branch= {}, vote= {}",
@@ -146,11 +144,10 @@ public class XATerminatorImpl implements XATerminator {
                 }
                 if (rollList.size() > 0) {
                     backInfo = handleRollBack(rollList, conn, stmt);
-                }else
-                {
-                    backInfo = "warn:can not find exe sql,select sql ="+sqlStr ;
+                } else {
+                    backInfo = "warn:can not find exe sql,select sql =" + sqlStr;
                 }
-                System.out.println("backInfo="+backInfo);
+                System.out.println("backInfo=" + backInfo);
                 String GloableXid = partGloableXid(archive.getXid());
                 String branchXid = partBranchXid(archive.getXid());
                 String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
@@ -610,77 +607,81 @@ public class XATerminatorImpl implements XATerminator {
         try {
             System.out.println("bengin invokeRollback");
             if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
-                System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection");
-                MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
-                PreparedStatement ps = null;
-                //拼接PREPARE语句，在general_log查找执行中的sql
-                StringBuilder commandBuf = new StringBuilder(300);
-                String GloableXid = partGloableXid(archive.getXid());
-                String branchXid = partBranchXid(archive.getXid());
-                String sqlStr = "select rollback_info from txc_undo_log where branch_id ='"+branchXid+"' and xid ='"+GloableXid+"'";
-                Statement stmt = null;
-                ResultSet rs = null;
-                List rollList = new ArrayList<String>();
-                List<String> backInfo = null;
-                Connection conn = null;
-                System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---1");
-                try {
-                    Connection myconn = connection.getConnection();
-                    ConnectionWrapper connwap = (ConnectionWrapper) myconn;
+                //prepare成功状态，应用级回滚，否则数据库级回滚
+                if (archive.getVote() == XAResource.XA_OK) {
+                    System.out.println("before rollback,vote = " + archive.getVote());
+                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection");
+                    MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
+                    PreparedStatement ps = null;
+                    //拼接PREPARE语句，在general_log查找执行中的sql
+                    StringBuilder commandBuf = new StringBuilder(300);
+                    String GloableXid = partGloableXid(archive.getXid());
+                    String branchXid = partBranchXid(archive.getXid());
+                    String sqlStr = "select rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
+                    Statement stmt = null;
+                    ResultSet rs = null;
+                    List rollList = new ArrayList<String>();
+                    List<String> backInfo = null;
+                    Connection conn = null;
+                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---1");
+                    try {
+                        Connection myconn = connection.getConnection();
+                        ConnectionWrapper connwap = (ConnectionWrapper) myconn;
 
-                    Field mc = ConnectionWrapper.class.getDeclaredField("mc");
-                    mc.setAccessible(true);
-                    Object mymc = mc.get(connwap);
-                    ConnectionImpl j4conn = (JDBC4Connection) mymc;
+                        Field mc = ConnectionWrapper.class.getDeclaredField("mc");
+                        mc.setAccessible(true);
+                        Object mymc = mc.get(connwap);
+                        ConnectionImpl j4conn = (JDBC4Connection) mymc;
 
-                    Field pass = ConnectionImpl.class.getDeclaredField("password");
-                    pass.setAccessible(true);
-                    Object passobj = pass.get(j4conn);
-                    String password = passobj.toString();
+                        Field pass = ConnectionImpl.class.getDeclaredField("password");
+                        pass.setAccessible(true);
+                        Object passobj = pass.get(j4conn);
+                        String password = passobj.toString();
 
-                    Field fuser = ConnectionImpl.class.getDeclaredField("user");
-                    fuser.setAccessible(true);
-                    Object userobj = fuser.get(j4conn);
-                    String user = userobj.toString();
+                        Field fuser = ConnectionImpl.class.getDeclaredField("user");
+                        fuser.setAccessible(true);
+                        Object userobj = fuser.get(j4conn);
+                        String user = userobj.toString();
 
 
-                    DatabaseMetaData databaseMetaData = myconn.getMetaData();
+                        DatabaseMetaData databaseMetaData = myconn.getMetaData();
 
-                    Class.forName("com.mysql.jdbc.Driver");
-                    conn = DriverManager.getConnection(databaseMetaData.getURL(), user, password);
+                        Class.forName("com.mysql.jdbc.Driver");
+                        conn = DriverManager.getConnection(databaseMetaData.getURL(), user, password);
 
-                    stmt = conn.createStatement();
+                        stmt = conn.createStatement();
 
-                    rs = stmt.executeQuery(sqlStr);
-                    while (rs.next()) {
-                        rollList.add(rs.getString("rollback_info"));
-                    }
-                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---2，size="+rollList.size());
-                    if (rollList.size() > 0) {
-                        System.out.println("bengin  invokeRollback rollbackinfo="+rollList.get(0));
-                        backInfo = decodeRollBackSql(rollList);
-                        if(!rollback(backInfo, conn, stmt))
-                        {
-                            logger.error(String.format("Roll back mysql info error!,backInfo:s%",backInfo));
+                        rs = stmt.executeQuery(sqlStr);
+                        while (rs.next()) {
+                            rollList.add(rs.getString("rollback_info"));
+                        }
+                        System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---2，size=" + rollList.size());
+                        if (rollList.size() > 0) {
+                            System.out.println("bengin  invokeRollback rollbackinfo=" + rollList.get(0));
+                            backInfo = decodeRollBackSql(rollList);
+                            if (!rollback(backInfo, conn, stmt)) {
+                                logger.error(String.format("Roll back mysql info error!,backInfo:s%", backInfo));
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        //关闭自建创建的连接
+                        try {
+                            rs.close();
+                            conn.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            stmt.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    //关闭自建创建的连接
-                    try {
-                        rs.close();
-                        conn.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        stmt.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                } else {
+                    archive.rollback(archive.getXid());
                 }
-
             } else {
                 archive.rollback(archive.getXid());
             }
@@ -769,7 +770,6 @@ public class XATerminatorImpl implements XATerminator {
 
         return;
     }
-
 
 
     public void end(Xid xid, int flags) throws XAException {
@@ -1208,9 +1208,9 @@ public class XATerminatorImpl implements XATerminator {
             System.out.println("begin decodeRollBackSql rollsql");
             List<String> tmpsql = new ArrayList<String>();
             tmpsql = JSONObject.parseArray(rollsql, String.class);
-            backSql.addAll(backSql);
+            backSql.addAll(tmpsql);
         }
-        backSql= decode(backSql);
+        backSql = decode(backSql);
         return backSql;
 
     }
@@ -1219,14 +1219,14 @@ public class XATerminatorImpl implements XATerminator {
     private boolean rollback(List<String> list, Connection connection, Statement stmt) {
         for (String rollsql : list) {
             try {
-                System.out.println("exec back sql="+rollsql);
+                System.out.println("exec back sql=" + rollsql);
                 stmt.execute(rollsql);
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
         }
-        return true ;
+        return true;
     }
 
 }

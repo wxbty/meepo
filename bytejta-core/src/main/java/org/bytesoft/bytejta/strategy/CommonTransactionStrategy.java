@@ -59,6 +59,7 @@ public class CommonTransactionStrategy implements TransactionStrategy {
 		try {
 			remoteVote = this.remoteTerminator.prepare(xid);
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			throw new RollbackRequiredException();
 		}
 

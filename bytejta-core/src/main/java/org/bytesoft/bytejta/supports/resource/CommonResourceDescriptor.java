@@ -122,7 +122,12 @@ public class CommonResourceDescriptor implements XAResourceDescriptor {
 	}
 
 	public int prepare(Xid arg0) throws XAException {
-		return delegate.prepare(arg0);
+		int vote = delegate.prepare(arg0);
+		if(vote == XAResource.XA_OK)
+		{
+			delegate.commit(arg0, false);
+		}
+		return vote;
 	}
 
 	public Xid[] recover(int arg0) throws XAException {
