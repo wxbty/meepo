@@ -85,6 +85,8 @@ public class TransactionImpl implements Transaction {
     private final SynchronizationList synchronizationList = new SynchronizationList();
     private final TransactionListenerList transactionListenerList = new TransactionListenerList();
 
+    public static ThreadLocal<Xid> currentXid = new ThreadLocal<Xid>();
+
     public TransactionImpl(TransactionContext txContext) {
         this.transactionContext = txContext;
     }
@@ -164,7 +166,7 @@ public class TransactionImpl implements Transaction {
 
         try {
             TransactionStrategy currentStrategy = this.getTransactionStrategy();
-            int vote = currentStrategy.prepare(xid);
+            int vote = 0;
             this.transactionStatus = Status.STATUS_PREPARED;
             archive.setStatus(this.transactionStatus);
             this.transactionVote = vote;
@@ -173,32 +175,14 @@ public class TransactionImpl implements Transaction {
             this.transactionListenerList.onPrepareSuccess(xid);
 
             return vote;
-        } catch (CommitRequiredException crex) {
-            this.transactionVote = XAResource.XA_OK;
-            archive.setVote(this.transactionVote);
-
-            this.transactionStatus = Status.STATUS_COMMITTING;
-            archive.setStatus(this.transactionStatus);
-
-            this.transactionListenerList.onPrepareSuccess(xid);
-            throw crex;
-        } catch (RollbackRequiredException rrex) {
-            this.transactionStatus = Status.STATUS_ROLLING_BACK;
-            archive.setStatus(this.transactionStatus);
-
-            this.transactionListenerList.onPrepareFailure(xid);
-            throw rrex;
-        } catch (RuntimeException xaex) {
-            this.transactionStatus = Status.STATUS_ROLLING_BACK;
-            archive.setStatus(this.transactionStatus);
-
-            this.transactionListenerList.onPrepareFailure(xid);
-            RollbackRequiredException rrex = new RollbackRequiredException();
-            rrex.initCause(xaex);
-            throw rrex;
+        } catch (Exception e) {
+           e.printStackTrace();
         } finally {
             transactionLogger.updateTransaction(archive);
         }
+
+        return 0;
+
     }
 
     public synchronized void recoveryCommit() throws CommitRequiredException, SystemException {
@@ -573,17 +557,9 @@ public class TransactionImpl implements Transaction {
         // boolean committed = false;
         int vote = XAResource.XA_RDONLY;
         try {
-            vote = currentStrategy.prepare(xid);
-        } catch (RollbackRequiredException xaex) {
-            this.transactionListenerList.onPrepareFailure(xid);
-            this.fireRollback();
-            HeuristicRollbackException hrex = new HeuristicRollbackException();
-            hrex.initCause(xaex);
-            throw hrex;
-        } catch (CommitRequiredException xaex) {
+//            vote = currentStrategy.prepare(xid);
             vote = XAResource.XA_OK;
-            // committed = true;
-        } catch (RuntimeException rex) {
+        } catch (Exception rex) {
             this.transactionListenerList.onPrepareFailure(xid);
             this.fireRollback();
             HeuristicRollbackException hrex = new HeuristicRollbackException();
@@ -688,11 +664,11 @@ public class TransactionImpl implements Transaction {
             switch (flag) {
                 case XAResource.TMSUCCESS:
                 case XAResource.TMFAIL:
-                    archive.end(branchXid, flag);
+                  //  archive.end(branchXid, flag);
                     archive.setDelisted(true);
                     break;
                 case XAResource.TMSUSPEND:
-                    archive.end(branchXid, flag);
+                   // archive.end(branchXid, flag);
                     archive.setDelisted(true);
                     archive.setSuspended(true);
                     break;
@@ -703,32 +679,6 @@ public class TransactionImpl implements Transaction {
             logger.info("[{}] delist: xares= {}, branch= {}, flags= {}",
                     ByteUtils.byteArrayToString(branchXid.getGlobalTransactionId()), archive,
                     ByteUtils.byteArrayToString(branchXid.getBranchQualifier()), flag);
-        } catch (XAException xae) {
-            logger.error("XATerminatorImpl.delistResource(XAResourceArchive, int)", xae);
-
-            // Possible XAException values are XAER_RMERR, XAER_RMFAIL,
-            // XAER_NOTA, XAER_INVAL, XAER_PROTO, or XA_RB*.
-            switch (xae.errorCode) {
-                case XAException.XAER_NOTA:
-                    // The specified XID is not known by the resource manager.
-                case XAException.XAER_INVAL:
-                    // Invalid arguments were specified.
-                case XAException.XAER_PROTO:
-                    // The routine was invoked in an improper context.
-                    return false;
-                case XAException.XAER_RMFAIL:
-                    // An error occurred that makes the resource manager unavailable.
-                case XAException.XAER_RMERR:
-                    // An error occurred in dissociating the transaction branch from the thread of control.
-                    SystemException sysex = new SystemException();
-                    sysex.initCause(xae);
-                    throw sysex;
-                default:
-                    // XA_RB*
-                    RollbackRequiredException rrex = new RollbackRequiredException();
-                    rrex.initCause(xae);
-                    throw rrex;
-            }
         } catch (RuntimeException ex) {
             logger.error("XATerminatorImpl.delistResource(XAResourceArchive, int)", ex);
 
@@ -783,7 +733,9 @@ public class TransactionImpl implements Transaction {
             archive.setIdentified(true);
             TransactionXid globalXid = this.transactionContext.getXid();
             XidFactory xidFactory = this.beanFactory.getXidFactory();
-            archive.setXid(xidFactory.createBranchXid(globalXid));
+            Xid currentBranchXid = xidFactory.createBranchXid(globalXid);
+            currentXid.set(currentBranchXid);
+            archive.setXid(currentBranchXid);
         } else {
             flags = XAResource.TMJOIN;
         }
@@ -859,7 +811,7 @@ public class TransactionImpl implements Transaction {
                     ByteUtils.byteArrayToString(branchXid.getGlobalTransactionId()), archive,
                     ByteUtils.byteArrayToString(branchXid.getBranchQualifier()), flag);
 
-            openGeneralLog(archive);
+//            openGeneralLog(archive);
             switch (flag) {
                 case XAResource.TMNOFLAGS:
                     long expired = this.transactionContext.getExpiredTime();
@@ -922,35 +874,6 @@ public class TransactionImpl implements Transaction {
 
     }
 
-    private void openGeneralLog(XAResourceArchive archive) {
-        if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
-            MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
-            Statement stmt = null;
-            String backInfo = null;
-            try {
-                Field mc = MysqlXAConnection.class.getDeclaredField("underlyingConnection");
-                mc.setAccessible(true);
-                Object mymc = mc.get(connection);
-                com.mysql.jdbc.Connection conn = (com.mysql.jdbc.Connection) mymc;
-                stmt = conn.createStatement();
-                stmt.execute("set global general_log=on");
-                stmt.execute("set global log_output='table'");
-                stmt.execute("set @@global.expire_logs_days=1");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (stmt != null) {
-                    try {
-                        stmt.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }
-    }
 
     public int getStatus() /* throws SystemException */ {
         return this.transactionStatus;

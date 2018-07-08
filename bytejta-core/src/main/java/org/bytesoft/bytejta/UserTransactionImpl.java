@@ -35,7 +35,7 @@ public class UserTransactionImpl implements UserTransaction, Referenceable, Seri
 
 	public void commit() throws HeuristicMixedException, HeuristicRollbackException, IllegalStateException,
 			RollbackException, SecurityException, SystemException {
-		this.transactionManager.commit();
+	//	this.transactionManager.commit();
 	}
 
 	public int getStatus() throws SystemException {

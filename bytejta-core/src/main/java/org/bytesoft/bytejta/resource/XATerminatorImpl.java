@@ -31,7 +31,7 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.update.Update;
-import org.bytesoft.bytejta.supports.resource.CommonResourceDescriptor;
+import org.bytesoft.bytejta.supports.resource.RemoteResourceDescriptor;
 import org.bytesoft.common.utils.Base64Util;
 import org.bytesoft.common.utils.ByteUtils;
 import org.bytesoft.transaction.TransactionBeanFactory;
@@ -41,6 +41,7 @@ import org.bytesoft.transaction.resource.XATerminator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.sql.XAConnection;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
@@ -80,7 +81,7 @@ public class XATerminatorImpl implements XATerminator {
                     globalVote = XAResource.XA_OK;
                 }
                 transactionLogger.updateResource(archive);
-                backInfo(archive);
+//                backInfo(archive);
 
 
             }
@@ -604,149 +605,91 @@ public class XATerminatorImpl implements XATerminator {
     }
 
     private void invokeRollback(XAResourceArchive archive) throws XAException {
-        try {
-            System.out.println("bengin invokeRollback");
-            if (archive.getDescriptor().getDelegate() instanceof JDBC4MysqlXAConnection) {
-                //prepare成功状态，应用级回滚，否则数据库级回滚
-                if (archive.getVote() == XAResource.XA_OK) {
-                    System.out.println("before rollback,vote = " + archive.getVote());
-                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection");
-                    MysqlXAConnection connection = (MysqlXAConnection) archive.getDescriptor().getDelegate();
-                    PreparedStatement ps = null;
-                    //拼接PREPARE语句，在general_log查找执行中的sql
-                    StringBuilder commandBuf = new StringBuilder(300);
-                    String GloableXid = partGloableXid(archive.getXid());
-                    String branchXid = partBranchXid(archive.getXid());
-                    String sqlStr = "select rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
-                    Statement stmt = null;
-                    ResultSet rs = null;
-                    List rollList = new ArrayList<String>();
-                    List<String> backInfo = null;
-                    Connection conn = null;
-                    System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---1");
-                    try {
-                        Connection myconn = connection.getConnection();
-                        ConnectionWrapper connwap = (ConnectionWrapper) myconn;
+        System.out.println("bengin invokeRollback");
+        //-1已提交状态，应用级回滚，否则数据库级回滚
+        if (archive.getVote() == -1) {
 
-                        Field mc = ConnectionWrapper.class.getDeclaredField("mc");
-                        mc.setAccessible(true);
-                        Object mymc = mc.get(connwap);
-                        ConnectionImpl j4conn = (JDBC4Connection) mymc;
+            if(archive.getDescriptor() instanceof RemoteResourceDescriptor)
+            {
+                   archive.rollback(archive.getXid());
+                   return;
+            }
+            System.out.println("before rollback,vote = " + archive.getVote());
+            System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection");
+            XAConnection connection = (XAConnection) archive.getDescriptor().getDelegate();
+            PreparedStatement ps = null;
+            //拼接PREPARE语句，在general_log查找执行中的sql
+            StringBuilder commandBuf = new StringBuilder(300);
+            String GloableXid = partGloableXid(archive.getXid());
+            String branchXid = partBranchXid(archive.getXid());
+            String sqlStr = "select rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
+            Statement stmt = null;
+            ResultSet rs = null;
+            List rollList = new ArrayList<String>();
+            List<String> backInfo = null;
+            Connection conn = null;
+            System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---1");
+            try {
+                conn = connection.getConnection();
+//                ConnectionWrapper connwap = (ConnectionWrapper) myconn;
+//
+//                Field mc = ConnectionWrapper.class.getDeclaredField("mc");
+//                mc.setAccessible(true);
+//                Object mymc = mc.get(connwap);
+//                ConnectionImpl j4conn = (JDBC4Connection) mymc;
+//
+//                Field pass = ConnectionImpl.class.getDeclaredField("password");
+//                pass.setAccessible(true);
+//                Object passobj = pass.get(j4conn);
+//                String password = passobj.toString();
+//
+//                Field fuser = ConnectionImpl.class.getDeclaredField("user");
+//                fuser.setAccessible(true);
+//                Object userobj = fuser.get(j4conn);
+//                String user = userobj.toString();
+//
+//
+//                DatabaseMetaData databaseMetaData = myconn.getMetaData();
+//
+//                Class.forName("com.mysql.jdbc.Driver");
+//                conn = DriverManager.getConnection(databaseMetaData.getURL(), user, password);
 
-                        Field pass = ConnectionImpl.class.getDeclaredField("password");
-                        pass.setAccessible(true);
-                        Object passobj = pass.get(j4conn);
-                        String password = passobj.toString();
+                stmt = conn.createStatement();
 
-                        Field fuser = ConnectionImpl.class.getDeclaredField("user");
-                        fuser.setAccessible(true);
-                        Object userobj = fuser.get(j4conn);
-                        String user = userobj.toString();
-
-
-                        DatabaseMetaData databaseMetaData = myconn.getMetaData();
-
-                        Class.forName("com.mysql.jdbc.Driver");
-                        conn = DriverManager.getConnection(databaseMetaData.getURL(), user, password);
-
-                        stmt = conn.createStatement();
-
-                        rs = stmt.executeQuery(sqlStr);
-                        while (rs.next()) {
-                            rollList.add(rs.getString("rollback_info"));
-                        }
-                        System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---2，size=" + rollList.size());
-                        if (rollList.size() > 0) {
-                            System.out.println("bengin  invokeRollback rollbackinfo=" + rollList.get(0));
-                            backInfo = decodeRollBackSql(rollList);
-                            if (!rollback(backInfo, conn, stmt)) {
-                                logger.error(String.format("Roll back mysql info error!,backInfo:s%", backInfo));
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        //关闭自建创建的连接
-                        try {
-                            rs.close();
-                            conn.close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            stmt.close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    archive.rollback(archive.getXid());
+                rs = stmt.executeQuery(sqlStr);
+                while (rs.next()) {
+                    rollList.add(rs.getString("rollback_info"));
                 }
-            } else {
-                archive.rollback(archive.getXid());
-            }
-        } catch (XAException xaex) {
-            // * @exception XAException An error has occurred. Possible XAExceptions are
-            // * XA_HEURHAZ, XA_HEURCOM, XA_HEURRB, XA_HEURMIX, XAER_RMERR, XAER_RMFAIL,
-            // * XAER_NOTA, XAER_INVAL, or XAER_PROTO.
-            // * <p>If the transaction branch is already marked rollback-only the
-            // * resource manager may throw one of the XA_RB* exceptions. Upon return,
-            // * the resource manager has rolled back the branch's work and has released
-            // * all held resources.
-            switch (xaex.errorCode) {
-                case XAException.XA_HEURHAZ:
-                    // Due to some failure, the work done on behalf of the specified transaction branch
-                    // may have been heuristically completed. A resource manager may return this
-                    // value only if it has successfully prepared xid.
-                case XAException.XA_HEURMIX:
-                    // Due to a heuristic decision, the work done on behalf of the specified transaction
-                    // branch was partially committed and partially rolled back. A resource manager
-                    // may return this value only if it has successfully prepared xid.
-                case XAException.XA_HEURCOM:
-                    // Due to a heuristic decision, the work done on behalf of the specified transaction
-                    // branch was committed. A resource manager may return this value only if it has
-                    // successfully prepared xid.
-                case XAException.XA_HEURRB:
-                    // Due to a heuristic decision, the work done on behalf of the specified transaction
-                    // branch was rolled back. A resource manager may return this value only if it has
-                    // successfully prepared xid.
-                    throw xaex;
-                case XAException.XAER_RMFAIL:
-                    // An error occurred that makes the resource manager unavailable.
-                    XAException xrhaz = new XAException(XAException.XA_HEURHAZ);
-                    xrhaz.initCause(xaex);
-                    throw xrhaz;
-                case XAException.XAER_NOTA:
-                    // The specified XID is not known by the resource manager.
-                    if (archive.isReadonly()) {
-                        throw new XAException(XAException.XA_RDONLY);
-                    } else if (archive.getVote() == XAResourceArchive.DEFAULT_VOTE) {
-                        break; // rolled back
-                    } else if (archive.getVote() == XAResource.XA_RDONLY) {
-                        throw new XAException(XAException.XA_RDONLY);
-                    } else if (archive.getVote() == XAResource.XA_OK) {
-                        throw new XAException(XAException.XAER_RMERR);
-                    } else {
-                        throw new XAException(XAException.XAER_RMERR);
+                System.out.println("bengin  invokeRollback JDBC4MysqlXAConnection  ---2，size=" + rollList.size());
+                if (rollList.size() > 0) {
+                    System.out.println("bengin  invokeRollback rollbackinfo=" + rollList.get(0));
+                    backInfo = decodeRollBackSql(rollList);
+                    if (!rollback(backInfo, conn, stmt)) {
+                        logger.error(String.format("Roll back mysql info error!,backInfo:s%", backInfo));
                     }
-                case XAException.XAER_PROTO:
-                    // The routine was invoked in an improper context.
-                case XAException.XAER_INVAL:
-                    // Invalid arguments were specified.
-                    throw new XAException(XAException.XAER_RMERR);
-                case XAException.XAER_RMERR:
-                    // An error occurred in rolling back the transaction branch. The resource manager is
-                    // free to forget about the branch when returning this error so long as all accessing
-                    // threads of control have been notified of the branch’s state.
-                default: // XA_RB*
-                    // The resource manager has rolled back the transaction branch’s work and has
-                    // released all held resources. These values are typically returned when the
-                    // branch was already marked rollback-only.
-                    XAException xarb = new XAException(XAException.XA_HEURRB);
-                    xarb.initCause(xaex);
-                    throw xarb;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                //关闭自建创建的连接
+                try {
+                    rs.close();
+                    conn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    stmt.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+        }else
+        {
+            throw new XAException("error vote of achive,vote="+archive.getVote());
         }
+
+
     }
 
     public int getTransactionTimeout() throws XAException {

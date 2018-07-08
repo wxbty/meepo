@@ -79,7 +79,9 @@ public class XAConnectionImpl implements XAConnection, ConnectionEventListener {
 	}
 
 	public Connection getConnection() throws SQLException {
-		return this.delegate.getConnection();
+		Connection conn = this.delegate.getConnection();
+		SharpConnection spConn = new SharpConnection(this.delegate);
+		return spConn;
 	}
 
 	public void addConnectionEventListener(ConnectionEventListener listener) {

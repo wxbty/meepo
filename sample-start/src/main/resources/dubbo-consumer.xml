@@ -15,6 +15,6 @@
 	<dubbo:registry address="35.201.238.214:2181" protocol="zookeeper" timeout="300000"/>
 
 	<dubbo:reference id="remoteAccountService" interface="com.bytesvc.service.IAccountService" group="org.bytesoft.bytejta"
-		filter="transaction" loadbalance="transaction" cluster="failfast" retries="0"  timeout="300000"/>
+		filter="transaction" loadbalance="transaction" cluster="failfast" retries="0"  timeout="3000"/>
 
 </beans>

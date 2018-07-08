@@ -66,6 +66,22 @@ public class TransactionServiceFilter implements Filter {
 		String interfaceClazz = url.getServiceInterface();
 
 		System.out.println("provider method="+invocation.getMethodName());
+		if ("decreaseAmount".equals(invocation.getMethodName()))
+		{
+			System.out.println("begin decreaseAmount");
+		}
+		if ("prepare".equals(invocation.getMethodName()))
+		{
+			System.out.println("begin prepare");
+		}
+		if ("start".equals(invocation.getMethodName()))
+		{
+			System.out.println("begin start");
+		}
+		if ("rollback".equals(invocation.getMethodName()))
+		{
+			System.out.println("begin rollback");
+		}
 		if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
 				&& Arrays.equals(invocation.getParameterTypes(), new Class<?>[] { Xid.class, Integer.TYPE })) {
 			return this.providerInvokeForKey(invoker, invocation);
@@ -243,8 +259,9 @@ public class TransactionServiceFilter implements Filter {
 			Transaction transaction = transactionManager.getTransactionQuietly();
 			TransactionContext transactionContext = transaction == null ? null : transaction.getTransactionContext();
 			propagatedBy = transactionContext == null ? null : String.valueOf(transactionContext.getPropagatedBy());
-
-			return this.wrapResultForProvider(invoker, invocation, propagatedBy, true);
+			Result result = this.wrapResultForProvider(invoker, invocation, propagatedBy, true);
+			transaction.participantPrepare();
+			return result;
 		} catch (RpcException rex) {
 			failure = true;
 
@@ -543,6 +560,7 @@ public class TransactionServiceFilter implements Filter {
 		RpcException invokeError = null;
 		Throwable serverError = null;
 		try {
+			//TransactionContext 序列化后放入attachment
 			this.beforeConsumerInvokeForSVC(invocation, request, response);
 			result = (RpcResult) invoker.invoke(invocation);
 			Object value = result.getValue();

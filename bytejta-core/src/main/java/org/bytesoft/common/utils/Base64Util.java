@@ -120,7 +120,7 @@ public class Base64Util {
         System.out.println(StringEscapeUtils.unescapeHtml4(str));
         //System.out.println(encode("steps".getBytes()));
         try {
-            System.out.println(new String(decode("dXBkYXRlIHRiX2FjY291bnRfb25lIHNldCBhbW91bnQgPSA3ODg5LjAgd2hlcmUgYWNjdF9pZD0xMDAx")));
+            System.out.println(new String(decode("dXBkYXRlIHRiX2FjY291bnRfb25lIHNldCBhbW91bnQgPSA3NzkwLjAgd2hlcmUgYWNjdF9pZD0xMDAx")));
         }catch(Exception e)
         {
             e.printStackTrace();
