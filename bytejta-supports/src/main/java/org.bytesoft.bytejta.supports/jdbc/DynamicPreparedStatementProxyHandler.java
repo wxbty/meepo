@@ -57,7 +57,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             waitBackSqlList.add(sql);
             Connection conn = xaConn.getConnection();
             Statement st = conn.createStatement();
-            String backInfo = SqlpraserUtils.handleRollBack(waitBackSqlList, conn, st, "psql");
+            String backInfo = SqlpraserUtils.handleRollBack(waitBackSqlList, conn, st);
 
             PreparedStatement ps = null;
             String GloableXid = SqlpraserUtils.partGloableXid(currentXid);

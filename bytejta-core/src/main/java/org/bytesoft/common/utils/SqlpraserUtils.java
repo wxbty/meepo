@@ -40,13 +40,13 @@ import java.util.regex.Pattern;
 
 public class SqlpraserUtils {
 
-	public static String handleRollBack(List<String> list, Connection connection, Statement stmt,String identifier) {
+	public static String handleRollBack(List<String> list, Connection connection, Statement stmt) {
 		List<String> backSql = new ArrayList<String>();
 		for (String rollsql : list) {
 			if (rollsql.startsWith("insert")) {
 				backSql.addAll(handleInsert(rollsql));
 			} else if (rollsql.startsWith("update")) {
-				backSql.addAll(handleUpdate(rollsql, stmt, connection,identifier));
+				backSql.addAll(handleUpdate(rollsql, stmt, connection));
 			} else if (rollsql.startsWith("delete")) {
 				backSql.addAll(handleDelete(rollsql, connection));
 			}
@@ -78,7 +78,7 @@ public class SqlpraserUtils {
 
 	}
 
-	public static List<String> handleUpdate(String updateSql, Statement stmt, Connection conn,String identifier) {
+	public static List<String> handleUpdate(String updateSql, Statement stmt, Connection conn) {
 
 		List<String> updateBackSql = new ArrayList<String>();
 		List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
@@ -91,7 +91,7 @@ public class SqlpraserUtils {
 				logger.error("Unsupport multi tables for update");
 				return null;
 			}
-			String pkey = getPrimaryKey(conn, tables.get(0),identifier)[0];
+			String pkey = getPrimaryKey(conn, tables.get(0))[0];
 			columns = pkey + "," + columns;
 			String table = tables.get(0);
 			String whereSql = name_update_where(updateSql);
@@ -198,7 +198,7 @@ public class SqlpraserUtils {
 	}
 
 
-	public static String[] getPrimaryKey(Connection con, String tableName,String identifier) throws Exception
+	public static String[] getPrimaryKey(Connection con, String tableName) throws Exception
 	{
 		DatabaseMetaData dbMetaData=con.getMetaData();
 		ResultSet primaryKeyResultSet = dbMetaData.getPrimaryKeys(con.getCatalog(),null,tableName);
