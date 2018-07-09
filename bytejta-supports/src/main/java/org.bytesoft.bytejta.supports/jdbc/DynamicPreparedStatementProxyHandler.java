@@ -1,6 +1,8 @@
 package org.bytesoft.bytejta.supports.jdbc;
 
+import com.alibaba.fastjson.JSON;
 import org.bytesoft.bytejta.TransactionImpl;
+import org.bytesoft.bytejta.image.BackInfo;
 import org.bytesoft.bytejta.supports.resource.CommonResourceDescriptor;
 import org.bytesoft.common.utils.SqlpraserUtils;
 import org.slf4j.Logger;
@@ -22,7 +24,7 @@ import java.util.regex.Pattern;
 
 public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
-    static final Logger logger = LoggerFactory.getLogger(DynamicPreparedStatementProxyHandler.class);
+     Logger logger = LoggerFactory.getLogger(DynamicPreparedStatementProxyHandler.class);
 
     private Object realObject;
 
@@ -31,6 +33,12 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     private XAConnection xaConn;
 
     private Object[] params = new Object[2];
+
+    public static ThreadLocal<BackInfo> backinfo = new ThreadLocal<BackInfo>(){
+        public BackInfo initialValue(){
+            return new BackInfo();
+        }
+    };
 
 
     public DynamicPreparedStatementProxyHandler(Object realObject, String sql, XAConnection conn) {
@@ -57,7 +65,10 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             waitBackSqlList.add(sql);
             Connection conn = xaConn.getConnection();
             Statement st = conn.createStatement();
-            String backInfo = SqlpraserUtils.handleRollBack(waitBackSqlList, conn, st);
+
+            BackInfo  backInfo = backinfo.get();
+            backInfo.setBeforeImage(SqlpraserUtils.handleRollBack(backInfo,waitBackSqlList, conn, st));
+
 
             PreparedStatement ps = null;
             String GloableXid = SqlpraserUtils.partGloableXid(currentXid);
@@ -66,10 +77,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             ps = conn.prepareStatement(logSql);
             ps.setString(1, GloableXid);
             ps.setString(2, branchXid);
-            ps.setString(3, backInfo);
             ps.setInt(4, 0);
             ps.setString(5, "127.0.0.1");
-            ps.executeUpdate();         //执行sql语句
+
 
             logger.info("proxy sql = " + sql);
             Object obj = method.invoke(realObject, args);
@@ -77,6 +87,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             //本地直接提交
             xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
             xaConn.getXAResource().prepare(currentXid);
+
+            backInfo.setAfterImage(SqlpraserUtils.handleRollBack(backInfo, waitBackSqlList, conn, st));
+            String backSqlJson = JSON.toJSONString(backInfo);
+            ps.setString(3, backSqlJson);
+            ps.executeUpdate();         //执行sql语句
 
             st.close();
             //事务数据源从对应数据库获取后置对象
