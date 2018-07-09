@@ -2,152 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/UserTransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/UserTransactionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionBeanFactoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionBeanFactoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionCoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionCoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionManagerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionManagerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRecoveryImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRecoveryImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRecoveryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRecoveryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/UserTransactionImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/UserTransactionImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/VacantTransactionLock.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/VacantTransactionLock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/ArchiveDeserializerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/ArchiveDeserializerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/deserializer/TransactionArchiveDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/deserializer/TransactionArchiveDeserializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/deserializer/XAResourceArchiveDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/deserializer/XAResourceArchiveDeserializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/store/VirtualLoggingFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/store/VirtualLoggingFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/store/VirtualLoggingSystemImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/store/VirtualLoggingSystemImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorOptd$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorOptd$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorOptd.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorOptd.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/LastResourceOptimizeStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/LastResourceOptimizeStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/VacantTransactionStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/strategy/VacantTransactionStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/DataSourceHolder.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/DataSourceHolder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXACompatible.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXACompatible.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXAConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXAConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXAResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXAResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LogicalConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/LogicalConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/RecoveredResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/jdbc/RecoveredResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/CommonResourceDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/CommonResourceDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/LocalXAResourceDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/LocalXAResourceDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/RemoteResourceDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/RemoteResourceDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/UnidentifiedResourceDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/resource/UnidentifiedResourceDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/wire/RemoteCoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/wire/RemoteCoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/wire/RemoteCoordinatorRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/supports/wire/RemoteCoordinatorRegistry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/work/TransactionWork.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/work/TransactionWork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/xa/XidFactoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/xa/XidFactoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/Base64Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/Base64Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/ByteUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/ByteUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/CommonUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/CommonUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/common/utils/SerializeUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/CommitRequiredException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/CommitRequiredException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/RemoteSystemException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/RemoteSystemException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/RollbackRequiredException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/RollbackRequiredException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/Transaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionBeanFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionBeanFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionLock.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionLock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionRecovery.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionRecovery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/TransactionRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/adapter/ResourceAdapterImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/adapter/ResourceAdapterImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/archive/TransactionArchive.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/archive/TransactionArchive.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/archive/XAResourceArchive.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/archive/XAResourceArchive.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/aware/TransactionBeanFactoryAware.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/aware/TransactionBeanFactoryAware.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/aware/TransactionEndpointAware.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/aware/TransactionEndpointAware.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/SynchronizationImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/SynchronizationImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/SynchronizationList.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/SynchronizationList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/TransactionListenerList.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/TransactionListenerList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/TransactionResourceListenerList.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/internal/TransactionResourceListenerList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/ArchiveDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/ArchiveDeserializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/LoggingFlushable.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/LoggingFlushable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/TransactionLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/TransactionLogger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingTrigger.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/logging/store/VirtualLoggingTrigger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/recovery/TransactionRecoveryCallback.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/recovery/TransactionRecoveryCallback.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/recovery/TransactionRecoveryListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/recovery/TransactionRecoveryListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/resource/XATerminator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/resource/XATerminator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionListenerAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionListenerAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionResourceListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionResourceListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionResourceListenerAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionResourceListenerAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionStatistic.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionStatistic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionTimer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/TransactionTimer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/resource/XAResourceDescriptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/resource/XAResourceDescriptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionInterceptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/rpc/TransactionResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/serialize/XAResourceDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/supports/serialize/XAResourceDeserializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWork.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/work/SimpleWorkManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/xa/TransactionXid.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/xa/TransactionXid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/xa/XidFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/transaction/xa/XidFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/TransactionConfigPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/TransactionConfigPostProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboConfigPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboConfigPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/DubboRemoteCoordinator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/InvocationContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/InvocationContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/InvocationContextRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/InvocationContextRegistry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionBeanRegistry.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionBeanRegistry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionConfigPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionConfigPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionEndpointPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/TransactionEndpointPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/ext/ILoadBalancer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/ext/ILoadBalancer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/serialize/XAResourceDeserializerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/serialize/XAResourceDeserializerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionLoadBalance.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionLoadBalance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionLoadBalancer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionLoadBalancer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ApplicationConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ApplicationConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ProtocolConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ProtocolConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ProviderConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ProviderConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ReferenceConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ReferenceConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ServiceConfigValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/validator/ServiceConfigValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXADataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/LocalXADataSource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XAConnectionImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XAConnectionImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XADataSourceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XADataSourceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedConnectionFactoryHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedConnectionFactoryHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedConnectionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedConnectionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedXASessionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/ManagedXASessionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/serialize/XAResourceDeserializerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/resource/serialize/XAResourceDeserializerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionInterceptorImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionInterceptorImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionRequestImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionRequestImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionResponseImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/rpc/TransactionResponseImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/ManagedConnectionFactoryPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/ManagedConnectionFactoryPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/TransactionBeanFactoryPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/TransactionBeanFactoryPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/TransactionManagerPostProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/spring/TransactionManagerPostProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/application.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/application.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/comsumerService/GenericTransferServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/comsumerService/GenericTransferServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/dubbo-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-provider.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/dubbo-provider.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-2.log" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
@@ -187,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="XATerminatorImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="1169" selection-start-line="1169" selection-end-line="1169" />
+            <state relative-caret-position="208">
+              <caret line="1166" column="45" lean-forward="true" selection-start-line="1166" selection-start-column="45" selection-end-line="1166" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -199,7 +55,7 @@
       <file leaf-file-name="DynamicStatementProxyHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicStatementProxyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="60">
               <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
@@ -208,8 +64,8 @@
       <file leaf-file-name="DynamicPreparedStatementProxyHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="59" column="51" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="51" />
+            <state relative-caret-position="296">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -217,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SqlpraserUtils.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SqlpraserUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SqlpraserUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="131" column="68" selection-start-line="131" selection-start-column="68" selection-end-line="131" selection-end-column="68" />
+            <state relative-caret-position="890">
+              <caret line="422" selection-start-line="422" selection-end-line="422" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1727#1735#0" expanded="true" />
@@ -1064,10 +920,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172002000" />
+    <option name="totallyTimeSpent" value="174584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="24" y="54" width="1329" height="786" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5007153" side_tool="true" weight="0.3287483" />
@@ -1079,7 +936,7 @@
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="10" visible="true" weight="0.3963964" />
+      <window_info anchor="bottom" id="Debug" order="10" weight="0.3963964" />
       <window_info anchor="bottom" id="TODO" order="13" />
       <window_info anchor="bottom" id="Messages" order="2" weight="0.32732734" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
@@ -1089,8 +946,8 @@
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Run" order="9" weight="0.26276276" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" weight="0.33933935" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4950249" visible="true" weight="0.28282827" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.33933935" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4950249" visible="true" weight="0.28282827" />
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" sideWeight="0.50497514" side_tool="true" weight="0.28282827" />
       <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.34684685" />
@@ -1482,40 +1339,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="1169" selection-start-line="1169" selection-end-line="1169" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicStatementProxyHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="59" column="51" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SqlpraserUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="131" column="68" selection-start-line="131" selection-start-column="68" selection-end-line="131" selection-end-column="68" />
+        <state relative-caret-position="890">
+          <caret line="422" selection-start-line="422" selection-end-line="422" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1727#1735#0" expanded="true" />
             <element signature="e#3236#3244#0" expanded="true" />
             <element signature="e#3306#3327#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicStatementProxyHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="1166" column="45" lean-forward="true" selection-start-line="1166" selection-start-column="45" selection-end-line="1166" selection-end-column="45" />
         </state>
       </provider>
     </entry>

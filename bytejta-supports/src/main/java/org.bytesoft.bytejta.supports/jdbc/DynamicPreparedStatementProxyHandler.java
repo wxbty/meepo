@@ -78,7 +78,6 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
             xaConn.getXAResource().prepare(currentXid);
 
-            Thread.sleep(4000);
             st.close();
             //事务数据源从对应数据库获取后置对象
             return obj;
