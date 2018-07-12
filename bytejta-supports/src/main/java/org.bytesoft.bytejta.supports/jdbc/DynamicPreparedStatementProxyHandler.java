@@ -40,64 +40,89 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
+
+            System.out.println(realObject.getClass().getName());
+
+
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
             Integer seq = (Integer) args[0];
             params[seq - 1] = args[1];
         }
         if ("executeUpdate".equals(method.getName())) {
-            BackInfo backInfo = new BackInfo();
-            sql = printRealSql(sql, params);
-            CommonResourceDescriptor resource = (CommonResourceDescriptor) xaConn.getXAResource();
-            Xid currentXid = TransactionImpl.currentXid.get();
-            //事务数据源从对应数据库获取前置对象
-            Connection conn = xaConn.getConnection();
-            Statement st = conn.createStatement();
 
 
-            BaseResolvers resolver = ImageUtil.getImageResolvers(sql);
-            backInfo.setBeforeImage(resolver.genBeforeImage(backInfo, sql, conn, st));
-            PreparedStatement ps = null;
-            String GloableXid = partGloableXid(currentXid);
-            String branchXid = partBranchXid(currentXid);
-            String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
-            ps = conn.prepareStatement(logSql);
-            ps.setString(1, GloableXid);
-            ps.setString(2, branchXid);
-            ps.setInt(4, 0);
-            ps.setString(5, "127.0.0.1");
 
-            logger.info("proxy sql = " + sql);
-            Object obj = method.invoke(realObject, args);
-            Object pkVal = null;
-            if (sql.toLowerCase().startsWith("insert")) {
-                PreparedStatement preparedStatement = (PreparedStatement) realObject;
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                while (generatedKeys.next()) {
-                    pkVal = generatedKeys.getObject(1);
+                BackInfo backInfo = new BackInfo();
+                if (realObject instanceof PreparedStatement) {
+                    sql = printRealSql(sql, params);
+                }else if (realObject instanceof Statement)
+                {
+
+                    sql = args[0].toString();
                 }
-                if (pkVal == null) {
-                    String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
-                    List<String> colums = SqlpraserUtils.name_insert_column(sql);
-                    List<String> values = SqlpraserUtils.name_insert_values(sql);
-                    if (colums.contains(pkKey)) {
-                        pkVal = values.get(colums.indexOf(pkKey));
+                CommonResourceDescriptor resource = (CommonResourceDescriptor) xaConn.getXAResource();
+                Xid currentXid = TransactionImpl.currentXid.get();
+                //事务数据源从对应数据库获取前置对象
+                Connection conn = xaConn.getConnection();
+                Statement st = conn.createStatement();
+
+
+                BaseResolvers resolver = ImageUtil.getImageResolvers(sql);
+                backInfo.setBeforeImage(resolver.genBeforeImage(backInfo, sql, conn, st));
+                PreparedStatement ps = null;
+                String GloableXid = partGloableXid(currentXid);
+                String branchXid = partBranchXid(currentXid);
+                String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
+                ps = conn.prepareStatement(logSql);
+                ps.setString(1, GloableXid);
+                ps.setString(2, branchXid);
+                ps.setInt(4, 0);
+                ps.setString(5, "127.0.0.1");
+
+                logger.info("proxy sql = " + sql);
+                Object obj = null;
+                Object pkVal = null;
+                if (sql.toLowerCase().startsWith("insert")) {
+                    ResultSet generatedKeys = null;
+                    if (realObject instanceof PreparedStatement) {
+                        obj = method.invoke(realObject, args);
+                        PreparedStatement preparedStatement = (PreparedStatement) realObject;
+                        generatedKeys = preparedStatement.getGeneratedKeys();
+                    }else if (realObject instanceof Statement) {
+                        Statement realSt = (Statement) realObject;
+                        obj = realSt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+                        generatedKeys = realSt.getGeneratedKeys();
+                    }
+                    while (generatedKeys.next()) {
+                        pkVal = generatedKeys.getObject(1);
+                    }
+
+                    if (pkVal == null) {
+                        String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
+                        List<String> colums = SqlpraserUtils.name_insert_column(sql);
+                        List<String> values = SqlpraserUtils.name_insert_values(sql);
+                        if (colums.contains(pkKey)) {
+                            pkVal = values.get(colums.indexOf(pkKey));
+                        }
                     }
                 }
 
-            }
-            //本地直接提交
-            xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-            xaConn.getXAResource().prepare(currentXid);
-            //插入时需要获取主键的value
 
-            backInfo.setAfterImage(resolver.genAfterImage(backInfo, sql, conn, st, pkVal));
-            String backSqlJson = JSON.toJSONString(backInfo);
-            ps.setString(3, backSqlJson);
-            ps.executeUpdate();         //执行sql语句
+                //本地直接提交
+                xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+                xaConn.getXAResource().prepare(currentXid);
+                //插入时需要获取主键的value
 
-            st.close();
-            //事务数据源从对应数据库获取后置对象
-            return obj;
+                backInfo.setAfterImage(resolver.genAfterImage(backInfo, sql, conn, st, pkVal));
+                String backSqlJson = JSON.toJSONString(backInfo);
+                ps.setString(3, backSqlJson);
+                ps.executeUpdate();         //执行sql语句
+
+                st.close();
+                //事务数据源从对应数据库获取后置对象
+                return obj;
+
+
         }
         return method.invoke(realObject, args);
     }

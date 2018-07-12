@@ -25,7 +25,9 @@ public class SharpConnection implements Connection {
     public Statement createStatement() throws SQLException {
 
         Statement st = conn.createStatement();
-        return st;
+        Statement proxySt = (Statement) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), new Class[]{Statement.class}, new DynamicPreparedStatementProxyHandler(st, null, xaConn));
+
+        return proxySt;
     }
 
     public PreparedStatement prepareStatement(String sql) throws SQLException {

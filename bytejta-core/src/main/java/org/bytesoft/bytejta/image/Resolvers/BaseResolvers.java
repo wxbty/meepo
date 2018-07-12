@@ -34,7 +34,7 @@ public abstract class BaseResolvers implements ImageResolvers {
         Image Image = new Image();
         List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
         StringBuffer sqlJoint = new StringBuffer("select ");
-        sqlJoint.append(allColumns);
+        sqlJoint.append(primaryKey + ","+allColumns);
         sqlJoint.append(" from ");
         sqlJoint.append(tableName);
         if (StringUtils.isNotBlank(sqlWhere)) {
