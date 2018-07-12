@@ -64,6 +64,11 @@ public class TransactionServiceFilter implements Filter {
 	public Result providerInvoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 		URL url = RpcContext.getContext().getUrl();
 		String interfaceClazz = url.getServiceInterface();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		System.out.println("provider method="+invocation.getMethodName());
 		if ("decreaseAmount".equals(invocation.getMethodName()))

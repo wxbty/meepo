@@ -10,7 +10,6 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/validator/ProtocolConfigValidator.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/serialize/XAResourceDeserializerImpl.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/validator/ProviderConfigValidator.java
-/Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/App.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/validator/ApplicationConfigValidator.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/DubboConfigPostProcessor.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/validator/ServiceConfigValidator.java

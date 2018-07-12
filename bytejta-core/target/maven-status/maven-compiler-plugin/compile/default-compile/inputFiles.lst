@@ -4,12 +4,14 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/work/SimpleWork.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/supports/rpc/TransactionRequest.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java
+/Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorOptd.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/logging/TransactionLogger.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/recovery/TransactionRecoveryCallback.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionStatistic.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/resource/XATerminator.java
+/Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Field.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/deserializer/TransactionArchiveDeserializer.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/resource/LocalXAResourceDescriptor.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionRepositoryImpl.java
@@ -30,6 +32,7 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/jdbc/LocalXACompatible.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionRecoveryImpl.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/jdbc/LocalXAResource.java
+/Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/image/LineFileds.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/logging/store/VirtualLoggingRecord.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionManagerImpl.java
@@ -67,6 +70,7 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/jdbc/LocalXAConnection.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/work/TransactionWork.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionResourceListener.java
+/Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/common/utils/SqlpraserUtils.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/supports/TransactionListenerAdapter.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/Transaction.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/archive/TransactionArchive.java
@@ -82,4 +86,5 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/internal/TransactionResourceListenerList.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/LastResourceOptimizeStrategy.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/transaction/CommitRequiredException.java
+/Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Image.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/resource/RemoteResourceDescriptor.java

@@ -6,9 +6,15 @@ public class Field {
     private String type;
     private Object value;
 
-    public Field(String name, String type, Object value) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public void setValue(Object value) {
         this.value = value;
     }
 

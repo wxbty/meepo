@@ -1,5 +1,7 @@
 org/bytesoft/bytejta/supports/spring/TransactionBeanFactoryPostProcessor.class
+org/bytesoft/bytejta/supports/jdbc/DynamicPreparedStatementProxyHandler.class
 org/bytesoft/bytejta/supports/spring/TransactionManagerPostProcessor.class
+org/bytesoft/bytejta/supports/jdbc/SharpConnection.class
 org/bytesoft/bytejta/supports/spring/ManagedConnectionFactoryPostProcessor.class
 org/bytesoft/bytejta/supports/jdbc/XADataSourceImpl.class
 org/bytesoft/bytejta/supports/jdbc/XAConnectionImpl.class
@@ -8,6 +10,9 @@ org/bytesoft/bytejta/supports/resource/ManagedConnectionFactoryHandler.class
 org/bytesoft/bytejta/supports/resource/serialize/XAResourceDeserializerImpl.class
 org/bytesoft/bytejta/supports/rpc/TransactionInterceptorImpl.class
 org/bytesoft/bytejta/supports/rpc/TransactionRequestImpl.class
+org/bytesoft/bytejta/supports/jdbc/DynamicPreparedStatementProxyHandler$1.class
+org/bytesoft/bytejta/supports/jdbc/DynamicStatementProxyHandler.class
 org/bytesoft/bytejta/supports/resource/ManagedConnectionHandler.class
+org/bytesoft/bytejta/supports/jdbc/SharpStatement.class
 org/bytesoft/bytejta/supports/resource/ManagedXASessionHandler.class
 org/bytesoft/bytejta/supports/rpc/TransactionResponseImpl.class

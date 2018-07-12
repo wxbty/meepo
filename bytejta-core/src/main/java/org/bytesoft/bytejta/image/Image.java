@@ -10,15 +10,6 @@ public class Image {
 
     private String tableName;
 
-    private boolean isbefore;
-
-    public boolean isIsbefore() {
-        return isbefore;
-    }
-
-    public void setIsbefore(boolean isbefore) {
-        this.isbefore = isbefore;
-    }
 
     public List<LineFileds> getLine() {
         return line;
