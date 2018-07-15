@@ -16,32 +16,33 @@ import java.util.Map;
 
 public abstract class BaseResolvers implements ImageResolvers {
 
+    protected BackInfo backInfo;
+    protected Connection conn;
+    protected Statement stmt;
+
     protected String schema;
     protected String tableName;
     protected String primaryKey;
     protected String allColumns;
     protected String sqlWhere;
     protected List<String> column_list;
+    protected String orginSql;
+    protected String beforeImageSql;
 
-    protected Image genImage(BackInfo backInfo, String sql, Connection conn, Statement stmt) throws SQLException, JSQLParserException, XAException {
+    protected Image genImage() throws SQLException, JSQLParserException, XAException {
 
-        tableName = getTable(sql);
-        primaryKey = getPrimaryKey(conn, tableName);
-        sqlWhere = getSqlWhere(sql);
-        column_list = getColumnList(sql, conn, tableName);
+        tableName = getTable();
+        primaryKey = getPrimaryKey();
+        sqlWhere = getSqlWhere();
+        column_list = getColumnList();
         allColumns = getAllColumns();
+        schema = getMetaSchema(conn,tableName);
 
-        Image Image = new Image();
+
+        Image image = new Image();
         List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
-        StringBuffer sqlJoint = new StringBuffer("select ");
-        sqlJoint.append(primaryKey + ","+allColumns);
-        sqlJoint.append(" from ");
-        sqlJoint.append(tableName);
-        if (StringUtils.isNotBlank(sqlWhere)) {
-            sqlJoint.append(" where ");
-            sqlJoint.append(sqlWhere);
-        }
-        String beforeImageSql = sqlJoint.toString();
+
+        getBeforeImageSql();
         ResultSet rs = stmt.executeQuery(beforeImageSql);
         while (rs.next()) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -67,44 +68,56 @@ public abstract class BaseResolvers implements ImageResolvers {
             lf.setFields(fileds);
             line.add(lf);
         }
-        Image.setLine(line);
-        Image.setTableName(tableName);
-        Image.setSchemaName(schema);
+        image.setLine(line);
+        image.setTableName(tableName);
+        image.setSchemaName(schema);
 
-        backInfo.setSelectBody("select " + allColumns + " from " + tableName);
+        backInfo.setSelectBody("select " + primaryKey + "," + allColumns + " from " + tableName);
         backInfo.setSelectWhere(" where 1=1 and " + sqlWhere);
-        backInfo.setChangeType(sql.trim().substring(0,6));
-        backInfo.setChangeSql(sql);
+        backInfo.setChangeType(orginSql.trim().substring(0, 6));
+        backInfo.setChangeSql(orginSql);
         backInfo.setPk(primaryKey);
 
-        return Image;
+        return image;
     }
 
     @Override
-    public abstract Image genBeforeImage(BackInfo backInfo, String sql, Connection conn, Statement stmt) throws SQLException, JSQLParserException, XAException;
+    public abstract Image genBeforeImage() throws SQLException, JSQLParserException, XAException;
 
     @Override
-    public abstract Image genAfterImage(BackInfo backInfo, String sql, Connection conn, Statement stmt, Object pkVal) throws SQLException, XAException, JSQLParserException;
+    public abstract Image genAfterImage() throws SQLException, XAException, JSQLParserException;
 
 
-    protected abstract String getTable(String sql) throws JSQLParserException, XAException;
+    public abstract String getTable() throws JSQLParserException, XAException;
 
-    protected String getschema(Connection con, String tableName) throws SQLException {
-        return getMetaSchema(con, tableName);
+    protected void getBeforeImageSql() throws SQLException {
+        StringBuffer sqlJoint = new StringBuffer("select ");
+        sqlJoint.append(primaryKey + "," + allColumns);
+        sqlJoint.append(" from ");
+        sqlJoint.append(tableName);
+        if (StringUtils.isNotBlank(sqlWhere)) {
+            sqlJoint.append(" where ");
+            sqlJoint.append(sqlWhere);
+        }
+         beforeImageSql = sqlJoint.toString();
     }
 
-    protected String getPrimaryKey(Connection con, String tableName) throws SQLException {
-        return getMetaPrimaryKey(con, tableName);
+    protected String getschema() throws SQLException {
+        return getMetaSchema(conn, tableName);
+    }
+
+    protected String getPrimaryKey() throws SQLException {
+        return getMetaPrimaryKey(conn, tableName);
     }
 
     protected String getAllColumns() {
-        return  transList(column_list);
+        return transList(column_list);
     }
 
-    protected abstract String getSqlWhere(String sql) throws JSQLParserException;
+    protected abstract String getSqlWhere() throws JSQLParserException;
 
-    protected List<String> getColumnList(String sql, Connection con, String tableName) throws JSQLParserException, SQLException {
-        Map<String, Object> metaColumn = getColumns(con, tableName);
+    protected List<String> getColumnList() throws JSQLParserException, SQLException {
+        Map<String, Object> metaColumn = getColumns();
         return new ArrayList<>(metaColumn.keySet());
     }
 
@@ -130,8 +143,8 @@ public abstract class BaseResolvers implements ImageResolvers {
         return schemasName;
     }
 
-    protected Map<String, Object> getColumns(Connection con, String tableName) throws SQLException {
-        DatabaseMetaData dbMetaData = con.getMetaData();
+    protected Map<String, Object> getColumns() throws SQLException {
+        DatabaseMetaData dbMetaData = conn.getMetaData();
         ResultSet columResultSet = dbMetaData.getColumns(null, "%", tableName, "%");
         Map<String, Object> colums = new HashMap<>();
         while (columResultSet.next()) {
@@ -140,7 +153,7 @@ public abstract class BaseResolvers implements ImageResolvers {
         return colums;
     }
 
-    private String transList(List<String> list) {
+    public String transList(List<String> list) {
         StringBuffer buf = new StringBuffer();
         for (String str : list) {
             buf.append(str).append(",");
@@ -150,5 +163,9 @@ public abstract class BaseResolvers implements ImageResolvers {
         }
         return buf.toString();
     }
+
+    abstract public String getLockedSet() throws JSQLParserException, SQLException, XAException;
+
+
 
 }

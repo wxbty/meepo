@@ -27,9 +27,9 @@ public class GenericTransferServiceImpl implements ITransferService {
 	}
 
 	private void increaseAmount(String acctId, double amount) throws ServiceException {
-//		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
+		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
 //		int value = this.jdbcTemplate.update("delete from tb_account_two where amount = ? and acct_id = ?", 233.3, "1531315150148");
-		int value = this.jdbcTemplate.update("insert into apple (name)values('liming')");
+//		int value = this.jdbcTemplate.update("insert into apple (name)values('liming')");
 
 		System.out.printf("exec increase: acct= %s, amount= %7.2f%n", acctId, amount);
 	}

@@ -590,7 +590,7 @@ public class TransactionImpl implements Transaction {
             boolean unFinishExists = true;
             try {
                 //异步提交，直接返回结果，优化性能
-//                currentStrategy.commit(xid);
+                currentStrategy.commit(xid);
                 unFinishExists = false;
             } catch (RuntimeException ex) {
                 this.transactionListenerList.onCommitFailure(xid);

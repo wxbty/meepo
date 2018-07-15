@@ -13,21 +13,29 @@ import java.util.List;
 
 public class UpdateImageResolvers extends BaseResolvers {
 
+    UpdateImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement stmt)
+    {
+        this.orginSql =orginSql;
+        this.backInfo = backInfo;
+        this.conn = conn;
+        this.stmt = stmt;
+    }
+
 
     @Override
-    public Image genBeforeImage(BackInfo backInfo, String sql, Connection conn, Statement stmt) throws SQLException, JSQLParserException, XAException {
-        return genImage(backInfo,sql,conn,stmt);
+    public Image genBeforeImage() throws SQLException, JSQLParserException, XAException {
+        return genImage();
     }
 
     @Override
-    public Image genAfterImage(BackInfo backInfo, String sql, Connection conn, Statement stmt, Object pkVal) throws SQLException, XAException, JSQLParserException {
-        return genImage(backInfo,sql,conn,stmt);
+    public Image genAfterImage() throws SQLException, XAException, JSQLParserException {
+        return genImage();
     }
 
     @Override
-    protected String getTable(String sql) throws JSQLParserException, XAException {
+    public String getTable() throws JSQLParserException, XAException {
 
-        List<String> tables = SqlpraserUtils.name_update_table(sql);
+        List<String> tables = SqlpraserUtils.name_update_table(orginSql);
         if (tables.size() > 1) {
             throw new XAException("Update.UnsupportMultiTables");
         }
@@ -35,13 +43,19 @@ public class UpdateImageResolvers extends BaseResolvers {
     }
 
     @Override
-    protected String getSqlWhere(String sql) throws JSQLParserException {
-        return SqlpraserUtils.name_update_where(sql);
+    protected String getSqlWhere() throws JSQLParserException {
+        return SqlpraserUtils.name_update_where(orginSql);
     }
 
 
     @Override
-    protected List<String> getColumnList(String sql,Connection con, String tableName) throws JSQLParserException {
-        return SqlpraserUtils.name_update_column(sql);
+    protected List<String> getColumnList() throws JSQLParserException {
+        return SqlpraserUtils.name_update_column(orginSql);
+    }
+
+    @Override
+    public String getLockedSet() {
+
+        return beforeImageSql;
     }
 }

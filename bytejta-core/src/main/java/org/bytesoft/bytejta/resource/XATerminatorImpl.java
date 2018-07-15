@@ -22,6 +22,7 @@ import com.mysql.jdbc.JDBC4Connection;
 import com.mysql.jdbc.jdbc2.optional.ConnectionWrapper;
 import com.mysql.jdbc.jdbc2.optional.JDBC4MysqlXAConnection;
 import com.mysql.jdbc.jdbc2.optional.MysqlXAConnection;
+import com.sun.org.apache.xalan.internal.XalanConstants;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
@@ -75,7 +76,6 @@ public class XATerminatorImpl implements XATerminator {
                 globalVote = archive.getVote() == XAResource.XA_RDONLY ? globalVote : XAResource.XA_OK;
             } else {
                 int branchVote = archive.prepare(archive.getXid());
-                //二阶段提交改为一阶段提交+后续清理,提交操作放在生成sql后执行
                 archive.setVote(branchVote);
                 if (branchVote == XAResource.XA_RDONLY) {
                     archive.setReadonly(true);
@@ -84,8 +84,6 @@ public class XATerminatorImpl implements XATerminator {
                     globalVote = XAResource.XA_OK;
                 }
                 transactionLogger.updateResource(archive);
-//                backInfo(archive);
-
 
             }
 
@@ -360,59 +358,26 @@ public class XATerminatorImpl implements XATerminator {
     }
 
     private void invokeTwoPhaseCommit(XAResourceArchive archive) throws XAException {
-        try {
+        //清理锁信息来代替数据库提交
+//            archive.commit(archive.getXid(), false);
+        if (archive.getDescriptor() instanceof RemoteResourceDescriptor) {
             archive.commit(archive.getXid(), false);
-        } catch (XAException xaex) {
-            // * @exception XAException An error has occurred. Possible XAExceptions
-            // * are XA_HEURHAZ, XA_HEURCOM, XA_HEURRB, XA_HEURMIX, XAER_RMERR,
-            // * XAER_RMFAIL, XAER_NOTA, XAER_INVAL, or XAER_PROTO.
-            // * <P>If the resource manager did not commit the transaction and the
-            // * parameter onePhase is set to true, the resource manager may throw
-            // * one of the XA_RB* exceptions. Upon return, the resource manager has
-            // * rolled back the branch's work and has released all held resources.
-            switch (xaex.errorCode) {
-                case XAException.XA_HEURHAZ:
-                    // OSI-TP: The condition that arises when, as a result of communication failure with a
-                    // subordinate, the bound data of the subordinate's subtree are in an unknown state.
-
-                    // XA: Due to some failure, the work done on behalf of the specified
-                    // transaction branch may have been heuristically completed.
-                case XAException.XA_HEURMIX:
-                    // Due to a heuristic decision, the work done on behalf of the specified
-                    // transaction branch was partially committed and partially rolled back.
-                case XAException.XA_HEURCOM:
-                    // Due to a heuristic decision, the work done on behalf of
-                    // the specified transaction branch was committed.
-                case XAException.XA_HEURRB:
-                    // Due to a heuristic decision, the work done on behalf of
-                    // the specified transaction branch was rolled back.
-                    throw xaex;
-                case XAException.XAER_NOTA:
-                    // The specified XID is not known by the resource manager.
-                    throw new XAException(XAException.XA_RDONLY); // read-only
-                case XAException.XAER_RMFAIL:
-                    // An error occurred that makes the resource manager unavailable.
-                    throw xaex;
-                case XAException.XAER_INVAL:
-                    // Invalid arguments were specified.
-                case XAException.XAER_PROTO:
-                    // The routine was invoked in an improper context.
-                    XAException error = new XAException(XAException.XAER_RMERR);
-                    error.initCause(xaex);
-                    throw error;
-                case XAException.XAER_RMERR:
-                    // An error occurred in committing the work performed on behalf of the transaction
-                    // branch and the branch’s work has been rolled back. Note that returning this error
-                    // signals a catastrophic event to a transaction manager since other resource
-                    // managers may successfully commit their work on behalf of this branch. This error
-                    // should be returned only when a resource manager concludes that it can never
-                    // commit the branch and that it cannot hold the branch’s resources in a prepared
-                    // state. Otherwise, [XA_RETRY] should be returned.
-                default:// XA_RB*
-                    XAException xarb = new XAException(XAException.XA_HEURRB);
-                    xarb.initCause(xaex);
-                    throw xarb;
+            return;
+        }else {
+            try {
+                String gloableXid = partGloableXid(archive.getXid());
+                String branchXid = partBranchXid(archive.getXid());
+                String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
+                XAConnection connection = (XAConnection) archive.getDescriptor().getDelegate();
+                Connection conn = connection.getConnection();
+                Statement stmt = conn.createStatement();
+                stmt.execute(sql);
+            }catch (SQLException ex)
+            {
+                logger.error("SQL.error",ex);
+                throw new XAException("invokeTwoPhaseCommit.SQLException");
             }
+
         }
     }
 

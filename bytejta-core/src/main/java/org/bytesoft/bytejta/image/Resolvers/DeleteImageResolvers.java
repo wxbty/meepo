@@ -19,16 +19,24 @@ import java.util.Map;
 public class DeleteImageResolvers extends BaseResolvers {
 
     static final Logger logger = LoggerFactory.getLogger(DeleteImageResolvers.class);
-    private Object pkVal;
+
+
+    DeleteImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement st)
+    {
+        this.orginSql =orginSql;
+        this.backInfo = backInfo;
+        this.conn = conn;
+        this.stmt = stmt;
+    }
 
     @Override
-    public Image genBeforeImage(BackInfo backInfo, String deleteSql, Connection conn, Statement stmt) throws JSQLParserException, SQLException, XAException {
-        return genImage(backInfo, deleteSql, conn, stmt);
+    public Image genBeforeImage() throws JSQLParserException, SQLException, XAException {
+        return genImage();
 
     }
 
     @Override
-    public Image genAfterImage(BackInfo backInfo, String sql, Connection connection, Statement stmt, Object pkVal)  {
+    public Image genAfterImage()  {
         Image image = new Image();
         image.setSchemaName(schema);
         image.setTableName(tableName);
@@ -37,9 +45,9 @@ public class DeleteImageResolvers extends BaseResolvers {
     }
 
     @Override
-    protected String getTable(String sql) throws JSQLParserException, XAException {
+    public String getTable() throws JSQLParserException, XAException {
 
-        List<String> tables = SqlpraserUtils.name_delete_table(sql);
+        List<String> tables = SqlpraserUtils.name_delete_table(orginSql);
         if (tables.size() > 1) {
             throw new XAException("Delete.UnsupportMultiTables");
         }
@@ -48,10 +56,14 @@ public class DeleteImageResolvers extends BaseResolvers {
 
 
     @Override
-    protected String getSqlWhere(String sql) throws JSQLParserException {
-        return SqlpraserUtils.name_delete_where(sql);
+    protected String getSqlWhere() throws JSQLParserException {
+        return SqlpraserUtils.name_delete_where(orginSql);
     }
 
+    @Override
+    public String getLockedSet() throws JSQLParserException {
+        return beforeImageSql;
+    }
 
 
 }
