@@ -21,9 +21,11 @@ import com.alibaba.dubbo.rpc.*;
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;
 import org.apache.commons.lang3.StringUtils;
+import org.bytesoft.bytejta.resource.XATerminatorImpl;
 import org.bytesoft.bytejta.supports.dubbo.DubboRemoteCoordinator;
 import org.bytesoft.bytejta.supports.dubbo.InvocationContext;
 import org.bytesoft.bytejta.supports.dubbo.TransactionBeanRegistry;
+import org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl;
 import org.bytesoft.bytejta.supports.rpc.TransactionRequestImpl;
 import org.bytesoft.bytejta.supports.rpc.TransactionResponseImpl;
 import org.bytesoft.bytejta.supports.wire.RemoteCoordinator;
@@ -147,12 +149,20 @@ public class TransactionServiceFilter implements Filter {
 		result.setException(null);
 		result.setValue(wrapped);
 
-	//	this.wrapResultForProvider(invoker, invocation, null, false);
-
 		return result;
 	}
 
 	public Result providerInvokeForJTA(Invoker<?> invoker, Invocation invocation) throws RpcException {
+
+		System.out.println(Thread.currentThread().getName() + "  -----succ");
+
+		if (XATerminatorImpl.sourceProp.get().isEmpty()) {
+			XATerminatorImpl.sourceProp.get().put("url", XADataSourceImpl.url);
+			XATerminatorImpl.sourceProp.get().put("user", XADataSourceImpl.user);
+			XATerminatorImpl.sourceProp.get().put("password", XADataSourceImpl.password);
+			XATerminatorImpl.sourceProp.get().put("className", XADataSourceImpl.className);
+		}
+
 		TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
 		TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();
 		XidFactory xidFactory = beanFactory.getXidFactory();
@@ -212,6 +222,9 @@ public class TransactionServiceFilter implements Filter {
 
 
 	public Result providerInvokeForSVC(Invoker<?> invoker, Invocation invocation) throws RpcException {
+
+
+
 		RemoteCoordinatorRegistry coordinatorRegistry = RemoteCoordinatorRegistry.getInstance();
 		TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
 		TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();

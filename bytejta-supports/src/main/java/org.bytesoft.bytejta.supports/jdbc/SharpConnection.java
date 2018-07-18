@@ -1,5 +1,7 @@
 package org.bytesoft.bytejta.supports.jdbc;
 
+import org.bytesoft.bytejta.resource.XATerminatorImpl;
+
 import javax.sql.XAConnection;
 import java.lang.reflect.Proxy;
 import java.sql.*;
@@ -17,8 +19,16 @@ public class SharpConnection implements Connection {
         this.xaConn = xaConn;
         try {
             this.conn = xaConn.getConnection();
+
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        if (XATerminatorImpl.sourceProp.get().isEmpty()) {
+            XATerminatorImpl.sourceProp.get().put("url", XADataSourceImpl.url);
+            XATerminatorImpl.sourceProp.get().put("user", XADataSourceImpl.user);
+            XATerminatorImpl.sourceProp.get().put("password", XADataSourceImpl.password);
+            XATerminatorImpl.sourceProp.get().put("className", XADataSourceImpl.className);
         }
     }
 

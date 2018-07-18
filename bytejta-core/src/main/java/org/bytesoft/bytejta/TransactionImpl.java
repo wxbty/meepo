@@ -664,11 +664,11 @@ public class TransactionImpl implements Transaction {
             switch (flag) {
                 case XAResource.TMSUCCESS:
                 case XAResource.TMFAIL:
-                  //  archive.end(branchXid, flag);
+//                    archive.end(branchXid, flag);
                     archive.setDelisted(true);
                     break;
                 case XAResource.TMSUSPEND:
-                   // archive.end(branchXid, flag);
+//                    archive.end(branchXid, flag);
                     archive.setDelisted(true);
                     archive.setSuspended(true);
                     break;
@@ -1151,7 +1151,6 @@ public class TransactionImpl implements Transaction {
         }
 
         if (unPrepareExists == false) {
-            System.out.println("-------------xxxxxxxxxxx-----3、-------- trans will be prepared");
             this.transactionStatus = Status.STATUS_PREPARED;
 
             TransactionArchive archive = this.getTransactionArchive();

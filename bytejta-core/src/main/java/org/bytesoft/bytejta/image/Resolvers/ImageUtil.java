@@ -18,6 +18,9 @@ public class ImageUtil {
         }else if (sql.toLowerCase().trim().startsWith("delete"))
         {
             return new DeleteImageResolvers(sql,backInfo,conn,st);
+        }else if (sql.toLowerCase().trim().startsWith("select"))
+        {
+            return new SelectImageResolvers(sql,backInfo,conn,st);
         }else
         {
             throw new XAException("Unsupport sql type");

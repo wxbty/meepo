@@ -20,10 +20,7 @@ import org.bytesoft.transaction.supports.resource.XAResourceDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.ConnectionEvent;
-import javax.sql.ConnectionEventListener;
-import javax.sql.StatementEventListener;
-import javax.sql.XAConnection;
+import javax.sql.*;
 import javax.transaction.xa.XAResource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -79,7 +76,6 @@ public class XAConnectionImpl implements XAConnection, ConnectionEventListener {
 	}
 
 	public Connection getConnection() throws SQLException {
-		Connection conn = this.delegate.getConnection();
 		SharpConnection spConn = new SharpConnection(this.delegate);
 		return spConn;
 	}

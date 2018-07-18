@@ -64,6 +64,13 @@ public class XATerminatorImpl implements XATerminator {
     private TransactionBeanFactory beanFactory;
     private final List<XAResourceArchive> resources = new ArrayList<XAResourceArchive>();
 
+    public static ThreadLocal<HashMap<String, String>> sourceProp = new ThreadLocal<HashMap<String, String>>() {
+        @Override
+        protected HashMap initialValue() {
+            return new HashMap<String, String>();
+        }
+    };
+
     public synchronized int prepare(Xid xid) throws XAException {
         TransactionLogger transactionLogger = this.beanFactory.getTransactionLogger();
 
@@ -296,6 +303,8 @@ public class XATerminatorImpl implements XATerminator {
                         ByteUtils.byteArrayToString(archive.getXid().getBranchQualifier()), rex);
                 unFinishExists = true;
                 updateRequired = false;
+            } catch (SQLException e) {
+                e.printStackTrace();
             } finally {
                 if (updateRequired) {
                     transactionLogger.updateResource(archive);
@@ -357,27 +366,40 @@ public class XATerminatorImpl implements XATerminator {
         }
     }
 
-    private void invokeTwoPhaseCommit(XAResourceArchive archive) throws XAException {
+    private void invokeTwoPhaseCommit(XAResourceArchive archive) throws XAException, SQLException {
         //清理锁信息来代替数据库提交
 //            archive.commit(archive.getXid(), false);
         if (archive.getDescriptor() instanceof RemoteResourceDescriptor) {
             archive.commit(archive.getXid(), false);
             return;
-        }else {
-            try {
-                String gloableXid = partGloableXid(archive.getXid());
-                String branchXid = partBranchXid(archive.getXid());
-                String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
-                XAConnection connection = (XAConnection) archive.getDescriptor().getDelegate();
-                Connection conn = connection.getConnection();
-                Statement stmt = conn.createStatement();
-                stmt.execute(sql);
-            }catch (SQLException ex)
-            {
-                logger.error("SQL.error",ex);
-                throw new XAException("invokeTwoPhaseCommit.SQLException");
-            }
+        } else {
+            releaseLock(archive);
+        }
+    }
 
+    private void releaseLock(XAResourceArchive archive) throws XAException, SQLException {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            String gloableXid = partGloableXid(archive.getXid());
+            String branchXid = partBranchXid(archive.getXid());
+            String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
+
+
+            Class.forName(sourceProp.get().get("className"));
+            conn = DriverManager.getConnection(sourceProp.get().get("url"), sourceProp.get().get("user"), sourceProp.get().get("password"));
+            stmt = conn.createStatement();
+            stmt.execute(sql);
+        } catch (SQLException ex) {
+            logger.error("SQL.error", ex);
+            throw new XAException("invokeTwoPhaseCommit.SQLException");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (stmt != null)
+                stmt.close();
         }
     }
 
@@ -521,6 +543,7 @@ public class XATerminatorImpl implements XATerminator {
                         logger.error(String.format("Roll back mysql info error!,backInfo:" + backInfo.toArray().toString()));
                     }
                 }
+                releaseLock(archive);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -677,321 +700,6 @@ public class XATerminatorImpl implements XATerminator {
                 nonZeroFound = true;
             }
         } while (shift != 0);
-    }
-
-
-    private String handleRollBack(List<String> list, Connection connection, Statement stmt) {
-        List<String> backSql = new ArrayList<String>();
-        for (String rollsql : list) {
-            if (rollsql.startsWith("insert")) {
-                backSql.addAll(handleInsert(rollsql));
-            } else if (rollsql.startsWith("update")) {
-                backSql.addAll(handleUpdate(rollsql, stmt, connection));
-            } else if (rollsql.startsWith("delete")) {
-                backSql.addAll(handleDelete(rollsql, connection));
-            }
-        }
-        String backSqlJson = JSON.toJSONString(encode(backSql));
-        return backSqlJson;
-
-    }
-
-    private List<String> handleInsert(String insertSql) {
-        //todo 此处会有bug，改成有主键，按主键回滚，没有主键，放弃异步回滚
-        try {
-            String table = name_insert_table(insertSql);
-            net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(insertSql);
-            Insert insertStatement = (Insert) statement;
-            StringBuilder whereSql = new StringBuilder();
-            for (int i = 0; i < insertStatement.getColumns().size(); i++) {
-                whereSql.append(" and " + insertStatement.getColumns().get(i).getColumnName() + "=" + ((ExpressionList) insertStatement.getItemsList()).getExpressions().get(i).toString());
-            }
-            final String backSql = "delete from " + table + " where 1=1 " + whereSql.toString();
-            return new ArrayList<String>() {{
-                add(backSql);
-            }};
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ArrayList<String>();
-
-    }
-
-    private List<String> handleUpdate(String updateSql, Statement stmt, Connection conn) {
-
-        List<String> updateBackSql = new ArrayList<String>();
-        List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
-        try {
-
-            List<String> column_list = name_update_column(updateSql);
-            String columns = transList(column_list);
-            List<String> tables = name_update_table(updateSql);
-            if (tables.size() > 1) {
-                logger.error("Unsupport multi tables for update");
-                return null;
-            }
-            String pkey = getPrimaryKey(conn, tables.get(0))[0];
-            columns = pkey + "," + columns;
-            String table = tables.get(0);
-            String whereSql = name_update_where(updateSql);
-            String selectSql = "select " + columns + " from " + table + " where " + whereSql;
-            logger.info(String.format("Save old data for update,data query sql =%s", selectSql));
-            ResultSet rs = stmt.executeQuery(selectSql);
-            while (rs.next()) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                for (String col : column_list) {
-                    map.put(col, rs.getObject(col));
-                }
-                map.put(pkey, rs.getObject(pkey));
-                key_value_list.add(map);
-            }
-
-            for (Map<String, Object> peMap : key_value_list) {
-                StringBuffer backSql = new StringBuffer();
-                backSql.append("update ");
-                backSql.append(table);
-                backSql.append(" set ");
-                for (String col : peMap.keySet()) {
-                    if (!col.equals(pkey)) {
-                        backSql.append(col + " = ");
-                        Object obj = peMap.get(col);
-                        if (obj instanceof String) {
-                            backSql.append("'" + peMap.get(col) + "',");
-                        } else {
-                            backSql.append(peMap.get(col) + ",");
-                        }
-                    }
-                }
-                while (backSql.charAt(backSql.length() - 1) == ',') {
-                    backSql.deleteCharAt(backSql.length() - 1);
-                }
-                backSql.append(" where ");
-                Object obj = peMap.get(pkey);
-                backSql.append(pkey + "=" + peMap.get(pkey));
-                updateBackSql.add(backSql.toString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return updateBackSql;
-
-    }
-
-    private List<String> handleDelete(String deleteSql, Connection conn) {
-        List<String> deleteBackList = new ArrayList<String>();
-        List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
-        try {
-            List<String> column_list = new ArrayList<String>();
-            List<String> tables = name_delete_table(deleteSql);
-            if (tables.size() > 1) {
-                throw new IllegalArgumentException("Unsupport multi tables for delete");
-            }
-            String table = tables.get(0);
-            String whereSql = name_delete_where(deleteSql);
-            String selectSql = "select * from " + table + " where " + whereSql;
-            logger.info(String.format("Save old data for update,data query sql =%s", selectSql));
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(selectSql);
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int count = rsmd.getColumnCount();
-            String[] name = new String[count];
-            for (int i = 0; i < count; i++) {
-                column_list.add(rsmd.getColumnName(i + 1));
-            }
-            while (rs.next()) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                for (String col : column_list) {
-                    map.put(col, rs.getObject(col));
-                }
-                key_value_list.add(map);
-            }
-
-            for (Map<String, Object> peMap : key_value_list) {
-                StringBuffer backSql = new StringBuffer();
-                backSql.append("insert into ");
-                backSql.append(table);
-                backSql.append(" ( ");
-                backSql.append(transList(column_list) + " )values(");
-                for (String col : column_list) {
-                    Object obj = peMap.get(col);
-                    if (obj instanceof String) {
-                        backSql.append("'" + obj + "',");
-                    } else {
-                        backSql.append(obj + ",");
-                    }
-                }
-                while (backSql.charAt(backSql.length() - 1) == ',') {
-                    backSql.deleteCharAt(backSql.length() - 1);
-                }
-                backSql.append(" ) ");
-                deleteBackList.add(backSql.toString());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return deleteBackList;
-    }
-
-
-    public static String[] getPrimaryKey(Connection con, String table) throws Exception {
-        //mysql 获取主键的方法
-        String sql = "SHOW CREATE TABLE " + table;
-        try {
-            PreparedStatement pre = con.prepareStatement(sql);
-            ResultSet rs = pre.executeQuery();
-            if (rs.next()) {
-                //正则匹配数据
-                Pattern pattern = Pattern.compile("PRIMARY KEY \\(\\`(.*)\\`\\)");
-                Matcher matcher = pattern.matcher(rs.getString(2));
-                matcher.find();
-                String data = matcher.group();
-                //过滤对于字符
-                data = data.replaceAll("\\`|PRIMARY KEY \\(|\\)", "");
-                //拆分字符
-                String[] stringArr = data.split(",");
-                return stringArr;
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-        return null;
-    }
-
-    public static List<String> encode(List<String> list) {
-        //base64加密
-        List<String> code_list = new ArrayList<String>();
-        for (String str : list) {
-            code_list.add(Base64Util.encode(str.getBytes()));
-        }
-        return code_list;
-    }
-
-    public static List<String> decode(List<String> list) {
-        //base64加密
-        List<String> code_list = new ArrayList<String>();
-        for (String str : list) {
-            try {
-                code_list.add(new String(Base64Util.decode(str)));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return code_list;
-    }
-
-
-    // ****insert table
-    public static String name_insert_table(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Insert insertStatement = (Insert) statement;
-        String string_tablename = insertStatement.getTable().getName();
-        return string_tablename;
-    }
-
-    // ********* insert table column
-    public static List<String> name_insert_column(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Insert insertStatement = (Insert) statement;
-        List<Column> table_column = insertStatement.getColumns();
-        List<String> str_column = new ArrayList<String>();
-        for (int i = 0; i < table_column.size(); i++) {
-            str_column.add(table_column.get(i).toString());
-        }
-        return str_column;
-    }
-
-
-    // ********* Insert values ExpressionList
-    public static List<String> name_insert_values(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Insert insertStatement = (Insert) statement;
-        List<Expression> insert_values_expression = ((ExpressionList) insertStatement
-                .getItemsList()).getExpressions();
-        List<String> str_values = new ArrayList<String>();
-        for (int i = 0; i < insert_values_expression.size(); i++) {
-            str_values.add(insert_values_expression.get(i).toString());
-        }
-        return str_values;
-    }
-
-    // *********update table name
-    public static List<String> name_update_table(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Update updateStatement = (Update) statement;
-        List<Table> update_table = updateStatement.getTables();
-        List<String> str_table = new ArrayList<String>();
-        if (update_table != null) {
-            for (int i = 0; i < update_table.size(); i++) {
-                str_table.add(update_table.get(i).toString());
-            }
-        }
-        return str_table;
-
-    }
-
-    public static List<String> name_delete_table(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Delete updateStatement = (Delete) statement;
-        Table update_table = updateStatement.getTable();
-        List<String> str_table = new ArrayList<String>();
-        if (update_table != null) {
-            str_table.add(update_table.toString());
-        }
-        return str_table;
-
-    }
-
-    // *********update column
-    public static List<String> name_update_column(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Update updateStatement = (Update) statement;
-        List<Column> update_column = updateStatement.getColumns();
-        List<String> str_column = new ArrayList<String>();
-        if (update_column != null) {
-            for (int i = 0; i < update_column.size(); i++) {
-                str_column.add(update_column.get(i).toString());
-            }
-        }
-        return str_column;
-
-    }
-
-
-    // *******update where
-    public static String name_update_where(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Update updateStatement = (Update) statement;
-        Expression where_expression = updateStatement.getWhere();
-        String str = where_expression.toString();
-        return str;
-    }
-
-    // *******update where
-    public static String name_delete_where(String sql)
-            throws JSQLParserException {
-        net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
-        Delete updateStatement = (Delete) statement;
-        Expression where_expression = updateStatement.getWhere();
-        String str = where_expression.toString();
-        return str;
-    }
-
-    public static String transList(List<String> list) {
-        StringBuffer buf = new StringBuffer();
-        for (String str : list) {
-            buf.append(str).append(",");
-        }
-        while (buf.charAt(buf.length() - 1) == ',') {
-            buf.deleteCharAt(buf.length() - 1);
-        }
-        return buf.toString();
     }
 
 

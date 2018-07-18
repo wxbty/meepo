@@ -15,28 +15,26 @@
  */
 package org.bytesoft.common.utils;
 
-import com.alibaba.fastjson.JSONObject;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
+import net.sf.jsqlparser.parser.CCJSqlParserManager;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
+import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
+import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
-import org.bytesoft.bytejta.image.BackInfo;
-import org.bytesoft.bytejta.image.Image;
-import org.bytesoft.bytejta.image.LineFileds;
+import net.sf.jsqlparser.util.TablesNamesFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.transaction.xa.Xid;
-import java.sql.*;
+import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SqlpraserUtils {
 
@@ -108,6 +106,30 @@ public class SqlpraserUtils {
         return str_table;
 
     }
+
+    public static List<String> name_select_table(String sql)
+            throws JSQLParserException {
+        Statement statement = (Statement) CCJSqlParserUtil.parse(sql);
+        Select selectStatement = (Select) statement;
+        TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
+        List<String> tableList = tablesNamesFinder
+                .getTableList(selectStatement);
+        return tableList;
+    }
+
+    // *******select where
+    public static String name_select_where(String sql)
+            throws JSQLParserException {
+        CCJSqlParserManager parserManager = new CCJSqlParserManager();
+        Select select = (Select) parserManager.parse(new StringReader(sql));
+        PlainSelect plain = (PlainSelect) select.getSelectBody();
+        Expression where_expression = plain.getWhere();
+        String str = where_expression.toString();
+        return str;
+    }
+
+
+
 
     // *********update column
     public static List<String> name_update_column(String sql)

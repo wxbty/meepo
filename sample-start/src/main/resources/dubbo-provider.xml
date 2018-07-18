@@ -10,11 +10,11 @@
 
 	<dubbo:application name="sample-provider" />
 	<dubbo:provider timeout="1500000" />
-	<dubbo:consumer check="false" timeout="1500000" />
+	<dubbo:consumer check="false" timeout="150000" />
 	<dubbo:protocol name="dubbo" port="20882" />
-	<dubbo:registry address="zookeeper://35.201.238.214:2181" timeout="300000" />
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" timeout="300000" />
 
 	<dubbo:service interface="com.bytesvc.service.IAccountService" ref="accountService" group="org.bytesoft.bytejta"
-		filter="transaction" loadbalance="transaction" cluster="failfast" retries="0"  timeout="3000"/>
+		filter="transaction" loadbalance="transaction" cluster="failfast" retries="0"  timeout="15000"/>
 
 </beans>
