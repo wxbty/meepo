@@ -15,8 +15,6 @@
  */
 package org.bytesoft.bytejta;
 
-import com.mysql.jdbc.jdbc2.optional.JDBC4MysqlXAConnection;
-import com.mysql.jdbc.jdbc2.optional.MysqlXAConnection;
 import org.apache.commons.lang3.StringUtils;
 import org.bytesoft.bytejta.resource.XATerminatorImpl;
 import org.bytesoft.bytejta.resource.XATerminatorOptd;
@@ -53,11 +51,7 @@ import javax.transaction.*;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
-import java.lang.reflect.Field;
-import java.sql.Statement;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class TransactionImpl implements Transaction {
     static final Logger logger = LoggerFactory.getLogger(TransactionImpl.class);

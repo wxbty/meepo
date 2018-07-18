@@ -27,7 +27,6 @@ import org.bytesoft.transaction.logging.LoggingFlushable;
 import org.bytesoft.transaction.logging.TransactionLogger;
 import org.bytesoft.transaction.logging.store.VirtualLoggingListener;
 import org.bytesoft.transaction.logging.store.VirtualLoggingRecord;
-import org.bytesoft.transaction.logging.store.VirtualLoggingSystem;
 import org.bytesoft.transaction.recovery.TransactionRecoveryCallback;
 import org.bytesoft.transaction.xa.TransactionXid;
 import org.bytesoft.transaction.xa.XidFactory;

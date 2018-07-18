@@ -1,9 +1,7 @@
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/LocalXADataSource.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/ManagedConnectionFactoryHandler.java
-/Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpStatement.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/serialize/XAResourceDeserializerImpl.java
-/Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicStatementProxyHandler.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/ManagedConnectionHandler.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XADataSourceImpl.java
 /Users/wxb/IdeaProjects/jtaProvider/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/TransactionManagerPostProcessor.java

@@ -20,7 +20,10 @@ import org.bytesoft.transaction.supports.resource.XAResourceDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.*;
+import javax.sql.ConnectionEvent;
+import javax.sql.ConnectionEventListener;
+import javax.sql.StatementEventListener;
+import javax.sql.XAConnection;
 import javax.transaction.xa.XAResource;
 import java.sql.Connection;
 import java.sql.SQLException;

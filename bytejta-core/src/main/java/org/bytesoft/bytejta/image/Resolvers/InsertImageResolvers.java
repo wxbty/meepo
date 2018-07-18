@@ -1,7 +1,6 @@
 package org.bytesoft.bytejta.image.Resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
-import org.apache.commons.lang3.StringUtils;
 import org.bytesoft.bytejta.image.BackInfo;
 import org.bytesoft.bytejta.image.Image;
 import org.bytesoft.common.utils.SqlpraserUtils;

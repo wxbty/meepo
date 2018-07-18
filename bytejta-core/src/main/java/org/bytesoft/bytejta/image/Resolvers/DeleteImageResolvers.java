@@ -3,7 +3,6 @@ package org.bytesoft.bytejta.image.Resolvers;
 import net.sf.jsqlparser.JSQLParserException;
 import org.bytesoft.bytejta.image.BackInfo;
 import org.bytesoft.bytejta.image.Image;
-import org.bytesoft.bytejta.image.LineFileds;
 import org.bytesoft.common.utils.SqlpraserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class DeleteImageResolvers extends BaseResolvers {
 

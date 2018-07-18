@@ -1,10 +1,8 @@
 package org.bytesoft.bytejta.image;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bytesoft.bytejta.image.Resolvers.DeleteImageResolvers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.jvm.hotspot.utilities.Assert;
 
 import javax.transaction.xa.XAException;
 import java.sql.ResultSet;

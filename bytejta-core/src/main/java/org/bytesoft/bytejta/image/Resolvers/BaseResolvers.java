@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.bytesoft.bytejta.image.BackInfo;
 import org.bytesoft.bytejta.image.Image;
 import org.bytesoft.bytejta.image.LineFileds;
-import org.bytesoft.common.utils.SqlpraserUtils;
 
 import javax.transaction.xa.XAException;
 import java.sql.*;

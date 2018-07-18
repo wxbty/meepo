@@ -63,6 +63,10 @@ public class TransactionServiceFilter implements Filter {
 		}
 	}
 
+	public static void main(String[] args) {
+
+	}
+
 	public Result providerInvoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 		URL url = RpcContext.getContext().getUrl();
 		String interfaceClazz = url.getServiceInterface();
@@ -72,23 +76,7 @@ public class TransactionServiceFilter implements Filter {
 //			e.printStackTrace();
 //		}
 
-		System.out.println("provider method="+invocation.getMethodName());
-		if ("decreaseAmount".equals(invocation.getMethodName()))
-		{
-			System.out.println("begin decreaseAmount");
-		}
-		if ("prepare".equals(invocation.getMethodName()))
-		{
-			System.out.println("begin prepare");
-		}
-		if ("start".equals(invocation.getMethodName()))
-		{
-			System.out.println("begin start");
-		}
-		if ("rollback".equals(invocation.getMethodName()))
-		{
-			System.out.println("begin rollback");
-		}
+
 		if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
 				&& Arrays.equals(invocation.getParameterTypes(), new Class<?>[] { Xid.class, Integer.TYPE })) {
 			return this.providerInvokeForKey(invoker, invocation);

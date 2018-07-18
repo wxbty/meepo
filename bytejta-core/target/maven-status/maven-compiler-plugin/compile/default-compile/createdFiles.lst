@@ -20,6 +20,7 @@ org/bytesoft/bytejta/TransactionStrategy.class
 org/bytesoft/bytejta/supports/resource/UnidentifiedResourceDescriptor.class
 org/bytesoft/bytejta/image/LineFileds.class
 org/bytesoft/bytejta/logging/SampleTransactionLogger$2.class
+org/bytesoft/bytejta/lock/ShareLock.class
 org/bytesoft/transaction/xa/TransactionXid.class
 org/bytesoft/transaction/CommitRequiredException.class
 org/bytesoft/bytejta/supports/resource/CommonResourceDescriptor.class
@@ -31,6 +32,7 @@ org/bytesoft/transaction/adapter/ResourceAdapterImpl.class
 org/bytesoft/transaction/logging/ArchiveDeserializer.class
 org/bytesoft/transaction/work/SimpleWorkListener.class
 org/bytesoft/bytejta/xa/XidFactoryImpl.class
+org/bytesoft/bytejta/image/Resolvers/UpdateImageResolvers.class
 org/bytesoft/bytejta/logging/store/VirtualLoggingFile.class
 org/bytesoft/bytejta/TransactionRepositoryImpl.class
 org/bytesoft/bytejta/strategy/LastResourceOptimizeStrategy.class
@@ -40,6 +42,7 @@ org/bytesoft/bytejta/resource/XATerminatorImpl.class
 org/bytesoft/transaction/supports/rpc/TransactionResponse.class
 org/bytesoft/common/utils/SerializeUtils$1.class
 org/bytesoft/bytejta/image/Image.class
+org/bytesoft/bytejta/image/Resolvers/ImageUtil.class
 org/bytesoft/bytejta/logging/SampleTransactionLogger$1.class
 org/bytesoft/transaction/supports/TransactionResourceListener.class
 org/bytesoft/transaction/archive/TransactionArchive.class
@@ -50,7 +53,9 @@ org/bytesoft/bytejta/TransactionRecoveryImpl.class
 org/bytesoft/bytejta/supports/jdbc/DataSourceHolder.class
 org/bytesoft/bytejta/supports/resource/LocalXAResourceDescriptor.class
 org/bytesoft/common/utils/SerializeUtils$2.class
+org/bytesoft/bytejta/image/Resolvers/SelectImageResolvers.class
 org/bytesoft/common/utils/Base64Util.class
+org/bytesoft/bytejta/image/Resolvers/ShareLockImageResolvers.class
 org/bytesoft/transaction/supports/rpc/TransactionInterceptor.class
 org/bytesoft/bytejta/logging/ArchiveDeserializerImpl.class
 org/bytesoft/transaction/logging/TransactionLogger.class
@@ -62,8 +67,8 @@ org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.class
 org/bytesoft/bytejta/resource/XATerminatorOptd.class
 org/bytesoft/bytejta/image/BackInfo.class
 org/bytesoft/common/utils/CommonUtils.class
-org/bytesoft/common/utils/SqlpraserUtils$1.class
 org/bytesoft/transaction/RemoteSystemException.class
+org/bytesoft/bytejta/image/Resolvers/ImageResolvers.class
 org/bytesoft/transaction/work/SimpleWorkManager.class
 org/bytesoft/transaction/internal/SynchronizationImpl.class
 org/bytesoft/bytejta/TransactionManagerImpl.class
@@ -71,10 +76,13 @@ org/bytesoft/transaction/logging/LoggingFlushable.class
 org/bytesoft/common/utils/SqlpraserUtils.class
 org/bytesoft/transaction/supports/TransactionListener.class
 org/bytesoft/transaction/TransactionManager.class
+org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.class
 org/bytesoft/bytejta/supports/wire/RemoteCoordinatorRegistry.class
 org/bytesoft/bytejta/TransactionRecoveryImpl$1.class
 org/bytesoft/bytejta/supports/resource/RemoteResourceDescriptor.class
 org/bytesoft/transaction/logging/store/VirtualLoggingKey.class
+org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.class
+org/bytesoft/bytejta/lock/Lock.class
 org/bytesoft/transaction/xa/XidFactory.class
 org/bytesoft/bytejta/resource/XATerminatorOptd$1.class
 org/bytesoft/bytejta/logging/deserializer/TransactionArchiveDeserializer.class
@@ -89,12 +97,15 @@ org/bytesoft/bytejta/supports/jdbc/RecoveredResource.class
 org/bytesoft/bytejta/supports/jdbc/LocalXAResource.class
 org/bytesoft/transaction/archive/XAResourceArchive.class
 org/bytesoft/bytejta/supports/wire/RemoteCoordinator.class
+org/bytesoft/bytejta/lock/MutexLock.class
 org/bytesoft/transaction/logging/store/VirtualLoggingSystem.class
 org/bytesoft/bytejta/supports/jdbc/LocalXACompatible.class
+org/bytesoft/bytejta/image/Resolvers/BaseResolvers.class
 org/bytesoft/transaction/supports/TransactionListenerAdapter.class
 org/bytesoft/transaction/aware/TransactionBeanFactoryAware.class
 org/bytesoft/bytejta/logging/deserializer/XAResourceArchiveDeserializer.class
 org/bytesoft/transaction/RollbackRequiredException.class
 org/bytesoft/bytejta/resource/XATerminatorImpl$1.class
 org/bytesoft/bytejta/TransactionBeanFactoryImpl.class
+org/bytesoft/bytejta/lock/TxcLock.class
 org/bytesoft/bytejta/strategy/CommonTransactionStrategy.class
