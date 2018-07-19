@@ -142,7 +142,6 @@ public class TransactionServiceFilter implements Filter {
 
 	public Result providerInvokeForJTA(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
-		System.out.println(Thread.currentThread().getName() + "  -----succ");
 
 		if (XATerminatorImpl.sourceProp.get().isEmpty()) {
 			XATerminatorImpl.sourceProp.get().put("url", XADataSourceImpl.url);

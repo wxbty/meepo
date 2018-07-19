@@ -9,6 +9,7 @@ org/bytesoft/bytejta/supports/jdbc/LocalXADataSource.class
 org/bytesoft/bytejta/supports/resource/ManagedConnectionFactoryHandler.class
 org/bytesoft/bytejta/supports/resource/serialize/XAResourceDeserializerImpl.class
 org/bytesoft/bytejta/supports/rpc/TransactionInterceptorImpl.class
+org/bytesoft/bytejta/supports/spring/SpringBeanUtil.class
 org/bytesoft/bytejta/supports/rpc/TransactionRequestImpl.class
 org/bytesoft/bytejta/supports/resource/ManagedConnectionHandler.class
 org/bytesoft/bytejta/supports/resource/ManagedXASessionHandler.class

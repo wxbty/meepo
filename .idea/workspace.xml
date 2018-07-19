@@ -3,67 +3,43 @@
   <component name="ChangeListManager">
     <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/BaseResolvers.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/BaseResolvers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/SampleTransactionLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/SampleTransactionLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-core/target/bytejta-core-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/bytejta-core-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/TransactionImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/BackInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/BackInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/BaseResolvers.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/BaseResolvers.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/logging/SampleTransactionLogger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/classes/org/bytesoft/bytejta/resource/XATerminatorImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-core/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo-core.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/bytejta-supports-dubbo-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/bytejta-supports-dubbo-core.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/bytejta-supports-dubbo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/bytejta-supports-dubbo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter$InvocationResult.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/classes/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-core.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-standalone.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-standalone.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/target/bytejta-supports-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/bytejta-supports-2.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-core.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-standalone.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-standalone.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/bytejta-supports-task.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/DynamicPreparedStatementProxyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/DynamicPreparedStatementProxyHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XAConnectionImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/classes/org/bytesoft/bytejta/supports/jdbc/XAConnectionImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta-supports/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sample-start/target/classes/application-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/application-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/application.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/application.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/bytejta-supports-core.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/bytejta-supports-core.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-consumer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/dubbo-consumer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-provider.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/dubbo-provider.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/comsumerService/GenericTransferServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/comsumerService/GenericTransferServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/main/ConsumerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/main/ConsumerMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/target/javadeploy.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/javadeploy.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample-start/target/original-javadeploy.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sample-start/target/original-javadeploy.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/parent-2.0-jar-with-dependencies.jar" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
@@ -85,38 +61,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="DynamicPreparedStatementProxyHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bytejta-core/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="85" column="21" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="85" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionServiceFilter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="66" selection-start-line="66" selection-end-line="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1725">
-              <caret line="149" column="40" selection-start-line="149" selection-start-column="40" selection-end-line="149" selection-end-column="40" />
+            <state relative-caret-position="125">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,27 +73,85 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SharpConnection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="application.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="36" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="36" />
+            <state relative-caret-position="150">
+              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
+      <file leaf-file-name="ManagedConnectionFactoryPostProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/ManagedConnectionFactoryPostProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="245" column="23" selection-start-line="245" selection-start-column="23" selection-end-line="245" selection-end-column="23" />
+            <state relative-caret-position="75">
+              <caret line="26" column="35" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="bytejta-supports-core.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-core.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-consumer.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bytejta-supports-dubbo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bytejta-supports-task.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bytejta-supports-standalone.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-standalone.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="13" column="61" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpringBeanUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/SpringBeanUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -159,12 +166,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>resources.</find>
-      <find>resources.add</find>
-      <find>enlist</find>
-      <find>backInfo</find>
-      <find>partGloableXid</find>
-      <find>appendAsHex</find>
       <find>toString</find>
       <find>LOGGER.info</find>
       <find>12000</find>
@@ -189,6 +190,12 @@
       <find>recover</find>
       <find>fastjson</find>
       <find>fast</find>
+      <find>resource</find>
+      <find>enlistResource</find>
+      <find>setShared</find>
+      <find>component-scan</find>
+      <find>beanFactory</find>
+      <find>TransactionBeanFactory</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -212,14 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/archive/XAResourceArchive.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/resource/LocalXAResourceDescriptor.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/resource/CommonResourceDescriptor.java" />
-        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpStatement.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/Base64Util.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/image/BeforeImage.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/image/Field.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/image/BackInfo.java" />
@@ -234,7 +233,6 @@
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/InsertImageResolvers.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/lock/MutexLock.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/lock/TxcLock.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/UpdateImageResolvers.java" />
         <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/TransactionConfigPostProcessor.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/UserTransactionImpl.java" />
@@ -246,23 +244,32 @@
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/lock/ShareLock.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/ProxyXADataSource.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/impl/AccountServiceImpl.java" />
-        <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" />
-        <option value="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" />
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" />
         <option value="$PROJECT_DIR$/sample-start/pom.xml" />
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" />
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" />
-        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java" />
-        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpConnection.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/work/TransactionWork.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XADataSourceImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java" />
-        <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java" />
         <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java" />
-        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" />
+        <option value="$PROJECT_DIR$/profiles.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.java" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java" />
+        <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpConnection.java" />
+        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SpringBeanUtil.java" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/util/SpringBeanUtil.java" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/SpringBeanUtil.java" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-core.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-standalone.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java" />
+        <option value="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" />
       </list>
     </option>
   </component>
@@ -283,8 +290,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="225" />
-    <option name="y" value="-839" />
+    <option name="x" value="109" />
+    <option name="y" value="23" />
     <option name="width" value="1329" />
     <option name="height" value="786" />
   </component>
@@ -309,6 +316,90 @@
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
               <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
               <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="org.bytesoft.bytejta.supports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="org.bytesoft.bytejta.supports" type="462c0819:PsiDirectoryNode" />
+              <item name="jdbc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="org.bytesoft.bytejta.supports" type="462c0819:PsiDirectoryNode" />
+              <item name="spring" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -344,6 +435,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="dubbo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="serialize" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -395,6 +496,46 @@
               <item name="sample-start" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
+              <item name="comsumerService" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesvc" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jtaProvider" type="462c0819:PsiDirectoryNode" />
+              <item name="sample-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -420,11 +561,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.bytesoft.bytejta.supports.spring" />
+      <recent name="org.bytesoft.bytejta.supports.util" />
       <recent name="org.bytesoft.bytejta.image.Resolvers" />
       <recent name="org.bytesoft.bytejta.lock" />
       <recent name="org.bytesoft.bytejta.supports.jdbc" />
-      <recent name="org.bytesoft.common.utils" />
-      <recent name="com.bytesvc.service.impl" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta" />
@@ -553,8 +694,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ConsumerMain (1)" />
-        <item itemvalue="Application.Base64Util" />
         <item itemvalue="Application.ProviderMain (2)" />
+        <item itemvalue="Application.Base64Util" />
         <item itemvalue="Application.ProviderMain (1)" />
         <item itemvalue="Application.ProviderMain" />
       </list>
@@ -578,15 +719,15 @@
       <workItem from="1530364100158" duration="785000" />
       <workItem from="1530368560841" duration="122000" />
       <workItem from="1530586637481" duration="35085000" />
-      <workItem from="1531882061424" duration="3201000" />
+      <workItem from="1531882061424" duration="22582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="329200000" />
+    <option name="totallyTimeSpent" value="348581000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="225" y="-839" width="1329" height="786" extended-state="0" />
+    <frame x="109" y="23" width="1329" height="786" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
@@ -599,27 +740,27 @@
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="10" weight="0.39772728" />
+      <window_info anchor="bottom" id="Debug" order="10" weight="0.3963964" />
       <window_info anchor="bottom" id="TODO" order="13" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.328125" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="1" />
       <window_info anchor="bottom" id="Java Enterprise" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="bottom" id="Run" order="9" weight="0.2627841" />
+      <window_info anchor="bottom" id="Run" order="9" weight="0.26276276" />
       <window_info anchor="bottom" id="Version Control" order="5" />
       <window_info anchor="bottom" id="Spring" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.33933935" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.26418027" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49928468" visible="true" weight="0.33933935" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.26418027" />
+      <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info id="Web" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.328125" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.32732734" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="3" sideWeight="0.5034388" side_tool="true" weight="0.24964234" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.328125" />
       <window_info anchor="bottom" id="Inspection" order="12" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="6" />
-      <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
     </layout>
   </component>
@@ -634,362 +775,377 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="365" />
+      <option name="time" value="388" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/javax/resource/javax.resource-api/1.7/javax.resource-api-1.7-sources.jar!/javax/resource/spi/BootstrapContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.3.7.RELEASE/spring-beans-4.3.7.RELEASE-sources.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="554" selection-start-line="554" selection-end-line="554" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.3.7.RELEASE/spring-beans-4.3.7.RELEASE-sources.jar!/org/springframework/beans/factory/InitializingBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XADataSourceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.3.7.RELEASE/spring-tx-4.3.7.RELEASE-sources.jar!/org/springframework/jca/support/ResourceAdapterFactoryBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="121" column="56" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/adapter/ResourceAdapterImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="44" column="42" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/javax/resource/javax.resource-api/1.7/javax.resource-api-1.7-sources.jar!/javax/resource/spi/work/WorkEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="112" column="11" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/java/util/concurrent/AbstractExecutorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="116" column="55" lean-forward="true" selection-start-line="116" selection-start-column="55" selection-end-line="116" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/work/SimpleWorkManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="46" column="9" selection-start-line="44" selection-start-column="43" selection-end-line="46" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="13" column="72" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/TransactionRecovery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/work/TransactionWork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/SampleTransactionLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="62" column="16" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/archive/TransactionArchive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.2.1/postgresql-42.2.1-sources.jar!/org/postgresql/xa/PGXAConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-876">
-          <caret line="408" column="46" selection-start-line="408" selection-start-column="38" selection-end-line="408" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/supports/resource/CommonResourceDescriptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1535">
-          <caret line="133" selection-start-line="133" selection-end-line="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/logging/TransactionLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/store/VirtualLoggingFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="237" selection-start-line="237" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/store/VirtualLoggingSystemImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionRecoveryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="88" column="49" lean-forward="true" selection-start-line="88" selection-start-column="49" selection-end-line="88" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/SimpleTransactionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/strategy/CommonTransactionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/deserializer/XAResourceArchiveDeserializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="95" column="65" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorOptd.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/rt.jar!/javax/transaction/xa/XAResource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-130">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/archive/XAResourceArchive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="106" column="9" selection-start-line="104" selection-start-column="36" selection-end-line="106" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/supports/resource/XAResourceDescriptor.java">
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/ManagedXASessionHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/ManagedConnection.java">
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/rpc/TransactionInterceptorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/ManagedDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="79" column="9" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/4.3.7.RELEASE/spring-jdbc-4.3.7.RELEASE-sources.jar!/org/springframework/jdbc/core/JdbcTemplate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="422" selection-start-line="422" selection-end-line="422" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.7.RELEASE/spring-aop-4.3.7.RELEASE-sources.jar!/org/springframework/aop/support/AopUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="337" selection-start-line="337" selection-end-line="337" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.3.7.RELEASE/spring-tx-4.3.7.RELEASE-sources.jar!/org/springframework/transaction/interceptor/TransactionAspectSupport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="289" selection-start-line="289" selection-end-line="289" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.7.RELEASE/spring-aop-4.3.7.RELEASE-sources.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="238" selection-start-line="238" selection-end-line="238" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/TransactionContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/4.3.7.RELEASE/spring-jdbc-4.3.7.RELEASE-sources.jar!/org/springframework/jdbc/datasource/DataSourceUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/BasicDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="1532" selection-start-line="1532" selection-end-line="1532" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="21" column="9" selection-start-line="19" selection-start-column="31" selection-end-line="21" selection-end-column="9" />
+        <state relative-caret-position="240">
+          <caret line="47" column="9" selection-start-line="43" selection-start-column="8" selection-end-line="47" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-214">
-          <caret line="708" column="16" selection-start-line="708" selection-start-column="16" selection-end-line="708" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/resource/XATerminatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="953">
-          <caret line="224" column="40" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="40" />
+        <state relative-caret-position="-4885">
+          <caret line="55" column="13" selection-start-line="55" selection-start-column="13" selection-end-line="55" selection-end-column="13" />
           <folding>
-            <element signature="e#2788#2807#0" expanded="true" />
+            <element signature="e#4763#4764#0" expanded="true" />
+            <element signature="e#4801#4802#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/pom.xml">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/javax/sql/XAConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="18" lean-forward="true" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        <state relative-caret-position="160">
+          <caret line="43" column="45" lean-forward="true" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/BackInfo.java">
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="149" column="40" selection-start-line="149" selection-start-column="40" selection-end-line="149" selection-end-column="40" />
+        <state relative-caret-position="-48">
+          <caret line="13" column="38" selection-start-line="12" selection-start-column="4" selection-end-line="13" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37-sources.jar!/com/mysql/jdbc/jdbc2/optional/MysqlPooledConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37-sources.jar!/com/mysql/jdbc/jdbc2/optional/MysqlXAConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="610" column="38" selection-start-line="610" selection-start-column="38" selection-end-line="610" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/javax/sql/PooledConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/java/sql/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="316" column="13" selection-start-line="316" selection-start-column="13" selection-end-line="316" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/java/sql/DatabaseMetaData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="436" selection-start-line="436" selection-end-line="436" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XADataSourceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="113" column="22" selection-start-line="113" selection-start-column="15" selection-end-line="113" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/SampleTransactionLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="122" selection-start-line="122" selection-end-line="122" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/ArchiveDeserializerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/deserializer/TransactionArchiveDeserializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="244" selection-start-line="244" selection-end-line="244" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/logging/deserializer/XAResourceArchiveDeserializer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="138" selection-start-line="138" selection-end-line="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/serialize/XAResourceDeserializerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/serialize/XAResourceDeserializerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/resource/ManagedConnectionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/src.zip!/javax/sql/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/BasicDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="865">
+          <caret line="1528" column="17" lean-forward="true" selection-start-line="1528" selection-start-column="17" selection-end-line="1528" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-395">
+          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/ManagedConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="84" column="63" lean-forward="true" selection-start-line="84" selection-start-column="63" selection-end-line="84" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/TransactionRegistry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="53" column="20" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="30" />
+          <folding>
+            <element signature="e#2231#2232#0" expanded="true" />
+            <element signature="e#2291#2292#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/DataSourceXAConnectionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="63" column="28" lean-forward="true" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/BasicManagedDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="109" column="31" lean-forward="true" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="37" />
+          <folding>
+            <element signature="e#3938#3939#0" expanded="true" />
+            <element signature="e#3979#3980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SerializeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/ByteUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SpringBeanUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding>
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/TransactionManagerPostProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="35" column="59" selection-start-line="35" selection-start-column="59" selection-end-line="35" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/TransactionBeanFactoryPostProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/TransactionBeanFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/4.3.7.RELEASE/spring-jdbc-4.3.7.RELEASE-sources.jar!/org/springframework/jdbc/datasource/DataSourceUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/CommonUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1310">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="47" column="46" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionCoordinator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="43" column="46" selection-start-line="43" selection-start-column="12" selection-end-line="43" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo-core.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-246">
+          <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/util/SpringBeanUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ProviderMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/bytejta-supports-core.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-89" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-standalone.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="13" column="61" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/SpringBeanUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application.xml">
+    <entry file="file://$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="36" />
+        <state relative-caret-position="208">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java">
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-core.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="-1">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/pom.xml">
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/ManagedConnectionFactoryPostProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="245" column="23" selection-start-line="245" selection-start-column="23" selection-end-line="245" selection-end-column="23" />
+        <state relative-caret-position="75">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/SharpConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="85" column="21" lean-forward="true" selection-start-line="81" selection-start-column="8" selection-end-line="85" selection-end-column="21" />
+        <state relative-caret-position="171">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
         </state>
       </provider>
     </entry>

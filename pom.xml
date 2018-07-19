@@ -13,7 +13,7 @@
 
     <name>com.tuya.jta.parent</name>
     <modules>
-        <!--<module>sample-start</module>-->
+        <module>sample-start</module>
         <module>bytejta-supports-dubbo</module>
         <module>bytejta-supports</module>
         <module>bytejta-core</module>
@@ -226,19 +226,22 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                    <manifest>
-                        <mainClass>/Users/wxb/IdeaProjects/jtaProvider/bytejta-supports-dubbo/src/main/java/org/bytesoft/bytejta/supports/dubbo/spi/TransactionServiceFilter.java
-                        </mainClass>
-                    </manifest>
-                    </archive>
+                    <!-- put your configurations here -->
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
 
         </plugins>
     </build>

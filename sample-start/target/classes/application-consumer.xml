@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-	<import resource="bytejta-supports-dubbo.xml" />
+	<import resource="classpath:bytejta-supports-dubbo.xml" />
 	<import resource="dubbo-consumer.xml" />
 
 	<context:component-scan base-package="com.bytesvc.comsumerService" />
@@ -44,5 +44,7 @@
 	<bean id="jdbcTemplate2" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource2" />
 	</bean>
+
+	<!--<bean class="org.bytesoft.bytejta.supports.spring.SpringBeanUtil" />-->
 
 </beans>

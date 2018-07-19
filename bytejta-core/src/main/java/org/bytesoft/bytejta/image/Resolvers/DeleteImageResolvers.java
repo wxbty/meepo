@@ -19,7 +19,7 @@ public class DeleteImageResolvers extends BaseResolvers {
     static final Logger logger = LoggerFactory.getLogger(DeleteImageResolvers.class);
 
 
-    DeleteImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement st)
+    DeleteImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement stmt)
     {
         this.orginSql =orginSql;
         this.backInfo = backInfo;

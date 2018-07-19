@@ -15,8 +15,10 @@ import org.bytesoft.bytejta.image.Resolvers.InsertImageResolvers;
 import org.bytesoft.bytejta.lock.MutexLock;
 import org.bytesoft.bytejta.lock.ShareLock;
 import org.bytesoft.bytejta.lock.TxcLock;
-import org.bytesoft.bytejta.supports.resource.CommonResourceDescriptor;
+import org.bytesoft.bytejta.supports.spring.SpringBeanUtil;
 import org.bytesoft.common.utils.SqlpraserUtils;
+import org.bytesoft.transaction.Transaction;
+import org.bytesoft.transaction.TransactionBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,14 +49,22 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     private int timeOut = 10 * 1000;
 
 
-
     public DynamicPreparedStatementProxyHandler(Object realObject, String sql, XAConnection conn) {
         this.realObject = realObject;
         this.sql = sql;
         this.xaConn = conn;
+
+
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        TransactionBeanFactory bytejtaBeanFactory = (TransactionBeanFactory)SpringBeanUtil.getBean("bytejtaBeanFactory");
+        Transaction transaction = bytejtaBeanFactory.getTransactionManager().getTransaction();
+
+        if (transaction == null) {
+            return method.invoke(realObject, args);
+        }
 
 
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
@@ -71,10 +81,10 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
                 sql = args[0].toString();
             }
-            CommonResourceDescriptor resource = (CommonResourceDescriptor) xaConn.getXAResource();
             Xid currentXid = TransactionImpl.currentXid.get();
             //事务数据源从对应数据库获取前置对象
-            Connection conn = xaConn.getConnection();
+            Class.forName(XADataSourceImpl.className);
+            Connection conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
             Statement st = conn.createStatement();
 
 
@@ -128,6 +138,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             //本地直接提交
             xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
             xaConn.getXAResource().prepare(currentXid);
+            xaConn.getXAResource().commit(currentXid, false);
             //插入时需要获取主键的value
 
             if (sql.toLowerCase().startsWith("insert")) {
@@ -144,6 +155,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             if (st != null) {
                 st.close();
             }
+            if (conn != null) {
+                conn.close();
+            }
             //事务数据源从对应数据库获取后置对象
             return obj;
 
@@ -156,15 +170,15 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                 return method.invoke(realObject, args);
             }
             sql = args[0].toString();
-            System.out.println(Thread.currentThread().getName()+"=mythred");
+            System.out.println(Thread.currentThread().getName() + "=mythred");
             if (StringUtils.deleteWhitespace(sql.toLowerCase()).endsWith("lockinsharemode")) {
                 Connection conn = null;
                 Statement st = null;
                 Xid currentXid;
                 try {
                     Class.forName(XADataSourceImpl.className);
-                    conn = DriverManager.getConnection(XADataSourceImpl.url,XADataSourceImpl.user, XADataSourceImpl.password);
-                     st= conn.createStatement();
+                    conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
+                    st = conn.createStatement();
 
                     BackInfo backInfo = new BackInfo();
                     BaseResolvers resolver = ImageUtil.getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo, conn, st);
@@ -174,12 +188,10 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                     String branchXid = partBranchXid(currentXid);
                     getSlock(conn, st, resolver, GloableXid, branchXid);
                 } finally {
-                    if (conn!=null)
-                    {
+                    if (conn != null) {
                         conn.close();
                     }
-                    if (st!=null)
-                    {
+                    if (st != null) {
                         st.close();
                     }
                 }
@@ -213,8 +225,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                         getXlock(conn, st, resolver, GloableXid, branchXid);
                         Object obj = method.invoke(realObject, args);
                         //本地直接提交
-                        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-                        xaConn.getXAResource().prepare(currentXid);
+//                        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+//                        xaConn.getXAResource().prepare(currentXid);
                         return obj;
 
                     }

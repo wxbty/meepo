@@ -27,13 +27,13 @@ public class GenericTransferServiceImpl implements ITransferService {
 	}
 
 	private void increaseAmount(String acctId, double amount) throws ServiceException {
-//		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
+		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
 //		int value = this.jdbcTemplate.update("delete from tb_account_two where amount = ? and acct_id = ?", 233.3, "1531315150148");
 //		int value = this.jdbcTemplate.update("insert into apple (name)values('liming')");
-		String sql = "select name from apple where id =1  lock in  share mode ";
-		 //        调用方法获得记录数
-		String count = jdbcTemplate.queryForObject(sql, String.class);
-		System.out.println("count="+count);
+//		String sql = "select name from apple where id =1  lock in  share mode ";
+//		 //        调用方法获得记录数
+//		String count = jdbcTemplate.queryForObject(sql, String.class);
+//		System.out.println("count="+count);
 		System.out.printf("exec increase: acct= %s, amount= %7.2f%n", acctId, amount);
 	}
 

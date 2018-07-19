@@ -10,7 +10,7 @@
 		<property name="workList">
 			<list>
 				<ref bean="transactionWork" />
-				<ref bean="bytejtaTransactionLogger" />
+
 			</list>
 		</property>
 	</bean>

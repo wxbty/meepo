@@ -2,6 +2,7 @@ package com.bytesvc.service.main;
 
 import com.bytesvc.service.ITransferService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * 远程调用场景
@@ -9,11 +10,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ConsumerMain {
 
 	static ClassPathXmlApplicationContext context = null;
+	@javax.annotation.Resource(name = "jdbcTemplate2")
+	private static  JdbcTemplate jdbcTemplate;
 
 	public static void main(String... args) throws Throwable {
 		System.out.println("-------begin consumer main----------");
 		startup();
 
+		jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate2");
+		jdbcTemplate.update("delete from  apple where 1=1");
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
 		try {
 			transferSvc.transfer("1001", "2001", 1.00d);

@@ -9,10 +9,8 @@
         <module name="bytejta-core" />
         <module name="bytejta-supports" />
         <module name="bytejta-supports-dubbo" />
+        <module name="sample-start" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="sample-start" target="1.7" />
-    </bytecodeTargetLevel>
   </component>
 </project>
