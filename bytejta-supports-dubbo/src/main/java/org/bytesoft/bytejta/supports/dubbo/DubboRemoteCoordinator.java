@@ -51,7 +51,6 @@ public class DubboRemoteCoordinator implements InvocationHandler {
 					} else if (StringUtils.isNotBlank(this.invocationContext.getServiceKey())) {
 						return this.invocationContext.getServiceKey();
 					} else {
-						System.out.println("go invokeCoordinator");
 						return this.invokeCoordinator(proxy, method, args);
 					}
 				} else {

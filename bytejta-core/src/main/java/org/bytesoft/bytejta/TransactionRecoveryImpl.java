@@ -103,8 +103,8 @@ public class TransactionRecoveryImpl implements TransactionRecovery, Transaction
 		case Status.STATUS_PREPARING:
 		case Status.STATUS_ROLLING_BACK:
 		case Status.STATUS_UNKNOWN:
-			transaction.recoveryRollback();
-			transaction.forgetQuietly();
+//			transaction.recoveryRollback();
+//			transaction.forgetQuietly();
 			break;
 		case Status.STATUS_PREPARED:
 		case Status.STATUS_COMMITTING:

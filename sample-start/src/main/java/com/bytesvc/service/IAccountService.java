@@ -8,4 +8,6 @@ public interface IAccountService {
 
 	public void decreaseAmount(String accountId, double amount) throws ServiceException;
 
+	public  int getSum();
+
 }

@@ -80,13 +80,13 @@ public class InsertImageResolvers extends BaseResolvers {
         if (insertCols.contains(pk)) {
 
             pkVal = values.get(insertCols.indexOf(primaryKey));
-            sqlJoint.append("and "+primaryKey + "=" + pkVal);
+            sqlJoint.append(" and "+primaryKey + "=" + pkVal);
             return  sqlJoint.toString();
         }else
         {
             for (String col:insertCols)
             {
-                sqlJoint.append("and "+col+"="+values.get(insertCols.indexOf(col)));
+                sqlJoint.append(" and "+col+"="+values.get(insertCols.indexOf(col)));
             }
             return  sqlJoint.toString();
         }

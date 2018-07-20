@@ -16,6 +16,30 @@ public class BackInfo {
 
     static final Logger logger = LoggerFactory.getLogger(BackInfo.class);
 
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "BackInfo{" +
+                "id=" + id +
+                ", beforeImage=" + beforeImage +
+                ", afterImage=" + afterImage +
+                ", selectBody='" + selectBody + '\'' +
+                ", selectWhere='" + selectWhere + '\'' +
+                ", changeType='" + changeType + '\'' +
+                ", changeSql='" + changeSql + '\'' +
+                ", pk='" + pk + '\'' +
+                '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    private Long id;
+
     private Image beforeImage;
 
     private Image afterImage;
@@ -103,9 +127,12 @@ public class BackInfo {
             rollbackBeforeImage(stmt);
         }else
         {
-            logger.info("Rollback unnecessary or failed");
+            logger.error("Rollback unnecessary or failed");
+            System.out.println("backinfo="+toString());
         }
     }
+
+
 
     private boolean validAfterImage(Statement stmt) throws XAException, SQLException {
 
@@ -142,11 +169,16 @@ public class BackInfo {
                 while (rs.next()) {
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {
                         Object nowVal = rs.getObject(entry.getKey());
+                        if (nowVal instanceof java.sql.Timestamp)
+                            continue;
                         if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
                             return nowVal.equals(entry.getValue());
                         }
                         if (!nowVal.toString().equals(entry.getValue().toString())) {
                             logger.error("Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
+                            System.out.println("Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
+                            System.out.println("nowVal="+nowVal+",entry.getValue()="+entry.getValue());
+
                             return false;
                         }
                     }
@@ -163,6 +195,7 @@ public class BackInfo {
 
         if (isInsert()) {
             String lastSql = "delete from " + afterImage.getTableName() + " " + selectWhere;
+            System.out.println("exe delete backInsert sql="+lastSql);
             stmt.execute(lastSql);
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();
@@ -227,4 +260,13 @@ public class BackInfo {
         }
     }
 
+    public void updateStatusFinish(Statement stmt) {
+        String sql = "update txc_undo_log set status =1 where id = "+id;
+        try {
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            logger.error("update backinfo status failed",e);
+            e.printStackTrace();
+        }
     }
+}

@@ -35,6 +35,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class XATerminatorImpl implements XATerminator {
     static final Logger logger = LoggerFactory.getLogger(XATerminatorImpl.class);
@@ -502,22 +503,24 @@ public class XATerminatorImpl implements XATerminator {
             StringBuilder commandBuf = new StringBuilder(300);
             String GloableXid = partGloableXid(archive.getXid());
             String branchXid = partBranchXid(archive.getXid());
-            String sqlStr = "select rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
+            String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
             Statement stmt = null;
             ResultSet rs = null;
-            List rollList = new ArrayList<String>();
+            List<Long> ids = new ArrayList<>();
             List<String> backInfo = null;
             Connection conn = null;
+            Map<Long,String> map = new HashMap<>();
             try {
                 conn = connection.getConnection();
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(sqlStr);
                 while (rs.next()) {
-                    rollList.add(rs.getString("rollback_info"));
+
+                    map.put(rs.getLong("id"),rs.getString("rollback_info"));
                 }
-                if (rollList.size() > 0) {
-                    System.out.println("bengin  invokeRollback rollbackinfo=" + rollList.get(0));
-                    if (!rollback(rollList, conn, stmt)) {
+                if (map.size() > 0) {
+                    System.out.println("bengin  invokeRollback rollbackinfo=" + map.keySet());
+                    if (!rollback(map, conn, stmt)) {
                         logger.error(String.format("Roll back mysql info error!,backInfo:" + backInfo.toArray().toString()));
                     }
                 }
@@ -681,16 +684,22 @@ public class XATerminatorImpl implements XATerminator {
     }
 
 
-    private boolean rollback(List<String> list, Connection connection, Statement stmt) throws XAException, SQLException {
+    private boolean rollback(Map<Long, String> map, Connection connection, Statement stmt) throws XAException, SQLException {
 
-        for (String imageInfo : list) {
+        for (Long id : map.keySet()) {
+            String imageInfo = map.get(id);
             System.out.println("XATerminatorImpl.ExeBackinfo:" + imageInfo);
+
             BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
             });
+
             backInfo.rollback(stmt);
+            backInfo.setId(id);
+            backInfo.updateStatusFinish(stmt);
         }
         return true;
     }
+
 
 
 }

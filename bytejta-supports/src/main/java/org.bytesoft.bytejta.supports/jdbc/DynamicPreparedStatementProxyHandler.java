@@ -44,7 +44,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     private XAConnection xaConn;
 
-    private Object[] params = new Object[2];
+    private List<Object> params = new ArrayList<>();
 
     private int timeOut = 10 * 1000;
 
@@ -59,7 +59,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        TransactionBeanFactory bytejtaBeanFactory = (TransactionBeanFactory)SpringBeanUtil.getBean("bytejtaBeanFactory");
+        TransactionBeanFactory bytejtaBeanFactory = (TransactionBeanFactory) SpringBeanUtil.getBean("bytejtaBeanFactory");
         Transaction transaction = bytejtaBeanFactory.getTransactionManager().getTransaction();
 
         if (transaction == null) {
@@ -69,7 +69,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
             Integer seq = (Integer) args[0];
-            params[seq - 1] = args[1];
+            params.add(args[1]);
         }
         if ("executeUpdate".equals(method.getName())) {
 
@@ -295,7 +295,14 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             R1list.add(result.getObject(pk).toString());
         }
 
-        String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver.transList(R1list) + ")";
+        if (R1list.size()==0)
+        {
+            return lockList;
+        }
+
+        String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid + "' and table_name = '" + resolver.getTable() + "'" ;
+        if (R1list.size() > 0)
+            lockSql += " and key_value in(" + resolver.transList(R1list) + ")";
         List<String> R2list = new ArrayList<>();
         ResultSet lockResult = st.executeQuery(lockSql);
         while (lockResult.next()) {
@@ -367,8 +374,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
      * @param params 插入到 SQL 中的参数，可单个可多个可不填
      * @return 实际 sql 语句
      */
-    private String printRealSql(String sql, Object[] params) {
-        if (params == null || params.length == 0) {
+    private String printRealSql(String sql, List<Object> params) {
+        if (params == null || params.size() == 0) {
             System.out.println("The SQL is------------>\n" + sql);
             return sql;
         }
@@ -378,17 +385,15 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             return null;
         }
 
-        int cols = params.length;
+        int cols = params.size();
         Object[] values = new Object[cols];
-        System.arraycopy(params, 0, values, 0, cols);
-
+        params.toArray(values);
+//        System.arraycopy(params, 0, values, 0, cols);
         for (int i = 0; i < cols; i++) {
             Object value = values[i];
-            if (value instanceof Date) {
+            if (value instanceof Date || value instanceof  Timestamp ||value instanceof String|| value instanceof  Blob) {
                 values[i] = "'" + value + "'";
-            } else if (value instanceof String) {
-                values[i] = "'" + value + "'";
-            } else if (value instanceof Boolean) {
+            }  else if (value instanceof Boolean) {
                 values[i] = (Boolean) value ? 1 : 0;
             }
         }
@@ -407,8 +412,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
      * @param params 插入到 SQL 中的参数，可单个可多个可不填
      * @return true 表示为 ? 和参数的实际个数匹配
      */
-    private boolean match(String sql, Object[] params) {
-        if (params == null || params.length == 0) return true; // 没有参数，完整输出
+    private boolean match(String sql, List<Object> params) {
+        if (params == null || params.size() == 0) return true; // 没有参数，完整输出
 
         Matcher m = Pattern.compile("(\\?)").matcher(sql);
         int count = 0;
@@ -416,7 +421,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             count++;
         }
 
-        return count == params.length;
+        return count == params.size();
     }
 
 

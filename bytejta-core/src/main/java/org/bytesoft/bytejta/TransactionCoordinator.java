@@ -44,6 +44,9 @@ public class TransactionCoordinator implements RemoteCoordinator, TransactionBea
 	private TransactionBeanFactory beanFactory;
 	private String endpoint;
 
+	@javax.inject.Inject
+	private transient TransactionManager transactionManager;
+
 	private transient boolean ready = false;
 	private final Lock lock = new ReentrantLock();
 
@@ -88,6 +91,13 @@ public class TransactionCoordinator implements RemoteCoordinator, TransactionBea
 
 	/** supports resume only, for tcc transaction manager. */
 	public void start(Xid xid, int flags) throws XAException {
+
+		if (beanFactory == null)
+		{
+			System.out.println(transactionManager == null);
+
+		}
+
 
 		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
 		XidFactory xidFactory = this.beanFactory.getXidFactory();

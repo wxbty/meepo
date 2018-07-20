@@ -26,10 +26,15 @@ public class GenericTransferServiceImpl implements ITransferService {
 //		 throw new ServiceException("rollback");
 	}
 
+	public  int getSum()
+	{
+		return this.remoteAccountService.getSum();
+	}
+
 	private void increaseAmount(String acctId, double amount) throws ServiceException {
-		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
-//		int value = this.jdbcTemplate.update("delete from tb_account_two where amount = ? and acct_id = ?", 233.3, "1531315150148");
-//		int value = this.jdbcTemplate.update("insert into apple (name)values('liming')");
+//		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id = '"+acctId+"'");
+//		int value = this.jdbcTemplate.update("update tb_account_two set amount = ? where acct_id = ?", amount, acctId);
+		int value = this.jdbcTemplate.update("insert into orders(user_id,product_id,number,gmt_create) values('09616e24-5818-4784-8345-5a61e73d1478', 723, 3, '2018-07-20 16:01:33.747')");
 //		String sql = "select name from apple where id =1  lock in  share mode ";
 //		 //        调用方法获得记录数
 //		String count = jdbcTemplate.queryForObject(sql, String.class);

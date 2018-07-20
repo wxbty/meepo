@@ -239,7 +239,7 @@
     </dependencies>
 
     <build>
-        <finalName>javadeploy</finalName>
+        <finalName>meepo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -21,6 +21,7 @@ public class ConsumerMain {
 		jdbcTemplate.update("delete from  apple where 1=1");
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
 		try {
+			System.out.println(transferSvc.getSum());
 			transferSvc.transfer("1001", "2001", 1.00d);
 		} catch (Exception ex) {
 			ex.printStackTrace();

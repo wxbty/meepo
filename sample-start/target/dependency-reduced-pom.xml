@@ -10,7 +10,7 @@
   <artifactId>sample-start</artifactId>
   <name>com.tuya.jta.start</name>
   <build>
-    <finalName>javadeploy</finalName>
+    <finalName>meepo</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
