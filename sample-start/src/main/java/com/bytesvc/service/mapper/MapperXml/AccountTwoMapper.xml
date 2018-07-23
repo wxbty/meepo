@@ -19,7 +19,7 @@
     </delete>
     <!-- 更新 -->
     <update id="update" parameterType="com.bytesvc.service.pojo.Account">
-        update tb_account_two set amount= #{amount}
+        update tb_account_two set amount= amount + #{amount}
         where acct_id=#{acctId}
     </update>
 </mapper>

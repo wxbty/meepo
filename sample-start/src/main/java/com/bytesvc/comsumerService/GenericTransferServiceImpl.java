@@ -5,6 +5,7 @@ import com.bytesvc.service.IAccountService;
 import com.bytesvc.service.ITransferService;
 import com.bytesvc.service.mapper.AccountTwoDao;
 import com.bytesvc.service.pojo.Account;
+import org.apache.commons.dbcp2.managed.BasicManagedDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,15 @@ public class GenericTransferServiceImpl implements ITransferService {
 	@org.springframework.beans.factory.annotation.Autowired(required = false)
 	private IAccountService remoteAccountService;
 	@Autowired
+ 	private 	BasicManagedDataSource dataSource;
+	@Autowired
 	private AccountTwoDao accountTwoDao;
 
-//	@Transactional(rollbackFor = ServiceException.class)
+	@Transactional(rollbackFor = ServiceException.class)
 	public void transfer(String sourceAcctId, String targetAcctId, double amount) throws ServiceException {
 
 		this.increaseAmount(targetAcctId, amount);
-//		this.remoteAccountService.decreaseAmount(sourceAcctId, amount);
+		this.remoteAccountService.decreaseAmount(sourceAcctId, amount);
 
 
 //   		 throw new ServiceException("rollback");
@@ -48,7 +51,12 @@ public class GenericTransferServiceImpl implements ITransferService {
 		Account account = new Account();
 		account.setAcctId(acctId);
 		account.setAmount(amount);
+		int active = dataSource.getNumActive();
+		int idle = dataSource.getNumIdle();
+//		System.out.printf("active= %d, idle= %d", active, idle);
+
 		System.out.println("update num="+accountTwoDao.update(account));
+
 		System.out.printf("exec increase: acct= %s, amount= %7.2f%n", acctId, amount);
 	}
 

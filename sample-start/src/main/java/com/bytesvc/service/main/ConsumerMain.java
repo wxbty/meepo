@@ -1,5 +1,6 @@
 package com.bytesvc.service.main;
 
+import com.bytesvc.ServiceException;
 import com.bytesvc.service.ITransferService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +14,7 @@ public class ConsumerMain {
 	@javax.annotation.Resource(name = "jdbcTemplate2")
 	private static  JdbcTemplate jdbcTemplate;
 
+
 	public static void main(String... args) throws Throwable {
 		System.out.println("-------begin consumer main----------");
 		startup();
@@ -21,12 +23,12 @@ public class ConsumerMain {
 //		jdbcTemplate.update("delete from  apple where 1=1");
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
 		try {
-//			for (int tnum = 0;tnum < 7;tnum++) {
-//				Thread thread = new MyThread(transferSvc);
-//				thread.start();
-//			}
+			for (int tnum = 0;tnum < 200;tnum++) {
+				Thread thread = new MyThread(transferSvc);
+				thread.start();
+			}
 //			waitForMillis(6000);
-			transferSvc.transfer("1001", "2001", 254.00d);
+//			transferSvc.transfer("1001", "2001", 1.00d);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -44,7 +46,13 @@ public class ConsumerMain {
 
 		@Override
 		public void run() {
-			System.out.println(transferSvc.getSum());
+
+			try {
+				transferSvc.transfer("1001", "2001", 1.00d);
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
+//			System.out.println(transferSvc.getSum());
 		}
 	}
 

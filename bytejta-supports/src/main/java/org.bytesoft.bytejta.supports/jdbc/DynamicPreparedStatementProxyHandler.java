@@ -21,7 +21,9 @@ import org.bytesoft.transaction.Transaction;
 import org.bytesoft.transaction.TransactionBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.sql.XAConnection;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
@@ -49,6 +51,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     private List<Object> params = new ArrayList<>();
 
     private int timeOut = 50 * 1000;
+
+    @Resource(name="bytejtaBeanFactory")
+    private TransactionBeanFactory bytejtaBeanFactory;
 
 
     public DynamicPreparedStatementProxyHandler(Object realObject, String sql, XAConnection conn) {
