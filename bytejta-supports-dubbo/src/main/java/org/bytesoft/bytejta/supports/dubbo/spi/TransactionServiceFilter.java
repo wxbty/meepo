@@ -66,23 +66,14 @@ public class TransactionServiceFilter implements Filter {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
 
     public Result providerInvoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
         String transactionContextContent = invocation.getAttachment(TransactionContext.class.getName());
 
+        System.out.println("provider.method ="+invocation.getMethodName());
         URL url = RpcContext.getContext().getUrl();
         String interfaceClazz = url.getServiceInterface();
-//		try {
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-
-
         if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
                 && Arrays.equals(invocation.getParameterTypes(), new Class<?>[]{Xid.class, Integer.TYPE})) {
             return this.providerInvokeForKey(invoker, invocation);
@@ -91,9 +82,8 @@ public class TransactionServiceFilter implements Filter {
         } else if (RemoteCoordinator.class.getName().equals(interfaceClazz)) {
             return this.providerInvokeForJTA(invoker, invocation);
         } else {
-            System.out.println("last name=" + invocation.getMethodName());
+            //non transaction method
             if (StringUtils.isEmpty(transactionContextContent)) {
-                System.out.println("blank method = " + invocation.getMethodName() + ",interfaceClazz=" + interfaceClazz);
                 return invoker.invoke(invocation);
             }
             return this.providerInvokeForSVC(invoker, invocation);
@@ -152,14 +142,6 @@ public class TransactionServiceFilter implements Filter {
     }
 
     public Result providerInvokeForJTA(Invoker<?> invoker, Invocation invocation) throws RpcException {
-
-
-        if (XATerminatorImpl.sourceProp.get().isEmpty()) {
-            XATerminatorImpl.sourceProp.get().put("url", XADataSourceImpl.url);
-            XATerminatorImpl.sourceProp.get().put("user", XADataSourceImpl.user);
-            XATerminatorImpl.sourceProp.get().put("password", XADataSourceImpl.password);
-            XATerminatorImpl.sourceProp.get().put("className", XADataSourceImpl.className);
-        }
 
         TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
         TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();

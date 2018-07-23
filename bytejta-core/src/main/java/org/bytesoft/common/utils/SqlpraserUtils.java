@@ -124,11 +124,11 @@ public class SqlpraserUtils {
         Select select = (Select) parserManager.parse(new StringReader(sql));
         PlainSelect plain = (PlainSelect) select.getSelectBody();
         Expression where_expression = plain.getWhere();
+        if (where_expression == null)
+            return "";
         String str = where_expression.toString();
         return str;
     }
-
-
 
 
     // *********update column
@@ -154,6 +154,8 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Update updateStatement = (Update) statement;
         Expression where_expression = updateStatement.getWhere();
+        if (where_expression == null)
+            return "";
         String str = where_expression.toString();
         return str;
     }
@@ -164,13 +166,28 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Delete updateStatement = (Delete) statement;
         Expression where_expression = updateStatement.getWhere();
+        if (where_expression == null)
+            return "";
         String str = where_expression.toString();
         return str;
     }
 
 
+    public static boolean assertInsert(String sql) {
+        return sql.toLowerCase().trim().startsWith("insert");
+    }
 
+    public static boolean assertUpdate(String sql) {
+        return sql.toLowerCase().trim().startsWith("update");
+    }
 
+    public static boolean assertDelete(String sql) {
+        return sql.toLowerCase().trim().startsWith("delete");
+    }
+
+    public static boolean assertSelect(String sql) {
+        return sql.toLowerCase().trim().startsWith("select");
+    }
 
 
 }

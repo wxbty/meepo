@@ -468,7 +468,7 @@ public class TransactionImpl implements Transaction {
             if (this.participantList.size() == 0) {
                 this.skipOnePhaseCommit();
             } else if (this.participantList.size() == 1) {
-                this.skipOnePhaseCommit();
+                this.fireOnePhaseCommit();
             } else {
                 this.fireTwoPhaseCommit();
             }

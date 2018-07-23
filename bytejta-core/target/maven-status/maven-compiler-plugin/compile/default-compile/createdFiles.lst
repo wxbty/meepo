@@ -1,5 +1,4 @@
 org/bytesoft/common/utils/SerializeUtils$3.class
-org/bytesoft/bytejta/resource/XATerminatorImpl$2.class
 org/bytesoft/transaction/internal/TransactionResourceListenerList.class
 org/bytesoft/transaction/supports/serialize/XAResourceDeserializer.class
 org/bytesoft/transaction/internal/TransactionListenerList.class

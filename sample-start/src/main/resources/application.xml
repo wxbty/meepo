@@ -41,6 +41,15 @@
 		<property name="numTestsPerEvictionRun" value="20" />
 	</bean>
 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 别名 -->
+		<!--<property name="typeAliasesPackage" value="com.zhangguo.bookstore.entities"></property>-->
+		<!-- sql映射文件路径 -->
+		<property name="mapperLocations" value="classpath*:com/bytesvc/service/mapper/MapperXml/*Mapper.xml"></property>
+	</bean>
+
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

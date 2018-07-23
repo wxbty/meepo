@@ -1,6 +1,6 @@
 package org.bytesoft.bytejta.supports.jdbc;
 
-import org.bytesoft.bytejta.resource.XATerminatorImpl;
+import org.bytesoft.common.utils.SqlpraserUtils;
 
 import javax.sql.XAConnection;
 import java.lang.reflect.Proxy;
@@ -15,21 +15,9 @@ public class SharpConnection implements Connection {
 
     private XAConnection xaConn;
 
-    SharpConnection(XAConnection xaConn) {
+    SharpConnection(XAConnection xaConn) throws SQLException {
         this.xaConn = xaConn;
-        try {
-            this.conn = xaConn.getConnection();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (XATerminatorImpl.sourceProp.get().isEmpty()) {
-            XATerminatorImpl.sourceProp.get().put("url", XADataSourceImpl.url);
-            XATerminatorImpl.sourceProp.get().put("user", XADataSourceImpl.user);
-            XATerminatorImpl.sourceProp.get().put("password", XADataSourceImpl.password);
-            XATerminatorImpl.sourceProp.get().put("className", XADataSourceImpl.className);
-        }
+        this.conn = xaConn.getConnection();
     }
 
     public Statement createStatement() throws SQLException {
@@ -42,10 +30,10 @@ public class SharpConnection implements Connection {
 
     public PreparedStatement prepareStatement(String sql) throws SQLException {
         PreparedStatement ps = null;
-        if (sql.toLowerCase().startsWith("insert")) {
+        if (SqlpraserUtils.assertInsert(sql)) {
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         } else {
-            ps =conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
         }
         PreparedStatement proxySt = (PreparedStatement) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), new Class[]{PreparedStatement.class}, new DynamicPreparedStatementProxyHandler(ps, sql, xaConn));
         return proxySt;

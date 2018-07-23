@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.bytesvc.service.mapper.AccountTwoDao">
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <!--获得所有图书 -->
+    <select id="getAll" resultType="com.bytesvc.service.pojo.Account">
+        select acct_id,amount from tb_account_two
+    </select>
+
+    <!-- 增加 -->
+    <insert id="add" parameterType="com.bytesvc.service.pojo.Account">
+        insert into tb_account_two(acct_id,amount)
+        values(#{acctId},#{amount})
+    </insert>
+    <!-- 删除 -->
+    <delete id="delete">
+        delete from tb_account_two where id=#{id}
+    </delete>
+    <!-- 更新 -->
+    <update id="update" parameterType="com.bytesvc.service.pojo.Account">
+        update tb_account_two set amount= #{amount}
+        where acct_id=#{acctId}
+    </update>
+</mapper>

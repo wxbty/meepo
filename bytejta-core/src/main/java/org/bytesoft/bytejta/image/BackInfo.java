@@ -159,12 +159,16 @@ public class BackInfo {
                     throw new XAException("ValidAfterImage.Unsupport null premaryKey");
                 }
                 if (pkVal instanceof String) {
-                    andPkEquals = " and " + pk + "='" + pkVal + "'";
+                    andPkEquals = "  " + pk + "='" + pkVal + "'";
                 } else {
-                    andPkEquals = " and " + pk + "=" + pkVal;
+                    andPkEquals = "  " + pk + "=" + pkVal;
                 }
-
-                String selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
+                String selectSql = null;
+                if (getSelectWhere().toLowerCase().trim().endsWith("and"))
+                    selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
+                else
+                    selectSql = getSelectBody() + getSelectWhere() +" and " +andPkEquals;
+                System.out.println("selectSql="+selectSql);
                 ResultSet rs = stmt.executeQuery(selectSql);
                 while (rs.next()) {
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {

@@ -27,9 +27,11 @@ import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +48,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     private List<Object> params = new ArrayList<>();
 
-    private int timeOut = 10 * 1000;
+    private int timeOut = 50 * 1000;
 
 
     public DynamicPreparedStatementProxyHandler(Object realObject, String sql, XAConnection conn) {
@@ -66,140 +68,25 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             return method.invoke(realObject, args);
         }
 
-
+        System.out.println("invoke method="+method.getName());
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
             Integer seq = (Integer) args[0];
             params.add(args[1]);
         }
-        if ("executeUpdate".equals(method.getName())) {
-
-
-            BackInfo backInfo = new BackInfo();
-            if (realObject instanceof PreparedStatement) {
-                sql = printRealSql(sql, params);
-            } else if (realObject instanceof Statement) {
-
-                sql = args[0].toString();
-            }
-            Xid currentXid = TransactionImpl.currentXid.get();
-            //事务数据源从对应数据库获取前置对象
-            Class.forName(XADataSourceImpl.className);
-            Connection conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
-            Statement st = conn.createStatement();
-
-
-            BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
-
-            backInfo.setBeforeImage(resolver.genBeforeImage());
-            String GloableXid = partGloableXid(currentXid);
-            String branchXid = partBranchXid(currentXid);
-
-            getXlock(conn, st, resolver, GloableXid, branchXid);
-
-            PreparedStatement ps = null;
-
-            String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
-            ps = conn.prepareStatement(logSql);
-            ps.setString(1, GloableXid);
-            ps.setString(2, branchXid);
-            ps.setInt(4, 0);
-            ps.setString(5, "127.0.0.1");
-
-            logger.info("proxy sql = " + sql);
-            Object obj = null;
-            Object pkVal = null;
-            if (sql.toLowerCase().startsWith("insert")) {
-                ResultSet generatedKeys = null;
-                if (realObject instanceof PreparedStatement) {
-                    obj = method.invoke(realObject, args);
-                    PreparedStatement preparedStatement = (PreparedStatement) realObject;
-                    generatedKeys = preparedStatement.getGeneratedKeys();
-                } else if (realObject instanceof Statement) {
-                    Statement realSt = (Statement) realObject;
-                    obj = realSt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-                    generatedKeys = realSt.getGeneratedKeys();
-                }
-                while (generatedKeys.next()) {
-                    pkVal = generatedKeys.getObject(1);
-                }
-
-                if (pkVal == null) {
-                    String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
-                    List<String> colums = SqlpraserUtils.name_insert_column(sql);
-                    List<String> values = SqlpraserUtils.name_insert_values(sql);
-                    if (colums.contains(pkKey)) {
-                        pkVal = values.get(colums.indexOf(pkKey));
-                    }
-                }
-            } else {
-                obj = method.invoke(realObject, args);
-            }
-
-            //本地直接提交
-            xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-            xaConn.getXAResource().prepare(currentXid);
-            xaConn.getXAResource().commit(currentXid, false);
-            //插入时需要获取主键的value
-
-            if (sql.toLowerCase().startsWith("insert")) {
-                InsertImageResolvers inResolver = (InsertImageResolvers) resolver;
-                inResolver.setPkVal(pkVal);
-                backInfo.setAfterImage(inResolver.genAfterImage());
-            } else {
-                backInfo.setAfterImage(resolver.genAfterImage());
-            }
-            String backSqlJson = JSON.toJSONString(backInfo);
-            ps.setString(3, backSqlJson);
-            ps.executeUpdate();         //执行sql语句
-
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-            //事务数据源从对应数据库获取后置对象
-            return obj;
-
-
+        List<String> proxyMethods = Arrays.asList("executeUpdate","execute","executeBatch","executeLargeBatch","executeLargeUpdate");
+        if (proxyMethods.contains (method.getName())) {
+            return invokUpdate(method, args);
         }
 
         if ("executeQuery".equals(method.getName())) {
 
             if (args == null || StringUtils.isEmpty(args[0].toString())) {
+                //select x
                 return method.invoke(realObject, args);
             }
             sql = args[0].toString();
-            System.out.println(Thread.currentThread().getName() + "=mythred");
             if (StringUtils.deleteWhitespace(sql.toLowerCase()).endsWith("lockinsharemode")) {
-                Connection conn = null;
-                Statement st = null;
-                Xid currentXid;
-                try {
-                    Class.forName(XADataSourceImpl.className);
-                    conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
-                    st = conn.createStatement();
-
-                    BackInfo backInfo = new BackInfo();
-                    BaseResolvers resolver = ImageUtil.getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo, conn, st);
-                    backInfo.setBeforeImage(resolver.genBeforeImage());
-                    currentXid = TransactionImpl.currentXid.get();
-                    String GloableXid = partGloableXid(currentXid);
-                    String branchXid = partBranchXid(currentXid);
-                    getSlock(conn, st, resolver, GloableXid, branchXid);
-                } finally {
-                    if (conn != null) {
-                        conn.close();
-                    }
-                    if (st != null) {
-                        st.close();
-                    }
-                }
-                Object obj = method.invoke(realObject, args);
-                //本地直接提交
-                xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-                xaConn.getXAResource().prepare(currentXid);
-                return obj;
+                return LockSharedMode(method, args);
             } else {
                 net.sf.jsqlparser.statement.Statement statement = null;
                 try {
@@ -214,27 +101,159 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                     PlainSelect ps = (PlainSelect) selectBody;
                     if (ps.isForUpdate()) {
                         //select for update
-                        Connection conn = xaConn.getConnection();
-                        Statement st = conn.createStatement();
-                        BackInfo backInfo = new BackInfo();
-                        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
-                        backInfo.setBeforeImage(resolver.genBeforeImage());
-                        Xid currentXid = TransactionImpl.currentXid.get();
-                        String GloableXid = partGloableXid(currentXid);
-                        String branchXid = partBranchXid(currentXid);
-                        getXlock(conn, st, resolver, GloableXid, branchXid);
-                        Object obj = method.invoke(realObject, args);
-                        //本地直接提交
-//                        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-//                        xaConn.getXAResource().prepare(currentXid);
-                        return obj;
-
+                        return lockForUpdate(method, args);
                     }
                 }
 
             }
         }
         return method.invoke(realObject, args);
+    }
+
+    private Object lockForUpdate(Method method, Object[] args) throws SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
+        Connection conn = xaConn.getConnection();
+        Statement st = conn.createStatement();
+        BackInfo backInfo = new BackInfo();
+        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
+        backInfo.setBeforeImage(resolver.genBeforeImage());
+        Xid currentXid = TransactionImpl.currentXid.get();
+        String GloableXid = partGloableXid(currentXid);
+        String branchXid = partBranchXid(currentXid);
+        getXlock(conn, st, resolver, GloableXid, branchXid);
+        Object obj = method.invoke(realObject, args);
+        //本地直接提交
+//                        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+//                        xaConn.getXAResource().prepare(currentXid);
+        return obj;
+    }
+
+    private Object LockSharedMode(Method method, Object[] args) throws ClassNotFoundException, SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
+        Connection conn = null;
+        Statement st = null;
+        Xid currentXid;
+        try {
+            Class.forName(XADataSourceImpl.className);
+            conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
+            st = conn.createStatement();
+
+            BackInfo backInfo = new BackInfo();
+            BaseResolvers resolver = ImageUtil.getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo, conn, st);
+            backInfo.setBeforeImage(resolver.genBeforeImage());
+            currentXid = TransactionImpl.currentXid.get();
+            String GloableXid = partGloableXid(currentXid);
+            String branchXid = partBranchXid(currentXid);
+            getSlock(conn, st, resolver, GloableXid, branchXid);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+        }
+        Object obj = method.invoke(realObject, args);
+        //本地直接提交
+        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+        xaConn.getXAResource().prepare(currentXid);
+        return obj;
+    }
+
+    private Object invokUpdate(Method method, Object[] args) throws ClassNotFoundException, SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
+        BackInfo backInfo = new BackInfo();
+        PreparedStatement ps = null;
+        Object obj = null;
+        Object pkVal = null;
+
+
+        if (realObject instanceof PreparedStatement) {
+            sql = printRealSql(sql, params);
+        } else if (realObject instanceof Statement) {
+
+            sql = args[0].toString();
+        }
+        Xid currentXid = TransactionImpl.currentXid.get();
+        //事务数据源从对应数据库获取前置对象
+        Class.forName(XADataSourceImpl.className);
+        Connection conn = DriverManager.getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
+        Statement st = conn.createStatement();
+
+        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
+        backInfo.setBeforeImage(resolver.genBeforeImage());
+        String GloableXid = partGloableXid(currentXid);
+        String branchXid = partBranchXid(currentXid);
+        getXlock(conn, st, resolver, GloableXid, branchXid);
+        String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
+        ps = conn.prepareStatement(logSql);
+        ps.setString(1, GloableXid);
+        ps.setString(2, branchXid);
+        ps.setInt(4, 0);
+        ps.setString(5, getHost(conn));
+
+
+        if (SqlpraserUtils.assertInsert(sql)) {
+            ResultSet generatedKeys = null;
+            if (realObject instanceof PreparedStatement) {
+                obj = method.invoke(realObject, args);
+                PreparedStatement preparedStatement = (PreparedStatement) realObject;
+                generatedKeys = preparedStatement.getGeneratedKeys();
+            } else if (realObject instanceof Statement) {
+                Statement realSt = (Statement) realObject;
+                obj = realSt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+                generatedKeys = realSt.getGeneratedKeys();
+            }
+            while (generatedKeys.next()) {
+                pkVal = generatedKeys.getObject(1);
+            }
+
+            if (pkVal == null) {
+                String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
+                List<String> colums = SqlpraserUtils.name_insert_column(sql);
+                List<String> values = SqlpraserUtils.name_insert_values(sql);
+                if (colums.contains(pkKey)) {
+                    pkVal = values.get(colums.indexOf(pkKey));
+                }
+            }
+        } else {
+            obj = method.invoke(realObject, args);
+        }
+
+        //本地直接提交
+        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+        xaConn.getXAResource().prepare(currentXid);
+        xaConn.getXAResource().commit(currentXid, false);
+        //插入时需要获取主键的value
+
+        if (SqlpraserUtils.assertInsert(sql)) {
+            InsertImageResolvers inResolver = (InsertImageResolvers) resolver;
+            inResolver.setPkVal(pkVal);
+            backInfo.setAfterImage(inResolver.genAfterImage());
+        } else {
+            backInfo.setAfterImage(resolver.genAfterImage());
+        }
+        String backSqlJson = JSON.toJSONString(backInfo);
+        ps.setString(3, backSqlJson);
+        ps.executeUpdate();         //执行sql语句
+
+        if (st != null) {
+            st.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+        //事务数据源从对应数据库获取后置对象
+        return obj;
+    }
+
+    private String getHost(Connection conn) throws SQLException {
+        DatabaseMetaData md =conn.getMetaData();
+        String url = md.getURL();
+        String host = "";
+        Pattern p = Pattern.compile("(?<=//|)((\\w)+\\.)+\\w+");
+        Matcher matcher = p.matcher(url);
+        if (matcher.find()) {
+            host = matcher.group();
+        }
+        return host;
     }
 
     private void getXlock(Connection conn, Statement st, BaseResolvers resolver, String gloableXid, String branchXid) throws XAException, JSQLParserException, SQLException {
@@ -276,6 +295,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                     lock.lock(st);
                 } catch (SQLException e) {
                     logger.info("getXlock -- Data locked by other,retry");
+                    System.out.println("getXlock -- Data locked by other,retry");
                     return false;
                 }
             }
@@ -295,12 +315,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             R1list.add(result.getObject(pk).toString());
         }
 
-        if (R1list.size()==0)
-        {
+        if (R1list.size() == 0) {
             return lockList;
         }
 
-        String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid + "' and table_name = '" + resolver.getTable() + "'" ;
+        String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid + "' and table_name = '" + resolver.getTable() + "'";
         if (R1list.size() > 0)
             lockSql += " and key_value in(" + resolver.transList(R1list) + ")";
         List<String> R2list = new ArrayList<>();
@@ -376,12 +395,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
      */
     private String printRealSql(String sql, List<Object> params) {
         if (params == null || params.size() == 0) {
-            System.out.println("The SQL is------------>\n" + sql);
             return sql;
         }
 
         if (!match(sql, params)) {
-            System.out.println("SQL 语句中的占位符与参数个数不匹配。SQL：" + sql);
+            logger.error("SQL 语句中的占位符与参数个数不匹配。SQL：" + sql);
             return null;
         }
 
@@ -391,17 +409,14 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 //        System.arraycopy(params, 0, values, 0, cols);
         for (int i = 0; i < cols; i++) {
             Object value = values[i];
-            if (value instanceof Date || value instanceof  Timestamp ||value instanceof String|| value instanceof  Blob) {
+            if (value instanceof Date || value instanceof Timestamp || value instanceof String || value instanceof Blob) {
                 values[i] = "'" + value + "'";
-            }  else if (value instanceof Boolean) {
+            } else if (value instanceof Boolean) {
                 values[i] = (Boolean) value ? 1 : 0;
             }
         }
 
         String statement = String.format(sql.replaceAll("\\?", "%s"), values);
-
-        System.out.println("The SQL is------------>\n" + statement);
-
         return statement;
     }
 

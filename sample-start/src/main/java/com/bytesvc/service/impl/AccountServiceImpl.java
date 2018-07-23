@@ -29,12 +29,16 @@ public class AccountServiceImpl implements IAccountService {
 		// throw new ServiceException("rollback");
 	}
 
-
+	@Transactional(rollbackFor = ServiceException.class)
 	public  int getSum()
 	{
-		String sql = "select count(0) from student where id =1 ";
-		Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
-		return count;
+//		String sql = "select count(0) from student where id =1 ";
+//		Integer count = jdbcTemplate.queryForObject(sql, Integer.class);
+		int value = this.jdbcTemplate.update("update tb_account_one set amount = 1181 where acct_id = ?", "1001");
+		return value;
 	}
+
+
+
 
 }

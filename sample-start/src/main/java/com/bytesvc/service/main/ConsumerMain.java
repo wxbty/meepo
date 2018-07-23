@@ -17,18 +17,35 @@ public class ConsumerMain {
 		System.out.println("-------begin consumer main----------");
 		startup();
 
-		jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate2");
-		jdbcTemplate.update("delete from  apple where 1=1");
+//		jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate2");
+//		jdbcTemplate.update("delete from  apple where 1=1");
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
 		try {
-			System.out.println(transferSvc.getSum());
-			transferSvc.transfer("1001", "2001", 1.00d);
+//			for (int tnum = 0;tnum < 7;tnum++) {
+//				Thread thread = new MyThread(transferSvc);
+//				thread.start();
+//			}
+//			waitForMillis(6000);
+			transferSvc.transfer("1001", "2001", 254.00d);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			shutdown();
 		}
 
+	}
+
+	static class MyThread extends Thread {
+
+		private  ITransferService transferSvc;
+		public MyThread(ITransferService transferSvc) {
+			this.transferSvc = transferSvc;
+		}
+
+		@Override
+		public void run() {
+			System.out.println(transferSvc.getSum());
+		}
 	}
 
 	public static void startup() {

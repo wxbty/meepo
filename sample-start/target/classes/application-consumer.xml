@@ -45,6 +45,23 @@
 		<property name="dataSource" ref="dataSource2" />
 	</bean>
 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource2"></property>
+		<!-- 别名 -->
+		<!--<property name="typeAliasesPackage" value="com.zhangguo.bookstore.entities"></property>-->
+		<!-- sql映射文件路径 -->
+		<property name="mapperLocations" value="classpath*:com/bytesvc/service/mapper/MapperXml/*Mapper.xml"></property>
+	</bean>
+
+	<!--4 自动扫描对象关系映射 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<!-- 指定要自动扫描接口的基础包，实现接口 -->
+		<property name="basePackage" value="com.bytesvc.service.mapper"></property>
+	</bean>
+
 	<!--<bean class="org.bytesoft.bytejta.supports.spring.SpringBeanUtil" />-->
 
 </beans>

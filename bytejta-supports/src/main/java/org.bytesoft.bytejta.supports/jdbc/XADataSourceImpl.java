@@ -15,6 +15,7 @@
  */
 package org.bytesoft.bytejta.supports.jdbc;
 
+import org.bytesoft.bytejta.resource.XATerminatorImpl;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -161,10 +162,10 @@ public class XADataSourceImpl implements XADataSource, BeanNameAware,Initializin
             setPass.invoke(obj, password);
             XADataSource xs = (XADataSource) obj;
             this.xaDataSource = xs;
-            this.url = url;
-            this.user = user;
-            this.password = password;
-            this.className = className;
+            XATerminatorImpl.sourceProp.put("url",url);
+            XATerminatorImpl.sourceProp.put("user",user);
+            XATerminatorImpl.sourceProp.put("password",password);
+            XATerminatorImpl.sourceProp.put("className",className);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

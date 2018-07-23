@@ -43,12 +43,7 @@ public class XATerminatorImpl implements XATerminator {
     private TransactionBeanFactory beanFactory;
     private final List<XAResourceArchive> resources = new ArrayList<XAResourceArchive>();
 
-    public static ThreadLocal<HashMap<String, String>> sourceProp = new ThreadLocal<HashMap<String, String>>() {
-        @Override
-        protected HashMap initialValue() {
-            return new HashMap<String, String>();
-        }
-    };
+    public static HashMap<String, String> sourceProp = new HashMap<String, String>();
 
     public synchronized int prepare(Xid xid) throws XAException {
         TransactionLogger transactionLogger = this.beanFactory.getTransactionLogger();
@@ -81,32 +76,6 @@ public class XATerminatorImpl implements XATerminator {
         return globalVote;
     }
 
-
-    private String partGloableXid(Xid xid) {
-
-        byte[] gtrid = xid.getGlobalTransactionId();
-
-        StringBuilder builder = new StringBuilder();
-
-        if (gtrid != null) {
-            appendAsHex(builder, gtrid);
-        }
-
-        return builder.toString();
-    }
-
-    private String partBranchXid(Xid xid) {
-
-        byte[] btrid = xid.getBranchQualifier();
-
-        StringBuilder builder = new StringBuilder();
-
-        if (btrid != null) {
-            appendAsHex(builder, btrid);
-        }
-
-        return builder.toString();
-    }
 
     /**
      * error: XA_HEURHAZ, XA_HEURMIX, XA_HEURCOM, XA_HEURRB, XA_RDONLY, XAER_RMERR
@@ -352,33 +321,7 @@ public class XATerminatorImpl implements XATerminator {
             archive.commit(archive.getXid(), false);
             return;
         } else {
-            releaseLock(archive);
-        }
-    }
-
-    private void releaseLock(XAResourceArchive archive) throws XAException, SQLException {
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            String gloableXid = partGloableXid(archive.getXid());
-            String branchXid = partBranchXid(archive.getXid());
-            String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
-
-
-            Class.forName(sourceProp.get().get("className"));
-            conn = DriverManager.getConnection(sourceProp.get().get("url"), sourceProp.get().get("user"), sourceProp.get().get("password"));
-            stmt = conn.createStatement();
-            stmt.execute(sql);
-        } catch (SQLException ex) {
-            logger.error("SQL.error", ex);
-            throw new XAException("invokeTwoPhaseCommit.SQLException");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null)
-                conn.close();
-            if (stmt != null)
-                stmt.close();
+            archive.releaseLock();
         }
     }
 
@@ -501,30 +444,30 @@ public class XATerminatorImpl implements XATerminator {
             PreparedStatement ps = null;
             //拼接PREPARE语句，在general_log查找执行中的sql
             StringBuilder commandBuf = new StringBuilder(300);
-            String GloableXid = partGloableXid(archive.getXid());
-            String branchXid = partBranchXid(archive.getXid());
+            String GloableXid = archive.partGloableXid(archive.getXid());
+            String branchXid = archive.partBranchXid(archive.getXid());
             String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
             Statement stmt = null;
             ResultSet rs = null;
             List<Long> ids = new ArrayList<>();
             List<String> backInfo = null;
             Connection conn = null;
-            Map<Long,String> map = new HashMap<>();
+            Map<Long, String> map = new HashMap<>();
             try {
                 conn = connection.getConnection();
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(sqlStr);
                 while (rs.next()) {
 
-                    map.put(rs.getLong("id"),rs.getString("rollback_info"));
+                    map.put(rs.getLong("id"), rs.getString("rollback_info"));
                 }
                 if (map.size() > 0) {
-                    System.out.println("bengin  invokeRollback rollbackinfo=" + map.keySet());
+                    logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
                     if (!rollback(map, conn, stmt)) {
                         logger.error(String.format("Roll back mysql info error!,backInfo:" + backInfo.toArray().toString()));
                     }
                 }
-                releaseLock(archive);
+                archive.releaseLock();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -633,57 +576,6 @@ public class XATerminatorImpl implements XATerminator {
     }
 
 
-    private static void appendXid(StringBuilder builder, Xid xid) {
-        byte[] gtrid = xid.getGlobalTransactionId();
-        byte[] btrid = xid.getBranchQualifier();
-
-        if (gtrid != null) {
-            appendAsHex(builder, gtrid);
-        }
-
-        builder.append(',');
-        if (btrid != null) {
-            appendAsHex(builder, btrid);
-        }
-
-        builder.append(',');
-        appendAsHex(builder, xid.getFormatId());
-    }
-
-    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-
-    public static void appendAsHex(StringBuilder builder, byte[] bytes) {
-        builder.append("0x");
-        for (byte b : bytes) {
-            builder.append(HEX_DIGITS[(b >>> 4) & 0xF]).append(HEX_DIGITS[b & 0xF]);
-        }
-    }
-
-
-    public static void appendAsHex(StringBuilder builder, int value) {
-        if (value == 0) {
-            builder.append("0x0");
-            return;
-        }
-
-        int shift = 32;
-        byte nibble;
-        boolean nonZeroFound = false;
-
-        builder.append("0x");
-        do {
-            shift -= 4;
-            nibble = (byte) ((value >>> shift) & 0xF);
-            if (nonZeroFound) {
-                builder.append(HEX_DIGITS[nibble]);
-            } else if (nibble != 0) {
-                builder.append(HEX_DIGITS[nibble]);
-                nonZeroFound = true;
-            }
-        } while (shift != 0);
-    }
-
-
     private boolean rollback(Map<Long, String> map, Connection connection, Statement stmt) throws XAException, SQLException {
 
         for (Long id : map.keySet()) {
@@ -699,7 +591,6 @@ public class XATerminatorImpl implements XATerminator {
         }
         return true;
     }
-
 
 
 }
