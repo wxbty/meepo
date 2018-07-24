@@ -23,12 +23,12 @@ public class ConsumerMain {
 //		jdbcTemplate.update("delete from  apple where 1=1");
 		ITransferService transferSvc = (ITransferService) context.getBean("genericTransferService");
 		try {
-			for (int tnum = 0;tnum < 200;tnum++) {
-				Thread thread = new MyThread(transferSvc);
-				thread.start();
-			}
+//			for (int tnum = 0;tnum < 200;tnum++) {
+//				Thread thread = new MyThread(transferSvc);
+//				thread.start();
+//			}
 //			waitForMillis(6000);
-//			transferSvc.transfer("1001", "2001", 1.00d);
+			transferSvc.transfer("1001", "2001", 1.00d);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

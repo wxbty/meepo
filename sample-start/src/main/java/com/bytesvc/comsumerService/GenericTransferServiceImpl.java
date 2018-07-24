@@ -41,7 +41,7 @@ public class GenericTransferServiceImpl implements ITransferService {
 	}
 
 	private void increaseAmount(String acctId, double amount) throws ServiceException {
-//		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id ='"+acctId+"'");
+		int value = this.jdbcTemplate.update("update tb_account_two set amount = amount + "+amount+" where acct_id ='"+acctId+"'");
 //		int value = this.jdbcTemplate.update("update tb_account_two set amount = ? where acct_id = ?", amount, acctId);
 //		int value = this.jdbcTemplate.update("insert into orders(user_id,product_id,number,gmt_create) values('09616e24-5818-4784-8345-5a61e73d1478', 723, 3, '2018-07-20 16:01:33.747')");
 //		String sql = "select name from apple where id =1  lock in  share mode ";
@@ -55,7 +55,7 @@ public class GenericTransferServiceImpl implements ITransferService {
 		int idle = dataSource.getNumIdle();
 //		System.out.printf("active= %d, idle= %d", active, idle);
 
-		System.out.println("update num="+accountTwoDao.update(account));
+//		System.out.println("update num="+accountTwoDao.update(account));
 
 		System.out.printf("exec increase: acct= %s, amount= %7.2f%n", acctId, amount);
 	}
