@@ -13,8 +13,8 @@
 
     <name>com.tuya.jta.parent</name>
     <modules>
-        <module>sample-start</module>
-        <!--<module>bytejta-supports-dubbo</module>-->
+        <!--<module>sample-start</module>-->
+        <module>bytejta-supports-dubbo</module>
         <!--<module>bytejta-supports</module>-->
         <!--<module>bytejta-core</module>-->
     </modules>
