@@ -6,10 +6,11 @@
         <artifactId>parent</artifactId>
         <groupId>com.tuya.jta</groupId>
         <version>2.0</version>
+
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>bytejta-supports-dubbo</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,6 +25,10 @@
                 <exclusion>
                     <artifactId>objenesis</artifactId>
                     <groupId>org.objenesis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
                 </exclusion>
 
             </exclusions>
@@ -51,5 +56,67 @@
 
 
     </dependencies>
+
+    <build>
+        <finalName>meepo</finalName>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.3</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.tuya.jta</groupId>
+                                    <artifactId>bytejta-supports</artifactId>
+                                    <version>2.0</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>./target/classes</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.tuya.jta</groupId>
+                                    <artifactId>bytejta-core</artifactId>
+                                    <version>2.0</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>./target/classes</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>

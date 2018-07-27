@@ -2,65 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a60eca3-01ca-4b1e-88b0-059876b36f07" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/bytejta-supports-dubbo-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/target/original-bytejta-supports-dubbo-2.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/target/original-bytejta-supports-dubbo-2.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/127_0_0_1_sample_provider_20882/bytejta-2.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_consumer_30881/bytejta-2.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_12_190_sample_provider_20882/bytejta-2.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_43_170_sample_consumer_30881/bytejta-1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_43_170_sample_consumer_30881/bytejta-2.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_43_170_sample_provider_20882/bytejta-1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bytejta/192_168_43_170_sample_provider_20882/bytejta-2.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bytejta-supports/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bytejta-supports/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/ServiceException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/IAccountService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/ITransferService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/impl/AccountServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ProviderMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/mapper/AccountDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/mapper/AccountTwoDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/mapper/MapperXml/AccountMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/mapper/MapperXml/AccountTwoMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/pojo/Account.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/application.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-consumer.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/dubbo-provider.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/src/main/resources/mybatis.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/application-consumer.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/application.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/ServiceException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/comsumerService/GenericTransferServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/IAccountService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/ITransferService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/impl/AccountServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/main/ConsumerMain$MyThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/main/ConsumerMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/main/ProviderMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/mapper/AccountDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/mapper/AccountTwoDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/com/bytesvc/service/pojo/Account.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-consumer.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/dubbo-provider.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/classes/mybatis.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/dependency-reduced-pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/meepo.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample-start/target/original-meepo.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/parent-2.0-shaded.pom" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/bytejta-supports-dubbo/target/" />
@@ -77,436 +23,48 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="com.myfav" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
+      <file leaf-file-name="release.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assembly/release.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="16" selection-start-line="13" selection-end-line="16" />
+            <state relative-caret-position="370">
+              <caret line="36" column="11" selection-end-line="36" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasicManagedDataSource.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1.jar!/org/apache/commons/dbcp2/managed/BasicManagedDataSource.class">
+      <file leaf-file-name="release.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/assembly/release.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="310">
+              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MAVEN/com.tuya.jta:sample-start:2.0" pinned="false" current-in-tab="false">
-        <entry file="uml://MAVEN/com.tuya.jta:sample-start:2.0">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>MAVEN</ID>
-              <OriginalElement>com.tuya.jta:sample-start:2.0</OriginalElement>
-              <nodes>
-                <node x="2339.103345648604" y="653.0">com.tuya.jta:sample-start:2.0</node>
-                <node x="1847.1033456486036" y="564.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0</node>
-                <node x="1648.3533456486036" y="485.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0</node>
-                <node x="565.4783456486039" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0</node>
-                <node x="165.5" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2</node>
-                <node x="0.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0</node>
-                <node x="132.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7</node>
-                <node x="298.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6</node>
-                <node x="400.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4</node>
-                <node x="552.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38</node>
-                <node x="651.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3</node>
-                <node x="580.25" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
-                <node x="599.75" y="79.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3</node>
-                <node x="696.25" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
-                <node x="880.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56</node>
-                <node x="789.25" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
-                <node x="921.25" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
-                <node x="949.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2</node>
-                <node x="1127.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1</node>
-                <node x="1247.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2</node>
-                <node x="1359.0" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28</node>
-                <node x="1477.5" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE</node>
-                <node x="1575.125" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE</node>
-                <node x="1687.7979782430214" y="79.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE</node>
-                <node x="1667.7979782430214" y="0.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2</node>
-                <node x="1379.5" y="178.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE</node>
-                <node x="1692.2083333333335" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE</node>
-                <node x="1688.875" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE</node>
-                <node x="1567.875" y="267.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE</node>
-                <node x="1815.2083333333335" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0</node>
-                <node x="1935.2083333333335" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2</node>
-                <node x="2016.2083333333335" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8</node>
-                <node x="2151.2083333333335" y="485.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.alibaba:dubbo:jar:2.6.2</node>
-                <node x="2155.2083333333335" y="386.0">com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final</node>
-                <node x="2049.103345648604" y="564.0">org.postgresql:postgresql:jar:42.2.1</node>
-                <node x="2167.103345648604" y="564.0">mysql:mysql-connector-java:jar:5.1.37</node>
-                <node x="2354.103345648604" y="564.0">org.mybatis:mybatis:jar:3.4.1</node>
-                <node x="2454.103345648604" y="564.0">org.mybatis:mybatis-spring:jar:1.3.1</node>
-                <node x="2601.8179905582915" y="564.0">org.apache.curator:curator-recipes:jar:2.11.0</node>
-                <node x="2591.3179905582915" y="485.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0</node>
-                <node x="2607.3179905582915" y="386.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0</node>
-                <node x="2566.0679905582915" y="267.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6</node>
-                <node x="2543.5679905582915" y="178.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6/log4j:log4j:jar:1.2.16</node>
-                <node x="2625.5679905582915" y="178.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6/jline:jline:jar:0.9.94</node>
-                <node x="2682.067990558292" y="267.0">org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/com.google.guava:guava:jar:16.0.1</node>
-                <node x="2757.317990558292" y="564.0">org.apache.commons:commons-dbcp2:jar:2.1.1</node>
-                <node x="2759.317990558292" y="485.0">org.apache.commons:commons-dbcp2:jar:2.1.1/org.apache.commons:commons-pool2:jar:2.4.2</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38">
-                  <point x="-4.4583333333332575" y="-14.5" />
-                  <point x="614.5200123152706" y="316.0" />
-                  <point x="591.5" y="316.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
-                  <point x="0.0" y="-14.5" />
-                  <point x="204.5" y="247.0" />
-                  <point x="205.75" y="247.0" />
-                  <point x="-40.25" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1">
-                  <point x="31.208333333333258" y="-14.5" />
-                  <point x="650.1866789819371" y="346.0" />
-                  <point x="1177.0" y="346.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="org.mybatis:mybatis:jar:3.4.1">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6">
-                  <point x="-29.0" y="-14.5" />
-                  <point x="2636.3179905582915" y="366.0" />
-                  <point x="2614.0679905582915" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="mysql:mysql-connector-java:jar:5.1.37">
-                  <point x="-15.71428571428578" y="-14.5" />
-                  <point x="2378.3890599343176" y="613.0" />
-                  <point x="2250.603345648604" y="613.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6/jline:jline:jar:0.9.94">
-                  <point x="24.0" y="-14.5" />
-                  <point x="2638.0679905582915" y="247.0" />
-                  <point x="2653.5679905582915" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
-                  <point x="46.5" y="-14.5" />
-                  <point x="1586.0" y="366.0" />
-                  <point x="1592.875" y="366.0" />
-                  <point x="-25.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.commons:commons-dbcp2:jar:2.1.1" target="org.apache.commons:commons-dbcp2:jar:2.1.1/org.apache.commons:commons-pool2:jar:2.4.2">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7">
-                  <point x="-40.125" y="-14.5" />
-                  <point x="578.8533456486039" y="356.0" />
-                  <point x="204.5" y="356.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="0.0" y="-14.5" />
-                  <point x="1451.5" y="128.0" />
-                  <point x="1696.464644909688" y="128.0" />
-                  <point x="-43.33333333333326" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2">
-                  <point x="38.85714285714266" y="-14.5" />
-                  <point x="1755.2104885057463" y="455.0" />
-                  <point x="1965.7083333333335" y="455.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="org.mybatis:mybatis-spring:jar:1.3.1">
-                  <point x="15.71428571428578" y="-14.5" />
-                  <point x="2409.817631362889" y="613.0" />
-                  <point x="2516.603345648604" y="613.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0">
-                  <point x="-47.14285714285711" y="-14.5" />
-                  <point x="2346.9604885057465" y="633.0" />
-                  <point x="1938.1033456486036" y="633.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0">
-                  <point x="-49.04166666666663" y="-14.5" />
-                  <point x="569.9366789819373" y="366.0" />
-                  <point x="56.0" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="org.postgresql:postgresql:jar:42.2.1">
-                  <point x="-31.42857142857133" y="-14.5" />
-                  <point x="2362.6747742200323" y="623.0" />
-                  <point x="2098.103345648604" y="623.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
-                  <point x="-12.25" y="-14.5" />
-                  <point x="892.25" y="247.0" />
-                  <point x="845.25" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56">
-                  <point x="13.375" y="-14.5" />
-                  <point x="632.3533456486039" y="326.0" />
-                  <point x="904.5" y="326.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE">
-                  <point x="-38.85714285714289" y="-14.5" />
-                  <point x="1677.4962027914607" y="455.0" />
-                  <point x="1539.5" y="455.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
-                  <point x="12.25" y="-14.5" />
-                  <point x="916.75" y="247.0" />
-                  <point x="963.75" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2">
-                  <point x="22.291666666666742" y="-14.5" />
-                  <point x="641.2700123152706" y="336.0" />
-                  <point x="1028.0" y="336.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28">
-                  <point x="49.04166666666674" y="-14.5" />
-                  <point x="668.0200123152706" y="366.0" />
-                  <point x="1400.0" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE">
-                  <point x="-46.5" y="-14.5" />
-                  <point x="1493.0" y="366.0" />
-                  <point x="1451.5" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="-15.5" y="-14.5" />
-                  <point x="1524.0" y="366.0" />
-                  <point x="1534.0" y="366.0" />
-                  <point x="1534.0" y="138.0" />
-                  <point x="1713.7979782430214" y="138.0" />
-                  <point x="-26.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="org.apache.commons:commons-dbcp2:jar:2.1.1">
-                  <point x="47.14285714285711" y="-14.5" />
-                  <point x="2441.2462027914607" y="633.0" />
-                  <point x="2825.817990558292" y="633.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-                  <point x="-34.33333333333326" y="-14.5" />
-                  <point x="1709.375" y="366.0" />
-                  <point x="1678.375" y="366.0" />
-                  <point x="1678.375" y="237.0" />
-                  <point x="1646.375" y="237.0" />
-                  <point x="14.25" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
-                  <point x="-31.208333333333258" y="-14.5" />
-                  <point x="587.7700123152706" y="346.0" />
-                  <point x="287.5" y="346.0" />
-                  <point x="287.5" y="247.0" />
-                  <point x="286.25" y="247.0" />
-                  <point x="40.25" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="34.33333333333326" y="-14.5" />
-                  <point x="1778.0416666666665" y="366.0" />
-                  <point x="1962.8452894088664" y="366.0" />
-                  <point x="1962.8452894088664" y="158.0" />
-                  <point x="1783.1313115763548" y="158.0" />
-                  <point x="43.333333333333485" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:sample-start:2.0" target="org.apache.curator:curator-recipes:jar:2.11.0">
-                  <point x="31.42857142857133" y="-14.5" />
-                  <point x="2425.531917077175" y="623.0" />
-                  <point x="2665.3179905582915" y="623.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
-                  <point x="-14.75" y="-14.5" />
-                  <point x="665.75" y="247.0" />
-                  <point x="628.25" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
-                  <point x="14.75" y="-14.5" />
-                  <point x="695.25" y="247.0" />
-                  <point x="732.75" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="0.0" y="-14.5" />
-                  <point x="1632.125" y="158.0" />
-                  <point x="1748.4646449096879" y="158.0" />
-                  <point x="8.666666666666515" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="-25.0" y="-14.5" />
-                  <point x="1592.875" y="237.0" />
-                  <point x="1562.75" y="237.0" />
-                  <point x="1562.75" y="148.0" />
-                  <point x="1731.1313115763548" y="148.0" />
-                  <point x="-8.666666666666515" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-                  <point x="25.0" y="-14.5" />
-                  <point x="1642.875" y="247.0" />
-                  <point x="1617.875" y="247.0" />
-                  <point x="-14.25" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2">
-                  <point x="40.125" y="-14.5" />
-                  <point x="659.1033456486039" y="356.0" />
-                  <point x="1293.0" y="356.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0">
-                  <point x="19.42857142857156" y="-14.5" />
-                  <point x="1735.7819170771752" y="445.0" />
-                  <point x="1865.2083333333335" y="445.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0">
-                  <point x="-58.28571428571422" y="-14.5" />
-                  <point x="1658.0676313628894" y="465.0" />
-                  <point x="618.9783456486039" y="465.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-                  <point x="22.25" y="-14.5" />
-                  <point x="1755.625" y="158.0" />
-                  <point x="1765.7979782430214" y="158.0" />
-                  <point x="26.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE">
-                  <point x="0.0" y="-14.5" />
-                  <point x="1716.3533456486036" y="435.0" />
-                  <point x="1743.7083333333335" y="435.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4">
-                  <point x="-13.375" y="-14.5" />
-                  <point x="605.6033456486039" y="326.0" />
-                  <point x="466.0" y="326.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6">
-                  <point x="-22.291666666666742" y="-14.5" />
-                  <point x="596.6866789819371" y="336.0" />
-                  <point x="339.0" y="336.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.alibaba:dubbo:jar:2.6.2" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final">
-                  <point x="0.0" y="-14.5" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE">
-                  <point x="0.0" y="-14.5" />
-                  <point x="1743.7083333333335" y="366.0" />
-                  <point x="1733.375" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/com.google.guava:guava:jar:16.0.1">
-                  <point x="29.0" y="-14.5" />
-                  <point x="2694.3179905582915" y="366.0" />
-                  <point x="2716.567990558292" y="366.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0">
-                  <point x="-45.5" y="-14.5" />
-                  <point x="1892.6033456486036" y="539.0" />
-                  <point x="1716.3533456486036" y="539.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3">
-                  <point x="4.4583333333332575" y="-14.5" />
-                  <point x="623.4366789819371" y="316.0" />
-                  <point x="680.5" y="316.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-                  <point x="-22.25" y="-14.5" />
-                  <point x="1711.125" y="227.0" />
-                  <point x="1674.875" y="227.0" />
-                  <point x="42.75" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
-                  <point x="-19.42857142857156" y="-14.5" />
-                  <point x="1696.924774220032" y="445.0" />
-                  <point x="1642.875" y="445.0" />
-                  <point x="25.0" y="14.5" />
-                </edge>
-                <edge source="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6" target="org.apache.curator:curator-recipes:jar:2.11.0/org.apache.curator:curator-framework:jar:2.11.0/org.apache.curator:curator-client:jar:2.11.0/org.apache.zookeeper:zookeeper:jar:3.4.6/log4j:log4j:jar:1.2.16">
-                  <point x="-24.0" y="-14.5" />
-                  <point x="2590.0679905582915" y="247.0" />
-                  <point x="2574.5679905582915" y="247.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.alibaba:dubbo:jar:2.6.2">
-                  <point x="45.5" y="-14.5" />
-                  <point x="1983.6033456486036" y="539.0" />
-                  <point x="2187.2083333333335" y="539.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8">
-                  <point x="58.28571428571422" y="-14.5" />
-                  <point x="1774.6390599343179" y="465.0" />
-                  <point x="2075.7083333333335" y="465.0" />
-                  <point x="0.0" y="14.5" />
-                </edge>
-                <edge source="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports-dubbo:jar:2.0/com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-                  <point x="15.5" y="-14.5" />
-                  <point x="1555.0" y="366.0" />
-                  <point x="1557.375" y="366.0" />
-                  <point x="1557.375" y="247.0" />
-                  <point x="1589.375" y="247.0" />
-                  <point x="-42.75" y="14.5" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="1.0" x="2534.0" y="524.0" />
-              <SelectedNodes>
-                <node>org.apache.commons:commons-dbcp2:jar:2.1.1</node>
-              </SelectedNodes>
-              <Categories />
-              <VISIBILITY>All</VISIBILITY>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="XADataSourceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XADataSourceImpl.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="444">
+              <caret line="70" column="12" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -514,8 +72,197 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-411">
-              <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+            <state relative-caret-position="397">
+              <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Work.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/javax/resource/javax.resource-api/1.7/javax.resource-api-1.7.jar!/javax/resource/spi/work/Work.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MAVEN/com.tuya.jta:bytejta-core:2.0" pinned="false" current-in-tab="false">
+        <entry file="uml://MAVEN/com.tuya.jta:bytejta-core:2.0">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>MAVEN</ID>
+              <OriginalElement>com.tuya.jta:bytejta-core:2.0</OriginalElement>
+              <nodes>
+                <node x="852.0436507936506" y="277.0">com.tuya.jta:bytejta-core:2.0</node>
+                <node x="1310.0376984126983" y="79.0">javax.transaction:javax.transaction-api:jar:1.2</node>
+                <node x="1442.5376984126983" y="158.0">javax.jms:javax.jms-api:jar:2.0</node>
+                <node x="1276.5376984126983" y="158.0">javax.resource:javax.resource-api:jar:1.7</node>
+                <node x="1174.5376984126983" y="158.0">org.slf4j:slf4j-api:jar:1.7.6</node>
+                <node x="1022.5376984126983" y="158.0">org.apache.commons:commons-lang3:jar:3.4</node>
+                <node x="923.5376984126983" y="158.0">com.caucho:hessian:jar:4.0.38</node>
+                <node x="844.5376984126983" y="158.0">com.esotericsoftware:kryo:jar:3.0.3</node>
+                <node x="979.5833333333333" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
+                <node x="999.0833333333333" y="0.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3</node>
+                <node x="824.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
+                <node x="714.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1</node>
+                <node x="512.0" y="158.0">de.ruedigermoeller:fst:jar:2.56</node>
+                <node x="582.5436507936506" y="79.0">de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
+                <node x="477.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
+                <node x="367.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1</node>
+                <node x="334.00000000000006" y="158.0">javax.annotation:javax.annotation-api:jar:1.2</node>
+                <node x="214.0" y="158.0">javax.inject:javax.inject:jar:1</node>
+                <node x="102.0" y="158.0">com.github.jsqlparser:jsqlparser:jar:1.2</node>
+                <node x="0.0" y="158.0">com.alibaba:fastjson:jar:1.2.28</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
+                  <point x="16.333333333333144" y="-14.5" />
+                  <point x="552.8333333333333" y="138.0" />
+                  <point x="638.5436507936506" y="138.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="com.caucho:hessian:jar:4.0.38">
+                  <point x="4.458333333333371" y="-14.5" />
+                  <point x="910.0019841269841" y="207.0" />
+                  <point x="963.0376984126983" y="207.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
+                  <point x="19.66666666666663" y="-14.5" />
+                  <point x="893.704365079365" y="138.0" />
+                  <point x="1027.5833333333333" y="138.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="com.alibaba:fastjson:jar:1.2.28">
+                  <point x="-49.04166666666663" y="-14.5" />
+                  <point x="856.5019841269841" y="257.0" />
+                  <point x="41.0" y="257.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.inject:javax.inject:jar:1">
+                  <point x="-31.20833333333337" y="-14.5" />
+                  <point x="874.3353174603174" y="237.0" />
+                  <point x="264.0" y="237.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="org.apache.commons:commons-lang3:jar:3.4">
+                  <point x="13.375" y="-14.5" />
+                  <point x="918.9186507936506" y="217.0" />
+                  <point x="1088.5376984126983" y="217.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3">
+                  <point x="0.0" y="-14.5" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="com.github.jsqlparser:jsqlparser:jar:1.2">
+                  <point x="-40.125" y="-14.5" />
+                  <point x="865.4186507936506" y="247.0" />
+                  <point x="148.0" y="247.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
+                  <point x="0.0" y="-14.5" />
+                  <point x="874.0376984126983" y="138.0" />
+                  <point x="861.0436507936506" y="138.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.jms:javax.jms-api:jar:2.0">
+                  <point x="49.04166666666663" y="-14.5" />
+                  <point x="954.5853174603174" y="257.0" />
+                  <point x="1498.5376984126983" y="257.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="com.esotericsoftware:kryo:jar:3.0.3">
+                  <point x="-4.458333333333371" y="-14.5" />
+                  <point x="901.0853174603174" y="207.0" />
+                  <point x="874.0376984126983" y="207.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
+                  <point x="-1.1368683772161603E-13" y="-14.5" />
+                  <point x="536.5" y="128.0" />
+                  <point x="520.0436507936506" y="128.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1">
+                  <point x="-16.333333333333485" y="-14.5" />
+                  <point x="520.1666666666665" y="138.0" />
+                  <point x="412.54365079365067" y="138.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.annotation:javax.annotation-api:jar:1.2">
+                  <point x="-22.29166666666663" y="-14.5" />
+                  <point x="883.2519841269841" y="227.0" />
+                  <point x="413.00000000000006" y="227.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="org.slf4j:slf4j-api:jar:1.7.6">
+                  <point x="22.29166666666663" y="-14.5" />
+                  <point x="927.8353174603174" y="227.0" />
+                  <point x="1215.5376984126983" y="227.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="de.ruedigermoeller:fst:jar:2.56">
+                  <point x="-13.375" y="-14.5" />
+                  <point x="892.1686507936506" y="217.0" />
+                  <point x="536.5" y="217.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.resource:javax.resource-api:jar:1.7">
+                  <point x="31.20833333333337" y="-14.5" />
+                  <point x="936.7519841269841" y="237.0" />
+                  <point x="1349.0376984126983" y="237.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1">
+                  <point x="-19.66666666666663" y="-14.5" />
+                  <point x="854.3710317460317" y="138.0" />
+                  <point x="759.5436507936506" y="138.0" />
+                  <point x="0.0" y="14.5" />
+                </edge>
+                <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.transaction:javax.transaction-api:jar:1.2">
+                  <point x="40.125" y="-14.5" />
+                  <point x="945.6686507936506" y="247.0" />
+                  <point x="1432.0376984126983" y="247.0" />
+                  <point x="1432.0376984126983" y="138.0" />
+                  <point x="1430.7876984126983" y="138.0" />
+                  <point x="40.25" y="14.5" />
+                </edge>
+                <edge source="javax.resource:javax.resource-api:jar:1.7" target="javax.transaction:javax.transaction-api:jar:1.2">
+                  <point x="0.0" y="-14.5" />
+                  <point x="1349.0376984126983" y="138.0" />
+                  <point x="1350.2876984126983" y="138.0" />
+                  <point x="-40.25" y="14.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="968.0" y="239.0" />
+              <SelectedNodes>
+                <node>com.tuya.jta:bytejta-core:2.0</node>
+                <node>javax.resource:javax.resource-api:jar:1.7</node>
+              </SelectedNodes>
+              <Categories />
+              <VISIBILITY>All</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bytejta-core/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="33" column="21" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="33" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -532,9 +279,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>commitTransactionAfterReturning</find>
-      <find>TransactionCoordinator</find>
-      <find>bytejta-supports-standalone</find>
       <find>standalone</find>
       <find>zookeeper</find>
       <find>attachments.get</find>
@@ -562,6 +306,9 @@
       <find>slf4j-api</find>
       <find>javassist</find>
       <find>dubbo</find>
+      <find>aopalliance</find>
+      <find>&lt;scope&gt;test&lt;/scope&gt;</find>
+      <find>cglib</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -585,11 +332,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/ProxyXADataSource.java" />
-        <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/XAConnectionImpl.java" />
-        <option value="$PROJECT_DIR$/profiles.xml" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/image/Resolvers/DeleteImageResolvers.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/common/utils/SpringBeanUtil.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/util/SpringBeanUtil.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/SpringBeanUtil.java" />
         <option value="$PROJECT_DIR$/bytejta-supports/src/main/resources/bytejta-supports-task.xml" />
@@ -631,11 +373,16 @@
         <option value="$PROJECT_DIR$/sample-start/src/main/resources/application-consumer.xml" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/main/ConsumerMain.java" />
         <option value="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/comsumerService/GenericTransferServiceImpl.java" />
-        <option value="$PROJECT_DIR$/bytejta-core/pom.xml" />
         <option value="$PROJECT_DIR$/sample-start/pom.xml" />
-        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml" />
-        <option value="$PROJECT_DIR$/bytejta-supports/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/dependency-reduced-pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/assembly/release.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/release.xml" />
+        <option value="$PROJECT_DIR$/assembly/release.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/assembly/release.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-core/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports/pom.xml" />
+        <option value="$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml" />
       </list>
     </option>
   </component>
@@ -667,8 +414,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="56" />
-    <option name="y" value="60" />
+    <option name="x" value="258" />
+    <option name="y" value="-843" />
     <option name="width" value="1352" />
     <option name="height" value="786" />
   </component>
@@ -692,7 +439,79 @@
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
               <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="assembly" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-core" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bytesoft" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
               <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="assembly" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
@@ -706,6 +525,60 @@
               <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dubbo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="meepo" type="462c0819:PsiDirectoryNode" />
+              <item name="bytejta-supports-dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: cglib:cglib:2.2.2" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: cglib:cglib:2.2.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="cglib-2.2.2.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: cglib:cglib:2.2.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="cglib-2.2.2.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="com.myfav" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: cglib:cglib:2.2.2" type="70bed36:NamedLibraryElementNode" />
+              <item name="cglib-2.2.2.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="cglib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -723,7 +596,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.23856209" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
@@ -737,11 +610,11 @@
       <recent name="org.bytesoft.bytejta.image.Resolvers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/mapper/MapperXml" />
-      <recent name="$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta" />
-      <recent name="$PROJECT_DIR$/sample-start/src/main/resources" />
-      <recent name="$PROJECT_DIR$/sample-start/src/main/java/com" />
-      <recent name="$PROJECT_DIR$/sample-start/src/main/java" />
+      <recent name="$PROJECT_DIR$/bytejta-supports-dubbo/assembly" />
+      <recent name="$PROJECT_DIR$/bytejta-supports-dubbo" />
+      <recent name="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/assembly" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -892,15 +765,15 @@
       <workItem from="1531994354860" duration="7744000" />
       <workItem from="1532058554088" duration="76153000" />
       <workItem from="1532395558017" duration="6227000" />
-      <workItem from="1532419175362" duration="2895000" />
+      <workItem from="1532419175362" duration="32072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="457091000" />
+    <option name="totallyTimeSpent" value="486268000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="56" y="60" width="1352" height="786" extended-state="0" />
+    <frame x="258" y="-843" width="1352" height="786" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
       <window_info anchor="bottom" id="TODO" order="13" />
@@ -917,7 +790,8 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="0" />
       <window_info content_ui="combo" id="Project" order="5" sideWeight="0.4965612" visible="true" weight="0.28015268" />
-      <window_info anchor="right" id="Database" order="2" />
+      <window_info anchor="right" id="Database" order="2" weight="0.32977098" />
+      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.32732734" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -934,7 +808,6 @@
       <window_info anchor="right" id="Bean Validation" order="5" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Java Enterprise" order="3" />
-      <window_info anchor="bottom" id="Find" order="7" sideWeight="0.49928468" weight="0.32732734" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -952,67 +825,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/ManagedConnection.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_162.jdk/Contents/Home/jre/lib/rt.jar!/sun/nio/ch/KQueueArrayWrapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="133" column="23" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sample-start/src/main/java/com/bytesvc/service/IAccountService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/spring/SpringBeanUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.7.RELEASE/spring-aop-4.3.7.RELEASE-sources.jar!/org/springframework/aop/framework/CglibAopProxy.java" />
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/transaction/TransactionBeanFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/src/main/java/org/bytesoft/bytejta/TransactionBeanFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/bytejta-supports-dubbo-core.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="28" column="32" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/1.3.1/mybatis-spring-1.3.1.jar!/org/mybatis/spring/SqlSessionTemplate.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="205" selection-start-line="205" selection-end-line="205" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/1.3.1/mybatis-spring-1.3.1.jar!/org/mybatis/spring/MyBatisExceptionTranslator.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/managed/BasicManagedDataSource.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-pool2/2.4.2/commons-pool2-2.4.2-sources.jar!/org/apache/commons/pool2/impl/GenericObjectPool.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-dbcp2/2.1.1/commons-dbcp2-2.1.1-sources.jar!/org/apache/commons/dbcp2/BasicDataSource.java" />
     <entry file="file://$PROJECT_DIR$/bytejta-supports/src/main/java/org.bytesoft.bytejta.supports/jdbc/DynamicPreparedStatementProxyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-107">
@@ -1146,167 +958,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="136" column="46" selection-start-line="135" selection-start-column="11" selection-end-line="136" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://MAVEN/com.tuya.jta:bytejta-core:2.0">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.tuya.jta:bytejta-core:2.0</OriginalElement>
-          <nodes>
-            <node x="852.0436507936506" y="277.0">com.tuya.jta:bytejta-core:2.0</node>
-            <node x="1310.0376984126983" y="79.0">javax.transaction:javax.transaction-api:jar:1.2</node>
-            <node x="1442.5376984126983" y="158.0">javax.jms:javax.jms-api:jar:2.0</node>
-            <node x="1276.5376984126983" y="158.0">javax.resource:javax.resource-api:jar:1.7</node>
-            <node x="1174.5376984126983" y="158.0">org.slf4j:slf4j-api:jar:1.7.6</node>
-            <node x="1022.5376984126983" y="158.0">org.apache.commons:commons-lang3:jar:3.4</node>
-            <node x="923.5376984126983" y="158.0">com.caucho:hessian:jar:4.0.38</node>
-            <node x="844.5376984126983" y="158.0">com.esotericsoftware:kryo:jar:3.0.3</node>
-            <node x="979.5833333333333" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
-            <node x="999.0833333333333" y="0.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3</node>
-            <node x="824.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
-            <node x="714.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1</node>
-            <node x="512.0" y="158.0">de.ruedigermoeller:fst:jar:2.56</node>
-            <node x="582.5436507936506" y="79.0">de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
-            <node x="477.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
-            <node x="367.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1</node>
-            <node x="334.00000000000006" y="158.0">javax.annotation:javax.annotation-api:jar:1.2</node>
-            <node x="214.0" y="158.0">javax.inject:javax.inject:jar:1</node>
-            <node x="102.0" y="158.0">com.github.jsqlparser:jsqlparser:jar:1.2</node>
-            <node x="0.0" y="158.0">com.alibaba:fastjson:jar:1.2.28</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
-              <point x="16.333333333333144" y="-14.5" />
-              <point x="552.8333333333333" y="138.0" />
-              <point x="638.5436507936506" y="138.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.caucho:hessian:jar:4.0.38">
-              <point x="4.458333333333371" y="-14.5" />
-              <point x="910.0019841269841" y="207.0" />
-              <point x="963.0376984126983" y="207.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
-              <point x="19.66666666666663" y="-14.5" />
-              <point x="893.704365079365" y="138.0" />
-              <point x="1027.5833333333333" y="138.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.alibaba:fastjson:jar:1.2.28">
-              <point x="-49.04166666666663" y="-14.5" />
-              <point x="856.5019841269841" y="257.0" />
-              <point x="41.0" y="257.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.inject:javax.inject:jar:1">
-              <point x="-31.20833333333337" y="-14.5" />
-              <point x="874.3353174603174" y="237.0" />
-              <point x="264.0" y="237.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="org.apache.commons:commons-lang3:jar:3.4">
-              <point x="13.375" y="-14.5" />
-              <point x="918.9186507936506" y="217.0" />
-              <point x="1088.5376984126983" y="217.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.github.jsqlparser:jsqlparser:jar:1.2">
-              <point x="-40.125" y="-14.5" />
-              <point x="865.4186507936506" y="247.0" />
-              <point x="148.0" y="247.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
-              <point x="0.0" y="-14.5" />
-              <point x="874.0376984126983" y="138.0" />
-              <point x="861.0436507936506" y="138.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.jms:javax.jms-api:jar:2.0">
-              <point x="49.04166666666663" y="-14.5" />
-              <point x="954.5853174603174" y="257.0" />
-              <point x="1498.5376984126983" y="257.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.esotericsoftware:kryo:jar:3.0.3">
-              <point x="-4.458333333333371" y="-14.5" />
-              <point x="901.0853174603174" y="207.0" />
-              <point x="874.0376984126983" y="207.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
-              <point x="-1.1368683772161603E-13" y="-14.5" />
-              <point x="536.5" y="128.0" />
-              <point x="520.0436507936506" y="128.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1">
-              <point x="-16.333333333333485" y="-14.5" />
-              <point x="520.1666666666665" y="138.0" />
-              <point x="412.54365079365067" y="138.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.annotation:javax.annotation-api:jar:1.2">
-              <point x="-22.29166666666663" y="-14.5" />
-              <point x="883.2519841269841" y="227.0" />
-              <point x="413.00000000000006" y="227.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="org.slf4j:slf4j-api:jar:1.7.6">
-              <point x="22.29166666666663" y="-14.5" />
-              <point x="927.8353174603174" y="227.0" />
-              <point x="1215.5376984126983" y="227.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="de.ruedigermoeller:fst:jar:2.56">
-              <point x="-13.375" y="-14.5" />
-              <point x="892.1686507936506" y="217.0" />
-              <point x="536.5" y="217.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.resource:javax.resource-api:jar:1.7">
-              <point x="31.20833333333337" y="-14.5" />
-              <point x="936.7519841269841" y="237.0" />
-              <point x="1349.0376984126983" y="237.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1">
-              <point x="-19.66666666666663" y="-14.5" />
-              <point x="854.3710317460317" y="138.0" />
-              <point x="759.5436507936506" y="138.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.transaction:javax.transaction-api:jar:1.2">
-              <point x="40.125" y="-14.5" />
-              <point x="945.6686507936506" y="247.0" />
-              <point x="1432.0376984126983" y="247.0" />
-              <point x="1432.0376984126983" y="138.0" />
-              <point x="1430.7876984126983" y="138.0" />
-              <point x="40.25" y="14.5" />
-            </edge>
-            <edge source="javax.resource:javax.resource-api:jar:1.7" target="javax.transaction:javax.transaction-api:jar:1.2">
-              <point x="0.0" y="-14.5" />
-              <point x="1349.0376984126983" y="138.0" />
-              <point x="1350.2876984126983" y="138.0" />
-              <point x="-40.25" y="14.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="1.0" x="1200.0" y="199.0" />
-          <SelectedNodes>
-            <node>com.tuya.jta:bytejta-core:2.0</node>
-            <node>com.alibaba:fastjson:jar:1.2.28</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
         </state>
       </provider>
     </entry>
@@ -1621,325 +1272,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="uml://MAVEN/com.tuya.jta:bytejta-supports-dubbo:2.0">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>com.tuya.jta:bytejta-supports-dubbo:2.0</OriginalElement>
-          <nodes>
-            <node x="875.7708333333333" y="534.0">com.tuya.jta:bytejta-supports-dubbo:2.0</node>
-            <node x="310.99999999999994" y="455.0">com.tuya.jta:bytejta-supports:jar:2.0</node>
-            <node x="1213.25" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0</node>
-            <node x="1294.5" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2</node>
-            <node x="1725.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0</node>
-            <node x="1261.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7</node>
-            <node x="658.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6</node>
-            <node x="829.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4</node>
-            <node x="1427.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38</node>
-            <node x="1646.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3</node>
-            <node x="1575.25" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
-            <node x="1594.75" y="79.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3</node>
-            <node x="1691.25" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
-            <node x="760.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56</node>
-            <node x="669.25" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
-            <node x="801.25" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
-            <node x="981.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2</node>
-            <node x="1526.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1</node>
-            <node x="546.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2</node>
-            <node x="1159.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28</node>
-            <node x="244.5" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE</node>
-            <node x="362.99999999999994" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE</node>
-            <node x="311.32321428571385" y="79.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE</node>
-            <node x="291.3232142857139" y="0.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2</node>
-            <node x="136.5" y="168.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE</node>
-            <node x="428.99999999999994" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE</node>
-            <node x="435.99999999999994" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE</node>
-            <node x="303.99999999999994" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE</node>
-            <node x="1340.25" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0</node>
-            <node x="139.0" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2</node>
-            <node x="141.0" y="247.0">com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2/asm:asm:jar:3.3.1</node>
-            <node x="0.0" y="366.0">com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8</node>
-            <node x="1456.25" y="455.0">com.alibaba:dubbo:jar:2.6.2</node>
-            <node x="1460.25" y="366.0">com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-              <point x="-22.25" y="-14.5" />
-              <point x="458.24999999999994" y="222.0" />
-              <point x="462.74999999999994" y="222.0" />
-              <point x="42.75" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="34.33333333333326" y="-14.5" />
-              <point x="514.8333333333333" y="346.0" />
-              <point x="535.5" y="346.0" />
-              <point x="535.5" y="128.0" />
-              <point x="406.6565476190471" y="128.0" />
-              <point x="43.33333333333326" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
-              <point x="13.375" y="-14.5" />
-              <point x="1280.125" y="306.0" />
-              <point x="1416.5" y="306.0" />
-              <point x="1416.5" y="222.0" />
-              <point x="1415.25" y="222.0" />
-              <point x="40.25" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-              <point x="46.5" y="-14.5" />
-              <point x="353.0" y="346.0" />
-              <point x="414.49999999999994" y="346.0" />
-              <point x="414.49999999999994" y="222.0" />
-              <point x="405.74999999999994" y="222.0" />
-              <point x="-14.25" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE">
-              <point x="-46.5" y="-14.5" />
-              <point x="260.0" y="346.0" />
-              <point x="208.5" y="346.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2">
-              <point x="-38.85714285714289" y="-14.5" />
-              <point x="340.14285714285705" y="425.0" />
-              <point x="169.5" y="425.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38">
-              <point x="22.29166666666663" y="-14.5" />
-              <point x="1289.0416666666665" y="316.0" />
-              <point x="1466.5" y="316.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2">
-              <point x="-13.375" y="-14.5" />
-              <point x="1253.375" y="306.0" />
-              <point x="1060.0" y="306.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="0.0" y="-14.5" />
-              <point x="208.5" y="128.0" />
-              <point x="319.9898809523806" y="128.0" />
-              <point x="-43.33333333333326" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
-              <point x="15.5" y="-14.5" />
-              <point x="322.0" y="346.0" />
-              <point x="328.99999999999994" y="346.0" />
-              <point x="-25.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28">
-              <point x="-4.458333333333371" y="-14.5" />
-              <point x="1262.2916666666665" y="296.0" />
-              <point x="1200.0" y="296.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0">
-              <point x="58.28571428571422" y="-14.5" />
-              <point x="437.28571428571416" y="435.0" />
-              <point x="1390.25" y="435.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6">
-              <point x="-40.125" y="-14.5" />
-              <point x="1226.625" y="336.0" />
-              <point x="699.0" y="336.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE">
-              <point x="19.42857142857133" y="-14.5" />
-              <point x="398.4285714285713" y="415.0" />
-              <point x="480.49999999999994" y="415.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports-dubbo:2.0" target="com.alibaba:dubbo:jar:2.6.2">
-              <point x="45.5" y="-14.5" />
-              <point x="1012.2708333333333" y="509.0" />
-              <point x="1492.25" y="509.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE">
-              <point x="-19.42857142857133" y="-14.5" />
-              <point x="359.5714285714286" y="415.0" />
-              <point x="306.5" y="415.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0">
-              <point x="38.85714285714289" y="-14.5" />
-              <point x="417.85714285714283" y="425.0" />
-              <point x="1266.75" y="425.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="-15.5" y="-14.5" />
-              <point x="291.0" y="138.0" />
-              <point x="337.32321428571385" y="138.0" />
-              <point x="-26.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
-              <point x="-12.25" y="-14.5" />
-              <point x="772.25" y="222.0" />
-              <point x="725.25" y="222.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="-25.0" y="-14.5" />
-              <point x="328.99999999999994" y="148.0" />
-              <point x="354.6565476190471" y="148.0" />
-              <point x="-8.666666666666742" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-              <point x="-34.33333333333326" y="-14.5" />
-              <point x="446.1666666666667" y="346.0" />
-              <point x="425.49999999999994" y="346.0" />
-              <point x="425.49999999999994" y="222.0" />
-              <point x="434.24999999999994" y="222.0" />
-              <point x="14.25" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="22.25" y="-14.5" />
-              <point x="502.74999999999994" y="138.0" />
-              <point x="389.32321428571385" y="138.0" />
-              <point x="26.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56">
-              <point x="-31.208333333333258" y="-14.5" />
-              <point x="1235.5416666666667" y="326.0" />
-              <point x="784.5" y="326.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
-              <point x="12.25" y="-14.5" />
-              <point x="796.75" y="222.0" />
-              <point x="843.75" y="222.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0">
-              <point x="49.04166666666663" y="-14.5" />
-              <point x="1315.7916666666665" y="346.0" />
-              <point x="1781.0" y="346.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
-              <point x="-14.75" y="-14.5" />
-              <point x="1660.75" y="222.0" />
-              <point x="1623.25" y="222.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
-              <point x="0.0" y="-14.5" />
-              <point x="419.99999999999994" y="148.0" />
-              <point x="371.9898809523806" y="148.0" />
-              <point x="8.666666666666742" y="14.5" />
-            </edge>
-            <edge source="com.alibaba:dubbo:jar:2.6.2" target="com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2" target="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2/asm:asm:jar:3.3.1">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4">
-              <point x="-22.29166666666663" y="-14.5" />
-              <point x="1244.4583333333335" y="316.0" />
-              <point x="895.0" y="316.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
-              <point x="14.75" y="-14.5" />
-              <point x="1690.25" y="222.0" />
-              <point x="1727.75" y="222.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8">
-              <point x="-58.28571428571422" y="-14.5" />
-              <point x="320.7142857142857" y="435.0" />
-              <point x="59.5" y="435.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports-dubbo:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0">
-              <point x="-45.5" y="-14.5" />
-              <point x="921.2708333333333" y="509.0" />
-              <point x="378.99999999999994" y="509.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
-              <point x="0.0" y="-14.5" />
-              <point x="25.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1">
-              <point x="31.20833333333337" y="-14.5" />
-              <point x="1297.9583333333335" y="326.0" />
-              <point x="1576.0" y="326.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3">
-              <point x="40.125" y="-14.5" />
-              <point x="1306.875" y="336.0" />
-              <point x="1675.5" y="336.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7">
-              <point x="4.458333333333371" y="-14.5" />
-              <point x="1271.2083333333335" y="296.0" />
-              <point x="1333.5" y="296.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
-              <point x="0.0" y="-14.5" />
-              <point x="1333.5" y="222.0" />
-              <point x="1334.75" y="222.0" />
-              <point x="-40.25" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2">
-              <point x="-49.04166666666663" y="-14.5" />
-              <point x="1217.7083333333335" y="346.0" />
-              <point x="592.0" y="346.0" />
-              <point x="0.0" y="14.5" />
-            </edge>
-            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
-              <point x="25.0" y="-14.5" />
-              <point x="378.99999999999994" y="222.0" />
-              <point x="377.24999999999994" y="222.0" />
-              <point x="-42.75" y="14.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="1.0" x="1238.0" y="450.0" />
-          <SelectedNodes>
-            <node>com.alibaba:dubbo:jar:2.6.2</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$MAVEN_REPOSITORY$/com/alibaba/dubbo/2.6.2/dubbo-2.6.2.pom">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="339" column="42" selection-start-line="338" selection-start-column="11" selection-end-line="339" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-core/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1967,13 +1303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bytejta-supports/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
@@ -2412,17 +1741,570 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commyfav.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar!/META-INF/maven/org.slf4j/slf4j-api/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-711">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.6/slf4j-api-1.7.6.jar!/META-INF/maven/org.slf4j/slf4j-api/pom.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.7.RELEASE/spring-aop-4.3.7.RELEASE.jar!/META-INF/license.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="uml://MAVEN/com.tuya.jta:bytejta-supports-dubbo:2.0">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>com.tuya.jta:bytejta-supports-dubbo:2.0</OriginalElement>
+          <nodes>
+            <node x="1864.125" y="544.0">com.tuya.jta:bytejta-supports-dubbo:2.0</node>
+            <node x="1665.375" y="465.0">com.tuya.jta:bytejta-supports:jar:2.0</node>
+            <node x="582.5" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0</node>
+            <node x="165.5" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2</node>
+            <node x="0.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0</node>
+            <node x="132.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7</node>
+            <node x="298.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6</node>
+            <node x="400.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4</node>
+            <node x="552.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38</node>
+            <node x="651.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3</node>
+            <node x="580.25" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
+            <node x="696.25" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
+            <node x="880.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56</node>
+            <node x="789.25" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
+            <node x="921.25" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
+            <node x="949.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2</node>
+            <node x="1127.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1</node>
+            <node x="1247.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2</node>
+            <node x="1359.0" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28</node>
+            <node x="1477.5" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE</node>
+            <node x="1583.810064935065" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE</node>
+            <node x="1603.759063852814" y="79.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE</node>
+            <node x="1583.759063852814" y="0.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2</node>
+            <node x="1379.5" y="178.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE</node>
+            <node x="1687.061011904762" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE</node>
+            <node x="1688.875" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE</node>
+            <node x="1567.875" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE</node>
+            <node x="1810.061011904762" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0</node>
+            <node x="1930.061011904762" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2</node>
+            <node x="1932.061011904762" y="257.0">com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2/asm:asm:jar:3.3.1</node>
+            <node x="2011.061011904762" y="376.0">com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8</node>
+            <node x="2146.061011904762" y="465.0">com.alibaba:dubbo:jar:2.6.2</node>
+            <node x="2150.061011904762" y="376.0">com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
+              <point x="-22.25" y="-14.5" />
+              <point x="1711.125" y="237.0" />
+              <point x="1683.560064935065" y="237.0" />
+              <point x="42.75" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="34.333333333333314" y="-14.5" />
+              <point x="1772.8943452380954" y="356.0" />
+              <point x="1838.9489989177487" y="356.0" />
+              <point x="1838.9489989177487" y="148.0" />
+              <point x="1699.0923971861473" y="148.0" />
+              <point x="43.333333333333314" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
+              <point x="-31.208333333333258" y="-14.5" />
+              <point x="604.7916666666667" y="336.0" />
+              <point x="287.5" y="336.0" />
+              <point x="287.5" y="237.0" />
+              <point x="286.25" y="237.0" />
+              <point x="40.25" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
+              <point x="15.5" y="-14.5" />
+              <point x="1555.0" y="356.0" />
+              <point x="1557.375" y="356.0" />
+              <point x="1557.375" y="237.0" />
+              <point x="1598.060064935065" y="237.0" />
+              <point x="-42.75" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE">
+              <point x="-46.5" y="-14.5" />
+              <point x="1493.0" y="356.0" />
+              <point x="1451.5" y="356.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2">
+              <point x="38.85714285714289" y="-14.5" />
+              <point x="1772.232142857143" y="435.0" />
+              <point x="1960.561011904762" y="435.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.caucho:hessian:jar:4.0.38">
+              <point x="-4.4583333333332575" y="-14.5" />
+              <point x="631.5416666666667" y="306.0" />
+              <point x="591.5" y="306.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.annotation:javax.annotation-api:jar:1.2">
+              <point x="22.291666666666742" y="-14.5" />
+              <point x="658.2916666666667" y="326.0" />
+              <point x="1028.0" y="326.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-expression:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1451.5" y="128.0" />
+              <point x="1612.4257305194806" y="128.0" />
+              <point x="-43.333333333333314" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
+              <point x="46.5" y="-14.5" />
+              <point x="1586.0" y="356.0" />
+              <point x="1592.875" y="356.0" />
+              <point x="-25.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.alibaba:fastjson:jar:1.2.28">
+              <point x="49.04166666666674" y="-14.5" />
+              <point x="685.0416666666667" y="356.0" />
+              <point x="1400.0" y="356.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0">
+              <point x="19.42857142857133" y="-14.5" />
+              <point x="1752.8035714285713" y="425.0" />
+              <point x="1860.061011904762" y="425.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.slf4j:slf4j-api:jar:1.7.6">
+              <point x="-22.29166666666663" y="-14.5" />
+              <point x="613.7083333333334" y="326.0" />
+              <point x="339.0" y="326.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1733.375" y="445.0" />
+              <point x="1738.561011904762" y="445.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE/commons-logging:commons-logging:jar:1.2">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE">
+              <point x="-38.85714285714289" y="-14.5" />
+              <point x="1694.517857142857" y="435.0" />
+              <point x="1539.5" y="435.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports-dubbo:2.0" target="com.alibaba:dubbo:jar:2.6.2">
+              <point x="45.5" y="-14.5" />
+              <point x="2000.625" y="519.0" />
+              <point x="2182.061011904762" y="519.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0">
+              <point x="-58.285714285714334" y="-14.5" />
+              <point x="1675.0892857142856" y="445.0" />
+              <point x="636.0" y="445.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="-15.5" y="-14.5" />
+              <point x="1524.0" y="356.0" />
+              <point x="1534.0" y="356.0" />
+              <point x="1534.0" y="138.0" />
+              <point x="1629.759063852814" y="138.0" />
+              <point x="-26.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
+              <point x="-12.25" y="-14.5" />
+              <point x="892.25" y="237.0" />
+              <point x="845.25" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="-25.0" y="-14.5" />
+              <point x="1592.875" y="227.0" />
+              <point x="1569.560064935065" y="227.0" />
+              <point x="1569.560064935065" y="148.0" />
+              <point x="1647.0923971861473" y="148.0" />
+              <point x="-8.666666666666629" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
+              <point x="-34.333333333333314" y="-14.5" />
+              <point x="1704.2276785714287" y="356.0" />
+              <point x="1678.375" y="356.0" />
+              <point x="1678.375" y="237.0" />
+              <point x="1655.060064935065" y="237.0" />
+              <point x="14.25" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="22.25" y="-14.5" />
+              <point x="1755.625" y="158.0" />
+              <point x="1681.759063852814" y="158.0" />
+              <point x="26.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56">
+              <point x="13.375" y="-14.5" />
+              <point x="649.375" y="316.0" />
+              <point x="904.5" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
+              <point x="12.25" y="-14.5" />
+              <point x="916.75" y="237.0" />
+              <point x="963.75" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.jms:javax.jms-api:jar:2.0">
+              <point x="-49.04166666666663" y="-14.5" />
+              <point x="586.9583333333334" y="356.0" />
+              <point x="56.0" y="356.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
+              <point x="-14.75" y="-14.5" />
+              <point x="665.75" y="237.0" />
+              <point x="628.25" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-core:jar:4.3.7.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1640.810064935065" y="158.0" />
+              <point x="1664.4257305194806" y="158.0" />
+              <point x="8.666666666666686" y="14.5" />
+            </edge>
+            <edge source="com.alibaba:dubbo:jar:2.6.2" target="com.alibaba:dubbo:jar:2.6.2/org.jboss.netty:netty:jar:3.2.5.Final">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2" target="com.tuya.jta:bytejta-supports:jar:2.0/cglib:cglib:jar:2.2.2/asm:asm:jar:3.3.1">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-jdbc:jar:4.3.7.RELEASE/org.springframework:spring-tx:jar:4.3.7.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1738.561011904762" y="356.0" />
+              <point x="1733.375" y="356.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/org.apache.commons:commons-lang3:jar:3.4">
+              <point x="-13.375" y="-14.5" />
+              <point x="622.625" y="316.0" />
+              <point x="466.0" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
+              <point x="14.75" y="-14.5" />
+              <point x="695.25" y="237.0" />
+              <point x="732.75" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.aspectj:aspectjweaver:jar:1.6.8">
+              <point x="58.28571428571422" y="-14.5" />
+              <point x="1791.6607142857142" y="445.0" />
+              <point x="2070.561011904762" y="445.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports-dubbo:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0">
+              <point x="-45.5" y="-14.5" />
+              <point x="1909.625" y="519.0" />
+              <point x="1733.375" y="519.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE">
+              <point x="-19.428571428571445" y="-14.5" />
+              <point x="1713.9464285714284" y="425.0" />
+              <point x="1642.875" y="425.0" />
+              <point x="25.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.inject:javax.inject:jar:1">
+              <point x="31.208333333333258" y="-14.5" />
+              <point x="667.2083333333333" y="336.0" />
+              <point x="1177.0" y="336.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.esotericsoftware:kryo:jar:3.0.3">
+              <point x="4.4583333333332575" y="-14.5" />
+              <point x="640.4583333333333" y="306.0" />
+              <point x="680.5" y="306.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7">
+              <point x="-40.125" y="-14.5" />
+              <point x="595.875" y="346.0" />
+              <point x="204.5" y="346.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.resource:javax.resource-api:jar:1.7" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/javax.transaction:javax.transaction-api:jar:1.2">
+              <point x="0.0" y="-14.5" />
+              <point x="204.5" y="237.0" />
+              <point x="205.75" y="237.0" />
+              <point x="-40.25" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0" target="com.tuya.jta:bytejta-supports:jar:2.0/com.tuya.jta:bytejta-core:jar:2.0/com.github.jsqlparser:jsqlparser:jar:1.2">
+              <point x="40.125" y="-14.5" />
+              <point x="676.125" y="346.0" />
+              <point x="1293.0" y="346.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-aop:jar:4.3.7.RELEASE" target="com.tuya.jta:bytejta-supports:jar:2.0/org.springframework:spring-context:jar:4.3.7.RELEASE/org.springframework:spring-beans:jar:4.3.7.RELEASE">
+              <point x="25.0" y="-14.5" />
+              <point x="1642.875" y="237.0" />
+              <point x="1626.560064935065" y="237.0" />
+              <point x="-14.25" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="1804.0" y="396.0" />
+          <SelectedNodes>
+            <node>com.tuya.jta:bytejta-supports:jar:2.0/aopalliance:aopalliance:jar:1.0</node>
+          </SelectedNodes>
+          <Categories />
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/dependency-reduced-pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/dubbo/2.6.2/dubbo-2.6.2.jar!/META-INF/maven/com.alibaba/dubbo-config-api/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1368" />
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/dubbo/2.6.2/dubbo-2.6.2.jar!/META-INF/maven/com.alibaba/dubbo-config-api/pom.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2.2/cglib-2.2.2.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/resources/release.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/src/main/assembly/release.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembly/release.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="36" column="11" selection-end-line="36" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/assembly/release.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-supports/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="70" column="12" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-411">
-          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+        <state relative-caret-position="397">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bytejta-supports-dubbo/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="16" selection-start-line="13" selection-end-line="16" />
+        <state relative-caret-position="219">
+          <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/resource/javax.resource-api/1.7/javax.resource-api-1.7.jar!/javax/resource/spi/work/Work.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MAVEN/com.tuya.jta:bytejta-core:2.0">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>com.tuya.jta:bytejta-core:2.0</OriginalElement>
+          <nodes>
+            <node x="852.0436507936506" y="277.0">com.tuya.jta:bytejta-core:2.0</node>
+            <node x="1310.0376984126983" y="79.0">javax.transaction:javax.transaction-api:jar:1.2</node>
+            <node x="1442.5376984126983" y="158.0">javax.jms:javax.jms-api:jar:2.0</node>
+            <node x="1276.5376984126983" y="158.0">javax.resource:javax.resource-api:jar:1.7</node>
+            <node x="1174.5376984126983" y="158.0">org.slf4j:slf4j-api:jar:1.7.6</node>
+            <node x="1022.5376984126983" y="158.0">org.apache.commons:commons-lang3:jar:3.4</node>
+            <node x="923.5376984126983" y="158.0">com.caucho:hessian:jar:4.0.38</node>
+            <node x="844.5376984126983" y="158.0">com.esotericsoftware:kryo:jar:3.0.3</node>
+            <node x="979.5833333333333" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1</node>
+            <node x="999.0833333333333" y="0.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3</node>
+            <node x="824.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0</node>
+            <node x="714.5436507936506" y="79.0">com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1</node>
+            <node x="512.0" y="158.0">de.ruedigermoeller:fst:jar:2.56</node>
+            <node x="582.5436507936506" y="79.0">de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8</node>
+            <node x="477.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA</node>
+            <node x="367.54365079365067" y="79.0">de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1</node>
+            <node x="334.00000000000006" y="158.0">javax.annotation:javax.annotation-api:jar:1.2</node>
+            <node x="214.0" y="158.0">javax.inject:javax.inject:jar:1</node>
+            <node x="102.0" y="158.0">com.github.jsqlparser:jsqlparser:jar:1.2</node>
+            <node x="0.0" y="158.0">com.alibaba:fastjson:jar:1.2.28</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/com.fasterxml.jackson.core:jackson-core:jar:2.8.8">
+              <point x="16.333333333333144" y="-14.5" />
+              <point x="552.8333333333333" y="138.0" />
+              <point x="638.5436507936506" y="138.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.caucho:hessian:jar:4.0.38">
+              <point x="4.458333333333371" y="-14.5" />
+              <point x="910.0019841269841" y="207.0" />
+              <point x="963.0376984126983" y="207.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1">
+              <point x="19.66666666666663" y="-14.5" />
+              <point x="893.704365079365" y="138.0" />
+              <point x="1027.5833333333333" y="138.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.alibaba:fastjson:jar:1.2.28">
+              <point x="-49.04166666666663" y="-14.5" />
+              <point x="856.5019841269841" y="257.0" />
+              <point x="41.0" y="257.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.inject:javax.inject:jar:1">
+              <point x="-31.20833333333337" y="-14.5" />
+              <point x="874.3353174603174" y="237.0" />
+              <point x="264.0" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="org.apache.commons:commons-lang3:jar:3.4">
+              <point x="13.375" y="-14.5" />
+              <point x="918.9186507936506" y="217.0" />
+              <point x="1088.5376984126983" y="217.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:reflectasm:jar:1.10.1/org.ow2.asm:asm:jar:5.0.3">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.github.jsqlparser:jsqlparser:jar:1.2">
+              <point x="-40.125" y="-14.5" />
+              <point x="865.4186507936506" y="247.0" />
+              <point x="148.0" y="247.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/com.esotericsoftware:minlog:jar:1.3.0">
+              <point x="0.0" y="-14.5" />
+              <point x="874.0376984126983" y="138.0" />
+              <point x="861.0436507936506" y="138.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.jms:javax.jms-api:jar:2.0">
+              <point x="49.04166666666663" y="-14.5" />
+              <point x="954.5853174603174" y="257.0" />
+              <point x="1498.5376984126983" y="257.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="com.esotericsoftware:kryo:jar:3.0.3">
+              <point x="-4.458333333333371" y="-14.5" />
+              <point x="901.0853174603174" y="207.0" />
+              <point x="874.0376984126983" y="207.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.javassist:javassist:jar:3.21.0-GA">
+              <point x="-1.1368683772161603E-13" y="-14.5" />
+              <point x="536.5" y="128.0" />
+              <point x="520.0436507936506" y="128.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="de.ruedigermoeller:fst:jar:2.56" target="de.ruedigermoeller:fst:jar:2.56/org.objenesis:objenesis:jar:2.5.1">
+              <point x="-16.333333333333485" y="-14.5" />
+              <point x="520.1666666666665" y="138.0" />
+              <point x="412.54365079365067" y="138.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.annotation:javax.annotation-api:jar:1.2">
+              <point x="-22.29166666666663" y="-14.5" />
+              <point x="883.2519841269841" y="227.0" />
+              <point x="413.00000000000006" y="227.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="org.slf4j:slf4j-api:jar:1.7.6">
+              <point x="22.29166666666663" y="-14.5" />
+              <point x="927.8353174603174" y="227.0" />
+              <point x="1215.5376984126983" y="227.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="de.ruedigermoeller:fst:jar:2.56">
+              <point x="-13.375" y="-14.5" />
+              <point x="892.1686507936506" y="217.0" />
+              <point x="536.5" y="217.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.resource:javax.resource-api:jar:1.7">
+              <point x="31.20833333333337" y="-14.5" />
+              <point x="936.7519841269841" y="237.0" />
+              <point x="1349.0376984126983" y="237.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.esotericsoftware:kryo:jar:3.0.3" target="com.esotericsoftware:kryo:jar:3.0.3/org.objenesis:objenesis:jar:2.1">
+              <point x="-19.66666666666663" y="-14.5" />
+              <point x="854.3710317460317" y="138.0" />
+              <point x="759.5436507936506" y="138.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="com.tuya.jta:bytejta-core:2.0" target="javax.transaction:javax.transaction-api:jar:1.2">
+              <point x="40.125" y="-14.5" />
+              <point x="945.6686507936506" y="247.0" />
+              <point x="1432.0376984126983" y="247.0" />
+              <point x="1432.0376984126983" y="138.0" />
+              <point x="1430.7876984126983" y="138.0" />
+              <point x="40.25" y="14.5" />
+            </edge>
+            <edge source="javax.resource:javax.resource-api:jar:1.7" target="javax.transaction:javax.transaction-api:jar:1.2">
+              <point x="0.0" y="-14.5" />
+              <point x="1349.0376984126983" y="138.0" />
+              <point x="1350.2876984126983" y="138.0" />
+              <point x="-40.25" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="968.0" y="239.0" />
+          <SelectedNodes>
+            <node>com.tuya.jta:bytejta-core:2.0</node>
+            <node>javax.resource:javax.resource-api:jar:1.7</node>
+          </SelectedNodes>
+          <Categories />
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bytejta-core/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="33" column="21" lean-forward="true" selection-start-line="29" selection-start-column="8" selection-end-line="33" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -2479,7 +2361,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>sample-start</last-edited>
+          <last-edited>bytejta-supports-dubbo</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -2503,7 +2385,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: org.apache.commons:commons-dbcp2:2.1.1</last-edited>
+          <last-edited>Maven: javax.resource:javax.resource-api:1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
