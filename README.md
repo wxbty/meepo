@@ -7,6 +7,6 @@ meepo基于ByteJta实现 https://github.com/liuyangming/ByteJTA
 
 meepo = ByteJta的基础代码+GTS的原理流程
 
-样例https://github.com/wxbty/meepo-test
+使用样例：https://github.com/wxbty/meepo-test
 
 若您有任何建议，联系本人wxb_101@163.com
