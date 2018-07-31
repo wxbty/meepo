@@ -259,7 +259,6 @@ public class TransactionServiceFilter implements Filter {
             return result;
         } catch (RpcException rex) {
             failure = true;
-
             return this.createErrorResultForProvider(rex, propagatedBy, true);
         } catch (Throwable rex) {
             failure = true;
