@@ -21,14 +21,11 @@ import com.alibaba.dubbo.rpc.*;
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;
 import org.apache.commons.lang3.StringUtils;
-import org.bytesoft.bytejta.resource.XATerminatorImpl;
 import org.bytesoft.bytejta.supports.dubbo.DubboRemoteCoordinator;
 import org.bytesoft.bytejta.supports.dubbo.InvocationContext;
 import org.bytesoft.bytejta.supports.dubbo.TransactionBeanRegistry;
-import org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl;
 import org.bytesoft.bytejta.supports.rpc.TransactionRequestImpl;
 import org.bytesoft.bytejta.supports.rpc.TransactionResponseImpl;
-import org.bytesoft.bytejta.supports.spring.SpringBeanUtil;
 import org.bytesoft.bytejta.supports.wire.RemoteCoordinator;
 import org.bytesoft.bytejta.supports.wire.RemoteCoordinatorRegistry;
 import org.bytesoft.common.utils.ByteUtils;
@@ -40,7 +37,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 
-import javax.transaction.SystemException;
+import javax.transaction.Status;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
@@ -256,7 +253,9 @@ public class TransactionServiceFilter implements Filter {
             TransactionContext transactionContext = transaction == null ? null : transaction.getTransactionContext();
             propagatedBy = transactionContext == null ? null : String.valueOf(transactionContext.getPropagatedBy());
             Result result = this.wrapResultForProvider(invoker, invocation, propagatedBy, true);
-            transaction.participantPrepare();
+            if (transaction.getTransactionStatus() == Status.STATUS_ACTIVE || transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK || transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
+                transaction.participantPrepare();
+            }
             return result;
         } catch (RpcException rex) {
             failure = true;
