@@ -344,6 +344,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             lock.setXlock("1");
             lock.setSlock(0);
             lock.setKeyValue(r3str);
+            lock.setCreateTime(System.currentTimeMillis());
             lockList.add(lock);
         }
 
@@ -384,6 +385,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             lock.setXlock("1");
             lock.setSlock(1);
             lock.setKeyValue(r3str);
+            lock.setCreateTime(System.currentTimeMillis());
             lockList.add(lock);
         }
 
