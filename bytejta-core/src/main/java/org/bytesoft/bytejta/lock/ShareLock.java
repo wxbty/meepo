@@ -37,8 +37,8 @@ public class ShareLock extends TxcLock {
     }
 
     private  void insertShareLock(Statement st) throws SQLException {
-        String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock)values(";
-        sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xid+"',"+slock;
+        String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock,create_time)values(";
+        sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xid+"',"+slock+","+createTime;
         sql += ")";
         st.executeUpdate(sql);
     };

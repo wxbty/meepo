@@ -15,6 +15,10 @@
  */
 package org.bytesoft.bytejta;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import org.bytesoft.bytejta.image.BackInfo;
+import org.bytesoft.bytejta.resource.XATerminatorImpl;
 import org.bytesoft.bytejta.supports.wire.RemoteCoordinator;
 import org.bytesoft.common.utils.ByteUtils;
 import org.bytesoft.transaction.*;
@@ -28,6 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.*;
+import javax.transaction.xa.XAException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +47,7 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 	private TransactionBeanFactory beanFactory;
 	private int timeoutSeconds = 5 * 6000;
 	private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
+	private int expireMilliSeconds = 15 * 1000;
 
 
 	public void begin() throws NotSupportedException, SystemException {
@@ -262,6 +269,63 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 			if (transaction.getTransactionStatus() == Status.STATUS_ACTIVE
 					|| transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
 				this.timingRollback(transaction);
+			}
+		}
+
+		rollbackOverTimeImage();
+
+	}
+
+	private void rollbackOverTimeImage() {
+
+
+		long now = System.currentTimeMillis();
+		logger.debug("TransactionManagerImpl.rollbackOverTimeImage,now={}", now);
+
+		ResultSet rs = null;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName(XATerminatorImpl.sourceProp.get("className"));
+			conn = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
+			stmt = conn.createStatement();
+			String sql = "select u.id, rollback_info from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +" + expireMilliSeconds + "< " + now;
+			rs = stmt.executeQuery(sql);
+			boolean isExpire = false;
+			while (rs.next()) {
+				isExpire = true;
+				String imageInfo = rs.getString("rollback_info");
+				logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
+
+				BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
+				});
+				backInfo.setId(rs.getLong("id"));
+				Connection connS = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
+				Statement stmtS = connS.createStatement();
+				backInfo.rollback(stmtS);
+				backInfo.updateStatusFinish(stmtS);
+				if (stmtS != null)
+					stmtS.close();
+			}
+
+			if (isExpire) {
+				sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
+				stmt.execute(sql);
+			}
+		} catch (ClassNotFoundException e) {
+			logger.error("Config.classNameNotFound", e);
+		} catch (SQLException e) {
+			logger.error("SQLException", e);
+		} catch (XAException e) {
+			logger.error("XAException", e);
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 

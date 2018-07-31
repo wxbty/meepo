@@ -21,6 +21,16 @@ public abstract class TxcLock implements  Lock{
     protected String branchId;
     protected String xlock;
 
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    protected long createTime;
+
     private  boolean isLock;
 
     public boolean isLock() {
@@ -90,11 +100,12 @@ public abstract class TxcLock implements  Lock{
     public abstract void unlock(Statement st) throws SQLException;
 
     protected  void insertLock(Statement st) throws SQLException {
-        String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock)values(";
-        sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xlock+"',"+slock;
+        String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock,create_time)values(";
+        sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xlock+"',"+slock+","+createTime;
         sql += ")";
         st.executeUpdate(sql);
     };
+
 
 
     protected  void deleteLock(Statement st) throws SQLException {
