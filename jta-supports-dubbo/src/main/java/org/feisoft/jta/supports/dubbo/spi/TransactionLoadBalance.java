@@ -1,0 +1,112 @@
+
+package org.feisoft.jta.supports.dubbo.spi;
+
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.RpcException;
+import com.alibaba.dubbo.rpc.cluster.LoadBalance;
+import org.apache.commons.lang3.StringUtils;
+import org.feisoft.jta.TransactionImpl;
+import org.feisoft.jta.supports.dubbo.InvocationContext;
+import org.feisoft.jta.supports.dubbo.InvocationContextRegistry;
+import org.feisoft.jta.supports.dubbo.TransactionBeanRegistry;
+import org.feisoft.jta.supports.dubbo.ext.ILoadBalancer;
+import org.feisoft.transaction.TransactionBeanFactory;
+import org.feisoft.transaction.TransactionManager;
+import org.feisoft.transaction.archive.XAResourceArchive;
+import org.feisoft.transaction.supports.resource.XAResourceDescriptor;
+import org.springframework.core.env.Environment;
+
+import java.util.List;
+
+public final class TransactionLoadBalance implements LoadBalance {
+	static final String CONSTANT_LOADBALANCE_KEY = "org.feisoft.jta.loadbalance";
+
+	private ILoadBalancer loadBalancer;
+
+	private void fireInitializeIfNecessary() {
+		if (this.loadBalancer == null) {
+			this.initializeIfNecessary();
+		}
+	}
+
+	private synchronized void initializeIfNecessary() {
+		if (this.loadBalancer == null) {
+			Environment environment = TransactionBeanRegistry.getInstance().getEnvironment();
+			String loadBalanceKey = environment.getProperty(CONSTANT_LOADBALANCE_KEY, "default");
+			ExtensionLoader<ILoadBalancer> extensionLoader = ExtensionLoader.getExtensionLoader(ILoadBalancer.class);
+			this.loadBalancer = extensionLoader.getExtension(loadBalanceKey);
+		}
+	}
+
+	public <T> Invoker<T> select(List<Invoker<T>> invokers, URL url, Invocation invocation) throws RpcException {
+		InvocationContextRegistry registry = InvocationContextRegistry.getInstance();
+		InvocationContext invocationContext = registry.getInvocationContext();
+		if (invocationContext == null) {
+			return this.selectConfigedInvoker(invokers, url, invocation);
+		} else {
+			return this.selectSpecificInvoker(invokers, url, invocation, invocationContext);
+		}
+	}
+
+	public <T> Invoker<T> selectConfigedInvoker(List<Invoker<T>> invokers, URL url, Invocation invocation) throws RpcException {
+		if (invokers == null || invokers.isEmpty()) {
+			throw new RpcException("No invoker is found!");
+		}
+
+		TransactionBeanFactory beanFactory = TransactionBeanRegistry.getInstance().getBeanFactory();
+		TransactionManager transactionManager = beanFactory.getTransactionManager();
+		TransactionImpl transaction = //
+				(TransactionImpl) transactionManager.getTransactionQuietly();
+		List<XAResourceArchive> participantList = transaction == null ? null : transaction.getRemoteParticipantList();
+
+		for (int i = 0; invokers != null && participantList != null && participantList.isEmpty() == false
+				&& i < invokers.size(); i++) {
+			Invoker<T> invoker = invokers.get(i);
+			URL invokerUrl = invoker.getUrl();
+			String invokerHost = invokerUrl.getHost();
+			int invokerPort = invokerUrl.getPort();
+			String invokerAddr = String.format("%s:%s", invokerHost, invokerPort);
+			for (int j = 0; participantList != null && j < participantList.size(); j++) {
+				XAResourceArchive archive = participantList.get(j);
+				XAResourceDescriptor descriptor = archive.getDescriptor();
+				String identifier = descriptor.getIdentifier();
+				String[] values = identifier == null ? new String[0] : identifier.split("\\s*:\\s*");
+				String targetAddr = values.length == 3 ? values[0] : null;
+				String targetPort = values.length == 3 ? values[2] : null;
+				String remoteAddr = String.format("%s:%s", targetAddr, targetPort);
+				if (StringUtils.equalsIgnoreCase(invokerAddr, remoteAddr)) {
+					return invoker;
+				} // end-if (StringUtils.equalsIgnoreCase(invokerAddr, identifier))
+			}
+		}
+
+		this.fireInitializeIfNecessary();
+
+		if (this.loadBalancer == null) {
+			throw new RpcException("No org.feisoft.jta.supports.dubbo.ext.ILoadBalancer is found!");
+		} else {
+			return this.loadBalancer.select(invokers, url, invocation);
+		}
+
+	}
+
+	public <T> Invoker<T> selectSpecificInvoker(List<Invoker<T>> invokers, URL url, Invocation invocation,
+                                                InvocationContext context) throws RpcException {
+		String serverHost = context.getServerHost();
+		int serverPort = context.getServerPort();
+		for (int i = 0; invokers != null && i < invokers.size(); i++) {
+			Invoker<T> invoker = invokers.get(i);
+			URL targetUrl = invoker.getUrl();
+			String targetAddr = targetUrl.getIp();
+			int targetPort = targetUrl.getPort();
+			if (StringUtils.equals(targetAddr, serverHost) && targetPort == serverPort) {
+				return invoker;
+			}
+		}
+		throw new RpcException(String.format("Invoker(%s:%s) is not found!", serverHost, serverPort));
+	}
+
+}

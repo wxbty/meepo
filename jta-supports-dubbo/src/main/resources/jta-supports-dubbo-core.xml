@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="classpath:jta-supports-core.xml" />
+	<import resource="classpath:jta-supports-task.xml" />
+
+	<bean class="org.feisoft.jta.supports.dubbo.TransactionEndpointPostProcessor" />
+	<bean class="org.feisoft.jta.supports.dubbo.DubboConfigPostProcessor" />
+	<bean class="org.feisoft.jta.supports.dubbo.TransactionConfigPostProcessor" />
+
+	<bean class="org.feisoft.jta.supports.dubbo.TransactionBeanRegistry" factory-method="getInstance" />
+
+	<bean id="jtaXAResourceDeserializer" class="org.feisoft.jta.logging.deserializer.XAResourceArchiveDeserializer" />
+	<bean id="jtaTransactionDeserializer" class="org.feisoft.jta.logging.deserializer.TransactionArchiveDeserializer">
+		<property name="resourceArchiveDeserializer" ref="jtaXAResourceDeserializer" />
+	</bean>
+	<bean id="jtaArchiveDeserializer" class="org.feisoft.jta.logging.ArchiveDeserializerImpl">
+		<property name="transactionArchiveDeserializer" ref="jtaTransactionDeserializer" />
+		<property name="xaResourceArchiveDeserializer" ref="jtaXAResourceDeserializer" />
+	</bean>
+
+	<bean id="commonResourceDeserializer" class="org.feisoft.jta.supports.resource.serialize.XAResourceDeserializerImpl" />
+	<bean id="jtaResourceDeserializer" class="org.feisoft.jta.supports.dubbo.serialize.XAResourceDeserializerImpl">
+		<property name="resourceDeserializer" ref="commonResourceDeserializer" />
+	</bean>
+
+	<bean id="jtaBeanFactory" class="org.feisoft.jta.TransactionBeanFactoryImpl">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="xidFactory" ref="jtaXidFactory" />
+		<property name="transactionTimer" ref="transactionManager" />
+		<property name="transactionLogger" ref="jtaTransactionLogger" />
+		<property name="transactionRepository" ref="jtaTransactionRepository" />
+		<property name="transactionInterceptor" ref="jtaTransactionInterceptor" />
+		<property name="transactionRecovery" ref="jtaTransactionRecovery" />
+		<property name="transactionCoordinator" ref="jtaTransactionCoordinator" />
+		<property name="transactionLock" ref="jtaTransactionLock" />
+		<property name="archiveDeserializer" ref="jtaArchiveDeserializer" />
+		<property name="resourceDeserializer" ref="jtaResourceDeserializer" />
+	</bean>
+
+</beans>
