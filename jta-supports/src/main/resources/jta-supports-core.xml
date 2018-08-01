@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<description>The jta transaction manager module</description>
+
+
+	<bean class="org.feisoft.jta.supports.spring.ManagedConnectionFactoryPostProcessor" />
+	<bean class="org.feisoft.jta.supports.spring.SpringBeanUtil" />
+
+	<bean id="jtaUserTransaction" class="org.feisoft.jta.UserTransactionImpl" />
+
+	<bean id="transactionManager" class="org.feisoft.jta.TransactionManagerImpl" />
+	<bean id="jtaTransactionCoordinator" class="org.feisoft.jta.TransactionCoordinator" />
+	<bean id="jtaTransactionRecovery" class="org.feisoft.jta.TransactionRecoveryImpl" />
+	<bean id="jtaTransactionRepository" class="org.feisoft.jta.TransactionRepositoryImpl" />
+
+	<bean id="jtaXidFactory" class="org.feisoft.jta.xa.XidFactoryImpl" />
+
+	<bean id="jtaTransactionInterceptor" class="org.feisoft.jta.supports.rpc.TransactionInterceptorImpl" />
+
+	<bean id="jtaTransactionLogger" class="org.feisoft.jta.logging.SampleTransactionLogger" init-method="construct" />
+
+	<bean id="jtaTransactionLock" class="org.feisoft.jta.VacantTransactionLock" />
+
+</beans>
