@@ -13,9 +13,9 @@
 
     <name>com.tuya.jta.parent</name>
     <modules>
-        <module>bytejta-core</module>
-        <module>bytejta-supports</module>
-        <module>bytejta-supports-dubbo</module>
+        <module>jta-core</module>
+        <module>jta-supports</module>
+        <module>jta-supports-dubbo</module>
     </modules>
 
     <properties>
