@@ -22,6 +22,4 @@
 
 	<bean id="jtaTransactionLogger" class="org.feisoft.jta.logging.SampleTransactionLogger" init-method="construct" />
 
-	<bean id="jtaTransactionLock" class="org.feisoft.jta.VacantTransactionLock" />
-
 </beans>
