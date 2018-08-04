@@ -64,6 +64,7 @@ public class LocalXAResource implements XAResource {
 		} finally {
 			this.closeQuietly(rs);
 			this.closeQuietly(stmt);
+
 		}
 	}
 

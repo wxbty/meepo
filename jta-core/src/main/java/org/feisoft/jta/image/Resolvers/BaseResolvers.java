@@ -51,6 +51,9 @@ public abstract class BaseResolvers implements ImageResolvers {
             map.put(primaryKey, rs.getObject(primaryKey));
             key_value_list.add(map);
         }
+        if (!rs.isClosed()) {
+            rs.close();
+        }
         List<LineFileds> line = new ArrayList<LineFileds>();
 
         for (Map<String, Object> peMap : key_value_list) {
@@ -129,6 +132,9 @@ public abstract class BaseResolvers implements ImageResolvers {
         while (primaryKeyResultSet.next()) {
             primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
         }
+        if (!primaryKeyResultSet.isClosed()) {
+            primaryKeyResultSet.close();
+        }
         return primaryKeyColumnName;
     }
 
@@ -139,6 +145,9 @@ public abstract class BaseResolvers implements ImageResolvers {
         while (schemasResultSet.next()) {
             schemasName = schemasResultSet.getString("TABLE_SCHEM");
         }
+        if (!schemasResultSet.isClosed()) {
+            schemasResultSet.close();
+        }
         return schemasName;
     }
 
@@ -148,6 +157,9 @@ public abstract class BaseResolvers implements ImageResolvers {
         Map<String, Object> colums = new HashMap<>();
         while (columResultSet.next()) {
             colums.put(columResultSet.getString("COLUMN_NAME"), columResultSet.getObject("TYPE_NAME"));
+        }
+        if (!columResultSet.isClosed()) {
+            columResultSet.close();
         }
         return colums;
     }

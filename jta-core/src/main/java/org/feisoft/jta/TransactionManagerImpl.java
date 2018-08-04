@@ -310,6 +310,9 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 					conn.close();
 				if (stmt != null)
 					stmt.close();
+				if (!rs.isClosed()) {
+					rs.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

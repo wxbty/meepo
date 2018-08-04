@@ -208,6 +208,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             while (generatedKeys.next()) {
                 pkVal = generatedKeys.getObject(1);
             }
+            if (!generatedKeys.isClosed()) {
+                generatedKeys.close();
+            }
 
             if (pkVal == null) {
                 String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
@@ -318,6 +321,10 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         while (result.next()) {
             R1list.add(result.getObject(pk).toString());
         }
+        if (!result.isClosed()) {
+            result.close();
+        }
+
 
         if (R1list.size() == 0) {
             return lockList;
@@ -330,6 +337,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         ResultSet lockResult = st.executeQuery(lockSql);
         while (lockResult.next()) {
             R2list.add(lockResult.getString("key_value"));
+        }
+        if (!lockResult.isClosed()) {
+            lockResult.close();
         }
 
         R1list.removeAll(R2list);
@@ -361,6 +371,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         while (result.next()) {
             R1list.add(result.getObject(pk).toString());
         }
+        if (!result.isClosed()) {
+            result.close();
+        }
 
         String lockSql = "select key_value,count(*) as count from txc_lock where xid='"
                 + gloableXid + "'  and branch_id ='" + branchXid + "' and table_name = '"
@@ -371,6 +384,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         while (lockResult.next()) {
             if (lockResult.getInt("count") > 1)
                 R2list.add(lockResult.getString("key_value"));
+        }
+        if (!lockResult.isClosed()) {
+            lockResult.close();
         }
 
         R1list.removeAll(R2list);

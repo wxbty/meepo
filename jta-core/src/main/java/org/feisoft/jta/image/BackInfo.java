@@ -142,7 +142,11 @@ public class BackInfo {
         }
         if (isDelete()) {
             ResultSet rs = stmt.executeQuery(selectBody + selectWhere);
-            return !rs.next();
+            boolean exist = !rs.next();
+            if (!rs.isClosed()) {
+                rs.close();
+            }
+            return exist;
         } else if (isUpdate() || isInsert()) {
             List<LineFileds> line = afterImage.getLine();
             //找出所有的后像记录，查看和当前记录是否一直，如果不一致，报错人工处理
@@ -187,6 +191,9 @@ public class BackInfo {
                         }
                     }
 
+                }
+                if (!rs.isClosed()) {
+                    rs.close();
                 }
 
             }

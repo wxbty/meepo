@@ -25,6 +25,9 @@ public class ShareLock extends TxcLock {
            }
 
         }
+        if (!rs.isClosed()) {
+            rs.close();
+        }
 
         setLock(Boolean.TRUE);
 
