@@ -11,7 +11,6 @@ import org.feisoft.transaction.xa.XidFactory;
 
 public interface TransactionBeanFactory {
 
-	public TransactionLock getTransactionLock();
 
 	public TransactionManager getTransactionManager();
 

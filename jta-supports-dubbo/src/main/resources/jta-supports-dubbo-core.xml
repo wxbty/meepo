@@ -35,7 +35,6 @@
 		<property name="transactionInterceptor" ref="jtaTransactionInterceptor" />
 		<property name="transactionRecovery" ref="jtaTransactionRecovery" />
 		<property name="transactionCoordinator" ref="jtaTransactionCoordinator" />
-		<property name="transactionLock" ref="jtaTransactionLock" />
 		<property name="archiveDeserializer" ref="jtaArchiveDeserializer" />
 		<property name="resourceDeserializer" ref="jtaResourceDeserializer" />
 	</bean>

@@ -21,7 +21,6 @@ public class TransactionBeanFactoryImpl implements TransactionBeanFactory {
 	private TransactionInterceptor transactionInterceptor;
 	private TransactionRecovery transactionRecovery;
 	private RemoteCoordinator transactionCoordinator;
-	private TransactionLock transactionLock;
 
 	private ArchiveDeserializer archiveDeserializer;
 	private XAResourceDeserializer resourceDeserializer;
@@ -66,13 +65,7 @@ public class TransactionBeanFactoryImpl implements TransactionBeanFactory {
 		this.transactionInterceptor = transactionInterceptor;
 	}
 
-	public TransactionLock getTransactionLock() {
-		return transactionLock;
-	}
 
-	public void setTransactionLock(TransactionLock transactionLock) {
-		this.transactionLock = transactionLock;
-	}
 
 	public TransactionRecovery getTransactionRecovery() {
 		return transactionRecovery;
