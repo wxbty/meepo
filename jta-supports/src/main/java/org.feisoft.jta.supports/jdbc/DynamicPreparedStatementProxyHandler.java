@@ -225,9 +225,17 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         }
 
         //本地直接提交
-        xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
-        xaConn.getXAResource().prepare(currentXid);
-        xaConn.getXAResource().commit(currentXid, false);
+        XAResource resource =  xaConn.getXAResource();
+
+        try {
+            xaConn.getXAResource().end(currentXid, XAResource.TMSUCCESS);
+            xaConn.getXAResource().prepare(currentXid);
+            xaConn.getXAResource().commit(currentXid, false);
+        }catch (Exception ex)
+        {
+            logger.info("Local multi sqls exe!");
+        }
+
         //插入时需要获取主键的value
 
         if (SqlpraserUtils.assertInsert(sql)) {
