@@ -50,7 +50,8 @@ public class TransactionConfigPostProcessor implements BeanFactoryPostProcessor 
                     throw new FatalBeanException(
                             "There are more than one org.feisoft.jta.supports.dubbo.TransactionBeanRegistry was found!");
                 }
-            } else if (com.alibaba.dubbo.config.spring.ServiceBean.class.getName().equals(beanClassName)) {
+            } else if (com.alibaba.dubbo.config.spring.ServiceBean.class.getName().equals(beanClassName)
+                    || com.alibaba.dubbo.config.spring.ReferenceBean.class.getName().equals(beanClassName)) {
                 if (beanDef.getPropertyValues().contains("group")) {
                     PropertyValue pv = beanDef.getPropertyValues().getPropertyValue("group");
                     if ("org.feisoft.jta".equals(pv.getValue().toString())) {
