@@ -78,13 +78,6 @@ public class TransactionCoordinator implements RemoteCoordinator, TransactionBea
 	/** supports resume only, for tcc transaction manager. */
 	public void start(Xid xid, int flags) throws XAException {
 
-		if (beanFactory == null)
-		{
-			System.out.println(transactionManager == null);
-
-		}
-
-
 		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
 		XidFactory xidFactory = this.beanFactory.getXidFactory();
 		Transaction current = transactionManager.getTransactionQuietly();

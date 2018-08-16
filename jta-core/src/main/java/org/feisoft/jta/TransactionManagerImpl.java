@@ -64,7 +64,6 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 		this.associateThread(transaction);
 		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
 		transactionRepository.putTransaction(globalXid, transaction);
-		// this.transactionStatistic.fireBeginTransaction(transaction);
 
 		logger.info("[{}] begin-transaction", ByteUtils.byteArrayToString(globalXid.getGlobalTransactionId()));
 	}
