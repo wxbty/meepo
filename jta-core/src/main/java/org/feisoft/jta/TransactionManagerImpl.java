@@ -27,329 +27,335 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TransactionManagerImpl implements TransactionManager, TransactionTimer, TransactionBeanFactoryAware {
-	static final Logger logger = LoggerFactory.getLogger(TransactionManagerImpl.class);
+    static final Logger logger = LoggerFactory.getLogger(TransactionManagerImpl.class);
 
-	@javax.inject.Inject
-	private TransactionBeanFactory beanFactory;
-	private int timeoutSeconds = 5 * 6000;
-	private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
-	private int expireMilliSeconds = 15 * 1000;
-
-
-	public void begin() throws NotSupportedException, SystemException {
-		if (this.getTransaction() != null) {
-			throw new NotSupportedException();
-		}
-
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		RemoteCoordinator transactionCoordinator = this.beanFactory.getTransactionCoordinator();
-
-		int timeoutSeconds = this.timeoutSeconds;
-
-		TransactionContext transactionContext = new TransactionContext();
-		transactionContext.setPropagatedBy(transactionCoordinator.getIdentifier());
-		transactionContext.setCoordinator(true);
-		long createdTime = System.currentTimeMillis();
-		long expiredTime = createdTime + (timeoutSeconds * 1000L);
-		transactionContext.setCreatedTime(createdTime);
-		transactionContext.setExpiredTime(expiredTime);
-
-		TransactionXid globalXid = xidFactory.createGlobalXid();
-		transactionContext.setXid(globalXid);
-
-		TransactionImpl transaction = new TransactionImpl(transactionContext);
-		transaction.setBeanFactory(this.beanFactory);
-		transaction.setTransactionTimeout(this.timeoutSeconds);
-
-		this.associateThread(transaction);
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
-		transactionRepository.putTransaction(globalXid, transaction);
-		// this.transactionStatistic.fireBeginTransaction(transaction);
-
-		logger.info("[{}] begin-transaction", ByteUtils.byteArrayToString(globalXid.getGlobalTransactionId()));
-	}
-
-	public void commit() throws RollbackException, HeuristicMixedException, HeuristicRollbackException, SecurityException,
-			IllegalStateException, SystemException {
-		Transaction transaction = this.desociateThread();
-		if (transaction == null) {
-			throw new IllegalStateException();
-		} else if (transaction.getTransactionStatus() == Status.STATUS_ROLLEDBACK) {
-			throw new RollbackException();
-		} else if (transaction.getTransactionStatus() == Status.STATUS_COMMITTED) {
-			return;
-		} else if (transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
-			this.rollback(transaction);
-			throw new HeuristicRollbackException();
-		} else if (transaction.getTransactionStatus() != Status.STATUS_ACTIVE) {
-			throw new IllegalStateException();
-		}
-
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
-		TransactionContext transactionContext = transaction.getTransactionContext();
-		TransactionXid transactionXid = transactionContext.getXid();
-		try {
-			transaction.commit();
-			transaction.forgetQuietly(); // forget transaction
-		} catch (IllegalStateException ex) {
-			logger.error("Error occurred while committing transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (SecurityException ex) {
-			logger.error("Error occurred while committing transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (RollbackException rex) {
-			logger.error("Error occurred while committing transaction.", rex);
-			transaction.forgetQuietly(); // forget transaction
-			throw rex;
-		} catch (HeuristicMixedException hmex) {
-			logger.error("Error occurred while committing transaction.", hmex);
-			transaction.forgetQuietly(); // forget transaction
-			throw hmex;
-		} catch (HeuristicRollbackException hrex) {
-			logger.error("Error occurred while committing transaction.", hrex);
-			transaction.forgetQuietly(); // forget transaction
-			throw hrex;
-		} catch (SystemException ex) {
-			logger.error("Error occurred while committing transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (RuntimeException rex) {
-			logger.error("Error occurred while committing transaction.", rex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw rex;
-		}
-	}
-
-	public void rollback() throws IllegalStateException, SecurityException, SystemException {
-		Transaction transaction = this.desociateThread();
-		this.rollback(transaction);
-	}
-
-	protected void rollback(Transaction transaction) throws IllegalStateException, SecurityException, SystemException {
-		if (transaction == null) {
-			throw new IllegalStateException();
-		} else if (transaction.getTransactionStatus() == Status.STATUS_ROLLEDBACK) {
-			return;
-		} else if (transaction.getTransactionStatus() == Status.STATUS_COMMITTED) {
-			throw new SystemException();
-		}
-
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
-		TransactionContext transactionContext = transaction.getTransactionContext();
-		TransactionXid transactionXid = transactionContext.getXid();
-		try {
-			transaction.rollback();
-			transaction.forgetQuietly();
-		} catch (IllegalStateException ex) {
-			logger.error("Error occurred while rolling back transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (SecurityException ex) {
-			logger.error("Error occurred while rolling back transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (SystemException ex) {
-			logger.error("Error occurred while rolling back transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		} catch (RuntimeException ex) {
-			logger.error("Error occurred while rolling back transaction.", ex);
-			transactionRepository.putErrorTransaction(transactionXid, transaction);
-			throw ex;
-		}
-	}
-
-	public void associateThread(Transaction transaction) {
-		this.associatedTxMap.put(Thread.currentThread(), transaction);
-	}
-
-	public Transaction desociateThread() {
-		return this.associatedTxMap.remove(Thread.currentThread());
-	}
-
-	public Transaction suspend() throws RollbackRequiredException, SystemException {
-		Transaction transaction = this.desociateThread();
-		transaction.suspend();
-		return transaction;
-	}
-
-	public void resume(javax.transaction.Transaction tobj)
-			throws InvalidTransactionException, IllegalStateException, RollbackRequiredException, SystemException {
-
-		if (TransactionImpl.class.isInstance(tobj) == false) {
-			throw new InvalidTransactionException();
-		} else if (this.getTransaction() != null) {
-			throw new IllegalStateException();
-		}
-
-		TransactionImpl transaction = (TransactionImpl) tobj;
-		transaction.resume();
-		this.associateThread(transaction);
-
-	}
-
-	public int getStatus() throws SystemException {
-		Transaction transaction = this.getTransaction();
-		return transaction == null ? Status.STATUS_NO_TRANSACTION : transaction.getTransactionStatus();
-	}
-
-	public Transaction getTransaction(Thread thread) {
-		return this.associatedTxMap.get(thread);
-	}
-
-	public Transaction getTransactionQuietly() {
-		try {
-			return this.getTransaction();
-		} catch (SystemException ex) {
-			return null;
-		} catch (RuntimeException ex) {
-			return null;
-		}
-	}
-
-	public Transaction getTransaction() throws SystemException {
-		return this.associatedTxMap.get(Thread.currentThread());
-	}
-
-	public void setRollbackOnly() throws IllegalStateException, SystemException {
-		Transaction transaction = this.getTransaction();
-		if (transaction == null) {
-			throw new SystemException();
-		}
-		transaction.setRollbackOnly();
-	}
-
-	public void setTransactionTimeout(int seconds) throws SystemException {
-		Transaction transaction = this.getTransaction();
-		if (transaction == null) {
-			throw new SystemException();
-		} else if (seconds < 0) {
-			throw new SystemException();
-		} else if (seconds == 0) {
-			// ignore
-		} else {
-			((TransactionImpl) transaction).changeTransactionTimeout(seconds * 1000);
-		}
-	}
-
-	public void timingExecution() {
-		List<Transaction> expiredTransactions = new ArrayList<Transaction>();
-		List<Transaction> activeTransactions = new ArrayList<Transaction>(this.associatedTxMap.values());
-		long current = System.currentTimeMillis();
-		Iterator<Transaction> activeItr = activeTransactions.iterator();
-		while (activeItr.hasNext()) {
-			Transaction transaction = activeItr.next();
-			if (transaction.isTiming()) {
-				TransactionContext transactionContext = transaction.getTransactionContext();
-				if (transactionContext.getExpiredTime() <= current) {
-					expiredTransactions.add(transaction);
-				}
-			} // end-if (transaction.isTiming())
-		}
-
-		Iterator<Transaction> expiredItr = expiredTransactions.iterator();
-		while (activeItr.hasNext()) {
-			Transaction transaction = expiredItr.next();
-			if (transaction.getTransactionStatus() == Status.STATUS_ACTIVE
-					|| transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
-				this.timingRollback(transaction);
-			}
-		}
-
-		rollbackOverTimeImage();
-
-	}
-
-	private void rollbackOverTimeImage() {
+    @javax.inject.Inject
+    private TransactionBeanFactory beanFactory;
+    private int timeoutSeconds = 5 * 6000;
+    private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
+    private int expireMilliSeconds = 15 * 1000;
 
 
-		long now = System.currentTimeMillis();
-		logger.debug("TransactionManagerImpl.rollbackOverTimeImage,now={}", now);
+    public void begin() throws NotSupportedException, SystemException {
+        if (this.getTransaction() != null) {
+            throw new NotSupportedException();
+        }
 
-		ResultSet rs = null;
-		Connection conn = null;
-		Statement stmt = null;
-		try {
-			Class.forName(XATerminatorImpl.sourceProp.get("className"));
-			conn = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
-			stmt = conn.createStatement();
-			String sql = "select u.id, rollback_info from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +" + expireMilliSeconds + "< " + now;
-			rs = stmt.executeQuery(sql);
-			boolean isExpire = false;
-			while (rs.next()) {
-				isExpire = true;
-				String imageInfo = rs.getString("rollback_info");
-				logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        RemoteCoordinator transactionCoordinator = this.beanFactory.getTransactionCoordinator();
 
-				BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
-				});
-				backInfo.setId(rs.getLong("id"));
-				Connection connS = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
-				Statement stmtS = connS.createStatement();
-				backInfo.rollback(stmtS);
-				backInfo.updateStatusFinish(stmtS);
-				if (stmtS != null)
-					stmtS.close();
-			}
+        int timeoutSeconds = this.timeoutSeconds;
 
-			if (isExpire) {
-				sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
-				stmt.execute(sql);
-			}
-		} catch (ClassNotFoundException e) {
-			logger.error("Config.classNameNotFound", e);
-		} catch (SQLException e) {
-			logger.error("SQLException", e);
-		} catch (XAException e) {
-			logger.error("XAException", e);
-		} finally {
-			try {
-				if (conn != null)
-					conn.close();
-				if (stmt != null)
-					stmt.close();
-				if (!rs.isClosed()) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+        TransactionContext transactionContext = new TransactionContext();
+        transactionContext.setPropagatedBy(transactionCoordinator.getIdentifier());
+        transactionContext.setCoordinator(true);
+        long createdTime = System.currentTimeMillis();
+        long expiredTime = createdTime + (timeoutSeconds * 1000L);
+        transactionContext.setCreatedTime(createdTime);
+        transactionContext.setExpiredTime(expiredTime);
 
-	}
+        TransactionXid globalXid = xidFactory.createGlobalXid();
+        transactionContext.setXid(globalXid);
 
-	private void timingRollback(Transaction transaction) {
-		TransactionContext transactionContext = transaction.getTransactionContext();
-		TransactionXid globalXid = transactionContext.getXid();
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+        TransactionImpl transaction = new TransactionImpl(transactionContext);
+        transaction.setBeanFactory(this.beanFactory);
+        transaction.setTransactionTimeout(this.timeoutSeconds);
 
-		try {
-			transaction.rollback();
-			transaction.forgetQuietly(); // forget transaction
-		} catch (Exception ex) {
-			transactionRepository.putErrorTransaction(globalXid, transaction);
-		}
+        this.associateThread(transaction);
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+        transactionRepository.putTransaction(globalXid, transaction);
+        // this.transactionStatistic.fireBeginTransaction(transaction);
 
-	}
+        logger.info("[{}] begin-transaction", ByteUtils.byteArrayToString(globalXid.getGlobalTransactionId()));
+    }
 
-	public void stopTiming(Transaction transaction) {
-		if (TransactionImpl.class.isInstance(transaction)) {
-			((TransactionImpl) transaction).stopTiming();
-		}
-	}
+    public void commit() throws RollbackException, HeuristicMixedException, HeuristicRollbackException, SecurityException,
+            IllegalStateException, SystemException {
+        Transaction transaction = this.desociateThread();
+        if (transaction == null) {
+            throw new IllegalStateException();
+        } else if (transaction.getTransactionStatus() == Status.STATUS_ROLLEDBACK) {
+            throw new RollbackException();
+        } else if (transaction.getTransactionStatus() == Status.STATUS_COMMITTED) {
+            return;
+        } else if (transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
+            this.rollback(transaction);
+            throw new HeuristicRollbackException();
+        } else if (transaction.getTransactionStatus() != Status.STATUS_ACTIVE) {
+            throw new IllegalStateException();
+        }
 
-	public int getTimeoutSeconds() {
-		return timeoutSeconds;
-	}
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+        TransactionContext transactionContext = transaction.getTransactionContext();
+        TransactionXid transactionXid = transactionContext.getXid();
+        try {
+            transaction.commit();
+            transaction.forgetQuietly(); // forget transaction
+        } catch (IllegalStateException ex) {
+            logger.error("Error occurred while committing transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (SecurityException ex) {
+            logger.error("Error occurred while committing transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (RollbackException rex) {
+            logger.error("Error occurred while committing transaction.", rex);
+            transaction.forgetQuietly(); // forget transaction
+            throw rex;
+        } catch (HeuristicMixedException hmex) {
+            logger.error("Error occurred while committing transaction.", hmex);
+            transaction.forgetQuietly(); // forget transaction
+            throw hmex;
+        } catch (HeuristicRollbackException hrex) {
+            logger.error("Error occurred while committing transaction.", hrex);
+            transaction.forgetQuietly(); // forget transaction
+            throw hrex;
+        } catch (SystemException ex) {
+            logger.error("Error occurred while committing transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (RuntimeException rex) {
+            logger.error("Error occurred while committing transaction.", rex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw rex;
+        }
+    }
 
-	public void setTimeoutSeconds(int timeoutSeconds) {
-		this.timeoutSeconds = timeoutSeconds;
-	}
+    public void rollback() throws IllegalStateException, SecurityException, SystemException {
+        Transaction transaction = this.desociateThread();
+        this.rollback(transaction);
+    }
 
-	public void setBeanFactory(TransactionBeanFactory tbf) {
-		this.beanFactory = tbf;
-	}
+    protected void rollback(Transaction transaction) throws IllegalStateException, SecurityException, SystemException {
+        if (transaction == null) {
+            throw new IllegalStateException();
+        } else if (transaction.getTransactionStatus() == Status.STATUS_ROLLEDBACK) {
+            return;
+        } else if (transaction.getTransactionStatus() == Status.STATUS_COMMITTED) {
+            throw new SystemException();
+        }
+
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+        TransactionContext transactionContext = transaction.getTransactionContext();
+        TransactionXid transactionXid = transactionContext.getXid();
+        try {
+            transaction.rollback();
+            transaction.forgetQuietly();
+        } catch (IllegalStateException ex) {
+            logger.error("Error occurred while rolling back transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (SecurityException ex) {
+            logger.error("Error occurred while rolling back transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (SystemException ex) {
+            logger.error("Error occurred while rolling back transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        } catch (RuntimeException ex) {
+            logger.error("Error occurred while rolling back transaction.", ex);
+            transactionRepository.putErrorTransaction(transactionXid, transaction);
+            throw ex;
+        }
+    }
+
+    public void associateThread(Transaction transaction) {
+        this.associatedTxMap.put(Thread.currentThread(), transaction);
+    }
+
+    public Transaction desociateThread() {
+        return this.associatedTxMap.remove(Thread.currentThread());
+    }
+
+    public Transaction suspend() throws RollbackRequiredException, SystemException {
+        Transaction transaction = this.desociateThread();
+        transaction.suspend();
+        return transaction;
+    }
+
+    public void resume(javax.transaction.Transaction tobj)
+            throws InvalidTransactionException, IllegalStateException, RollbackRequiredException, SystemException {
+
+        if (TransactionImpl.class.isInstance(tobj) == false) {
+            throw new InvalidTransactionException();
+        } else if (this.getTransaction() != null) {
+            throw new IllegalStateException();
+        }
+
+        TransactionImpl transaction = (TransactionImpl) tobj;
+        transaction.resume();
+        this.associateThread(transaction);
+
+    }
+
+    public int getStatus() throws SystemException {
+        Transaction transaction = this.getTransaction();
+        return transaction == null ? Status.STATUS_NO_TRANSACTION : transaction.getTransactionStatus();
+    }
+
+    public Transaction getTransaction(Thread thread) {
+        return this.associatedTxMap.get(thread);
+    }
+
+    public Transaction getTransactionQuietly() {
+        try {
+            return this.getTransaction();
+        } catch (SystemException ex) {
+            return null;
+        } catch (RuntimeException ex) {
+            return null;
+        }
+    }
+
+    public Transaction getTransaction() throws SystemException {
+        return this.associatedTxMap.get(Thread.currentThread());
+    }
+
+    public void setRollbackOnly() throws IllegalStateException, SystemException {
+        Transaction transaction = this.getTransaction();
+        if (transaction == null) {
+            throw new SystemException();
+        }
+        transaction.setRollbackOnly();
+    }
+
+    public void setTransactionTimeout(int seconds) throws SystemException {
+        Transaction transaction = this.getTransaction();
+        if (transaction == null) {
+            throw new SystemException();
+        } else if (seconds < 0) {
+            throw new SystemException();
+        } else if (seconds == 0) {
+            // ignore
+        } else {
+            ((TransactionImpl) transaction).changeTransactionTimeout(seconds * 1000);
+        }
+    }
+
+    public void timingExecution() {
+        List<Transaction> expiredTransactions = new ArrayList<Transaction>();
+        List<Transaction> activeTransactions = new ArrayList<Transaction>(this.associatedTxMap.values());
+        long current = System.currentTimeMillis();
+        Iterator<Transaction> activeItr = activeTransactions.iterator();
+        while (activeItr.hasNext()) {
+            Transaction transaction = activeItr.next();
+            if (transaction.isTiming()) {
+                TransactionContext transactionContext = transaction.getTransactionContext();
+                if (transactionContext.getExpiredTime() <= current) {
+                    expiredTransactions.add(transaction);
+                }
+            } // end-if (transaction.isTiming())
+        }
+
+        Iterator<Transaction> expiredItr = expiredTransactions.iterator();
+        while (activeItr.hasNext()) {
+            Transaction transaction = expiredItr.next();
+            if (transaction.getTransactionStatus() == Status.STATUS_ACTIVE
+                    || transaction.getTransactionStatus() == Status.STATUS_MARKED_ROLLBACK) {
+                this.timingRollback(transaction);
+            }
+        }
+
+//        rollbackOverTimeImage();
+
+    }
+
+    private void rollbackOverTimeImage() {
+
+
+        long now = System.currentTimeMillis();
+        logger.debug("TransactionManagerImpl.rollbackOverTimeImage,now={}", now);
+
+        ResultSet rs = null;
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            Class.forName(XATerminatorImpl.sourceProp.get("className"));
+            conn = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
+            stmt = conn.createStatement();
+            String sql = "select u.id, rollback_info,k.create_time from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +" + expireMilliSeconds + "< " + now;
+            rs = stmt.executeQuery(sql);
+            boolean isExpire = false;
+            while (rs.next()) {
+                Long nowMillis = System.currentTimeMillis();
+                Long txMillis = rs.getLong("create_time");
+                if (nowMillis - txMillis < timeoutSeconds) {
+                    continue;
+                }
+
+                isExpire = true;
+                String imageInfo = rs.getString("rollback_info");
+                logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
+
+                BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
+                });
+                backInfo.setId(rs.getLong("id"));
+                Connection connS = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
+                Statement stmtS = connS.createStatement();
+                backInfo.rollback(stmtS);
+                backInfo.updateStatusFinish(stmtS);
+                if (stmtS != null)
+                    stmtS.close();
+            }
+
+            if (isExpire) {
+                sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
+                stmt.execute(sql);
+            }
+        } catch (ClassNotFoundException e) {
+            logger.error("Config.classNameNotFound", e);
+        } catch (SQLException e) {
+            logger.error("SQLException", e);
+        } catch (XAException e) {
+            logger.error("XAException", e);
+        } finally {
+            try {
+                if (conn != null)
+                    conn.close();
+                if (stmt != null)
+                    stmt.close();
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void timingRollback(Transaction transaction) {
+        TransactionContext transactionContext = transaction.getTransactionContext();
+        TransactionXid globalXid = transactionContext.getXid();
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+
+        try {
+            transaction.rollback();
+            transaction.forgetQuietly(); // forget transaction
+        } catch (Exception ex) {
+            transactionRepository.putErrorTransaction(globalXid, transaction);
+        }
+
+    }
+
+    public void stopTiming(Transaction transaction) {
+        if (TransactionImpl.class.isInstance(transaction)) {
+            ((TransactionImpl) transaction).stopTiming();
+        }
+    }
+
+    public int getTimeoutSeconds() {
+        return timeoutSeconds;
+    }
+
+    public void setTimeoutSeconds(int timeoutSeconds) {
+        this.timeoutSeconds = timeoutSeconds;
+    }
+
+    public void setBeanFactory(TransactionBeanFactory tbf) {
+        this.beanFactory = tbf;
+    }
 
 }
