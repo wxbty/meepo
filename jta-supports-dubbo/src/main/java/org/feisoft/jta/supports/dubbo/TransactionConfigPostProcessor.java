@@ -55,7 +55,11 @@ public class TransactionConfigPostProcessor implements BeanFactoryPostProcessor 
                 if (beanDef.getPropertyValues().contains("group")) {
                     PropertyValue pv = beanDef.getPropertyValues().getPropertyValue("group");
                     if ("org.feisoft.jta".equals(pv.getValue().toString())) {
-                        initialDubboCoService(beanFactory, applicationBeanId, registryBeanId, transactionBeanId);
+                        String application = initialDubboCoService(beanFactory, applicationBeanId, registryBeanId,
+                                transactionBeanId);
+                        this.initializeForProvider(beanFactory, application, transactionBeanId);
+                        this.initializeForConsumer(beanFactory, application, registryBeanId);
+
                     }
                 }
             }
@@ -64,8 +68,8 @@ public class TransactionConfigPostProcessor implements BeanFactoryPostProcessor 
 
     }
 
-    private void initialDubboCoService(ConfigurableListableBeanFactory beanFactory, String applicationBeanId,
-                                       String registryBeanId, String transactionBeanId) {
+    private String initialDubboCoService(ConfigurableListableBeanFactory beanFactory, String applicationBeanId,
+                                         String registryBeanId, String transactionBeanId) {
         if (StringUtils.isBlank(applicationBeanId)) {
             throw new FatalBeanException("No application name was found!");
         }
@@ -84,9 +88,8 @@ public class TransactionConfigPostProcessor implements BeanFactoryPostProcessor 
                     "No configuration of class org.feisoft.jta.supports.dubbo.TransactionBeanRegistry was found.");
         }
 
-        String application = String.valueOf(pv.getValue());
-        this.initializeForProvider(beanFactory, application, transactionBeanId);
-        this.initializeForConsumer(beanFactory, application, registryBeanId);
+        return String.valueOf(pv.getValue());
+
     }
 
     public void initializeForProvider(ConfigurableListableBeanFactory beanFactory, String application,
