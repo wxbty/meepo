@@ -507,27 +507,4 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     }
 
 
-    private static void appendAsHex(StringBuilder builder, int value) {
-        if (value == 0) {
-            builder.append("0x0");
-            return;
-        }
-
-        int shift = 32;
-        byte nibble;
-        boolean nonZeroFound = false;
-
-        builder.append("0x");
-        do {
-            shift -= 4;
-            nibble = (byte) ((value >>> shift) & 0xF);
-            if (nonZeroFound) {
-                builder.append(HEX_DIGITS[nibble]);
-            } else if (nibble != 0) {
-                builder.append(HEX_DIGITS[nibble]);
-                nonZeroFound = true;
-            }
-        } while (shift != 0);
-    }
-
 }
