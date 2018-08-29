@@ -291,8 +291,7 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
                 String imageInfo = rs.getString("rollback_info");
                 logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
 
-                BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
-                });
+                BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {});
                 backInfo.setId(rs.getLong("id"));
                 Connection connS = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
                 Statement stmtS = connS.createStatement();
