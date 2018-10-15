@@ -13,5 +13,3 @@ meepo = bytejta的基础代码+GTS的原理流程
 
 有任何问题，加群878443502交流
 
-txc_lock 新增create_time字段，更新代码的同时请更新sql，见meepo-test的sql文件
-
