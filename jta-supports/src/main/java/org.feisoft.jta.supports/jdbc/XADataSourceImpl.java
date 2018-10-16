@@ -152,13 +152,10 @@ public class XADataSourceImpl implements XADataSource, BeanNameAware,Initializin
             Class cls = Class.forName(className);
             Object obj = cls.newInstance();
             Method setUrl = cls.getMethod("setUrl", String.class);
-            //实例化一个Student对象
             setUrl.invoke(obj, url);
             Method setUser = cls.getMethod("setUser", String.class);
-            //实例化一个Student对象
             setUser.invoke(obj, user);
             Method setPass = cls.getMethod("setPassword", String.class);
-            //实例化一个Student对象
             setPass.invoke(obj, password);
             XADataSource xs = (XADataSource) obj;
             this.xaDataSource = xs;
