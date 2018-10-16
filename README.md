@@ -11,4 +11,5 @@ meepo = bytejta的基础代码+GTS的原理流程
 
 架构介绍+源码跟踪：https://wxbty.github.io/2018/08/01/start/one/ （持续更新中..）
 
-若您有任何建议，联系本人wxb_101@163.com
+有任何问题，加群878443502交流
+
