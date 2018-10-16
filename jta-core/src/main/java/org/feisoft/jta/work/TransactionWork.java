@@ -27,8 +27,8 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 		TransactionTimer transactionTimer = beanFactory.getTransactionTimer();
 		TransactionRecovery transactionRecovery = beanFactory.getTransactionRecovery();
 		try {
-			transactionRecovery.startRecovery();
-			transactionRecovery.timingRecover();
+//			transactionRecovery.startRecovery();
+//			transactionRecovery.timingRecover();
 		} catch (RuntimeException rex) {
 			logger.error("TransactionRecovery init failed!", rex);
 		}
@@ -41,7 +41,7 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 			if (current >= nextExecutionTime) {
 				nextExecutionTime = current + SECOND_MILLIS;
 				try {
-					transactionTimer.timingExecution();
+//					transactionTimer.timingExecution();
 				} catch (RuntimeException rex) {
 					logger.error(rex.getMessage(), rex);
 				}
@@ -50,7 +50,7 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 			if (current >= nextRecoveryTime) {
 				nextRecoveryTime = current + this.recoveryInterval;
 				try {
-					transactionRecovery.timingRecover();
+//					transactionRecovery.timingRecover();
 				} catch (RuntimeException rex) {
 					logger.error(rex.getMessage(), rex);
 				}

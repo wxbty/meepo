@@ -16,7 +16,7 @@ public class ImageUtil {
         else if (SqlpraserUtils.assertUpdate(sql))
         {
             return new UpdateImageResolvers(sql,backInfo,conn,st);
-        }else if (SqlpraserUtils.assertUpdate(sql))
+        }else if (SqlpraserUtils.assertDelete(sql))
         {
             return new DeleteImageResolvers(sql,backInfo,conn,st);
         }else if (SqlpraserUtils.assertSelect(sql))
