@@ -68,10 +68,7 @@ public class TransactionServiceFilter implements Filter {
 
         String transactionContextContent = invocation.getAttachment(TransactionContext.class.getName());
 
-        if ("commit".equals(invocation.getMethodName()))
-        {
-            System.out.println(1111);
-        }
+
         System.out.println("provider.method ="+invocation.getMethodName());
         URL url = RpcContext.getContext().getUrl();
         String interfaceClazz = url.getServiceInterface();
