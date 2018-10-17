@@ -206,7 +206,6 @@ public class BackInfo {
 
         if (isInsert()) {
             String lastSql = "delete from " + afterImage.getTableName() + " " + selectWhere;
-            System.out.println("exe delete backInsert sql="+lastSql);
             stmt.execute(lastSql);
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();

@@ -580,7 +580,6 @@ public class XATerminatorImpl implements XATerminator {
 
         for (Long id : map.keySet()) {
             String imageInfo = map.get(id);
-            System.out.println("XATerminatorImpl.ExeBackinfo:" + imageInfo);
 
             BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
             });
