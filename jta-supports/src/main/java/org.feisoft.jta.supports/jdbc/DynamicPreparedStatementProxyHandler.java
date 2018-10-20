@@ -7,6 +7,7 @@ import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.DbPoolUtil;
 import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.TransactionImpl;
 import org.feisoft.jta.image.BackInfo;
@@ -174,9 +175,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         }
         Xid currentXid = TransactionImpl.currentXid.get();
         //事务数据源从对应数据库获取前置对象
-        Class.forName(XADataSourceImpl.className);
-        Connection conn = DriverManager
-                .getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
+        Connection conn = DbPoolUtil.getConnection();
         Statement st = conn.createStatement();
 
         BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
