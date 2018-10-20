@@ -60,7 +60,7 @@ public class DbPoolUtil {
                 }
             }
             result = pstmt.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(con, pstmt, null);
@@ -94,7 +94,7 @@ public class DbPoolUtil {
                 if (t != null)
                     list.add(t);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(con, pstmt, rs);
@@ -120,7 +120,7 @@ public class DbPoolUtil {
             while (rs.next()) {
                total = rs.getInt("total");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             close(con, pstmt, rs);

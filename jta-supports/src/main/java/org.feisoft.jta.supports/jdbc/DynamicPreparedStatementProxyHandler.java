@@ -40,6 +40,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     Logger logger = LoggerFactory.getLogger(DynamicPreparedStatementProxyHandler.class);
 
+    List<String> proxyMethods = Arrays
+            .asList("executeUpdate", "execute", "executeBatch", "executeLargeBatch", "executeLargeUpdate");
+
+    List<String> insideTableNames = Arrays.asList("txc_lock", "txc_undo_log");
+
     private Object realObject;
 
     private String sql;
@@ -66,14 +71,25 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             return method.invoke(realObject, args);
         }
 
-        System.out.println("invoke method=" + method.getName());
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
             //            Integer seq = (Integer) args[0];
             params.add(args[1]);
         }
-        List<String> proxyMethods = Arrays
-                .asList("executeUpdate", "execute", "executeBatch", "executeLargeBatch", "executeLargeUpdate");
+
         if (proxyMethods.contains(method.getName())) {
+            if (args != null) {
+                Object param0 = args[0];
+                if (param0 instanceof String) {
+                    String strParam0 = param0.toString();
+                    if (SqlpraserUtils.assertExeSql(strParam0)) {
+                        String tableName = SqlpraserUtils.name_exesql_table(sql);
+                        //内部表使用sql
+                        if (insideTableNames.contains(tableName)) {
+                            return method.invoke(realObject, args);
+                        }
+                    }
+                }
+            }
             return invokUpdate(method, args);
         }
 
@@ -157,8 +173,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     }
 
     private Object invokUpdate(Method method, Object[] args)
-            throws SQLException, XAException, JSQLParserException, IllegalAccessException,
-            InvocationTargetException {
+            throws SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
         BackInfo backInfo = new BackInfo();
         Object obj = null;
         Object pkVal = null;
@@ -177,8 +192,6 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         String GloableXid = partGloableXid(currentXid);
         String branchXid = partBranchXid(currentXid);
         getXlock(resolver, GloableXid, branchXid);
-
-
 
         if (SqlpraserUtils.assertInsert(sql)) {
             ResultSet generatedKeys = null;
@@ -232,7 +245,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         }
         String backSqlJson = JSON.toJSONString(backInfo);
         String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
-        DbPoolUtil.executeUpdate(logSql,GloableXid,branchXid,backSqlJson,0,getHost());
+        DbPoolUtil.executeUpdate(logSql, GloableXid, branchXid, backSqlJson, 0, getHost());
 
         //事务数据源从对应数据库获取后置对象
         return obj;
@@ -248,7 +261,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         if (matcher.find()) {
             host = matcher.group();
         }
-        DbPoolUtil.close(conn,null,null);
+        DbPoolUtil.close(conn, null, null);
         return host;
     }
 
