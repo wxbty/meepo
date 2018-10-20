@@ -27,7 +27,7 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 		TransactionTimer transactionTimer = beanFactory.getTransactionTimer();
 		TransactionRecovery transactionRecovery = beanFactory.getTransactionRecovery();
 		try {
-//			transactionRecovery.startRecovery();
+			transactionRecovery.startRecovery();
 //			transactionRecovery.timingRecover();
 		} catch (RuntimeException rex) {
 			logger.error("TransactionRecovery init failed!", rex);
