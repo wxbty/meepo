@@ -2,12 +2,16 @@ package org.feisoft.jta.image.Resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 import org.feisoft.jta.image.LineFileds;
 
 import javax.transaction.xa.XAException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,16 +20,21 @@ import java.util.Map;
 public abstract class BaseResolvers implements ImageResolvers {
 
     protected BackInfo backInfo;
-    protected Connection conn;
-    protected Statement stmt;
 
     protected String schema;
+
     protected String tableName;
+
     protected String primaryKey;
+
     protected String allColumns;
+
     protected String sqlWhere;
+
     protected List<String> column_list;
+
     protected String orginSql;
+
     protected String beforeImageSql;
 
     protected Image genImage() throws SQLException, JSQLParserException, XAException {
@@ -35,31 +44,31 @@ public abstract class BaseResolvers implements ImageResolvers {
         sqlWhere = getSqlWhere();
         column_list = getColumnList();
         allColumns = getAllColumns();
-        schema = getMetaSchema(conn,tableName);
-
+        schema = getMetaSchema();
 
         Image image = new Image();
-        List<Map<String, Object>> key_value_list = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> key_value_list;
 
         getBeforeImageSql();
-        ResultSet rs = stmt.executeQuery(beforeImageSql);
-        while (rs.next()) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            for (String col : column_list) {
-                map.put(col, rs.getObject(col));
+
+        key_value_list = DbPoolUtil.executeQuery(beforeImageSql, rs -> {
+            Map<String, Object> keyObjMap = new HashMap<>();
+            try {
+                for (String col : column_list) {
+                    keyObjMap.put(col, rs.getObject(col));
+                }
+                keyObjMap.put(primaryKey, rs.getObject(primaryKey));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            map.put(primaryKey, rs.getObject(primaryKey));
-            key_value_list.add(map);
-        }
-        if (!rs.isClosed()) {
-            rs.close();
-        }
+            return keyObjMap;
+        }, null);
+
         List<LineFileds> line = new ArrayList<LineFileds>();
 
         for (Map<String, Object> peMap : key_value_list) {
             LineFileds lf = new LineFileds();
             List<org.feisoft.jta.image.Field> fileds = new ArrayList<org.feisoft.jta.image.Field>();
-            StringBuffer backSql = new StringBuffer();
             for (String col : peMap.keySet()) {
                 org.feisoft.jta.image.Field field = new org.feisoft.jta.image.Field();
                 field.setName(col);
@@ -89,10 +98,9 @@ public abstract class BaseResolvers implements ImageResolvers {
     @Override
     public abstract Image genAfterImage() throws SQLException, XAException, JSQLParserException;
 
-
     public abstract String getTable() throws JSQLParserException, XAException;
 
-    protected void getBeforeImageSql() throws SQLException {
+    protected void getBeforeImageSql() {
         StringBuffer sqlJoint = new StringBuffer("select ");
         sqlJoint.append(primaryKey + "," + allColumns);
         sqlJoint.append(" from ");
@@ -101,15 +109,15 @@ public abstract class BaseResolvers implements ImageResolvers {
             sqlJoint.append(" where ");
             sqlJoint.append(sqlWhere);
         }
-         beforeImageSql = sqlJoint.toString();
+        beforeImageSql = sqlJoint.toString();
     }
 
     protected String getschema() throws SQLException {
-        return getMetaSchema(conn, tableName);
+        return getMetaSchema();
     }
 
     protected String getPrimaryKey() throws SQLException {
-        return getMetaPrimaryKey(conn, tableName);
+        return getMetaPrimaryKey(tableName);
     }
 
     protected String getAllColumns() {
@@ -125,42 +133,40 @@ public abstract class BaseResolvers implements ImageResolvers {
 
     ;
 
-    public String getMetaPrimaryKey(Connection con, String tableName) throws SQLException {
-        DatabaseMetaData dbMetaData = con.getMetaData();
-        ResultSet primaryKeyResultSet = dbMetaData.getPrimaryKeys(con.getCatalog(), null, tableName);
+    public String getMetaPrimaryKey(String tableName) throws SQLException {
+        Connection conn = DbPoolUtil.getConnection();
+        DatabaseMetaData dbMetaData = conn.getMetaData();
+        ResultSet primaryKeyResultSet = dbMetaData.getPrimaryKeys(conn.getCatalog(), null, tableName);
         String primaryKeyColumnName = "";
         while (primaryKeyResultSet.next()) {
             primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
         }
-        if (!primaryKeyResultSet.isClosed()) {
-            primaryKeyResultSet.close();
-        }
+        DbPoolUtil.close(conn, null, primaryKeyResultSet);
+
         return primaryKeyColumnName;
     }
 
-    public String getMetaSchema(Connection con, String tableName) throws SQLException {
-        DatabaseMetaData dbMetaData = con.getMetaData();
-        ResultSet schemasResultSet = dbMetaData.getSchemas(con.getCatalog(), null);
+    public String getMetaSchema() throws SQLException {
+        Connection conn = DbPoolUtil.getConnection();
+        DatabaseMetaData dbMetaData = conn.getMetaData();
+        ResultSet schemasResultSet = dbMetaData.getSchemas(conn.getCatalog(), null);
         String schemasName = "";
         while (schemasResultSet.next()) {
             schemasName = schemasResultSet.getString("TABLE_SCHEM");
         }
-        if (!schemasResultSet.isClosed()) {
-            schemasResultSet.close();
-        }
+        DbPoolUtil.close(conn, null, schemasResultSet);
         return schemasName;
     }
 
     protected Map<String, Object> getColumns() throws SQLException {
+        Connection conn = DbPoolUtil.getConnection();
         DatabaseMetaData dbMetaData = conn.getMetaData();
         ResultSet columResultSet = dbMetaData.getColumns(null, "%", tableName, "%");
         Map<String, Object> colums = new HashMap<>();
         while (columResultSet.next()) {
             colums.put(columResultSet.getString("COLUMN_NAME"), columResultSet.getObject("TYPE_NAME"));
         }
-        if (!columResultSet.isClosed()) {
-            columResultSet.close();
-        }
+        DbPoolUtil.close(conn, null, columResultSet);
         return colums;
     }
 
@@ -176,7 +182,5 @@ public abstract class BaseResolvers implements ImageResolvers {
     }
 
     abstract public String getLockedSet() throws JSQLParserException, SQLException, XAException;
-
-
 
 }

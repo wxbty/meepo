@@ -1,18 +1,3 @@
-/**
- * Copyright 2014-2016 yangming.liu<bytefox@126.com>.
- * <p>
- * This copyrighted material is made available to anyone wishing to use, modify,
- * copy, or redistribute it subject to the terms and conditions of the GNU
- * Lesser General Public License, as published by the Free Software Foundation.
- * <p>
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
- * for more details.
- * <p>
- * You should have received a copy of the GNU Lesser General Public License
- * along with this distribution; if not, see <http://www.gnu.org/licenses/>.
- */
 package org.feisoft.common.utils;
 
 import net.sf.jsqlparser.JSQLParserException;
@@ -53,6 +38,7 @@ public class SqlpraserUtils {
     // ********* insert table column
     public static List<String> name_insert_column(String sql)
             throws JSQLParserException {
+        System.out.println("sql="+sql);
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Insert insertStatement = (Insert) statement;
         List<Column> table_column = insertStatement.getColumns();

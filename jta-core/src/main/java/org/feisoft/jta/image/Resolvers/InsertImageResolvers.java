@@ -1,16 +1,14 @@
 package org.feisoft.jta.image.Resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
+import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
-import org.feisoft.common.utils.SqlpraserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.xa.XAException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +23,9 @@ public class InsertImageResolvers extends BaseResolvers {
     private Object pkVal;
 
 
-    InsertImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement stmt) {
+    InsertImageResolvers(String orginSql, BackInfo backInfo) {
         this.orginSql = orginSql;
         this.backInfo = backInfo;
-        this.conn = conn;
-        this.stmt = stmt;
     }
 
     @Override
@@ -70,7 +66,7 @@ public class InsertImageResolvers extends BaseResolvers {
     @Override
     public String getLockedSet() throws JSQLParserException, SQLException {
         List<String> insertCols = SqlpraserUtils.name_insert_column(orginSql);
-        String pk = getMetaPrimaryKey(conn, getTable());
+        String pk = getMetaPrimaryKey(getTable());
         StringBuffer sqlJoint = new StringBuffer("select ");
         sqlJoint.append(transList(insertCols));
         sqlJoint.append(" from ");

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public interface ImageResolvers {
 
-    public Image genBeforeImage() throws SQLException, JSQLParserException, XAException;
+    Image genBeforeImage() throws SQLException, JSQLParserException, XAException;
 
-    public  Image genAfterImage() throws SQLException, XAException, JSQLParserException;
+    Image genAfterImage() throws SQLException, XAException, JSQLParserException;
 }
