@@ -103,4 +103,30 @@ public class DbPoolUtil {
         return list;
     }
 
+    public static int countList(String sql) throws SQLException {
+
+        //sql格式，select count(0) as total from ..
+        //todo sql格式
+        int total = 0;
+        Connection con = getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            //传入参数
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            //读出
+            while (rs.next()) {
+               total = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con, pstmt, rs);
+        }
+
+        return total;
+    }
+
 }
