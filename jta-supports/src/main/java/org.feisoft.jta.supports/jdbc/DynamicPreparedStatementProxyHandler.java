@@ -7,6 +7,7 @@ import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
 import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.TransactionImpl;
 import org.feisoft.jta.image.BackInfo;
@@ -30,15 +31,19 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     Logger logger = LoggerFactory.getLogger(DynamicPreparedStatementProxyHandler.class);
+
+    List<String> proxyMethods = Arrays
+            .asList("executeUpdate", "execute", "executeBatch", "executeLargeBatch", "executeLargeUpdate");
+
+    List<String> insideTableNames = Arrays.asList("txc_lock", "txc_undo_log");
 
     private Object realObject;
 
@@ -66,14 +71,31 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             return method.invoke(realObject, args);
         }
 
-        System.out.println("invoke method=" + method.getName());
         if (method.getName().startsWith("set") && args != null && args.length == 2) {
-//            Integer seq = (Integer) args[0];
+            //            Integer seq = (Integer) args[0];
             params.add(args[1]);
         }
-        List<String> proxyMethods = Arrays
-                .asList("executeUpdate", "execute", "executeBatch", "executeLargeBatch", "executeLargeUpdate");
+
         if (proxyMethods.contains(method.getName())) {
+            if (args != null) {
+                Object param0 = args[0];
+                if (param0 instanceof String) {
+                    String strParam0 = param0.toString();
+                    if (SqlpraserUtils.assertExeSql(strParam0)) {
+                        String tableName = SqlpraserUtils.name_exesql_table(strParam0);
+                        //内部表使用sql
+                        if (insideTableNames.contains(tableName)) {
+                            return method.invoke(realObject, args);
+                        }
+                    }
+                }
+            } else if (SqlpraserUtils.assertExeSql(sql)) {
+                String tableName = SqlpraserUtils.name_exesql_table(sql);
+                //内部表使用sql
+                if (insideTableNames.contains(tableName)) {
+                    return method.invoke(realObject, args);
+                }
+            }
             return invokUpdate(method, args);
         }
 
@@ -111,15 +133,13 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     private Object lockForUpdate(Method method, Object[] args)
             throws SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
-        Connection conn = xaConn.getConnection();
-        Statement st = conn.createStatement();
         BackInfo backInfo = new BackInfo();
-        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
+        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo);
         backInfo.setBeforeImage(resolver.genBeforeImage());
         Xid currentXid = TransactionImpl.currentXid.get();
         String GloableXid = partGloableXid(currentXid);
         String branchXid = partBranchXid(currentXid);
-        getXlock(conn, st, resolver, GloableXid, branchXid);
+        getXlock(resolver, GloableXid, branchXid);
 
         return method.invoke(realObject, args);
     }
@@ -137,7 +157,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
             BackInfo backInfo = new BackInfo();
             BaseResolvers resolver = ImageUtil
-                    .getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo, conn, st);
+                    .getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo);
             backInfo.setBeforeImage(resolver.genBeforeImage());
             currentXid = TransactionImpl.currentXid.get();
             String GloableXid = partGloableXid(currentXid);
@@ -159,10 +179,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     }
 
     private Object invokUpdate(Method method, Object[] args)
-            throws ClassNotFoundException, SQLException, XAException, JSQLParserException, IllegalAccessException,
-            InvocationTargetException {
+            throws SQLException, XAException, JSQLParserException, IllegalAccessException, InvocationTargetException {
         BackInfo backInfo = new BackInfo();
-        PreparedStatement ps = null;
         Object obj = null;
         Object pkVal = null;
 
@@ -174,22 +192,12 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         }
         Xid currentXid = TransactionImpl.currentXid.get();
         //事务数据源从对应数据库获取前置对象
-        Class.forName(XADataSourceImpl.className);
-        Connection conn = DriverManager
-                .getConnection(XADataSourceImpl.url, XADataSourceImpl.user, XADataSourceImpl.password);
-        Statement st = conn.createStatement();
 
-        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo, conn, st);
+        BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo);
         backInfo.setBeforeImage(resolver.genBeforeImage());
         String GloableXid = partGloableXid(currentXid);
         String branchXid = partBranchXid(currentXid);
-        getXlock(conn, st, resolver, GloableXid, branchXid);
-        String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
-        ps = conn.prepareStatement(logSql);
-        ps.setString(1, GloableXid);
-        ps.setString(2, branchXid);
-        ps.setInt(4, 0);
-        ps.setString(5, getHost(conn));
+        getXlock(resolver, GloableXid, branchXid);
 
         if (SqlpraserUtils.assertInsert(sql)) {
             ResultSet generatedKeys = null;
@@ -210,7 +218,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             }
 
             if (pkVal == null) {
-                String pkKey = resolver.getMetaPrimaryKey(conn, SqlpraserUtils.name_insert_table(sql));
+                String pkKey = resolver.getMetaPrimaryKey(SqlpraserUtils.name_insert_table(sql));
                 List<String> colums = SqlpraserUtils.name_insert_column(sql);
                 List<String> values = SqlpraserUtils.name_insert_values(sql);
                 if (colums.contains(pkKey)) {
@@ -242,20 +250,15 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             backInfo.setAfterImage(resolver.genAfterImage());
         }
         String backSqlJson = JSON.toJSONString(backInfo);
-        ps.setString(3, backSqlJson);
-        ps.executeUpdate();         //执行sql语句
+        String logSql = "INSERT INTO txc_undo_log (gmt_create,gmt_modified,xid,branch_id,rollback_info,status,server) VALUES(now(),now(),?,?,?,?,?)";
+        DbPoolUtil.executeUpdate(logSql, GloableXid, branchXid, backSqlJson, 0, getHost());
 
-        if (st != null) {
-            st.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
         //事务数据源从对应数据库获取后置对象
         return obj;
     }
 
-    private String getHost(Connection conn) throws SQLException {
+    private String getHost() throws SQLException {
+        Connection conn = DbPoolUtil.getConnection();
         DatabaseMetaData md = conn.getMetaData();
         String url = md.getURL();
         String host = "";
@@ -264,18 +267,19 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         if (matcher.find()) {
             host = matcher.group();
         }
+        DbPoolUtil.close(conn, null, null);
         return host;
     }
 
-    private void getXlock(Connection conn, Statement st, BaseResolvers resolver, String gloableXid, String branchXid)
+    private void getXlock(BaseResolvers resolver, String gloableXid, String branchXid)
             throws XAException, JSQLParserException, SQLException {
 
         long atime = System.currentTimeMillis();
 
         do {
             long btime = System.currentTimeMillis();
-            List<TxcLock> lockList = getMutexLock(gloableXid, branchXid, resolver, sql, conn, st);
-            if (lockCurrent(st, lockList))
+            List<TxcLock> lockList = getMutexLock(gloableXid, branchXid, resolver);
+            if (lockCurrent(lockList))
                 return;
             if (btime - atime > timeOut) {
                 throw new XAException("Proxy.getLockTimeout");
@@ -291,8 +295,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         do {
             long btime = System.currentTimeMillis();
-            List<TxcLock> lockList = getShareLock(gloableXid, branchXid, resolver, sql, conn, st);
-            if (lockCurrent(st, lockList))
+            List<TxcLock> lockList = getShareLock(gloableXid, branchXid, resolver, sql);
+            if (lockCurrent(lockList))
                 return;
             if (btime - atime > timeOut) {
                 throw new XAException("Proxy.getLockTimeout");
@@ -301,11 +305,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
     }
 
-    private boolean lockCurrent(Statement st, List<TxcLock> lockList) {
+    private boolean lockCurrent(List<TxcLock> lockList) {
         if (lockList.size() > 0) {
             for (TxcLock lock : lockList) {
                 try {
-                    lock.lock(st);
+                    lock.lock();
                 } catch (SQLException e) {
                     logger.info("getXlock -- Data locked by other,retry");
                     return false;
@@ -315,41 +319,25 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         return true;
     }
 
-    private List<TxcLock> getMutexLock(String gloableXid, String branchXid, BaseResolvers resolver, String sql,
-                                       Connection conn, Statement st)
+    private List<TxcLock> getMutexLock(String gloableXid, String branchXid, BaseResolvers resolver)
             throws XAException, JSQLParserException, SQLException {
 
         String beforeLockSql = resolver.getLockedSet();
-        ResultSet result = st.executeQuery(beforeLockSql);
-        String pk = resolver.getMetaPrimaryKey(conn, resolver.getTable());
-        List<TxcLock> lockList = new ArrayList<>();
-        List<String> R1list = new ArrayList<>();
-        while (result.next()) {
-            R1list.add(result.getObject(pk).toString());
-        }
-        if (!result.isClosed()) {
-            result.close();
-        }
+        String primaryKey = resolver.getMetaPrimaryKey(resolver.getTable());
 
-        if (R1list.size() == 0) {
+        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, rs -> rs.getObject(primaryKey).toString(), null);
+        List<TxcLock> lockList = new ArrayList<>();
+
+        if (allList.size() == 0) {
             return lockList;
         }
-
         String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid
-                + "' and table_name = '" + resolver.getTable() + "'";
-        if (R1list.size() > 0)
-            lockSql += " and key_value in(" + resolver.transList(R1list) + ")";
-        List<String> R2list = new ArrayList<>();
-        ResultSet lockResult = st.executeQuery(lockSql);
-        while (lockResult.next()) {
-            R2list.add(lockResult.getString("key_value"));
-        }
-        if (!lockResult.isClosed()) {
-            lockResult.close();
-        }
+                + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver.transList(allList)
+                + ")";
+        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, rs -> rs.getObject("key_value").toString(), null);
 
-        R1list.removeAll(R2list);
-        for (String r3str : R1list) {
+        allList.removeAll(lockedList);
+        for (String unlockRecord : allList) {
 
             MutexLock lock = new MutexLock();
             lock.setLock(Boolean.FALSE);
@@ -358,7 +346,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             lock.setTableName(resolver.getTable());
             lock.setXlock("1");
             lock.setSlock(0);
-            lock.setKeyValue(r3str);
+            lock.setKeyValue(unlockRecord);
             lock.setCreateTime(System.currentTimeMillis());
             lockList.add(lock);
         }
@@ -366,38 +354,29 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         return lockList;
     }
 
-    private List<TxcLock> getShareLock(String gloableXid, String branchXid, BaseResolvers resolver, String sql,
-                                       Connection conn, Statement st)
+    private List<TxcLock> getShareLock(String gloableXid, String branchXid, BaseResolvers resolver, String sql)
             throws XAException, JSQLParserException, SQLException {
 
         String beforeLockSql = resolver.getLockedSet();
-        ResultSet result = st.executeQuery(beforeLockSql);
-        String pk = resolver.getMetaPrimaryKey(conn, resolver.getTable());
+
+        String primaryKey = resolver.getMetaPrimaryKey(resolver.getTable());
+        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, rs -> rs.getObject(primaryKey).toString(), null);
+
         List<TxcLock> lockList = new ArrayList<>();
-        List<String> R1list = new ArrayList<>();
-        while (result.next()) {
-            R1list.add(result.getObject(pk).toString());
-        }
-        if (!result.isClosed()) {
-            result.close();
-        }
 
         String lockSql =
                 "select key_value,count(*) as count from txc_lock where xid='" + gloableXid + "'  and branch_id ='"
                         + branchXid + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver
-                        .transList(R1list) + ") group by key_value";
-        List<String> R2list = new ArrayList<>();
-        ResultSet lockResult = st.executeQuery(lockSql);
-        while (lockResult.next()) {
-            if (lockResult.getInt("count") > 1)
-                R2list.add(lockResult.getString("key_value"));
-        }
-        if (!lockResult.isClosed()) {
-            lockResult.close();
-        }
+                        .transList(allList) + ") group by key_value";
+        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, rs -> {
+            String tmp = null;
+            if (rs.getInt("count") > 1)
+                tmp = rs.getString("key_value");
+            return tmp;
+        }, null);
 
-        R1list.removeAll(R2list);
-        for (String r3str : R1list) {
+        allList.removeAll(lockedList);
+        for (String r3str : allList) {
 
             ShareLock lock = new ShareLock();
             lock.setLock(Boolean.FALSE);
@@ -415,8 +394,6 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     }
 
     /**
-     * 在开发过程，SQL语句有可能写错，如果能把运行时出错的 SQL 语句直接打印出来，那对排错非常方便，因为其可以直接拷贝到数据库客户端进行调试。
-     *
      * @param sql    SQL 语句，可以带有 ? 的占位符
      * @param params 插入到 SQL 中的参数，可单个可多个可不填
      * @return 实际 sql 语句
@@ -434,7 +411,6 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         int cols = params.size();
         Object[] values = new Object[cols];
         params.toArray(values);
-        //        System.arraycopy(params, 0, values, 0, cols);
         for (int i = 0; i < cols; i++) {
             Object value = values[i];
             if (value instanceof Date || value instanceof Timestamp || value instanceof String

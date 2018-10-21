@@ -1,7 +1,8 @@
 package org.feisoft.jta.lock;
 
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
+
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public abstract class TxcLock implements  Lock{
 
@@ -94,23 +95,23 @@ public abstract class TxcLock implements  Lock{
 
 
     @Override
-    public abstract void lock(Statement st) throws SQLException;
+    public abstract void lock() throws SQLException;
 
     @Override
-    public abstract void unlock(Statement st) throws SQLException;
+    public abstract void unlock() throws SQLException;
 
-    protected  void insertLock(Statement st) throws SQLException {
+    protected  void insertLock() throws SQLException {
         String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock,create_time)values(";
         sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xlock+"',"+slock+","+createTime;
         sql += ")";
-        st.executeUpdate(sql);
+        DbPoolUtil.executeUpdate(sql);
     };
 
 
 
-    protected  void deleteLock(Statement st) throws SQLException {
+    protected  void deleteLock() throws SQLException {
         String sql = "delete from txc_lock  where id = "+id;
-        st.executeUpdate(sql);
+        DbPoolUtil.executeUpdate(sql);
     };
 
 }

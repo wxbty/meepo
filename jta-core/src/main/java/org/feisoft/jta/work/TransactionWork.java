@@ -23,7 +23,6 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 
 	public void run() {
 
-		System.out.println("threadName="+Thread.currentThread().getName());
 		TransactionTimer transactionTimer = beanFactory.getTransactionTimer();
 		TransactionRecovery transactionRecovery = beanFactory.getTransactionRecovery();
 		try {

@@ -13,12 +13,10 @@ import java.util.List;
 
 public class UpdateImageResolvers extends BaseResolvers {
 
-    UpdateImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement stmt)
+    UpdateImageResolvers(String orginSql, BackInfo backInfo)
     {
         this.orginSql =orginSql;
         this.backInfo = backInfo;
-        this.conn = conn;
-        this.stmt = stmt;
     }
 
 

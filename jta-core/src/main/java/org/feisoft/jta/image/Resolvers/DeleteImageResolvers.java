@@ -1,30 +1,20 @@
 package org.feisoft.jta.image.Resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
+import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
-import org.feisoft.common.utils.SqlpraserUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.transaction.xa.XAException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteImageResolvers extends BaseResolvers {
 
-    static final Logger logger = LoggerFactory.getLogger(DeleteImageResolvers.class);
-
-
-    DeleteImageResolvers(String orginSql, BackInfo backInfo, Connection conn, Statement stmt)
-    {
-        this.orginSql =orginSql;
+    DeleteImageResolvers(String orginSql, BackInfo backInfo) {
+        this.orginSql = orginSql;
         this.backInfo = backInfo;
-        this.conn = conn;
-        this.stmt = stmt;
     }
 
     @Override
@@ -34,7 +24,7 @@ public class DeleteImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public Image genAfterImage()  {
+    public Image genAfterImage() {
         Image image = new Image();
         image.setSchemaName(schema);
         image.setTableName(tableName);
@@ -52,7 +42,6 @@ public class DeleteImageResolvers extends BaseResolvers {
         return tables.get(0);
     }
 
-
     @Override
     protected String getSqlWhere() throws JSQLParserException {
         return SqlpraserUtils.name_delete_where(orginSql);
@@ -62,6 +51,5 @@ public class DeleteImageResolvers extends BaseResolvers {
     public String getLockedSet() throws JSQLParserException {
         return beforeImageSql;
     }
-
 
 }
