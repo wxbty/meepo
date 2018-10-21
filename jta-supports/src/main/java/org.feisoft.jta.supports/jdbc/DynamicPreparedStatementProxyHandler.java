@@ -276,15 +276,16 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         long atime = System.currentTimeMillis();
 
+        long btime;
         do {
-            long btime = System.currentTimeMillis();
-            List<TxcLock> lockList = getMutexLock(gloableXid, branchXid, resolver);
-            if (lockCurrent(lockList))
+            btime = System.currentTimeMillis();
+            List<TxcLock> lockList = this.getMutexLock(gloableXid, branchXid, resolver);
+            if (this.lockCurrent(lockList)) {
                 return;
-            if (btime - atime > timeOut) {
-                throw new XAException("Proxy.getLockTimeout");
             }
-        } while (true);
+        } while(btime - atime <= (long)this.timeOut);
+
+        throw new XAException("Proxy.getLockTimeout");
 
     }
 
@@ -310,8 +311,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             for (TxcLock lock : lockList) {
                 try {
                     lock.lock();
-                } catch (SQLException e) {
-                    logger.info("getXlock -- Data locked by other,retry");
+                } catch (Exception e) {
+                    logger.info("getXlock -- Data locked by other,retry",e);
                     return false;
                 }
             }
@@ -319,7 +320,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         return true;
     }
 
-    private List<TxcLock> getMutexLock(String gloableXid, String branchXid, BaseResolvers resolver)
+    private synchronized List<TxcLock> getMutexLock(String gloableXid, String branchXid, BaseResolvers resolver)
             throws XAException, JSQLParserException, SQLException {
 
         String beforeLockSql = resolver.getLockedSet();
