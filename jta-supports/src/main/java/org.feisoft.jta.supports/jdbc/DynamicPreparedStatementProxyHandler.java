@@ -82,12 +82,18 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                 if (param0 instanceof String) {
                     String strParam0 = param0.toString();
                     if (SqlpraserUtils.assertExeSql(strParam0)) {
-                        String tableName = SqlpraserUtils.name_exesql_table(sql);
+                        String tableName = SqlpraserUtils.name_exesql_table(strParam0);
                         //内部表使用sql
                         if (insideTableNames.contains(tableName)) {
                             return method.invoke(realObject, args);
                         }
                     }
+                }
+            } else if (SqlpraserUtils.assertExeSql(sql)) {
+                String tableName = SqlpraserUtils.name_exesql_table(sql);
+                //内部表使用sql
+                if (insideTableNames.contains(tableName)) {
+                    return method.invoke(realObject, args);
                 }
             }
             return invokUpdate(method, args);
@@ -326,7 +332,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             return lockList;
         }
         String lockSql = "select key_value from txc_lock where xid='" + gloableXid + "'  and branch_id ='" + branchXid
-                + "' and table_name = '" + resolver.getTable() + "and key_value in(" + resolver.transList(allList)
+                + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver.transList(allList)
                 + ")";
         List<String> lockedList = DbPoolUtil.executeQuery(lockSql, rs -> rs.getObject("key_value").toString(), null);
 

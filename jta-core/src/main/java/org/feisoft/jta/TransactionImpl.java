@@ -358,7 +358,6 @@ public class TransactionImpl implements Transaction {
             throw ex;
         } finally {
             if (unFinishExists == false) {
-                System.out.println("-------------xxxxxxxxxxx-----1、-------- trans will be prepared");
                 this.transactionStatus = Status.STATUS_PREPARED;
                 archive.setStatus(this.transactionStatus);
                 this.transactionListenerList.onPrepareSuccess(xid);
@@ -1618,7 +1617,6 @@ public class TransactionImpl implements Transaction {
         try {
             TransactionStrategy currentStrategy = this.getTransactionStrategy();
             currentStrategy.start(xid);
-            System.out.println("-------------xxxxxxxxxxx-----4、-------- trans will be prepared");
             this.transactionStatus = Status.STATUS_PREPARED;
             archive.setStatus(this.transactionStatus);
             return 0;

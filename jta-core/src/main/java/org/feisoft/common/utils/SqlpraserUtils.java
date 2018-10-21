@@ -14,8 +14,6 @@ import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
 import net.sf.jsqlparser.util.TablesNamesFinder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -23,7 +21,6 @@ import java.util.List;
 
 public class SqlpraserUtils {
 
-    static final Logger logger = LoggerFactory.getLogger(SqlpraserUtils.class);
 
     // ****insert table
     public static String name_insert_table(String sql) throws JSQLParserException {
@@ -35,11 +32,10 @@ public class SqlpraserUtils {
 
     // ********* insert table column
     public static List<String> name_insert_column(String sql) throws JSQLParserException {
-        System.out.println("sql=" + sql);
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Insert insertStatement = (Insert) statement;
         List<Column> table_column = insertStatement.getColumns();
-        List<String> str_column = new ArrayList<String>();
+        List<String> str_column = new ArrayList<>();
         for (int i = 0; i < table_column.size(); i++) {
             str_column.add(table_column.get(i).toString());
         }
@@ -51,7 +47,7 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Insert insertStatement = (Insert) statement;
         List<Expression> insert_values_expression = ((ExpressionList) insertStatement.getItemsList()).getExpressions();
-        List<String> str_values = new ArrayList<String>();
+        List<String> str_values = new ArrayList<>();
         for (int i = 0; i < insert_values_expression.size(); i++) {
             str_values.add(insert_values_expression.get(i).toString());
         }
@@ -63,7 +59,7 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Update updateStatement = (Update) statement;
         List<Table> update_table = updateStatement.getTables();
-        List<String> str_table = new ArrayList<String>();
+        List<String> str_table = new ArrayList<>();
         if (update_table != null) {
             for (int i = 0; i < update_table.size(); i++) {
                 str_table.add(update_table.get(i).toString());
@@ -77,7 +73,7 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Delete updateStatement = (Delete) statement;
         Table update_table = updateStatement.getTable();
-        List<String> str_table = new ArrayList<String>();
+        List<String> str_table = new ArrayList<>();
         if (update_table != null) {
             str_table.add(update_table.toString());
         }
@@ -103,7 +99,7 @@ public class SqlpraserUtils {
     }
 
     public static List<String> name_select_table(String sql) throws JSQLParserException {
-        Statement statement = (Statement) CCJSqlParserUtil.parse(sql);
+        Statement statement =  CCJSqlParserUtil.parse(sql);
         Select selectStatement = (Select) statement;
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
         List<String> tableList = tablesNamesFinder.getTableList(selectStatement);
@@ -127,7 +123,7 @@ public class SqlpraserUtils {
         net.sf.jsqlparser.statement.Statement statement = CCJSqlParserUtil.parse(sql);
         Update updateStatement = (Update) statement;
         List<Column> update_column = updateStatement.getColumns();
-        List<String> str_column = new ArrayList<String>();
+        List<String> str_column = new ArrayList<>();
         if (update_column != null) {
             for (int i = 0; i < update_column.size(); i++) {
                 str_column.add(update_column.get(i).toString());

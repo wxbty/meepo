@@ -22,16 +22,9 @@ public class BackInfo {
 
     @Override
     public String toString() {
-        return "BackInfo{" +
-                "id=" + id +
-                ", beforeImage=" + beforeImage +
-                ", afterImage=" + afterImage +
-                ", selectBody='" + selectBody + '\'' +
-                ", selectWhere='" + selectWhere + '\'' +
-                ", changeType='" + changeType + '\'' +
-                ", changeSql='" + changeSql + '\'' +
-                ", pk='" + pk + '\'' +
-                '}';
+        return "BackInfo{" + "id=" + id + ", beforeImage=" + beforeImage + ", afterImage=" + afterImage
+                + ", selectBody='" + selectBody + '\'' + ", selectWhere='" + selectWhere + '\'' + ", changeType='"
+                + changeType + '\'' + ", changeSql='" + changeSql + '\'' + ", pk='" + pk + '\'' + '}';
     }
 
     public void setId(Long id) {
@@ -125,19 +118,16 @@ public class BackInfo {
     public void rollback(Statement stmt) throws XAException, SQLException {
         if (validAfterImage(stmt)) {
             rollbackBeforeImage(stmt);
-        }else
-        {
-            logger.error("Rollback unnecessary or failed");
-            System.out.println("backinfo="+toString());
+        } else {
+            logger.error("Rollback unnecessary or failed,backinfp={}", toString());
         }
     }
 
-
-
     private boolean validAfterImage(Statement stmt) throws XAException, SQLException {
 
-        if (beforeImage == null || afterImage == null || StringUtils.isEmpty(pk) || StringUtils.isEmpty(changeSql) ||
-                StringUtils.isEmpty(changeType) || StringUtils.isEmpty(selectBody) || StringUtils.isEmpty(selectWhere)) {
+        if (beforeImage == null || afterImage == null || StringUtils.isEmpty(pk) || StringUtils.isEmpty(changeSql)
+                || StringUtils.isEmpty(changeType) || StringUtils.isEmpty(selectBody) || StringUtils
+                .isEmpty(selectWhere)) {
             throw new XAException("validImageParameterNUll");
         }
         if (isDelete()) {
@@ -167,12 +157,11 @@ public class BackInfo {
                 } else {
                     andPkEquals = "  " + pk + "=" + pkVal;
                 }
-                String selectSql = null;
+                String selectSql;
                 if (getSelectWhere().toLowerCase().trim().endsWith("and"))
                     selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
                 else
-                    selectSql = getSelectBody() + getSelectWhere() +" and " +andPkEquals;
-                System.out.println("selectSql="+selectSql);
+                    selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
                 ResultSet rs = stmt.executeQuery(selectSql);
                 while (rs.next()) {
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {
@@ -183,9 +172,9 @@ public class BackInfo {
                             return nowVal.equals(entry.getValue());
                         }
                         if (!nowVal.toString().equals(entry.getValue().toString())) {
-                            logger.error("Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
-                            System.out.println("Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
-                            System.out.println("nowVal="+nowVal+",entry.getValue()="+entry.getValue());
+                            logger.error(
+                                    "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
+                            logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
 
                             return false;
                         }
@@ -263,19 +252,20 @@ public class BackInfo {
                     valSql.deleteCharAt(valSql.length() - 1);
                 }
 
-
-                String lastSql = "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql.toString() + ")";
+                String lastSql =
+                        "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql
+                                .toString() + ")";
                 stmt.execute(lastSql);
             }
         }
     }
 
     public void updateStatusFinish(Statement stmt) {
-        String sql = "update txc_undo_log set status =1 where id = "+id;
+        String sql = "update txc_undo_log set status =1 where id = " + id;
         try {
             stmt.execute(sql);
         } catch (SQLException e) {
-            logger.error("update backinfo status failed",e);
+            logger.error("update backinfo status failed", e);
             e.printStackTrace();
         }
     }
