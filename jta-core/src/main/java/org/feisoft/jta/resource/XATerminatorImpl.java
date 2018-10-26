@@ -1,18 +1,16 @@
 /**
  * Copyright 2014-2016 yangming.liu<bytefox@126.com>.
- * <p>
  * This copyrighted material is made available to anyone wishing to use, modify,
  * copy, or redistribute it subject to the terms and conditions of the GNU
  * Lesser General Public License, as published by the Free Software Foundation.
- * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
  * for more details.
- * <p>
  * You should have received a copy of the GNU Lesser General Public License
  * along with this distribution; if not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.feisoft.jta.resource;
 
 import com.alibaba.fastjson.JSON;
@@ -38,9 +36,11 @@ import java.util.List;
 import java.util.Map;
 
 public class XATerminatorImpl implements XATerminator {
+
     static final Logger logger = LoggerFactory.getLogger(XATerminatorImpl.class);
 
     private TransactionBeanFactory beanFactory;
+
     private final List<XAResourceArchive> resources = new ArrayList<XAResourceArchive>();
 
     public static HashMap<String, String> sourceProp = new HashMap<String, String>();
@@ -75,7 +75,6 @@ public class XATerminatorImpl implements XATerminator {
 
         return globalVote;
     }
-
 
     /**
      * error: XA_HEURHAZ, XA_HEURMIX, XA_HEURCOM, XA_HEURRB, XA_RDONLY, XAER_RMERR
@@ -316,7 +315,7 @@ public class XATerminatorImpl implements XATerminator {
 
     private void invokeTwoPhaseCommit(XAResourceArchive archive) throws XAException, SQLException {
         //清理锁信息来代替数据库提交
-//            archive.commit(archive.getXid(), false);
+        //            archive.commit(archive.getXid(), false);
         if (archive.getDescriptor() instanceof RemoteResourceDescriptor) {
             archive.commit(archive.getXid(), false);
             return;
@@ -410,6 +409,8 @@ public class XATerminatorImpl implements XATerminator {
                 logger.error("[{}] Error occurred while rolling back xa-resource: xares= {}, branch= {}",
                         ByteUtils.byteArrayToString(archive.getXid().getGlobalTransactionId()), archive,
                         ByteUtils.byteArrayToString(archive.getXid().getBranchQualifier()), rex);
+            } catch (SQLException e) {
+                e.printStackTrace();
             } finally {
                 if (updateRequired) {
                     transactionLogger.updateResource(archive);
@@ -431,7 +432,7 @@ public class XATerminatorImpl implements XATerminator {
 
     }
 
-    private void invokeRollback(XAResourceArchive archive) throws XAException {
+    private void invokeRollback(XAResourceArchive archive) throws XAException, SQLException {
         //-1已提交状态，应用级回滚，否则数据库级回滚
         if (archive.getVote() == -1) {
 
@@ -439,18 +440,17 @@ public class XATerminatorImpl implements XATerminator {
                 archive.rollback(archive.getXid());
                 return;
             }
-            logger.info("XATerminatorImpl.bengin invokeRollback Of" + archive.getDescriptor().getDelegate().getClass().getName());
+            logger.info("XATerminatorImpl.bengin invokeRollback Of" + archive.getDescriptor().getDelegate().getClass()
+                    .getName());
             XAConnection connection = (XAConnection) archive.getDescriptor().getDelegate();
             PreparedStatement ps = null;
             //拼接PREPARE语句，在general_log查找执行中的sql
-            StringBuilder commandBuf = new StringBuilder(300);
             String GloableXid = archive.partGloableXid(archive.getXid());
             String branchXid = archive.partBranchXid(archive.getXid());
-            String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='" + GloableXid + "'";
+            String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='"
+                    + GloableXid + "'";
             Statement stmt = null;
             ResultSet rs = null;
-            List<Long> ids = new ArrayList<>();
-            List<String> backInfo = null;
             Connection conn = null;
             Map<Long, String> map = new HashMap<>();
             try {
@@ -464,28 +464,24 @@ public class XATerminatorImpl implements XATerminator {
                 if (map.size() > 0) {
                     logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
                     if (!rollback(map, conn, stmt)) {
-                        logger.error(String.format("Roll back mysql info error!,backInfo:" + backInfo.toArray().toString()));
+                        logger.error("Roll back mysql info error!,backInfo");
                     }
                 }
                 archive.releaseLock();
-            } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 //关闭自创建的连接
-                try {
+                if (rs != null)
                     rs.close();
+                if (conn != null)
                     conn.close();
+                if (stmt != null)
                     stmt.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
             }
         } else {
             logger.error("XAResourceArchive.ErrorVoteNum,vote =" + archive.getVote());
             throw new XAException("XAResourceArchive.ErrorVoteNum");
         }
-
 
     }
 
@@ -510,7 +506,6 @@ public class XATerminatorImpl implements XATerminator {
 
         return;
     }
-
 
     public void end(Xid xid, int flags) throws XAException {
         throw new XAException(XAException.XAER_RMFAIL);
@@ -575,13 +570,14 @@ public class XATerminatorImpl implements XATerminator {
         this.beanFactory = beanFactory;
     }
 
-
-    private boolean rollback(Map<Long, String> map, Connection connection, Statement stmt) throws XAException, SQLException {
+    private boolean rollback(Map<Long, String> map, Connection connection, Statement stmt)
+            throws XAException, SQLException {
 
         for (Long id : map.keySet()) {
             String imageInfo = map.get(id);
 
             BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
+
             });
 
             backInfo.rollback(stmt);
@@ -590,6 +586,5 @@ public class XATerminatorImpl implements XATerminator {
         }
         return true;
     }
-
 
 }
