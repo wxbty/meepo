@@ -223,6 +223,8 @@ public class XADataSourceImpl implements XADataSource, BeanNameAware,Initializin
                 backInfo.updateStatusFinish(stmtS);
                 if (stmtS != null)
                     stmtS.close();
+                if (connS != null)
+                    connS.close();
             }
 
             if (isExpire) {
