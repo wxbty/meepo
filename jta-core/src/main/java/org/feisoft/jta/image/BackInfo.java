@@ -1,10 +1,12 @@
 package org.feisoft.jta.image;
 
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.xa.XAException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -115,15 +117,15 @@ public class BackInfo {
         return "delete".equalsIgnoreCase(getChangeType());
     }
 
-    public void rollback(Statement stmt) throws XAException, SQLException {
-        if (validAfterImage(stmt)) {
-            rollbackBeforeImage(stmt);
+    public void rollback() throws XAException, SQLException {
+        if (validAfterImage()) {
+            rollbackBeforeImage();
         } else {
             logger.error("Rollback unnecessary or failed,backinfp={}", toString());
         }
     }
 
-    private boolean validAfterImage(Statement stmt) throws XAException, SQLException {
+    private boolean validAfterImage() throws XAException, SQLException {
 
         if (beforeImage == null || afterImage == null || StringUtils.isEmpty(pk) || StringUtils.isEmpty(changeSql)
                 || StringUtils.isEmpty(changeType) || StringUtils.isEmpty(selectBody) || StringUtils
@@ -131,11 +133,11 @@ public class BackInfo {
             throw new XAException("validImageParameterNUll");
         }
         if (isDelete()) {
+            Connection conn = DbPoolUtil.getConnection();
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectBody + selectWhere);
             boolean exist = !rs.next();
-            if (!rs.isClosed()) {
-                rs.close();
-            }
+            DbPoolUtil.close(conn, null, rs, stmt);
             return exist;
         } else if (isUpdate() || isInsert()) {
             List<LineFileds> line = afterImage.getLine();
@@ -162,6 +164,8 @@ public class BackInfo {
                     selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
                 else
                     selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
+                Connection conn = DbPoolUtil.getConnection();
+                Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(selectSql);
                 while (rs.next()) {
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {
@@ -181,9 +185,7 @@ public class BackInfo {
                     }
 
                 }
-                if (!rs.isClosed()) {
-                    rs.close();
-                }
+                DbPoolUtil.close(conn,null,rs,stmt);
 
             }
             return true;
@@ -191,11 +193,11 @@ public class BackInfo {
         return false;
     }
 
-    private void rollbackBeforeImage(Statement stmt) throws XAException, SQLException {
+    private void rollbackBeforeImage() throws XAException, SQLException {
 
         if (isInsert()) {
             String lastSql = "delete from " + afterImage.getTableName() + " " + selectWhere;
-            stmt.execute(lastSql);
+            DbPoolUtil.executeUpdate(lastSql);
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();
             for (LineFileds lf : line) {
@@ -226,7 +228,7 @@ public class BackInfo {
                 }
 
                 String lastSql = "update " + beforeImage.getTableName() + " set " + setSql + whereSql;
-                stmt.execute(lastSql);
+                DbPoolUtil.executeUpdate(lastSql);
 
             }
         } else if (isDelete()) {
@@ -255,18 +257,15 @@ public class BackInfo {
                 String lastSql =
                         "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql
                                 .toString() + ")";
-                stmt.execute(lastSql);
+                DbPoolUtil.executeUpdate(lastSql);
             }
         }
     }
 
-    public void updateStatusFinish(Statement stmt) {
+    public void updateStatusFinish() throws SQLException {
         String sql = "update txc_undo_log set status =1 where id = " + id;
-        try {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            logger.error("update backinfo status failed", e);
-            e.printStackTrace();
-        }
+        DbPoolUtil.executeUpdate(sql);
+
     }
 }
+
