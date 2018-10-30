@@ -164,28 +164,33 @@ public class BackInfo {
                     selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
                 else
                     selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
-                Connection conn = DbPoolUtil.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(selectSql);
-                while (rs.next()) {
+                List<Boolean> result = DbPoolUtil.executeQuery(selectSql, rs -> {
+                    boolean isSucess = true;
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {
                         Object nowVal = rs.getObject(entry.getKey());
                         if (nowVal instanceof java.sql.Timestamp)
                             continue;
                         if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
-                            return nowVal.equals(entry.getValue());
+                            isSucess = nowVal.equals(entry.getValue());
+                            if (!isSucess)
+                                break;
                         }
                         if (!nowVal.toString().equals(entry.getValue().toString())) {
                             logger.error(
                                     "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
                             logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
 
-                            return false;
+                            isSucess = false;
+                            break;
                         }
                     }
+                    return isSucess;
+                }, null);
 
+                for (boolean sucess : result) {
+                    if (!sucess)
+                        return false;
                 }
-                DbPoolUtil.close(conn,null,rs,stmt);
 
             }
             return true;

@@ -49,7 +49,7 @@ public class TransactionWork implements Work, TransactionBeanFactoryAware {
 			if (current >= nextRecoveryTime) {
 				nextRecoveryTime = current + this.recoveryInterval;
 				try {
-//					transactionRecovery.timingRecover();
+					transactionRecovery.timingRecover();
 				} catch (RuntimeException rex) {
 					logger.error(rex.getMessage(), rex);
 				}
