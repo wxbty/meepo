@@ -3,6 +3,7 @@ package org.feisoft.jta.image.Resolvers;
 import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.lang3.StringUtils;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.RowMap;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 import org.feisoft.jta.image.LineFileds;
@@ -51,17 +52,26 @@ public abstract class BaseResolvers implements ImageResolvers {
 
         getBeforeImageSql();
 
-        key_value_list = DbPoolUtil.executeQuery(beforeImageSql, rs -> {
-            Map<String, Object> keyObjMap = new HashMap<>();
-            try {
-                for (String col : column_list) {
-                    keyObjMap.put(col, rs.getObject(col));
+        key_value_list = DbPoolUtil.executeQuery(beforeImageSql, new RowMap<Map<String, Object>>() {
+
+            @Override
+            public Map<String, Object> rowMapping(ResultSet rs) {
+                Map<String, Object> keyObjMap = new HashMap<>();
+                try {
+                    for (String col : column_list) {
+                        keyObjMap.put(col, rs.getObject(col));
+                    }
+                    keyObjMap.put(primaryKey, rs.getObject(primaryKey));
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                keyObjMap.put(primaryKey, rs.getObject(primaryKey));
-            } catch (SQLException e) {
-                e.printStackTrace();
+                return keyObjMap;
             }
-            return keyObjMap;
+
+            @Override
+            public boolean booleanMapping(ResultSet rs) {
+                return false;
+            }
         }, null);
 
         List<LineFileds> line = new ArrayList<LineFileds>();

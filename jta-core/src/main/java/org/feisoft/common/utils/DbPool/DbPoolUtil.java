@@ -88,6 +88,33 @@ public class DbPoolUtil {
         return result;
     }
 
+    public static boolean exitListQuery(String sql, RowMap rowmap, Object... params) throws SQLException {
+        Connection con = getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = con.prepareStatement(sql);
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    pstmt.setObject(i + 1, params[i]);
+                }
+            }
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                //通过RowMap接口创建一个t 来接收读取的值
+                boolean result = rowmap.booleanMapping(rs);
+                if (!result)
+                    return false;
+            }
+        } catch (Exception e) {
+            logger.error("executeQuery SqlExcepiton", e);
+        } finally {
+            close(con, pstmt, rs);
+        }
+        return true;
+    }
+
     public static <T> List<T> executeQuery(String sql, RowMap<T> rowmap, Object... params) throws SQLException {
         List<T> list = new ArrayList<T>();
         Connection con = getConnection();

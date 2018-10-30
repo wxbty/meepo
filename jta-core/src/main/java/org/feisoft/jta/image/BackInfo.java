@@ -2,6 +2,7 @@ package org.feisoft.jta.image;
 
 import org.apache.commons.lang3.StringUtils;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.RowMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -164,33 +165,34 @@ public class BackInfo {
                     selectSql = getSelectBody() + getSelectWhere() + andPkEquals;
                 else
                     selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
-                List<Boolean> result = DbPoolUtil.executeQuery(selectSql, rs -> {
-                    boolean isSucess = true;
-                    for (Map.Entry<String, Object> entry : fds.entrySet()) {
-                        Object nowVal = rs.getObject(entry.getKey());
-                        if (nowVal instanceof java.sql.Timestamp)
-                            continue;
-                        if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
-                            isSucess = nowVal.equals(entry.getValue());
-                            if (!isSucess)
-                                break;
-                        }
-                        if (!nowVal.toString().equals(entry.getValue().toString())) {
-                            logger.error(
-                                    "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
-                            logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
 
-                            isSucess = false;
-                            break;
-                        }
+                return DbPoolUtil.exitListQuery(selectSql, new RowMap<Object>() {
+
+                    @Override
+                    public Object rowMapping(ResultSet rs) {
+                        return null;
                     }
-                    return isSucess;
-                }, null);
 
-                for (boolean sucess : result) {
-                    if (!sucess)
-                        return false;
-                }
+                    @Override
+                    public boolean booleanMapping(ResultSet rs) throws SQLException {
+                        for (Map.Entry<String, Object> entry : fds.entrySet()) {
+                            Object nowVal = rs.getObject(entry.getKey());
+                            if (nowVal instanceof java.sql.Timestamp)
+                                continue;
+                            if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
+                                return nowVal.equals(entry.getValue());
+                            }
+                            if (!nowVal.toString().equals(entry.getValue().toString())) {
+                                logger.error(
+                                        "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
+                                logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
+
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                }, null);
 
             }
             return true;
