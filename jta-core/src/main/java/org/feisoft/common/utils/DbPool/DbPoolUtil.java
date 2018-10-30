@@ -1,10 +1,7 @@
 package org.feisoft.common.utils.DbPool;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +18,18 @@ public class DbPoolUtil {
      */
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
+    }
+
+    public static void close(Connection con, PreparedStatement pstmt, ResultSet rs, Statement stmt) {
+        close(con, pstmt, rs);
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //关闭资源流
