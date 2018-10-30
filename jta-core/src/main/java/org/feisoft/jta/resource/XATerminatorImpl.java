@@ -463,7 +463,7 @@ public class XATerminatorImpl implements XATerminator {
                 }
                 if (map.size() > 0) {
                     logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
-                    if (!rollback(map, conn, stmt)) {
+                    if (!rollback(map)) {
                         logger.error("Roll back mysql info error!,backInfo");
                     }
                 }
@@ -570,8 +570,7 @@ public class XATerminatorImpl implements XATerminator {
         this.beanFactory = beanFactory;
     }
 
-    private boolean rollback(Map<Long, String> map, Connection connection, Statement stmt)
-            throws XAException, SQLException {
+    private boolean rollback(Map<Long, String> map) throws XAException, SQLException {
 
         for (Long id : map.keySet()) {
             String imageInfo = map.get(id);
@@ -580,9 +579,9 @@ public class XATerminatorImpl implements XATerminator {
 
             });
 
-            backInfo.rollback(stmt);
+            backInfo.rollback();
             backInfo.setId(id);
-            backInfo.updateStatusFinish(stmt);
+            backInfo.updateStatusFinish();
         }
         return true;
     }
