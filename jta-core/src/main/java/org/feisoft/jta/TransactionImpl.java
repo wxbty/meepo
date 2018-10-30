@@ -466,7 +466,8 @@ public class TransactionImpl implements Transaction {
 
             if (this.participantList.size() == 0) {
                 this.skipOnePhaseCommit();
-            } else if (this.participantList.size() == 1) {
+            } else if (this.participantList.size() == 1 && (this.nativeParticipantList.size() == 1
+                    || this.participant != null)) {
                 this.fireOnePhaseCommit();
             } else {
                 this.fireTwoPhaseCommit();
@@ -547,6 +548,7 @@ public class TransactionImpl implements Transaction {
 
         this.transactionListenerList.onPrepareStart(xid);
 
+
         // boolean committed = false;
         int vote = XAResource.XA_RDONLY;
         try {
@@ -561,6 +563,7 @@ public class TransactionImpl implements Transaction {
         }
 
         this.transactionListenerList.onPrepareSuccess(xid);
+
 
         if (vote == XAResource.XA_RDONLY) {
             this.transactionStatus = Status.STATUS_PREPARED;// .setStatusPrepared();
@@ -1400,6 +1403,7 @@ public class TransactionImpl implements Transaction {
     public void registerTransactionListener(TransactionListener listener) {
         this.transactionListenerList.registerTransactionListener(listener);
     }
+
 
     public void registerTransactionResourceListener(TransactionResourceListener listener) {
         this.resourceListenerList.registerTransactionResourceListener(listener);

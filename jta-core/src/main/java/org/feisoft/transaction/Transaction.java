@@ -62,6 +62,5 @@ public interface Transaction extends javax.transaction.Transaction {
 
 	public void recoveryRollback() throws RollbackRequiredException, SystemException;
 
-	public int participantStart() throws  SystemException;
 
 }
