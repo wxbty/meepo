@@ -15,7 +15,7 @@
  */
 package org.feisoft.transaction.archive;
 
-import org.feisoft.jta.resource.XATerminatorImpl;
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
 import org.feisoft.transaction.supports.resource.XAResourceDescriptor;
 import org.slf4j.Logger;
@@ -24,10 +24,7 @@ import org.slf4j.LoggerFactory;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class XAResourceArchive implements XAResource {
     static final Logger logger = LoggerFactory.getLogger(XAResourceArchive.class);
@@ -239,30 +236,11 @@ public class XAResourceArchive implements XAResource {
     }
 
 
-    public void releaseLock() throws XAException, SQLException {
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            String gloableXid = partGloableXid(getXid());
-            String branchXid = partBranchXid(getXid());
-            String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
-
-
-            Class.forName(XATerminatorImpl.sourceProp.get("className"));
-            conn = DriverManager.getConnection(XATerminatorImpl.sourceProp.get("url"), XATerminatorImpl.sourceProp.get("user"), XATerminatorImpl.sourceProp.get("password"));
-            stmt = conn.createStatement();
-            stmt.execute(sql);
-        } catch (SQLException ex) {
-            logger.error("SQL.error", ex);
-            throw new XAException("invokeTwoPhaseCommit.SQLException");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null)
-                conn.close();
-            if (stmt != null)
-                stmt.close();
-        }
+    public void releaseLock() throws SQLException {
+        String gloableXid = partGloableXid(getXid());
+        String branchXid = partBranchXid(getXid());
+        String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
+        DbPoolUtil.executeUpdate(sql);
     }
 
     public String partGloableXid(Xid xid) {
