@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.xa.XAException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -215,6 +212,15 @@ public class BackInfo {
                     fds.put(field.getName(), field.getValue());
                     if (field.getValue() instanceof String) {
                         setSql.append(" " + field.getName() + "='" + field.getValue() + "',");
+                    } else if ("java.sql.Timestamp".equals(field.getType())) {
+                        if (field.getValue() instanceof Long) {
+                            setSql.append(" " + field.getName() + "=" + new Timestamp((long) field.getValue()) + ",");
+                        } else if (field.getValue() instanceof Timestamp) {
+                            setSql.append(" " + field.getName() + "=" + field.getValue() + ",");
+
+                        } else {
+                            throw new XAException("Cannot handle type=" + field.getValue().getClass().getName());
+                        }
                     } else {
                         setSql.append(" " + field.getName() + "=" + field.getValue() + ",");
                     }
@@ -250,7 +256,11 @@ public class BackInfo {
 
                     if (field.getValue() instanceof String) {
                         valSql.append(" '" + field.getValue() + "',");
-                    } else {
+                     }else if ("java.sql.Timestamp".equals(field.getType()))
+                    {
+                        valSql.append(" '" + new Timestamp((long) field.getValue()) + "',");
+                    }
+                    else {
                         valSql.append(" " + field.getValue() + ",");
                     }
                 }
@@ -264,6 +274,7 @@ public class BackInfo {
                 String lastSql =
                         "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql
                                 .toString() + ")";
+                logger.info("exe before image ={}",lastSql);
                 DbPoolUtil.executeUpdate(lastSql);
             }
         }

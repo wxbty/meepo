@@ -1,13 +1,19 @@
 package org.feisoft.jta.lock;
 
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-public abstract class TxcLock implements  Lock{
+public abstract class TxcLock implements Lock {
+
+    static final Logger logger = LoggerFactory.getLogger(TxcLock.class);
 
     protected Long id;
+
     protected String tableName;
+
     protected String keyValue;
 
     public String getKeyValue() {
@@ -19,7 +25,9 @@ public abstract class TxcLock implements  Lock{
     }
 
     protected String xid;
+
     protected String branchId;
+
     protected String xlock;
 
     public long getCreateTime() {
@@ -32,7 +40,7 @@ public abstract class TxcLock implements  Lock{
 
     protected long createTime;
 
-    private  boolean isLock;
+    private boolean isLock;
 
     public boolean isLock() {
         return isLock;
@@ -92,26 +100,44 @@ public abstract class TxcLock implements  Lock{
         this.xlock = xlock;
     }
 
-
-
     @Override
     public abstract void lock() throws SQLException;
 
     @Override
     public abstract void unlock() throws SQLException;
 
-    protected  void insertLock() throws SQLException {
-        String sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock,create_time)values(";
-        sql += "'"+tableName+"',"+keyValue+",'"+xid+"','"+branchId+"','"+xlock+"',"+slock+","+createTime;
-        sql += ")";
+    protected void insertLock() throws SQLException {
+
+        //        synchronized (TxcLock.class) {
+        String sql = "select count(0) as total from  txc_lock where table_name = '" + tableName + "' and key_value ="
+                + keyValue + " and xlock='" + xlock + "'";
+        int total = DbPoolUtil.countList(sql);
+        if (total > 0) {
+            throw new SQLException();
+        }
+
+        String insert_sql = "insert into txc_lock (table_name,key_value,xid,branch_id,xlock,slock,create_time)values(";
+        insert_sql +=
+                "'" + tableName + "'," + keyValue + ",'" + xid + "','" + branchId + "','" + xlock + "'," + slock + ","
+                        + createTime;
+        insert_sql += ")";
+        try {
+            DbPoolUtil.executeUpdate(insert_sql);
+        } catch (Exception e) {
+            logger.error("插入lock失败，totol_sql ={},insert_sql={},total={}", sql, insert_sql, total, e);
+            throw new SQLException();
+
+        }
+        //        }
+    }
+
+    ;
+
+    protected void deleteLock() throws SQLException {
+        String sql = "delete from txc_lock  where id = " + id;
         DbPoolUtil.executeUpdate(sql);
-    };
+    }
 
-
-
-    protected  void deleteLock() throws SQLException {
-        String sql = "delete from txc_lock  where id = "+id;
-        DbPoolUtil.executeUpdate(sql);
-    };
+    ;
 
 }

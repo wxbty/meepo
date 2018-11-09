@@ -14,8 +14,8 @@ public class ShareLock extends TxcLock {
 
     @Override
     public void lock() throws SQLException {
-        String sql = "select count(0) as total from  txc_lock where table_name = '" + tableName + "' and key_value ="
-                + keyValue + " and xid='" + xid + "' and branch_id='" + branchId + "'";
+        String sql = "select count(0) as total from  txc_lock where  table_name = '" + tableName + "' and key_value ="
+                + keyValue + " and xlock='" + xlock + "'";
         int total = DbPoolUtil.countList(sql);
         if (total == 0) {
             insertLock();

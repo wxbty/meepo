@@ -68,7 +68,6 @@ public class TransactionServiceFilter implements Filter {
 
         String transactionContextContent = invocation.getAttachment(TransactionContext.class.getName());
 
-
         URL url = RpcContext.getContext().getUrl();
         String interfaceClazz = url.getServiceInterface();
         if (StringUtils.equals(invocation.getMethodName(), KEY_XA_RESOURCE_START)
