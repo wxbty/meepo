@@ -1,8 +1,8 @@
 package org.feisoft.jta.image;
 
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.DbPool.BoolRowMap;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
-import org.feisoft.common.utils.DbPool.RowMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -163,32 +163,23 @@ public class BackInfo {
                 else
                     selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
 
-                return DbPoolUtil.exitListQuery(selectSql, new RowMap<Object>() {
-
-                    @Override
-                    public Object rowMapping(ResultSet rs) {
-                        return null;
-                    }
-
-                    @Override
-                    public boolean booleanMapping(ResultSet rs) throws SQLException {
-                        for (Map.Entry<String, Object> entry : fds.entrySet()) {
-                            Object nowVal = rs.getObject(entry.getKey());
-                            if (nowVal instanceof java.sql.Timestamp)
-                                continue;
-                            if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
-                                return nowVal.equals(entry.getValue());
-                            }
-                            if (!nowVal.toString().equals(entry.getValue().toString())) {
-                                logger.error(
-                                        "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
-                                logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
-
-                                return false;
-                            }
+                return DbPoolUtil.exitListQuery(selectSql, (BoolRowMap<Object>) rs -> {
+                    for (Map.Entry<String, Object> entry : fds.entrySet()) {
+                        Object nowVal = rs.getObject(entry.getKey());
+                        if (nowVal instanceof Timestamp)
+                            continue;
+                        if (nowVal instanceof Integer && entry.getValue() instanceof Integer) {
+                            return nowVal.equals(entry.getValue());
                         }
-                        return true;
+                        if (!nowVal.toString().equals(entry.getValue().toString())) {
+                            logger.error(
+                                    "Rollback sql error,because now resultData is not equals afterImage,change to manual operation!");
+                            logger.error("nowVal=" + nowVal + ",entry.getValue()=" + entry.getValue());
+
+                            return false;
+                        }
                     }
+                    return true;
                 }, null);
 
             }
@@ -256,11 +247,9 @@ public class BackInfo {
 
                     if (field.getValue() instanceof String) {
                         valSql.append(" '" + field.getValue() + "',");
-                     }else if ("java.sql.Timestamp".equals(field.getType()))
-                    {
+                    } else if ("java.sql.Timestamp".equals(field.getType())) {
                         valSql.append(" '" + new Timestamp((long) field.getValue()) + "',");
-                    }
-                    else {
+                    } else {
                         valSql.append(" " + field.getValue() + ",");
                     }
                 }
@@ -274,7 +263,7 @@ public class BackInfo {
                 String lastSql =
                         "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql
                                 .toString() + ")";
-                logger.info("exe before image ={}",lastSql);
+                logger.info("exe before image ={}", lastSql);
                 DbPoolUtil.executeUpdate(lastSql);
             }
         }

@@ -1,11 +1,9 @@
-
 package org.feisoft.jta;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.feisoft.common.utils.ByteUtils;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
-import org.feisoft.common.utils.DbPool.RowMap;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.supports.wire.RemoteCoordinator;
 import org.feisoft.transaction.*;
@@ -19,8 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.*;
-import javax.transaction.xa.XAException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,10 +31,12 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 
     @javax.inject.Inject
     private TransactionBeanFactory beanFactory;
-    private int timeoutSeconds = 5 * 6000;
-    private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
-    private int expireMilliSeconds = 15 * 1000;
 
+    private int timeoutSeconds = 5 * 6000;
+
+    private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
+
+    private int expireMilliSeconds = 15 * 1000;
 
     public void begin() throws NotSupportedException, SystemException {
         if (this.getTransaction() != null) {
@@ -73,7 +71,8 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
         logger.info("[{}] begin-transaction", ByteUtils.byteArrayToString(globalXid.getGlobalTransactionId()));
     }
 
-    public void commit() throws RollbackException, HeuristicMixedException, HeuristicRollbackException, SecurityException,
+    public void commit()
+            throws RollbackException, HeuristicMixedException, HeuristicRollbackException, SecurityException,
             IllegalStateException, SystemException {
         Transaction transaction = this.desociateThread();
         if (transaction == null) {
@@ -278,34 +277,25 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
                     "select u.id, rollback_info,k.create_time from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +"
                             + expireMilliSeconds + "< " + now;
             AtomicBoolean isExpire = new AtomicBoolean(false);
-            DbPoolUtil.executeQuery(sql, new RowMap<Object>() {
-
-                @Override
-                public Object rowMapping(ResultSet rs) throws SQLException, XAException {
-                    Long nowMillis = System.currentTimeMillis();
-                    Long txMillis = rs.getLong("create_time");
-                    if (nowMillis - txMillis < timeoutSeconds) {
-                        logger.debug("Not go to expired txc,continue!");
-                        return null;
-                    }
-
-                    isExpire.set(true);
-                    String imageInfo = rs.getString("rollback_info");
-                    logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
-
-                    BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
-
-                    });
-                    backInfo.setId(rs.getLong("id"));
-                    backInfo.rollback();
-                    backInfo.updateStatusFinish();
+            DbPoolUtil.executeQuery(sql, rs -> {
+                Long nowMillis = System.currentTimeMillis();
+                Long txMillis = rs.getLong("create_time");
+                if (nowMillis - txMillis < timeoutSeconds) {
+                    logger.debug("Not go to expired txc,continue!");
                     return null;
                 }
 
-                @Override
-                public boolean booleanMapping(ResultSet rs) {
-                    return false;
-                }
+                isExpire.set(true);
+                String imageInfo = rs.getString("rollback_info");
+                logger.info("TransactionManagerImpl.ExeBackinfo:{}", imageInfo);
+
+                BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
+
+                });
+                backInfo.setId(rs.getLong("id"));
+                backInfo.rollback();
+                backInfo.updateStatusFinish();
+                return null;
             }, null);
 
             if (isExpire.get()) {
@@ -317,8 +307,6 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
         }
 
     }
-
-
 
     private void timingRollback(Transaction transaction) {
         TransactionContext transactionContext = transaction.getTransactionContext();

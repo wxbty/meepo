@@ -30,8 +30,7 @@ public class DbPoolUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (!inited)
-        {
+        if (!inited) {
             throw new SQLException("DbPoolUtil.NotInited");
         }
         return dataSource.getConnection();
@@ -88,7 +87,7 @@ public class DbPoolUtil {
         return result;
     }
 
-    public static boolean exitListQuery(String sql, RowMap rowmap, Object... params) throws SQLException {
+    public static boolean exitListQuery(String sql, BoolRowMap rowmap, Object... params) throws SQLException {
         Connection con = getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;

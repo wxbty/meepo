@@ -8,7 +8,6 @@ import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.SelectBody;
 import org.apache.commons.lang3.StringUtils;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
-import org.feisoft.common.utils.DbPool.RowMap;
 import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.TransactionImpl;
 import org.feisoft.jta.image.BackInfo;
@@ -376,18 +375,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         String beforeLockSql = resolver.getLockedSet();
         String primaryKey = resolver.getMetaPrimaryKey(resolver.getTable());
 
-        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, new RowMap<String>() {
-
-            @Override
-            public String rowMapping(ResultSet rs) throws SQLException {
-                return rs.getObject(primaryKey).toString();
-            }
-
-            @Override
-            public boolean booleanMapping(ResultSet rs) {
-                return false;
-            }
-        }, null);
+        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, rs -> rs.getObject(primaryKey).toString(), null);
         List<TxcLock> lockList = new ArrayList<>();
 
         if (allList.size() == 0) {
@@ -397,18 +385,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                 + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver.transList(allList)
                 + ")";
 
-        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, new RowMap<String>() {
-
-            @Override
-            public String rowMapping(ResultSet rs) throws SQLException {
-                return rs.getObject("key_value").toString();
-            }
-
-            @Override
-            public boolean booleanMapping(ResultSet rs) {
-                return false;
-            }
-        }, null);
+        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, rs -> rs.getObject("key_value").toString(), null);
 
         allList.removeAll(lockedList);
         for (String unlockRecord : allList) {
@@ -434,18 +411,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         String beforeLockSql = resolver.getLockedSet();
 
         String primaryKey = resolver.getMetaPrimaryKey(resolver.getTable());
-        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, new RowMap<String>() {
-
-            @Override
-            public String rowMapping(ResultSet rs) throws SQLException {
-                return rs.getObject(primaryKey).toString();
-            }
-
-            @Override
-            public boolean booleanMapping(ResultSet rs) {
-                return false;
-            }
-        }, null);
+        List<String> allList = DbPoolUtil.executeQuery(beforeLockSql, rs -> rs.getObject(primaryKey).toString(), null);
 
         List<TxcLock> lockList = new ArrayList<>();
 
@@ -453,20 +419,11 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                 "select key_value,count(*) as count from txc_lock where xid='" + gloableXid + "'  and branch_id ='"
                         + branchXid + "' and table_name = '" + resolver.getTable() + "' and key_value in(" + resolver
                         .transList(allList) + ") group by key_value";
-        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, new RowMap<String>() {
-
-            @Override
-            public String rowMapping(ResultSet rs) throws SQLException {
-                String tmp = null;
-                if (rs.getInt("count") > 1)
-                    tmp = rs.getString("key_value");
-                return tmp;
-            }
-
-            @Override
-            public boolean booleanMapping(ResultSet rs) {
-                return false;
-            }
+        List<String> lockedList = DbPoolUtil.executeQuery(lockSql, rs -> {
+            String tmp = null;
+            if (rs.getInt("count") > 1)
+                tmp = rs.getString("key_value");
+            return tmp;
         }, null);
 
         allList.removeAll(lockedList);

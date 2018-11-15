@@ -15,9 +15,11 @@ package org.feisoft.jta.resource;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import org.feisoft.common.utils.ByteUtils;
+import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.RowMap;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
-import org.feisoft.common.utils.ByteUtils;
 import org.feisoft.transaction.TransactionBeanFactory;
 import org.feisoft.transaction.archive.XAResourceArchive;
 import org.feisoft.transaction.logging.TransactionLogger;
@@ -25,7 +27,6 @@ import org.feisoft.transaction.resource.XATerminator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.XAConnection;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
@@ -442,42 +443,25 @@ public class XATerminatorImpl implements XATerminator {
             }
             logger.info("XATerminatorImpl.bengin invokeRollback Of" + archive.getDescriptor().getDelegate().getClass()
                     .getName());
-            XAConnection connection = (XAConnection) archive.getDescriptor().getDelegate();
             PreparedStatement ps = null;
             //拼接PREPARE语句，在general_log查找执行中的sql
             String GloableXid = archive.partGloableXid(archive.getXid());
             String branchXid = archive.partBranchXid(archive.getXid());
             String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='"
                     + GloableXid + "'";
-            Statement stmt = null;
-            ResultSet rs = null;
-            Connection conn = null;
+
             Map<Long, String> map = new HashMap<>();
-            try {
-                conn = connection.getConnection();
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(sqlStr);
-                while (rs.next()) {
+            DbPoolUtil.executeQuery(sqlStr, (RowMap<Map<String, Object>>) rs -> {
+                map.put(rs.getLong("id"), rs.getString("rollback_info"));
+                return null;
+            }, null);
 
-                    map.put(rs.getLong("id"), rs.getString("rollback_info"));
-                }
-                if (map.size() > 0) {
-                    logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
-                    if (!rollback(map)) {
-                        logger.error("Roll back mysql info error!,backInfo");
-                    }
-                }
-                archive.releaseLock();
-            } finally {
-                //关闭自创建的连接
-                if (rs != null)
-                    rs.close();
-                if (conn != null)
-                    conn.close();
-                if (stmt != null)
-                    stmt.close();
-
+            if (map.size() > 0) {
+                logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
+                rollback(map);
             }
+            archive.releaseLock();
+
         } else {
             logger.error("XAResourceArchive.ErrorVoteNum,vote =" + archive.getVote());
             throw new XAException("XAResourceArchive.ErrorVoteNum");
@@ -570,20 +554,17 @@ public class XATerminatorImpl implements XATerminator {
         this.beanFactory = beanFactory;
     }
 
-    private boolean rollback(Map<Long, String> map) throws XAException, SQLException {
+    private void rollback(Map<Long, String> map) throws XAException, SQLException {
 
         for (Long id : map.keySet()) {
             String imageInfo = map.get(id);
-
             BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
 
             });
-
             backInfo.rollback();
             backInfo.setId(id);
             backInfo.updateStatusFinish();
         }
-        return true;
     }
 
 }

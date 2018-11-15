@@ -1,18 +1,16 @@
 /**
  * Copyright 2014-2016 yangming.liu<bytefox@126.com>.
- * <p>
  * This copyrighted material is made available to anyone wishing to use, modify,
  * copy, or redistribute it subject to the terms and conditions of the GNU
  * Lesser General Public License, as published by the Free Software Foundation.
- * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
  * for more details.
- * <p>
  * You should have received a copy of the GNU Lesser General Public License
  * along with this distribution; if not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.feisoft.transaction.archive;
 
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
@@ -27,22 +25,33 @@ import javax.transaction.xa.Xid;
 import java.sql.SQLException;
 
 public class XAResourceArchive implements XAResource {
+
     static final Logger logger = LoggerFactory.getLogger(XAResourceArchive.class);
+
     public static final int DEFAULT_VOTE = -1;
 
     private boolean suspended;
+
     private boolean delisted;
+
     private boolean completed;
+
     private boolean readonly;
+
     private boolean committed;
+
     private boolean rolledback;
+
     private boolean heuristic;
+
     private boolean identified;
 
     private transient boolean recovered;
 
     private Xid xid;
+
     private int vote = DEFAULT_VOTE;
+
     private XAResourceDescriptor descriptor;
 
     public void commit(Xid ignore, boolean onePhase) throws XAException {
@@ -66,8 +75,7 @@ public class XAResourceArchive implements XAResource {
                 }
             }
 
-
-//			descriptor.commit(xid, onePhase);
+            //			descriptor.commit(xid, onePhase);
         }
     }
 
@@ -235,12 +243,17 @@ public class XAResourceArchive implements XAResource {
         this.identified = identified;
     }
 
-
     public void releaseLock() throws SQLException {
         String gloableXid = partGloableXid(getXid());
         String branchXid = partBranchXid(getXid());
         String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
         DbPoolUtil.executeUpdate(sql);
+        try {
+            sql = "delete from txc_undo_log where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
+            DbPoolUtil.executeUpdate(sql);
+        } catch (SQLException e) {
+            logger.error("e",e);
+        }
     }
 
     public String partGloableXid(Xid xid) {
@@ -269,55 +282,14 @@ public class XAResourceArchive implements XAResource {
         return builder.toString();
     }
 
-
-    private static void appendXid(StringBuilder builder, Xid xid) {
-        byte[] gtrid = xid.getGlobalTransactionId();
-        byte[] btrid = xid.getBranchQualifier();
-
-        if (gtrid != null) {
-            appendAsHex(builder, gtrid);
-        }
-
-        builder.append(',');
-        if (btrid != null) {
-            appendAsHex(builder, btrid);
-        }
-
-        builder.append(',');
-        appendAsHex(builder, xid.getFormatId());
-    }
-
-    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    private static final char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+            'e', 'f' };
 
     public static void appendAsHex(StringBuilder builder, byte[] bytes) {
         builder.append("0x");
         for (byte b : bytes) {
             builder.append(HEX_DIGITS[(b >>> 4) & 0xF]).append(HEX_DIGITS[b & 0xF]);
         }
-    }
-
-
-    public static void appendAsHex(StringBuilder builder, int value) {
-        if (value == 0) {
-            builder.append("0x0");
-            return;
-        }
-
-        int shift = 32;
-        byte nibble;
-        boolean nonZeroFound = false;
-
-        builder.append("0x");
-        do {
-            shift -= 4;
-            nibble = (byte) ((value >>> shift) & 0xF);
-            if (nonZeroFound) {
-                builder.append(HEX_DIGITS[nibble]);
-            } else if (nibble != 0) {
-                builder.append(HEX_DIGITS[nibble]);
-                nonZeroFound = true;
-            }
-        } while (shift != 0);
     }
 
 }
