@@ -12,7 +12,6 @@ import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.TransactionImpl;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Resolvers.BaseResolvers;
-import org.feisoft.jta.image.Resolvers.ImageUtil;
 import org.feisoft.jta.image.Resolvers.InsertImageResolvers;
 import org.feisoft.jta.lock.MutexLock;
 import org.feisoft.jta.lock.ShareLock;
@@ -83,6 +82,9 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
             params.add(args[1]);
         }
 
+        if (innerMethod(args))
+            return method.invoke(realObject, args);
+
         if (transaction.getStatus() == Status.STATUS_ROLLEDBACK) {
             throw new XAException("Transaction STATUS_MARKED_ROLLBACK");
         }
@@ -104,25 +106,6 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         if (isUpdateMethod(method.getName())) {
 
-            if (args != null) {
-                Object param0 = args[0];
-                if (param0 instanceof String) {
-                    String strParam0 = param0.toString();
-                    if (SqlpraserUtils.assertExeSql(strParam0)) {
-                        String tableName = SqlpraserUtils.name_exesql_table(strParam0);
-                        //内部表使用sql
-                        if (isInsideSql(tableName)) {
-                            return method.invoke(realObject, args);
-                        }
-                    }
-                }
-            } else if (SqlpraserUtils.assertExeSql(sql)) {
-                String tableName = SqlpraserUtils.name_exesql_table(sql);
-                //内部表使用sql
-                if (isInsideSql(tableName)) {
-                    return method.invoke(realObject, args);
-                }
-            }
             if (currentXid == null) {
                 logger.error("method.getName()={},args={}-----没有xid-----,thread={}", method.getName(), args,
                         Thread.currentThread().getName());
@@ -167,6 +150,29 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         return method.invoke(realObject, args);
     }
 
+    private boolean innerMethod(Object[] args) throws JSQLParserException {
+        if (args != null) {
+            Object param0 = args[0];
+            if (param0!=null && param0 instanceof String) {
+                String strParam0 = param0.toString();
+                if (SqlpraserUtils.assertExeSql(strParam0)) {
+                    String tableName = SqlpraserUtils.name_exesql_table(strParam0);
+                    //内部表使用sql
+                    if (isInsideSql(tableName)) {
+                        return true;
+                    }
+                }
+            }
+        } else if (StringUtils.isNotBlank(sql)&&SqlpraserUtils.assertExeSql(sql)) {
+            String tableName = SqlpraserUtils.name_exesql_table(sql);
+            //内部表使用sql
+            if (isInsideSql(tableName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isInsideSql(String tableName) {
         return insideTableNames.contains(tableName);
     }
@@ -184,7 +190,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         BackInfo backInfo = new BackInfo();
         try {
 
-            BaseResolvers resolver = ImageUtil.getImageResolvers(sql, backInfo);
+            BaseResolvers resolver = BaseResolvers.newInstance(sql, backInfo);
             backInfo.setBeforeImage(resolver.genBeforeImage());
             getXlock(resolver, GloableXid, branchXid);
         } finally {
@@ -200,8 +206,8 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         Object obj;
         try {
-            BaseResolvers resolver = ImageUtil
-                    .getImageResolvers(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo);
+            BaseResolvers resolver = BaseResolvers
+                    .newInstance(sql.substring(0, sql.toLowerCase().indexOf("lock")), backInfo);
             backInfo.setBeforeImage(resolver.genBeforeImage());
 
             getSlock(resolver, GloableXid, branchXid);
@@ -230,7 +236,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
 
         BaseResolvers resolver;
         try {
-            resolver = ImageUtil.getImageResolvers(sql, backInfo);
+            resolver = BaseResolvers.newInstance(sql, backInfo);
             backInfo.setBeforeImage(resolver.genBeforeImage());
             logger.info("before getXlock,GloableXid=" + GloableXid + ",branchXid=" + branchXid);
             getXlock(resolver, GloableXid, branchXid);
@@ -246,11 +252,13 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                     obj = realSt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
                     generatedKeys = realSt.getGeneratedKeys();
                 }
-                while (generatedKeys.next()) {
-                    pkVal = generatedKeys.getObject(1);
-                }
-                if (!generatedKeys.isClosed()) {
-                    generatedKeys.close();
+                if (generatedKeys != null) {
+                    while (generatedKeys.next()) {
+                        pkVal = generatedKeys.getObject(1);
+                    }
+                    if (!generatedKeys.isClosed()) {
+                        generatedKeys.close();
+                    }
                 }
 
                 if (pkVal == null) {

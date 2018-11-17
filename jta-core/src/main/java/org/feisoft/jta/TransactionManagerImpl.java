@@ -271,7 +271,6 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
     private void rollbackOverTimeImage() {
 
         long now = System.currentTimeMillis();
-        logger.debug("TransactionManagerImpl.rollbackOverTimeImage,now={}", now);
         try {
             String sql =
                     "select u.id, rollback_info,k.create_time from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +"

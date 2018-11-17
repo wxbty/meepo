@@ -3,6 +3,7 @@ package org.feisoft.jta.image.Resolvers;
 import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.lang3.StringUtils;
 import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 import org.feisoft.jta.image.LineFileds;
@@ -44,7 +45,7 @@ public abstract class BaseResolvers implements ImageResolvers {
         sqlWhere = getSqlWhere();
         column_list = getColumnList();
         allColumns = getAllColumns();
-        schema = getMetaSchema();
+        schema = getschema();
 
         Image image = new Image();
         List<Map<String, Object>> key_value_list;
@@ -92,12 +93,6 @@ public abstract class BaseResolvers implements ImageResolvers {
         return image;
     }
 
-    @Override
-    public abstract Image genBeforeImage() throws SQLException, JSQLParserException, XAException;
-
-    @Override
-    public abstract Image genAfterImage() throws SQLException, XAException, JSQLParserException;
-
     public abstract String getTable() throws JSQLParserException, XAException;
 
     protected void getBeforeImageSql() {
@@ -112,21 +107,29 @@ public abstract class BaseResolvers implements ImageResolvers {
         beforeImageSql = sqlJoint.toString();
     }
 
-    protected String getschema() throws SQLException {
-        return getMetaSchema();
+    public String getschema() throws SQLException {
+        Connection conn = DbPoolUtil.getConnection();
+        DatabaseMetaData dbMetaData = conn.getMetaData();
+        ResultSet schemasResultSet = dbMetaData.getSchemas(conn.getCatalog(), null);
+        String schemasName = "";
+        while (schemasResultSet.next()) {
+            schemasName = schemasResultSet.getString("TABLE_SCHEM");
+        }
+        DbPoolUtil.close(conn, null, schemasResultSet);
+        return schemasName;
     }
 
-    protected String getPrimaryKey() throws SQLException {
+    public String getPrimaryKey() throws SQLException {
         return getMetaPrimaryKey(tableName);
     }
 
-    protected String getAllColumns() {
+    public String getAllColumns() {
         return transList(column_list);
     }
 
-    protected abstract String getSqlWhere() throws JSQLParserException;
+    public abstract String getSqlWhere() throws JSQLParserException;
 
-    protected List<String> getColumnList() throws JSQLParserException, SQLException {
+    public List<String> getColumnList() throws JSQLParserException, SQLException {
         Map<String, Object> metaColumn = getColumns();
         return new ArrayList<>(metaColumn.keySet());
     }
@@ -144,18 +147,6 @@ public abstract class BaseResolvers implements ImageResolvers {
         DbPoolUtil.close(conn, null, primaryKeyResultSet);
 
         return primaryKeyColumnName;
-    }
-
-    public String getMetaSchema() throws SQLException {
-        Connection conn = DbPoolUtil.getConnection();
-        DatabaseMetaData dbMetaData = conn.getMetaData();
-        ResultSet schemasResultSet = dbMetaData.getSchemas(conn.getCatalog(), null);
-        String schemasName = "";
-        while (schemasResultSet.next()) {
-            schemasName = schemasResultSet.getString("TABLE_SCHEM");
-        }
-        DbPoolUtil.close(conn, null, schemasResultSet);
-        return schemasName;
     }
 
     protected Map<String, Object> getColumns() throws SQLException {
@@ -183,4 +174,17 @@ public abstract class BaseResolvers implements ImageResolvers {
 
     abstract public String getLockedSet() throws JSQLParserException, SQLException, XAException;
 
+    public static BaseResolvers newInstance(String sql, BackInfo backInfo) throws XAException {
+        if (SqlpraserUtils.assertInsert(sql))
+            return new InsertImageResolvers(sql, backInfo);
+        else if (SqlpraserUtils.assertUpdate(sql)) {
+            return new UpdateImageResolvers(sql, backInfo);
+        } else if (SqlpraserUtils.assertDelete(sql)) {
+            return new DeleteImageResolvers(sql, backInfo);
+        } else if (SqlpraserUtils.assertSelect(sql)) {
+            return new SelectImageResolvers(sql, backInfo);
+        } else {
+            throw new XAException("BaseResolvers.UnsupportSqlType");
+        }
+    }
 }

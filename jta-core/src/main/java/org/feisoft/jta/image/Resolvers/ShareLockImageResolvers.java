@@ -43,7 +43,7 @@ public class ShareLockImageResolvers extends BaseResolvers {
     }
 
     @Override
-    protected String getSqlWhere() throws JSQLParserException {
+    public String getSqlWhere() throws JSQLParserException {
         return SqlpraserUtils.name_select_where(orginSql);
     }
 

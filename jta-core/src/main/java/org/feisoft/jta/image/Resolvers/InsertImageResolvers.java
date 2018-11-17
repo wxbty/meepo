@@ -53,7 +53,7 @@ public class InsertImageResolvers extends BaseResolvers {
 
 
     @Override
-    protected String getSqlWhere() {
+    public String getSqlWhere() {
         return primaryKey + "= " + pkVal;
     }
 

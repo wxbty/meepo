@@ -41,13 +41,13 @@ public class UpdateImageResolvers extends BaseResolvers {
     }
 
     @Override
-    protected String getSqlWhere() throws JSQLParserException {
+    public String getSqlWhere() throws JSQLParserException {
         return SqlpraserUtils.name_update_where(orginSql);
     }
 
 
     @Override
-    protected List<String> getColumnList() throws JSQLParserException {
+    public List<String> getColumnList() throws JSQLParserException {
         return SqlpraserUtils.name_update_column(orginSql);
     }
 
