@@ -24,6 +24,29 @@
     </properties>
 
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- ================================================= -->
+            <!-- 兄弟模块依赖 -->
+            <!-- ================================================= -->
+
+            <dependency>
+                <groupId>com.tuya.jta</groupId>
+                <artifactId>jta-core</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tuya.jta</groupId>
+                <artifactId>jta-supports</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tuya.jta</groupId>
+                <artifactId>jta-supports-dubbo</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
