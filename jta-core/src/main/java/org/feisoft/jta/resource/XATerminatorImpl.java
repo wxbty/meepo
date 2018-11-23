@@ -443,8 +443,7 @@ public class XATerminatorImpl implements XATerminator {
             }
             logger.info("XATerminatorImpl.bengin invokeRollback Of" + archive.getDescriptor().getDelegate().getClass()
                     .getName());
-            PreparedStatement ps = null;
-            //拼接PREPARE语句，在general_log查找执行中的sql
+
             String GloableXid = archive.partGloableXid(archive.getXid());
             String branchXid = archive.partBranchXid(archive.getXid());
             String sqlStr = "select id, rollback_info from txc_undo_log where branch_id ='" + branchXid + "' and xid ='"

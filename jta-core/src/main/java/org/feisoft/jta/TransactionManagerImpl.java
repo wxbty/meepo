@@ -32,7 +32,7 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
     @javax.inject.Inject
     private TransactionBeanFactory beanFactory;
 
-    private int timeoutSeconds = 5 * 6000;
+    private int timeoutSeconds = 30 * 1000;
 
     private final Map<Thread, Transaction> associatedTxMap = new ConcurrentHashMap<Thread, Transaction>();
 
@@ -298,8 +298,12 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
             }, null);
 
             if (isExpire.get()) {
-                sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
-                DbPoolUtil.executeUpdate(sql);
+                sql = "select count(*) as total from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
+                int outDateLockNum = DbPoolUtil.countList(sql);
+                if (outDateLockNum > 0) {
+                    sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
+                    DbPoolUtil.executeUpdate(sql);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQLException", e);

@@ -121,8 +121,7 @@ public class TransactionCoordinator implements RemoteCoordinator, TransactionBea
 	}
 
 	public void commit(Xid xid, boolean onePhase) throws XAException {
-		//todo 暂时不知道这句干什么用的，不注释会出错
-//		this.checkParticipantReadyIfNecessary();
+		this.checkParticipantReadyIfNecessary();
 
 		XidFactory xidFactory = this.beanFactory.getXidFactory();
 		TransactionXid branchXid = (TransactionXid) xid;

@@ -7,11 +7,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ink.zfei</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>meepo-parent</artifactId>
     <packaging>pom</packaging>
     <version>2.0</version>
 
-    <name>com.tuya.jta.parent</name>
+    <name>ink.zfei.parent</name>
     <modules>
         <module>jta-core</module>
         <module>jta-supports</module>
@@ -24,36 +24,12 @@
     </properties>
 
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- ================================================= -->
-            <!-- 兄弟模块依赖 -->
-            <!-- ================================================= -->
-
-            <dependency>
-                <groupId>com.tuya.jta</groupId>
-                <artifactId>jta-core</artifactId>
-                <version>${jta.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tuya.jta</groupId>
-                <artifactId>jta-supports</artifactId>
-                <version>${jta.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.tuya.jta</groupId>
-                <artifactId>jta-supports-dubbo</artifactId>
-                <version>${jta.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -61,4 +37,31 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- ================================================= -->
+            <!-- 兄弟模块依赖 -->
+            <!-- ================================================= -->
+
+            <dependency>
+                <groupId>ink.zfei</groupId>
+                <artifactId>jta-core</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ink.zfei</groupId>
+                <artifactId>jta-supports</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ink.zfei</groupId>
+                <artifactId>jta-supports-dubbo</artifactId>
+                <version>${jta.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
 </project>

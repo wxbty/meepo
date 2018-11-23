@@ -3,10 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>meepo-parent</artifactId>
         <groupId>ink.zfei</groupId>
         <version>2.0</version>
-
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jta-supports-dubbo</artifactId>
@@ -18,7 +17,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.tuya.jta</groupId>
+            <groupId>ink.zfei</groupId>
             <artifactId>jta-supports</artifactId>
             <exclusions>
                 <exclusion>
