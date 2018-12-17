@@ -1,12 +1,22 @@
 package org.feisoft.jta.lock;
 
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.common.utils.SpringBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
 public abstract class TxcLock implements Lock {
+
+    private DbPoolSource dbPoolSource = null;
+
+    {
+        if (this.dbPoolSource == null) {
+            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+            this.dbPoolSource = dbPoolSource;
+        }
+    }
 
     static final Logger logger = LoggerFactory.getLogger(TxcLock.class);
 
@@ -111,7 +121,7 @@ public abstract class TxcLock implements Lock {
         //        synchronized (TxcLock.class) {
         String sql = "select count(0) as total from  txc_lock where table_name = '" + tableName + "' and key_value ="
                 + keyValue + " and xlock='" + xlock + "'";
-        int total = DbPoolUtil.countList(sql);
+        int total = dbPoolSource.countList(sql);
         if (total > 0) {
             throw new SQLException();
         }
@@ -122,7 +132,10 @@ public abstract class TxcLock implements Lock {
                         + createTime;
         insert_sql += ")";
         try {
-            DbPoolUtil.executeUpdate(insert_sql);
+            int pkVal = dbPoolSource.executeUpdate(insert_sql);
+            if (pkVal > 0) {
+                setId((long) pkVal);
+            }
         } catch (Exception e) {
             logger.error("插入lock失败，totol_sql ={},insert_sql={},total={}", sql, insert_sql, total, e);
             throw new SQLException();
@@ -135,7 +148,7 @@ public abstract class TxcLock implements Lock {
 
     protected void deleteLock() throws SQLException {
         String sql = "delete from txc_lock  where id = " + id;
-        DbPoolUtil.executeUpdate(sql);
+        dbPoolSource.executeUpdate(sql);
     }
 
     ;

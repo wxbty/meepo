@@ -38,7 +38,7 @@ public class ServiceConfigValidator implements DubboConfigValidator {
 		PropertyValue filter = mpv.getPropertyValue("filter");
 		PropertyValue group = mpv.getPropertyValue("group");
 
-		if (retries == null || retries.getValue() == null || "0".equals(retries.getValue()) == false) {
+        if (retries == null || retries.getValue() == null || "-1".equals(retries.getValue()) == false) {
 			throw new FatalBeanException(
 					String.format("The value of attr 'retries'(beanId= %s) should be '0'.", this.beanName));
 		} else if (loadbalance == null || loadbalance.getValue() == null

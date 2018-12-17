@@ -5,7 +5,6 @@ import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 
-import javax.transaction.xa.XAException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class SelectImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public Image genBeforeImage() throws JSQLParserException, SQLException, XAException {
+    public Image genBeforeImage() throws JSQLParserException, SQLException {
         return genImage();
 
     }
@@ -28,11 +27,11 @@ public class SelectImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public String getTable() throws JSQLParserException, XAException {
+    public String getTable() throws JSQLParserException, SQLException {
 
         List<String> tables = SqlpraserUtils.name_select_table(orginSql);
         if (tables.size() > 1) {
-            throw new XAException("Select.UnsupportMultiTables");
+            throw new SQLException("Select.UnsupportMultiTables");
         }
         return tables.get(0);
     }

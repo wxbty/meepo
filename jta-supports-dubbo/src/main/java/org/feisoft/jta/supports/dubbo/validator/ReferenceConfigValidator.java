@@ -47,7 +47,7 @@ public class ReferenceConfigValidator implements DubboConfigValidator {
 			throw new FatalBeanException(String.format(
 					"The value of attr 'group'(beanId= %s) should be 'org.feisoft.jta' or starts with 'org.feisoft.jta-'.",
 					this.beanName));
-		} else if (retries == null || retries.getValue() == null || "0".equals(retries.getValue()) == false) {
+        } else if (retries == null || retries.getValue() == null || "-1".equals(retries.getValue()) == false) {
 			throw new FatalBeanException(
 					String.format("The value of attr 'retries'(beanId= %s) should be '0'.", this.beanName));
 		} else if (loadbalance == null || loadbalance.getValue() == null

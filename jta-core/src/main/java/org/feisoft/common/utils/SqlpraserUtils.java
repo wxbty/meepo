@@ -92,6 +92,9 @@ public class SqlpraserUtils {
         } else if (assertDelete(sql)) {
             tableNames = name_delete_table(sql);
             return tableNames.get(0);
+        } else if (assertSelect(sql)) {
+            tableNames = name_select_table(sql);
+            return tableNames.get(0);
         } else {
             return null;
         }
@@ -172,7 +175,7 @@ public class SqlpraserUtils {
     }
 
     public static boolean assertExeSql(String sql) {
-        return assertInsert(sql) || assertUpdate(sql) || assertDelete(sql);
+        return assertInsert(sql) || assertUpdate(sql) || assertDelete(sql) || assertSelect(sql);
     }
 
 }

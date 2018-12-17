@@ -1,4 +1,4 @@
-package org.feisoft.jta.supports.spring;
+package org.feisoft.common.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

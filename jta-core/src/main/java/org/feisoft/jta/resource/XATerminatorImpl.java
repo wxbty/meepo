@@ -16,8 +16,9 @@ package org.feisoft.jta.resource;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.feisoft.common.utils.ByteUtils;
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
 import org.feisoft.common.utils.DbPool.RowMap;
+import org.feisoft.common.utils.SpringBeanUtil;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
 import org.feisoft.transaction.TransactionBeanFactory;
@@ -30,7 +31,7 @@ import org.slf4j.LoggerFactory;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +39,20 @@ import java.util.Map;
 
 public class XATerminatorImpl implements XATerminator {
 
+    private DbPoolSource dbPoolSource = null;
+
+    {
+        if (this.dbPoolSource == null) {
+            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+            this.dbPoolSource = dbPoolSource;
+        }
+    }
+
     static final Logger logger = LoggerFactory.getLogger(XATerminatorImpl.class);
 
     private TransactionBeanFactory beanFactory;
 
     private final List<XAResourceArchive> resources = new ArrayList<XAResourceArchive>();
-
-    public static HashMap<String, String> sourceProp = new HashMap<String, String>();
 
     public synchronized int prepare(Xid xid) throws XAException {
         TransactionLogger transactionLogger = this.beanFactory.getTransactionLogger();
@@ -321,6 +329,7 @@ public class XATerminatorImpl implements XATerminator {
             archive.commit(archive.getXid(), false);
             return;
         } else {
+            logger.info("invokeTwoPhaseCommit.releaseLock");
             archive.releaseLock();
         }
     }
@@ -441,7 +450,7 @@ public class XATerminatorImpl implements XATerminator {
                 archive.rollback(archive.getXid());
                 return;
             }
-            logger.info("XATerminatorImpl.bengin invokeRollback Of" + archive.getDescriptor().getDelegate().getClass()
+            logger.info("XATerminatorImpl.bengin invokeRollback Of " + archive.getDescriptor().getDelegate().getClass()
                     .getName());
 
             String GloableXid = archive.partGloableXid(archive.getXid());
@@ -450,10 +459,12 @@ public class XATerminatorImpl implements XATerminator {
                     + GloableXid + "'";
 
             Map<Long, String> map = new HashMap<>();
-            DbPoolUtil.executeQuery(sqlStr, (RowMap<Map<String, Object>>) rs -> {
+            logger.info("logsql executeQuery before time={}", System.currentTimeMillis());
+            dbPoolSource.executeQuery(sqlStr, (RowMap<Map<String, Object>>) rs -> {
                 map.put(rs.getLong("id"), rs.getString("rollback_info"));
                 return null;
             }, null);
+            logger.info("logsql executeQuery after time={}", System.currentTimeMillis());
 
             if (map.size() > 0) {
                 logger.info("bengin  invokeRollback rollbackinfo=" + map.keySet());
@@ -553,16 +564,23 @@ public class XATerminatorImpl implements XATerminator {
         this.beanFactory = beanFactory;
     }
 
-    private void rollback(Map<Long, String> map) throws XAException, SQLException {
+    private void rollback(Map<Long, String> map) throws SQLException {
 
-        for (Long id : map.keySet()) {
-            String imageInfo = map.get(id);
-            BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
+        try {
+            for (Long id : map.keySet()) {
+                String imageInfo = map.get(id);
+                BackInfo backInfo = JSON.parseObject(imageInfo, new TypeReference<BackInfo>() {
 
-            });
-            backInfo.rollback();
-            backInfo.setId(id);
-            backInfo.updateStatusFinish();
+                });
+                logger.warn("thread = {},back sql ={}", Thread.currentThread().getName(), backInfo.getChangeSql());
+                backInfo.rollback();
+                backInfo.setId(id);
+                backInfo.updateStatusFinish();
+                logger.warn("thread = {},back sql ={}", Thread.currentThread().getName(), backInfo.getChangeSql());
+            }
+        } catch (SQLException e) {
+            logger.error("SQLException.e", e);
+            throw e;
         }
     }
 

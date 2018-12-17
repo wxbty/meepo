@@ -42,7 +42,7 @@ public class TransactionImpl implements Transaction {
 
     static final Logger logger = LoggerFactory.getLogger(TransactionImpl.class);
 
-    private transient boolean timing = true;
+    private transient volatile boolean timing = true;
 
     private TransactionBeanFactory beanFactory;
 
@@ -249,6 +249,7 @@ public class TransactionImpl implements Transaction {
             return;
         } /* else active, preparing, prepared, committing {} */
 
+        this.beanFactory.getTransactionTimer().stopTiming(this);
         try {
             this.synchronizationList.beforeCompletion();
             this.delistAllResource();
@@ -303,6 +304,7 @@ public class TransactionImpl implements Transaction {
         } /* else preparing, prepared, committing {} */
 
         try {
+            this.beanFactory.getTransactionTimer().stopTiming(this);
             this.synchronizationList.beforeCompletion();
             this.delistAllResource();
             this.invokeParticipantCommit();
@@ -854,7 +856,8 @@ public class TransactionImpl implements Transaction {
                     // The routine was invoked in an improper context.
                     return false;
                 case XAException.XAER_RMFAIL:
-                    // An error occurred that makes the resource manager unavailable
+                    return false;
+                // An error occurred that makes the resource manager unavailable,maybe dbcp2 bug of multi threads
                 case XAException.XAER_RMERR:
                     // An error occurred in associating the transaction branch with the thread of control
                     SystemException sysex = new SystemException();
@@ -879,8 +882,10 @@ public class TransactionImpl implements Transaction {
     public synchronized void registerSynchronization(Synchronization sync)
             throws RollbackException, IllegalStateException, SystemException {
 
-        if (this.transactionStatus == Status.STATUS_MARKED_ROLLBACK) {
-            throw new RollbackException();
+        if (this.transactionStatus == Status.STATUS_MARKED_ROLLBACK
+                || this.transactionStatus == Status.STATUS_ROLLEDBACK
+                || this.transactionStatus == Status.STATUS_ROLLING_BACK) {
+            //            throw new RollbackException();
         } else if (this.transactionStatus == Status.STATUS_ACTIVE) {
             this.synchronizationList.registerSynchronizationQuietly(sync);
             logger.debug("[{}] register-sync: sync= {}"//
@@ -944,6 +949,7 @@ public class TransactionImpl implements Transaction {
             this.invokeParticipantRollback();
         } else {
             try {
+                this.beanFactory.getTransactionTimer().stopTiming(this);
                 this.synchronizationList.beforeCompletion();
                 this.delistAllResourceQuietly();
                 this.invokeParticipantRollback();
@@ -1055,7 +1061,6 @@ public class TransactionImpl implements Transaction {
         }
 
     }
-
 
     private void delistAllResourceQuietly() {
         try {

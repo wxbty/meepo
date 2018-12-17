@@ -140,7 +140,13 @@ public class CommonResourceDescriptor implements XAResourceDescriptor {
 	}
 
 	public void start(Xid arg0, int arg1) throws XAException {
-		delegate.start(arg0, arg1);
+		logger.info("thread={},xid={},delegate={}", Thread.currentThread().getName(), arg0, delegate);
+		try {
+			delegate.start(arg0, arg1);
+		} catch (XAException e) {
+			logger.error("thread={},xid={},delegate={}", Thread.currentThread().getName(), arg0, delegate);
+			throw e;
+		}
 	}
 
 	public XAResource getDelegate() {

@@ -27,7 +27,7 @@ public class ManagedConnectionFactoryPostProcessor implements BeanPostProcessor 
 			ManagedConnectionFactoryHandler interceptor = new ManagedConnectionFactoryHandler(bean);
 			interceptor.setIdentifier(beanName);
 			return Proxy.newProxyInstance(cl, interfaces, interceptor);
-		} else if (XAConnectionFactory.class.isInstance(bean)) {
+        } else if (XAConnectionFactory.class.isInstance(bean)) {
 			ManagedConnectionFactoryHandler interceptor = new ManagedConnectionFactoryHandler(bean);
 			interceptor.setIdentifier(beanName);
 			return Proxy.newProxyInstance(cl, interfaces, interceptor);

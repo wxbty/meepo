@@ -15,81 +15,22 @@
  */
 package org.feisoft.jta.supports.jdbc;
 
-import org.feisoft.jta.resource.XATerminatorImpl;
-import org.slf4j.LoggerFactory;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.common.utils.SpringBeanUtil;
 import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.InitializingBean;
 
 import javax.sql.XAConnection;
 import javax.sql.XADataSource;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.logging.Logger;
 
-public class XADataSourceImpl implements XADataSource, BeanNameAware,InitializingBean {
-
-    static final org.slf4j.Logger logger = LoggerFactory.getLogger(XADataSourceImpl.class);
-
-    private int timeoutSeconds = 5 * 6000;
-    private int expireMilliSeconds = 15 * 1000;
+public class XADataSourceImpl implements XADataSource, BeanNameAware {
 
     private String identifier;
     private XADataSource xaDataSource;
-    public static String user;
-    public static String password;
-    public static String url;
-    public static String className;
 
-
-    public String getDriverClass() {
-        return driverClass;
-    }
-
-    public void setDriverClass(String driverClass) {
-        this.driverClass = driverClass;
-
-    }
-
-    private String driverClass;
-
-    public XADataSourceImpl() {
-
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
 
     public PrintWriter getLogWriter() throws SQLException {
         return this.xaDataSource.getLogWriter();
@@ -149,39 +90,12 @@ public class XADataSourceImpl implements XADataSource, BeanNameAware,Initializin
         return xaDataSource;
     }
 
-    public void setXaDataSource(XADataSource xaDataSource) {
+    public void setXaDataSource(XADataSource xaDataSource) throws Exception {
         this.xaDataSource = xaDataSource;
+        DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+        dbPoolSource.setProxyDataSource(xaDataSource);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        try {
-            Class cls = Class.forName(className);
-            Object obj = cls.newInstance();
-            Method setUrl = cls.getMethod("setUrl", String.class);
-            setUrl.invoke(obj, url);
-            Method setUser = cls.getMethod("setUser", String.class);
-            setUser.invoke(obj, user);
-            Method setPass = cls.getMethod("setPassword", String.class);
-            setPass.invoke(obj, password);
-            XADataSource xs = (XADataSource) obj;
-            this.xaDataSource = xs;
-            XATerminatorImpl.sourceProp.put("url",url);
-            XATerminatorImpl.sourceProp.put("user",user);
-            XATerminatorImpl.sourceProp.put("password",password);
-            XATerminatorImpl.sourceProp.put("className",className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }

@@ -56,6 +56,7 @@ public class TransactionServiceFilter implements Filter {
 
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
+
         if (RpcContext.getContext().isProviderSide()) {
             return this.providerInvoke(invoker, invocation);
         } else {
@@ -66,7 +67,6 @@ public class TransactionServiceFilter implements Filter {
 
     public Result providerInvoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
-        String transactionContextContent = invocation.getAttachment(TransactionContext.class.getName());
 
         URL url = RpcContext.getContext().getUrl();
         String interfaceClazz = url.getServiceInterface();
@@ -79,6 +79,7 @@ public class TransactionServiceFilter implements Filter {
             return this.providerInvokeForJTA(invoker, invocation);
         } else {
             //non transaction method
+            String transactionContextContent = invocation.getAttachment(TransactionContext.class.getName());
             if (StringUtils.isEmpty(transactionContextContent)) {
                 return invoker.invoke(invocation);
             }
@@ -513,7 +514,10 @@ public class TransactionServiceFilter implements Filter {
         RemoteCoordinator consumeCoordinator = beanRegistry.getConsumeCoordinator();
         TransactionManager transactionManager = beanFactory.getTransactionManager();
         Transaction transaction = transactionManager.getTransactionQuietly();
-        TransactionContext nativeTransactionContext = transaction == null ? null : transaction.getTransactionContext();
+        if (transaction == null) {
+            return invoker.invoke(invocation);
+        }
+        TransactionContext nativeTransactionContext = transaction.getTransactionContext();
 
         URL targetUrl = invoker.getUrl();
         String targetAddr = targetUrl.getIp();

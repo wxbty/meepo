@@ -13,7 +13,8 @@
 
 package org.feisoft.transaction.archive;
 
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.common.utils.SpringBeanUtil;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
 import org.feisoft.transaction.supports.resource.XAResourceDescriptor;
 import org.slf4j.Logger;
@@ -25,6 +26,15 @@ import javax.transaction.xa.Xid;
 import java.sql.SQLException;
 
 public class XAResourceArchive implements XAResource {
+
+    private DbPoolSource dbPoolSource = null;
+
+    {
+        if (this.dbPoolSource == null) {
+            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+            this.dbPoolSource = dbPoolSource;
+        }
+    }
 
     static final Logger logger = LoggerFactory.getLogger(XAResourceArchive.class);
 
@@ -247,10 +257,11 @@ public class XAResourceArchive implements XAResource {
         String gloableXid = partGloableXid(getXid());
         String branchXid = partBranchXid(getXid());
         String sql = "delete from txc_lock where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
-        DbPoolUtil.executeUpdate(sql);
+        dbPoolSource.executeUpdate(sql);
         try {
             sql = "delete from txc_undo_log where xid ='" + gloableXid + "' and branch_id='" + branchXid + "' ";
-            DbPoolUtil.executeUpdate(sql);
+            logger.info("releaseLock.releaseLog = {},currentTime={}", sql, System.currentTimeMillis());
+            dbPoolSource.executeUpdate(sql);
         } catch (SQLException e) {
             logger.error("e",e);
         }

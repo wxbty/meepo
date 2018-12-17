@@ -5,7 +5,6 @@ import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 
-import javax.transaction.xa.XAException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class DeleteImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public Image genBeforeImage() throws JSQLParserException, SQLException, XAException {
+    public Image genBeforeImage() throws JSQLParserException, SQLException {
         return genImage();
 
     }
@@ -33,11 +32,11 @@ public class DeleteImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public String getTable() throws JSQLParserException, XAException {
+    public String getTable() throws JSQLParserException, SQLException {
 
         List<String> tables = SqlpraserUtils.name_delete_table(orginSql);
         if (tables.size() > 1) {
-            throw new XAException("Delete.UnsupportMultiTables");
+            throw new SQLException("Delete.UnsupportMultiTables");
         }
         return tables.get(0);
     }

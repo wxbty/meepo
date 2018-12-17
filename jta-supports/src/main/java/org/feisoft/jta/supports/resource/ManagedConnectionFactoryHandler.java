@@ -13,7 +13,7 @@ import java.lang.reflect.Proxy;
 
 public class ManagedConnectionFactoryHandler implements InvocationHandler {
 
-	private final Object delegate;
+    private Object delegate;
 	private String identifier;
 
 	public ManagedConnectionFactoryHandler(Object xads) {

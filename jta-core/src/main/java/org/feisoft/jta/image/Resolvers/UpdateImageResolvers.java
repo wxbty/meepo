@@ -5,7 +5,6 @@ import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.image.Image;
 
-import javax.transaction.xa.XAException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,21 +18,21 @@ public class UpdateImageResolvers extends BaseResolvers {
 
 
     @Override
-    public Image genBeforeImage() throws SQLException, JSQLParserException, XAException {
+    public Image genBeforeImage() throws SQLException, JSQLParserException {
         return genImage();
     }
 
     @Override
-    public Image genAfterImage() throws SQLException, XAException, JSQLParserException {
+    public Image genAfterImage() throws SQLException, JSQLParserException {
         return genImage();
     }
 
     @Override
-    public String getTable() throws JSQLParserException, XAException {
+    public String getTable() throws JSQLParserException, SQLException {
 
         List<String> tables = SqlpraserUtils.name_update_table(orginSql);
         if (tables.size() > 1) {
-            throw new XAException("Update.UnsupportMultiTables");
+            throw new SQLException("Update.UnsupportMultiTables");
         }
         return tables.get(0);
     }

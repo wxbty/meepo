@@ -1,6 +1,7 @@
 package org.feisoft.jta.lock;
 
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.common.utils.SpringBeanUtil;
 
 import java.sql.SQLException;
 
@@ -12,11 +13,20 @@ import java.sql.SQLException;
  */
 public class ShareLock extends TxcLock {
 
+    private DbPoolSource dbPoolSource = null;
+
+    {
+        if (this.dbPoolSource == null) {
+            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+            this.dbPoolSource = dbPoolSource;
+        }
+    }
+
     @Override
     public void lock() throws SQLException {
         String sql = "select count(0) as total from  txc_lock where  table_name = '" + tableName + "' and key_value ="
                 + keyValue + " and xlock='" + xlock + "'";
-        int total = DbPoolUtil.countList(sql);
+        int total = dbPoolSource.countList(sql);
         if (total == 0) {
             insertLock();
             insertShareLock();
@@ -41,7 +51,7 @@ public class ShareLock extends TxcLock {
         sql += "'" + tableName + "'," + keyValue + ",'" + xid + "','" + branchId + "','" + xid + "'," + slock + ","
                 + createTime;
         sql += ")";
-        DbPoolUtil.executeUpdate(sql);
+        dbPoolSource.executeUpdate(sql);
     }
 
     ;

@@ -2,17 +2,26 @@ package org.feisoft.jta.image;
 
 import org.apache.commons.lang3.StringUtils;
 import org.feisoft.common.utils.DbPool.BoolRowMap;
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.common.utils.SpringBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.transaction.xa.XAException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BackInfo {
+
+    private DbPoolSource dbPoolSource = null;
+
+    {
+        if (this.dbPoolSource == null) {
+            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+            this.dbPoolSource = dbPoolSource;
+        }
+    }
 
     static final Logger logger = LoggerFactory.getLogger(BackInfo.class);
 
@@ -115,27 +124,35 @@ public class BackInfo {
         return "delete".equalsIgnoreCase(getChangeType());
     }
 
-    public void rollback() throws XAException, SQLException {
-        if (validAfterImage()) {
-            rollbackBeforeImage();
-        } else {
-            logger.error("Rollback unnecessary or failed,backinfp={}", toString());
+    public void rollback() throws SQLException {
+
+        logger.info("changeTypeSql={}", changeSql);
+        try {
+            if (validAfterImage()) {
+                rollbackBeforeImage();
+            } else {
+                logger.error("----------" + "Rollback unnecessary or failed,backinfp={}", toString());
+            }
+        } catch (SQLException e) {
+            logger.error("rollback.SQLException={}", e);
+            throw e;
         }
     }
 
-    private boolean validAfterImage() throws XAException, SQLException {
+    private boolean validAfterImage() throws SQLException {
 
         if (beforeImage == null || afterImage == null || StringUtils.isEmpty(pk) || StringUtils.isEmpty(changeSql)
                 || StringUtils.isEmpty(changeType) || StringUtils.isEmpty(selectBody) || StringUtils
                 .isEmpty(selectWhere)) {
-            throw new XAException("validImageParameterNUll");
+            logger.error("validImageParameterNUll");
+            throw new SQLException("validImageParameterNUll");
         }
         if (isDelete()) {
-            Connection conn = DbPoolUtil.getConnection();
+            Connection conn = dbPoolSource.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(selectBody + selectWhere);
             boolean exist = !rs.next();
-            DbPoolUtil.close(conn, null, rs, stmt);
+            dbPoolSource.close(conn, null, rs, stmt);
             return exist;
         } else if (isUpdate() || isInsert()) {
             List<LineFileds> line = afterImage.getLine();
@@ -150,7 +167,7 @@ public class BackInfo {
                 String andPkEquals = "";
                 Object pkVal = fds.get(pk);
                 if (pkVal == null) {
-                    throw new XAException("ValidAfterImage.Unsupport null premaryKey");
+                    throw new SQLException("ValidAfterImage.Unsupport null premaryKey");
                 }
                 if (pkVal instanceof String) {
                     andPkEquals = "  " + pk + "='" + pkVal + "'";
@@ -163,7 +180,7 @@ public class BackInfo {
                 else
                     selectSql = getSelectBody() + getSelectWhere() + " and " + andPkEquals;
 
-                return DbPoolUtil.exitListQuery(selectSql, (BoolRowMap<Object>) rs -> {
+                boolean per = dbPoolSource.exitListQuery(selectSql, (BoolRowMap<Object>) rs -> {
                     for (Map.Entry<String, Object> entry : fds.entrySet()) {
                         Object nowVal = rs.getObject(entry.getKey());
                         if (nowVal instanceof Timestamp)
@@ -181,6 +198,8 @@ public class BackInfo {
                     }
                     return true;
                 }, null);
+                if (!per)
+                    return false;
 
             }
             return true;
@@ -188,11 +207,11 @@ public class BackInfo {
         return false;
     }
 
-    private void rollbackBeforeImage() throws XAException, SQLException {
+    private void rollbackBeforeImage() throws SQLException {
 
         if (isInsert()) {
             String lastSql = "delete from " + afterImage.getTableName() + " " + selectWhere;
-            DbPoolUtil.executeUpdate(lastSql);
+            dbPoolSource.executeUpdate(lastSql);
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();
             for (LineFileds lf : line) {
@@ -210,7 +229,7 @@ public class BackInfo {
                             setSql.append(" " + field.getName() + "=" + field.getValue() + ",");
 
                         } else {
-                            throw new XAException("Cannot handle type=" + field.getValue().getClass().getName());
+                            throw new SQLException("Cannot handle type=" + field.getValue().getClass().getName());
                         }
                     } else {
                         setSql.append(" " + field.getName() + "=" + field.getValue() + ",");
@@ -223,7 +242,7 @@ public class BackInfo {
                 String whereSql = "";
                 Object pkVal = fds.get(pk);
                 if (pkVal == null) {
-                    throw new XAException(XAException.XA_RBROLLBACK);
+                    throw new SQLException("PkVal null");
                 }
                 if (pkVal instanceof String) {
                     whereSql = " where " + pk + "='" + pkVal + "'";
@@ -232,7 +251,7 @@ public class BackInfo {
                 }
 
                 String lastSql = "update " + beforeImage.getTableName() + " set " + setSql + whereSql;
-                DbPoolUtil.executeUpdate(lastSql);
+                dbPoolSource.executeUpdate(lastSql);
 
             }
         } else if (isDelete()) {
@@ -264,14 +283,14 @@ public class BackInfo {
                         "insert into " + beforeImage.getTableName() + " (" + colSql.toString() + ")values(" + valSql
                                 .toString() + ")";
                 logger.info("exe before image ={}", lastSql);
-                DbPoolUtil.executeUpdate(lastSql);
+                dbPoolSource.executeUpdate(lastSql);
             }
         }
     }
 
     public void updateStatusFinish() throws SQLException {
         String sql = "update txc_undo_log set status =1 where id = " + id;
-        DbPoolUtil.executeUpdate(sql);
+        dbPoolSource.executeUpdate(sql);
 
     }
 }

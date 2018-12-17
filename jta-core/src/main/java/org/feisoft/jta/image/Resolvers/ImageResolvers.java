@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface ImageResolvers {
 
-    Image genBeforeImage() throws SQLException, JSQLParserException, XAException;
+    Image genBeforeImage() throws SQLException, JSQLParserException;
 
-    Image genAfterImage() throws SQLException, XAException, JSQLParserException;
+    Image genAfterImage() throws SQLException, JSQLParserException;
 
-    String getTable() throws JSQLParserException, XAException;
+    String getTable() throws JSQLParserException, XAException, SQLException;
 
     String getPrimaryKey() throws SQLException;
 

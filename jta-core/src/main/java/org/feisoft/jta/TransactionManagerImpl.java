@@ -3,7 +3,7 @@ package org.feisoft.jta;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.feisoft.common.utils.ByteUtils;
-import org.feisoft.common.utils.DbPool.DbPoolUtil;
+import org.feisoft.common.utils.DbPool.DbPoolSource;
 import org.feisoft.jta.image.BackInfo;
 import org.feisoft.jta.supports.wire.RemoteCoordinator;
 import org.feisoft.transaction.*;
@@ -15,6 +15,7 @@ import org.feisoft.transaction.xa.TransactionXid;
 import org.feisoft.transaction.xa.XidFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.*;
 import java.sql.SQLException;
@@ -28,6 +29,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class TransactionManagerImpl implements TransactionManager, TransactionTimer, TransactionBeanFactoryAware {
 
     static final Logger logger = LoggerFactory.getLogger(TransactionManagerImpl.class);
+
+    @Autowired(required = false)
+    private DbPoolSource dbPoolSource;
 
     @javax.inject.Inject
     private TransactionBeanFactory beanFactory;
@@ -262,7 +266,7 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
         }
 
         //清除超期lock
-        if (DbPoolUtil.isInited()) {
+        if (dbPoolSource != null && dbPoolSource.isInited()) {
             rollbackOverTimeImage();
         }
 
@@ -276,7 +280,7 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
                     "select u.id, rollback_info,k.create_time from txc_lock k,txc_undo_log u where k.xid=u.xid and k.branch_id=u.branch_id and  k.create_time +"
                             + expireMilliSeconds + "< " + now;
             AtomicBoolean isExpire = new AtomicBoolean(false);
-            DbPoolUtil.executeQuery(sql, rs -> {
+            dbPoolSource.executeQuery(sql, rs -> {
                 Long nowMillis = System.currentTimeMillis();
                 Long txMillis = rs.getLong("create_time");
                 if (nowMillis - txMillis < timeoutSeconds) {
@@ -299,10 +303,10 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
 
             if (isExpire.get()) {
                 sql = "select count(*) as total from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
-                int outDateLockNum = DbPoolUtil.countList(sql);
+                int outDateLockNum = dbPoolSource.countList(sql);
                 if (outDateLockNum > 0) {
                     sql = "delete from txc_lock where  create_time +" + expireMilliSeconds + "< " + now;
-                    DbPoolUtil.executeUpdate(sql);
+                    dbPoolSource.executeUpdate(sql);
                 }
             }
         } catch (SQLException e) {
