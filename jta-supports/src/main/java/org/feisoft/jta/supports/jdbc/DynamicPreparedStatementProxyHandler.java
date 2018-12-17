@@ -81,75 +81,73 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
         if (transaction == null || "close".equals(method.getName())) {
             return method.invoke(realObject, args);
         }
-        synchronized (DynamicPreparedStatementProxyHandler.class) {
 
-            if (method.getName().startsWith("set") && args != null && args.length == 2) {
-                params.add(args[1]);
-            }
-            if (Status.STATUS_ACTIVE != transaction.getStatus()) {
-                throw new SQLException("Operation is disabled during the inactive phase of the transaction!");
-            } else if (!transaction.isTiming()) {
-                throw new SQLException(
-                        "Lock operation is disabled during the inactive phase of the transaction when transaction is stoped!");
-            }
+        if (method.getName().startsWith("set") && args != null && args.length == 2) {
+            params.add(args[1]);
+        }
+        if (Status.STATUS_ACTIVE != transaction.getStatus()) {
+            throw new SQLException("Operation is disabled during the inactive phase of the transaction!");
+        } else if (!transaction.isTiming()) {
+            throw new SQLException(
+                    "Lock operation is disabled during the inactive phase of the transaction when transaction is stoped!");
+        }
 
-            if (isQueryMethod(method) || isUpdateMethod(method.getName())) {
-                if (currentXid == null) {
-                    List<XAResourceArchive> xaResourceArchives = transaction.getNativeParticipantList();
-                    if (xaResourceArchives.size() > 0) {
-                        currentXid = xaResourceArchives.get(0).getXid();
-                    }
+        if (isQueryMethod(method) || isUpdateMethod(method.getName())) {
+            if (currentXid == null) {
+                List<XAResourceArchive> xaResourceArchives = transaction.getNativeParticipantList();
+                if (xaResourceArchives.size() > 0) {
+                    currentXid = xaResourceArchives.get(0).getXid();
                 }
-                if (currentXid != null) {
-                    gloableXid = partGloableXid(currentXid);
-                    branchXid = partBranchXid(currentXid);
-                }
-
+            }
+            if (currentXid != null) {
+                gloableXid = partGloableXid(currentXid);
+                branchXid = partBranchXid(currentXid);
             }
 
-            if (isUpdateMethod(method.getName())) {
-                if (currentXid == null) {
-                    logger.error("method.getName()={},args={}-----没有xid-----", method.getName(), args);
-                    throw new SQLException("No xid");
-                }
-                return invokUpdate(method, args, transaction);
+        }
+
+        if (isUpdateMethod(method.getName())) {
+            if (currentXid == null) {
+                //                    logger.error("method.getName()={},args={}-----没有xid-----", method.getName(), args);
+                throw new SQLException("No xid");
             }
+            return invokUpdate(method, args, transaction);
+        }
 
-            if (isQueryMethod(method)) {
+        if (isQueryMethod(method)) {
 
-                try {
-                    if (args == null || StringUtils.isEmpty(args[0].toString())) {
-                        //select x
+            try {
+                if (args == null || StringUtils.isEmpty(args[0].toString())) {
+                    //select x
+                    return method.invoke(realObject, args);
+                }
+                sql = args[0].toString();
+                if (StringUtils.deleteWhitespace(sql.toLowerCase()).endsWith("lockinsharemode")) {
+                    return LockSharedMode(method, args);
+                } else {
+                    net.sf.jsqlparser.statement.Statement statement;
+                    try {
+                        statement = CCJSqlParserUtil.parse(sql);
+                    } catch (JSQLParserException e) {
+                        logger.error("jsqlparser.praseFailed,sql=" + sql);
                         return method.invoke(realObject, args);
                     }
-                    sql = args[0].toString();
-                    if (StringUtils.deleteWhitespace(sql.toLowerCase()).endsWith("lockinsharemode")) {
-                        return LockSharedMode(method, args);
-                    } else {
-                        net.sf.jsqlparser.statement.Statement statement;
-                        try {
-                            statement = CCJSqlParserUtil.parse(sql);
-                        } catch (JSQLParserException e) {
-                            logger.error("jsqlparser.praseFailed,sql=" + sql);
-                            return method.invoke(realObject, args);
+                    Select select = (Select) statement;
+                    SelectBody selectBody = select.getSelectBody();
+                    if (selectBody instanceof PlainSelect) {
+                        PlainSelect ps = (PlainSelect) selectBody;
+                        if (ps.isForUpdate()) {
+                            // update
+                            return lockForUpdate(method, args);
                         }
-                        Select select = (Select) statement;
-                        SelectBody selectBody = select.getSelectBody();
-                        if (selectBody instanceof PlainSelect) {
-                            PlainSelect ps = (PlainSelect) selectBody;
-                            if (ps.isForUpdate()) {
-                                // update
-                                return lockForUpdate(method, args);
-                            }
-                        }
-
                     }
-                } finally {
-                    xaCommit(method, args);
+
                 }
+            } finally {
+                xaCommit(method, args);
             }
-            return method.invoke(realObject, args);
         }
+        return method.invoke(realObject, args);
 
     }
 
@@ -269,7 +267,7 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                 }
             }
         } catch (SQLException e) {
-            logger.error("unhandle Exception", e);
+            //            logger.error("unhandle Exception", e);
             throw e;
         } finally {
             xaCommit(method, args);

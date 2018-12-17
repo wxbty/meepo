@@ -7,7 +7,6 @@ import org.feisoft.jta.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.transaction.xa.XAException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +37,10 @@ public class InsertImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public Image genAfterImage() throws XAException, SQLException, JSQLParserException {
+    public Image genAfterImage() throws SQLException, JSQLParserException {
         if (pkVal == null) {
             logger.error("Insert genAfterImage Can not be null!");
-            throw new XAException("Insert.pkValNull");
+            throw new SQLException("Insert.pkValNull");
         }
         return genImage();
     }

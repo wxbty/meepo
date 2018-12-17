@@ -1,4 +1,3 @@
-
 package org.feisoft.jta;
 
 import org.feisoft.jta.supports.wire.RemoteCoordinator;
@@ -23,372 +22,381 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TransactionCoordinator implements RemoteCoordinator, TransactionBeanFactoryAware, TransactionEndpointAware {
-	static final Logger logger = LoggerFactory.getLogger(TransactionCoordinator.class);
+public class TransactionCoordinator
+        implements RemoteCoordinator, TransactionBeanFactoryAware, TransactionEndpointAware {
 
-	@javax.inject.Inject
-	private TransactionBeanFactory beanFactory;
-	private String endpoint;
+    static final Logger logger = LoggerFactory.getLogger(TransactionCoordinator.class);
 
-	@javax.inject.Inject
-	private transient TransactionManager transactionManager;
+    @javax.inject.Inject
+    private TransactionBeanFactory beanFactory;
 
-	private transient boolean ready = false;
-	private final Lock lock = new ReentrantLock();
+    private String endpoint;
 
-	public Transaction getTransactionQuietly() {
-		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
-		return transactionManager.getTransactionQuietly();
-	}
+    @javax.inject.Inject
+    private transient TransactionManager transactionManager;
 
-	public Transaction start(TransactionContext transactionContext, int flags) throws XAException {
+    private transient boolean ready = false;
 
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
-		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
-		if (transactionManager.getTransactionQuietly() != null) {
-			throw new XAException(XAException.XAER_PROTO);
-		}
+    private final Lock lock = new ReentrantLock();
 
-		TransactionXid globalXid = (TransactionXid) transactionContext.getXid();
-		Transaction transaction = transactionRepository.getTransaction(globalXid);
-		if (transaction == null) {
-			transaction = new TransactionImpl(transactionContext);
-			((TransactionImpl) transaction).setBeanFactory(this.beanFactory);
+    public Transaction getTransactionQuietly() {
+        TransactionManager transactionManager = this.beanFactory.getTransactionManager();
+        return transactionManager.getTransactionQuietly();
+    }
 
-			long expired = transactionContext.getExpiredTime();
-			long current = System.currentTimeMillis();
-			long timeoutMillis = (expired - current) / 1000L;
-			transaction.setTransactionTimeout((int) timeoutMillis);
+    public Transaction start(TransactionContext transactionContext, int flags) throws XAException {
 
-			transactionRepository.putTransaction(globalXid, transaction);
-		}
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+        TransactionManager transactionManager = this.beanFactory.getTransactionManager();
+        if (transactionManager.getTransactionQuietly() != null) {
+            throw new XAException(XAException.XAER_PROTO);
+        }
 
-		transactionManager.associateThread(transaction);
-		// this.transactionStatistic.fireBeginTransaction(transaction);
+        TransactionXid globalXid = (TransactionXid) transactionContext.getXid();
+        Transaction transaction = transactionRepository.getTransaction(globalXid);
+        if (transaction == null) {
+            transaction = new TransactionImpl(transactionContext);
+            ((TransactionImpl) transaction).setBeanFactory(this.beanFactory);
 
+            long expired = transactionContext.getExpiredTime();
+            long current = System.currentTimeMillis();
+            long timeoutMillis = (expired - current) / 1000L;
+            transaction.setTransactionTimeout((int) timeoutMillis);
 
-		return transaction;
-	}
+            transactionRepository.putTransaction(globalXid, transaction);
+        }
 
-	public Transaction end(TransactionContext transactionContext, int flags) throws XAException {
-		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
-		return transactionManager.desociateThread();
-	}
+        transactionManager.associateThread(transaction);
+        // this.transactionStatistic.fireBeginTransaction(transaction);
 
-	/** supports resume only, for tcc transaction manager. */
-	public void start(Xid xid, int flags) throws XAException {
+        return transaction;
+    }
 
-		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		Transaction current = transactionManager.getTransactionQuietly();
-		if (current != null) {
-			throw new XAException(XAException.XAER_PROTO);
-		}
+    public Transaction end(TransactionContext transactionContext, int flags) throws XAException {
+        TransactionManager transactionManager = this.beanFactory.getTransactionManager();
+        return transactionManager.desociateThread();
+    }
 
-		TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
+    /**
+     * supports resume only, for tcc transaction manager.
+     */
+    public void start(Xid xid, int flags) throws XAException {
 
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        TransactionManager transactionManager = this.beanFactory.getTransactionManager();
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        Transaction current = transactionManager.getTransactionQuietly();
+        if (current != null) {
+            throw new XAException(XAException.XAER_PROTO);
+        }
 
-		Transaction transaction = transactionRepository.getTransaction(globalXid);
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
-		transactionManager.associateThread(transaction);
-	}
+        TransactionRepository transactionRepository = this.beanFactory.getTransactionRepository();
 
-	/** supports suspend only, for tcc transaction manager. */
-	public void end(Xid xid, int flags) throws XAException {
-		if (TMSUSPEND != flags) {
-			throw new XAException(XAException.XAER_INVAL);
-		}
-		TransactionManager transactionManager = this.beanFactory.getTransactionManager();
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		Transaction transaction = transactionManager.getTransactionQuietly();
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
-		TransactionContext transactionContext = transaction.getTransactionContext();
-		TransactionXid transactionXid = transactionContext.getXid();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
 
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        Transaction transaction = transactionRepository.getTransaction(globalXid);
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
+        transactionManager.associateThread(transaction);
+    }
 
-		if (CommonUtils.equals(globalXid, transactionXid) == false) {
-			throw new XAException(XAException.XAER_INVAL);
-		}
-		transactionManager.desociateThread();
-	}
+    /**
+     * supports suspend only, for tcc transaction manager.
+     */
+    public void end(Xid xid, int flags) throws XAException {
+        if (TMSUSPEND != flags) {
+            throw new XAException(XAException.XAER_INVAL);
+        }
+        TransactionManager transactionManager = this.beanFactory.getTransactionManager();
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        Transaction transaction = transactionManager.getTransactionQuietly();
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
+        TransactionContext transactionContext = transaction.getTransactionContext();
+        TransactionXid transactionXid = transactionContext.getXid();
 
-	public void commit(Xid xid, boolean onePhase) throws XAException {
-		this.checkParticipantReadyIfNecessary();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
 
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
-		TransactionRepository repository = beanFactory.getTransactionRepository();
-		Transaction transaction = repository.getTransaction(globalXid);
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
+        if (CommonUtils.equals(globalXid, transactionXid) == false) {
+            throw new XAException(XAException.XAER_INVAL);
+        }
+        transactionManager.desociateThread();
+    }
 
-		try {
-			transaction.participantCommit(onePhase);
-			transaction.forgetQuietly(); // forget transaction
-		} catch (SecurityException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			repository.putErrorTransaction(globalXid, transaction);
+    public void commit(Xid xid, boolean onePhase) throws XAException {
+        this.checkParticipantReadyIfNecessary();
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (CommitRequiredException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			repository.putErrorTransaction(globalXid, transaction);
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        TransactionRepository repository = beanFactory.getTransactionRepository();
+        Transaction transaction = repository.getTransaction(globalXid);
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (RollbackException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator, tx has been rolled back.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+        try {
+            transaction.participantPrepare();
+            transaction.participantCommit(onePhase);
+            transaction.forgetQuietly(); // forget transaction
+        } catch (SecurityException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-			// don't forget if branch-transaction has been hueristic completed.
-			repository.putErrorTransaction(globalXid, transaction);
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (CommitRequiredException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-			XAException xaex = new XAException(XAException.XA_HEURRB);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (HeuristicMixedException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator, tx has been completed mixed.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (RollbackException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator, tx has been rolled back.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
 
-			// don't forget if branch-transaction has been hueristic completed.
-			repository.putErrorTransaction(globalXid, transaction);
+            // don't forget if branch-transaction has been hueristic completed.
+            repository.putErrorTransaction(globalXid, transaction);
 
-			XAException xaex = new XAException(XAException.XA_HEURMIX);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (HeuristicRollbackException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator, tx has been rolled back heuristically.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            XAException xaex = new XAException(XAException.XA_HEURRB);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (HeuristicMixedException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator, tx has been completed mixed.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
 
-			// don't forget if branch-transaction has been hueristic completed.
-			repository.putErrorTransaction(globalXid, transaction);
+            // don't forget if branch-transaction has been hueristic completed.
+            repository.putErrorTransaction(globalXid, transaction);
 
-			XAException xaex = new XAException(XAException.XA_HEURRB);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (SystemException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			repository.putErrorTransaction(globalXid, transaction);
+            XAException xaex = new XAException(XAException.XA_HEURMIX);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (HeuristicRollbackException ex) {
+            logger.error(
+                    "[{}] Error occurred while committing remote coordinator, tx has been rolled back heuristically.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (RuntimeException ex) {
-			logger.error("[{}] Error occurred while committing remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			repository.putErrorTransaction(globalXid, transaction);
+            // don't forget if branch-transaction has been hueristic completed.
+            repository.putErrorTransaction(globalXid, transaction);
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(ex);
-			throw xaex;
-		}
-	}
+            XAException xaex = new XAException(XAException.XA_HEURRB);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (SystemException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-	public void forgetQuietly(Xid xid) {
-		try {
-			this.forget(xid);
-		} catch (XAException ex) {
-			switch (ex.errorCode) {
-			case XAException.XAER_NOTA:
-				break;
-			default:
-				logger.error("[{}] Error occurred while forgeting remote coordinator.",
-						ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			}
-		} catch (RuntimeException ex) {
-			logger.error("[{}] Error occurred while forgeting remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-		}
-	}
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (RuntimeException ex) {
+            logger.error("[{}] Error occurred while committing remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-	public void forget(Xid xid) throws XAException {
-		this.checkParticipantReadyIfNecessary();
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(ex);
+            throw xaex;
+        }
+    }
 
-		if (xid == null) {
-			throw new XAException(XAException.XAER_INVAL);
-		}
+    public void forgetQuietly(Xid xid) {
+        try {
+            this.forget(xid);
+        } catch (XAException ex) {
+            switch (ex.errorCode) {
+                case XAException.XAER_NOTA:
+                    break;
+                default:
+                    logger.error("[{}] Error occurred while forgeting remote coordinator.",
+                            ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            }
+        } catch (RuntimeException ex) {
+            logger.error("[{}] Error occurred while forgeting remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+        }
+    }
 
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
-		TransactionRepository transactionRepository = beanFactory.getTransactionRepository();
-		Transaction transaction = transactionRepository.getErrorTransaction(globalXid);
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
+    public void forget(Xid xid) throws XAException {
+        this.checkParticipantReadyIfNecessary();
 
-		try {
-			transaction.forget();
-		} catch (SystemException ex) {
-			logger.error("[{}] Error occurred while forgeting remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			throw new XAException(XAException.XAER_RMERR);
-		} catch (RuntimeException rex) {
-			logger.error("[{}] Error occurred while forgeting remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rex);
-			throw new XAException(XAException.XAER_RMERR);
-		}
-	}
+        if (xid == null) {
+            throw new XAException(XAException.XAER_INVAL);
+        }
 
-	public int getTransactionTimeout() throws XAException {
-		return 0;
-	}
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        TransactionRepository transactionRepository = beanFactory.getTransactionRepository();
+        Transaction transaction = transactionRepository.getErrorTransaction(globalXid);
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
 
-	public boolean isSameRM(XAResource xares) throws XAException {
-		throw new XAException(XAException.XAER_RMERR);
-	}
+        try {
+            transaction.forget();
+        } catch (SystemException ex) {
+            logger.error("[{}] Error occurred while forgeting remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            throw new XAException(XAException.XAER_RMERR);
+        } catch (RuntimeException rex) {
+            logger.error("[{}] Error occurred while forgeting remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rex);
+            throw new XAException(XAException.XAER_RMERR);
+        }
+    }
 
-	public int prepare(Xid xid) throws XAException {
-		this.checkParticipantReadyIfNecessary();
+    public int getTransactionTimeout() throws XAException {
+        return 0;
+    }
 
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
-		TransactionRepository repository = beanFactory.getTransactionRepository();
-		Transaction transaction = repository.getTransaction(globalXid);
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
+    public boolean isSameRM(XAResource xares) throws XAException {
+        throw new XAException(XAException.XAER_RMERR);
+    }
 
-		try {
-			return transaction.participantPrepare();
-		} catch (CommitRequiredException crex) {
-			return XA_OK;
-		} catch (RollbackRequiredException rrex) {
-			throw new XAException(XAException.XAER_RMERR);
-		}
-	}
+    public int prepare(Xid xid) throws XAException {
+        this.checkParticipantReadyIfNecessary();
 
-	public Xid[] recover(int flag) throws XAException {
-		this.checkParticipantReadyIfNecessary();
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        TransactionRepository repository = beanFactory.getTransactionRepository();
+        Transaction transaction = repository.getTransaction(globalXid);
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
 
-		TransactionRepository repository = beanFactory.getTransactionRepository();
-		List<Transaction> allTransactionList = repository.getActiveTransactionList();
+        try {
+            return transaction.participantPrepare();
+        } catch (CommitRequiredException crex) {
+            return XA_OK;
+        } catch (RollbackRequiredException rrex) {
+            throw new XAException(XAException.XAER_RMERR);
+        }
+    }
 
-		List<Transaction> transactions = new ArrayList<Transaction>();
-		for (int i = 0; i < allTransactionList.size(); i++) {
-			Transaction transaction = allTransactionList.get(i);
-			int transactionStatus = transaction.getTransactionStatus();
-			if (transactionStatus == Status.STATUS_PREPARED || transactionStatus == Status.STATUS_COMMITTING
-					|| transactionStatus == Status.STATUS_ROLLING_BACK || transactionStatus == Status.STATUS_COMMITTED
-					|| transactionStatus == Status.STATUS_ROLLEDBACK) {
-				transactions.add(transaction);
-			} else if (transaction.getTransactionContext().isRecoveried()) {
-				transactions.add(transaction);
-			}
-		}
+    public Xid[] recover(int flag) throws XAException {
+        this.checkParticipantReadyIfNecessary();
 
-		TransactionXid[] xidArray = new TransactionXid[transactions.size()];
-		for (int i = 0; i < transactions.size(); i++) {
-			Transaction transaction = transactions.get(i);
-			xidArray[i] = transaction.getTransactionContext().getXid();
-		}
+        TransactionRepository repository = beanFactory.getTransactionRepository();
+        List<Transaction> allTransactionList = repository.getActiveTransactionList();
 
-		return xidArray;
-	}
+        List<Transaction> transactions = new ArrayList<Transaction>();
+        for (int i = 0; i < allTransactionList.size(); i++) {
+            Transaction transaction = allTransactionList.get(i);
+            int transactionStatus = transaction.getTransactionStatus();
+            if (transactionStatus == Status.STATUS_PREPARED || transactionStatus == Status.STATUS_COMMITTING
+                    || transactionStatus == Status.STATUS_ROLLING_BACK || transactionStatus == Status.STATUS_COMMITTED
+                    || transactionStatus == Status.STATUS_ROLLEDBACK) {
+                transactions.add(transaction);
+            } else if (transaction.getTransactionContext().isRecoveried()) {
+                transactions.add(transaction);
+            }
+        }
 
-	public void rollback(Xid xid) throws XAException {
-		this.checkParticipantReadyIfNecessary();
+        TransactionXid[] xidArray = new TransactionXid[transactions.size()];
+        for (int i = 0; i < transactions.size(); i++) {
+            Transaction transaction = transactions.get(i);
+            xidArray[i] = transaction.getTransactionContext().getXid();
+        }
 
-		XidFactory xidFactory = this.beanFactory.getXidFactory();
-		TransactionXid branchXid = (TransactionXid) xid;
-		TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
-		TransactionRepository repository = beanFactory.getTransactionRepository();
-		Transaction transaction = repository.getTransaction(globalXid);
-		if (transaction == null) {
-			throw new XAException(XAException.XAER_NOTA);
-		}
+        return xidArray;
+    }
 
-		try {
-			transaction.participantRollback();
-			transaction.forgetQuietly(); // forget transaction
-		} catch (RollbackRequiredException rrex) {
-			logger.error("[{}] Error occurred while rolling back remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rrex);
-			repository.putErrorTransaction(globalXid, transaction);
+    public void rollback(Xid xid) throws XAException {
+        this.checkParticipantReadyIfNecessary();
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(rrex);
-			throw xaex;
-		} catch (SystemException ex) {
-			logger.error("[{}] Error occurred while rolling back remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
-			repository.putErrorTransaction(globalXid, transaction);
+        XidFactory xidFactory = this.beanFactory.getXidFactory();
+        TransactionXid branchXid = (TransactionXid) xid;
+        TransactionXid globalXid = xidFactory.createGlobalXid(branchXid.getGlobalTransactionId());
+        TransactionRepository repository = beanFactory.getTransactionRepository();
+        Transaction transaction = repository.getTransaction(globalXid);
+        if (transaction == null) {
+            throw new XAException(XAException.XAER_NOTA);
+        }
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(ex);
-			throw xaex;
-		} catch (RuntimeException rrex) {
-			logger.error("[{}] Error occurred while rolling back remote coordinator.",
-					ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rrex);
-			repository.putErrorTransaction(globalXid, transaction);
+        try {
+            transaction.participantRollback();
+            transaction.forgetQuietly(); // forget transaction
+        } catch (RollbackRequiredException rrex) {
+            logger.error("[{}] Error occurred while rolling back remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rrex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-			XAException xaex = new XAException(XAException.XAER_RMERR);
-			xaex.initCause(rrex);
-			throw xaex;
-		}
-	}
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(rrex);
+            throw xaex;
+        } catch (SystemException ex) {
+            logger.error("[{}] Error occurred while rolling back remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), ex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-	public void markParticipantReady() {
-		try {
-			this.lock.lock();
-			this.ready = true;
-		} finally {
-			this.lock.unlock();
-		}
-	}
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(ex);
+            throw xaex;
+        } catch (RuntimeException rrex) {
+            logger.error("[{}] Error occurred while rolling back remote coordinator.",
+                    ByteUtils.byteArrayToString(xid.getGlobalTransactionId()), rrex);
+            repository.putErrorTransaction(globalXid, transaction);
 
-	private void checkParticipantReadyIfNecessary() throws XAException {
-		if (this.ready == false) {
-			this.checkParticipantReady();
-		}
-	}
+            XAException xaex = new XAException(XAException.XAER_RMERR);
+            xaex.initCause(rrex);
+            throw xaex;
+        }
+    }
 
-	private void checkParticipantReady() throws XAException {
-		try {
-			this.lock.lock();
-			if (this.ready == false) {
-				throw new XAException(XAException.XAER_RMFAIL);
-			}
-		} finally {
-			this.lock.unlock();
-		}
-	}
+    public void markParticipantReady() {
+        try {
+            this.lock.lock();
+            this.ready = true;
+        } finally {
+            this.lock.unlock();
+        }
+    }
 
-	public boolean setTransactionTimeout(int seconds) throws XAException {
-		return false;
-	}
+    private void checkParticipantReadyIfNecessary() throws XAException {
+        if (this.ready == false) {
+            this.checkParticipantReady();
+        }
+    }
 
-	public void setEndpoint(String identifier) {
-		this.endpoint = identifier;
-	}
+    private void checkParticipantReady() throws XAException {
+        try {
+            this.lock.lock();
+            if (this.ready == false) {
+                throw new XAException(XAException.XAER_RMFAIL);
+            }
+        } finally {
+            this.lock.unlock();
+        }
+    }
 
-	public String getIdentifier() {
-		return this.endpoint;
-	}
+    public boolean setTransactionTimeout(int seconds) throws XAException {
+        return false;
+    }
 
-	public String getApplication() {
-		return this.endpoint;
-	}
+    public void setEndpoint(String identifier) {
+        this.endpoint = identifier;
+    }
 
-	public void setBeanFactory(TransactionBeanFactory tbf) {
-		this.beanFactory = tbf;
-	}
+    public String getIdentifier() {
+        return this.endpoint;
+    }
+
+    public String getApplication() {
+        return this.endpoint;
+    }
+
+    public void setBeanFactory(TransactionBeanFactory tbf) {
+        this.beanFactory = tbf;
+    }
 
 }

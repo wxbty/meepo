@@ -253,9 +253,7 @@ public class TransactionServiceFilter implements Filter {
             TransactionContext transactionContext = transaction == null ? null : transaction.getTransactionContext();
             propagatedBy = transactionContext == null ? null : String.valueOf(transactionContext.getPropagatedBy());
             Result result = this.wrapResultForProvider(invoker, invocation, propagatedBy, true);
-            if (transaction!=null  && transaction.getTransactionStatus() == Status.STATUS_ACTIVE) {
-                transaction.participantPrepare();
-            }
+
             return result;
         } catch (RpcException rex) {
             failure = true;
