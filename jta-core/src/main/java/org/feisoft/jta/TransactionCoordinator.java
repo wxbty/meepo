@@ -136,7 +136,7 @@ public class TransactionCoordinator
         Transaction transaction = repository.getTransaction(globalXid);
         if (transaction == null) {
             throw new XAException(XAException.XAER_NOTA);
-        }
+        }CommonResourceDescriptor
 
         try {
             transaction.participantPrepare();
