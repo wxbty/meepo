@@ -25,6 +25,10 @@ public class DbPoolSource {
         setInited(true);
     }
 
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
     public void setProxyDataSource(Object proxyDataSource) throws Exception {
 
         if (proxyDataSource instanceof DataSource) {

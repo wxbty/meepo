@@ -211,6 +211,7 @@ public class BackInfo {
 
         if (isInsert()) {
             String lastSql = "delete from " + afterImage.getTableName() + " " + selectWhere;
+            logger.info("exe isInsert image ={}", lastSql);
             dbPoolSource.executeUpdate(lastSql);
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();
@@ -251,6 +252,7 @@ public class BackInfo {
                 }
 
                 String lastSql = "update " + beforeImage.getTableName() + " set " + setSql + whereSql;
+                logger.info("exe Update image ={}", lastSql);
                 dbPoolSource.executeUpdate(lastSql);
 
             }

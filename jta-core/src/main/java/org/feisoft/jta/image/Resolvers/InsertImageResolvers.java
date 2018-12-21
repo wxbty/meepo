@@ -47,7 +47,7 @@ public class InsertImageResolvers extends BaseResolvers {
 
     @Override
     public String getTable() throws JSQLParserException {
-        return SqlpraserUtils.name_insert_table(orginSql);
+        return SqlpraserUtils.name_insert_table(orginSql).toUpperCase();
     }
 
 

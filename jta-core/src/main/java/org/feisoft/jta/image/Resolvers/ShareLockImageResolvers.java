@@ -38,7 +38,7 @@ public class ShareLockImageResolvers extends BaseResolvers {
         if (tables.size() > 1) {
             throw new SQLException("Select.UnsupportMultiTables");
         }
-        return tables.get(0);
+        return tables.get(0).toUpperCase();
     }
 
     @Override

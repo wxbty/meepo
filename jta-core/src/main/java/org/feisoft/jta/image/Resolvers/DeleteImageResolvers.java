@@ -35,10 +35,10 @@ public class DeleteImageResolvers extends BaseResolvers {
     public String getTable() throws JSQLParserException, SQLException {
 
         List<String> tables = SqlpraserUtils.name_delete_table(orginSql);
-        if (tables.size() > 1) {
+        if (tables.size() != 1) {
             throw new SQLException("Delete.UnsupportMultiTables");
         }
-        return tables.get(0);
+        return tables.get(0).toUpperCase();
     }
 
     @Override
@@ -47,8 +47,9 @@ public class DeleteImageResolvers extends BaseResolvers {
     }
 
     @Override
-    public String getLockedSet() throws JSQLParserException {
+    public String getLockedSet() {
         return beforeImageSql;
     }
+
 
 }

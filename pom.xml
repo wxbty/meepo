@@ -9,7 +9,7 @@
     <groupId>ink.zfei</groupId>
     <artifactId>meepo-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.1.RELEASE</version>
+    <version>2.0.2.SNAP</version>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -46,7 +46,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jta.version>2.0.1.RELEASE</jta.version>
+        <jta.version>2.0.2.SNAP</jta.version>
     </properties>
 
 

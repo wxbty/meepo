@@ -31,10 +31,10 @@ public class UpdateImageResolvers extends BaseResolvers {
     public String getTable() throws JSQLParserException, SQLException {
 
         List<String> tables = SqlpraserUtils.name_update_table(orginSql);
-        if (tables.size() > 1) {
+        if (tables.size() != 1) {
             throw new SQLException("Update.UnsupportMultiTables");
         }
-        return tables.get(0);
+        return tables.get(0).toUpperCase();
     }
 
     @Override

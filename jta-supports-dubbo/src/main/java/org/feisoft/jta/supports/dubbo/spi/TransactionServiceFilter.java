@@ -247,7 +247,7 @@ public class TransactionServiceFilter implements Filter {
         String propagatedBy = null;
         boolean failure = false;
         try {
-            this.beforeProviderInvokeForSVC(invocation, request, response);
+            this.beforeProviderInvokeForSVC(invocation, request);
 
             Transaction transaction = transactionManager.getTransactionQuietly();
             TransactionContext transactionContext = transaction == null ? null : transaction.getTransactionContext();
@@ -338,8 +338,7 @@ public class TransactionServiceFilter implements Filter {
         return result;
     }
 
-    private void beforeProviderInvokeForSVC(Invocation invocation, TransactionRequestImpl request,
-                                            TransactionResponseImpl response) {
+    private void beforeProviderInvokeForSVC(Invocation invocation, TransactionRequestImpl request) {
         TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
         TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();
         TransactionInterceptor transactionInterceptor = beanFactory.getTransactionInterceptor();

@@ -6,9 +6,15 @@ import org.feisoft.common.utils.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 import org.feisoft.common.utils.SqlpraserUtils;
 import org.feisoft.jta.image.BackInfo;
+import org.feisoft.jta.image.Field;
 import org.feisoft.jta.image.Image;
 import org.feisoft.jta.image.LineFileds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.NamedThreadLocal;
+import org.springframework.util.Assert;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -17,17 +23,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class BaseResolvers implements ImageResolvers {
 
-    private DbPoolSource dbPoolSource = null;
+    static final Logger logger = LoggerFactory.getLogger(BaseResolvers.class);
 
-    {
-        if (this.dbPoolSource == null) {
-            DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
-            this.dbPoolSource = dbPoolSource;
-        }
-    }
+    private DbPoolSource dbPoolSource;
+
+    private static final ThreadLocal<Map<Object, Object>> resources = new NamedThreadLocal<>("Datasource meta");
+
+    private static ConcurrentHashMap<String, String> tbNameToPks = new ConcurrentHashMap<>();
+
+    private ConcurrentHashMap<String, Map<String, Object>> tbNameToCols = new ConcurrentHashMap<>();
 
     protected BackInfo backInfo;
 
@@ -46,6 +54,12 @@ public abstract class BaseResolvers implements ImageResolvers {
     protected String orginSql;
 
     protected String beforeImageSql;
+
+    BaseResolvers() {
+        DbPoolSource dbPoolSource = (DbPoolSource) SpringBeanUtil.getBean("dbPoolSource");
+        Assert.notNull(dbPoolSource, "No DataSource specified");
+        this.dbPoolSource = dbPoolSource;
+    }
 
     protected Image genImage() throws SQLException, JSQLParserException {
 
@@ -80,7 +94,7 @@ public abstract class BaseResolvers implements ImageResolvers {
             LineFileds lf = new LineFileds();
             List<org.feisoft.jta.image.Field> fileds = new ArrayList<org.feisoft.jta.image.Field>();
             for (String col : peMap.keySet()) {
-                org.feisoft.jta.image.Field field = new org.feisoft.jta.image.Field();
+                Field field = new org.feisoft.jta.image.Field();
                 field.setName(col);
                 field.setType(peMap.get(col).getClass().getName());
                 field.setValue(peMap.get(col));
@@ -117,12 +131,20 @@ public abstract class BaseResolvers implements ImageResolvers {
     }
 
     public String getschema() throws SQLException {
+
+        if (hasSchema(dbPoolSource.getDataSource())) {
+            return doGetResource(dbPoolSource.getDataSource()).toString();
+        }
+
         Connection conn = dbPoolSource.getConnection();
         DatabaseMetaData dbMetaData = conn.getMetaData();
         ResultSet schemasResultSet = dbMetaData.getSchemas(conn.getCatalog(), null);
-        String schemasName = "";
+        String schemasName = null;
         while (schemasResultSet.next()) {
             schemasName = schemasResultSet.getString("TABLE_SCHEM");
+        }
+        if (StringUtils.isNotBlank(schemasName)) {
+            bindResource(dbPoolSource.getDataSource(), schemasName);
         }
         dbPoolSource.close(conn, null, schemasResultSet);
         return schemasName;
@@ -146,19 +168,27 @@ public abstract class BaseResolvers implements ImageResolvers {
     ;
 
     public String getMetaPrimaryKey(String tableName) throws SQLException {
+        if (BaseResolvers.tbNameToPks.keySet().contains(tableName)) {
+            return BaseResolvers.tbNameToPks.get(tableName);
+        }
         Connection conn = dbPoolSource.getConnection();
         DatabaseMetaData dbMetaData = conn.getMetaData();
         ResultSet primaryKeyResultSet = dbMetaData.getPrimaryKeys(conn.getCatalog(), null, tableName);
-        String primaryKeyColumnName = "";
+        String primaryKeyColumnName = null;
         while (primaryKeyResultSet.next()) {
             primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
         }
         dbPoolSource.close(conn, null, primaryKeyResultSet);
-
+        if (StringUtils.isNotBlank(primaryKeyColumnName)) {
+            BaseResolvers.tbNameToPks.put(tableName, primaryKeyColumnName);
+        }
         return primaryKeyColumnName;
     }
 
     protected Map<String, Object> getColumns() throws SQLException {
+        if (tbNameToCols.keySet().contains(tableName)) {
+            return tbNameToCols.get(tableName);
+        }
         Connection conn = dbPoolSource.getConnection();
         DatabaseMetaData dbMetaData = conn.getMetaData();
         ResultSet columResultSet = dbMetaData.getColumns(null, "%", tableName, "%");
@@ -167,6 +197,9 @@ public abstract class BaseResolvers implements ImageResolvers {
             colums.put(columResultSet.getString("COLUMN_NAME"), columResultSet.getObject("TYPE_NAME"));
         }
         dbPoolSource.close(conn, null, columResultSet);
+        if (colums.size() > 0) {
+            tbNameToCols.put(tableName, colums);
+        }
         return colums;
     }
 
@@ -195,5 +228,39 @@ public abstract class BaseResolvers implements ImageResolvers {
         } else {
             throw new SQLException("BaseResolvers.UnsupportSqlType");
         }
+    }
+
+    public void bindResource(Object actualKey, Object value) throws IllegalStateException {
+        Assert.notNull(value, "Value must not be null");
+        Map<Object, Object> map = resources.get();
+        // set ThreadLocal Map if none found
+        if (map == null) {
+            map = new HashMap<>();
+            resources.set(map);
+        }
+        Object oldValue = map.put(actualKey.toString(), value);
+        // Transparently suppress a ResourceHolder that was marked as void...
+
+        if (oldValue != null) {
+            throw new IllegalStateException(
+                    "Already value [" + oldValue + "] for key [" + actualKey + "] bound to thread [" + Thread
+                            .currentThread().getName() + "]");
+        }
+        if (logger.isTraceEnabled()) {
+            logger.trace("Bound value [" + value + "] for key [" + actualKey + "] to thread [" + Thread.currentThread()
+                    .getName() + "]");
+        }
+    }
+
+    public Object doGetResource(Object actualKey) {
+        Map<Object, Object> map = resources.get();
+        if (map == null) {
+            return null;
+        }
+        return map.get(actualKey);
+    }
+
+    public boolean hasSchema(DataSource dataSource) {
+        return doGetResource(dataSource) != null;
     }
 }
