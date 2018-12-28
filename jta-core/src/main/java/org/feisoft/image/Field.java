@@ -1,4 +1,4 @@
-package org.feisoft.jta.image;
+package org.feisoft.image;
 
 public class Field {
 

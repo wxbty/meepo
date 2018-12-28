@@ -1,9 +1,9 @@
-package org.feisoft.jta.image.resolvers;
+package org.feisoft.image.resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
 import org.feisoft.common.utils.SqlpraserUtils;
-import org.feisoft.jta.image.BackInfo;
-import org.feisoft.jta.image.Image;
+import org.feisoft.image.Image;
+import org.feisoft.image.BackInfo;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -52,5 +52,16 @@ public class UpdateImageResolvers extends BaseResolvers {
     public String getLockedSet() {
 
         return beforeImageSql;
+    }
+
+    public static void main(String[] args) {
+        String sql = "UPDATE video SET vaalidate=0 WHERE id=8002";
+        UpdateImageResolvers resolvers = new UpdateImageResolvers(sql,null);
+        try {
+            System.out.printf(resolvers.getSqlWhere());
+        } catch (JSQLParserException e) {
+            e.printStackTrace();
+        }
+
     }
 }

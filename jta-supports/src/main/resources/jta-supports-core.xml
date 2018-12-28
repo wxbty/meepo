@@ -10,7 +10,7 @@
     <bean class="org.feisoft.common.utils.SpringBeanUtil"/>
 
 
-    <bean id="dbPoolSource" class="org.feisoft.common.utils.DbPool.DbPoolSource"/>
+    <bean id="dbPoolSource" class="org.feisoft.DbPool.DbPoolSource"/>
 	<bean id="jtaUserTransaction" class="org.feisoft.jta.UserTransactionImpl" />
 
 	<bean id="transactionManager" class="org.feisoft.jta.TransactionManagerImpl" />

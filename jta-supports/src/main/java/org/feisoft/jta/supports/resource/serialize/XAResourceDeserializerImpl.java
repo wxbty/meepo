@@ -1,24 +1,19 @@
 /**
  * Copyright 2014-2018 yangming.liu<bytefox@126.com>.
- *
  * This copyrighted material is made available to anyone wishing to use, modify,
  * copy, or redistribute it subject to the terms and conditions of the GNU
  * Lesser General Public License, as published by the Free Software Foundation.
- *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
  * for more details.
- *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this distribution; if not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.feisoft.jta.supports.resource.serialize;
 
-import org.feisoft.jta.supports.jdbc.DataSourceHolder;
-import org.feisoft.jta.supports.jdbc.RecoveredResource;
 import org.feisoft.jta.supports.resource.CommonResourceDescriptor;
-import org.feisoft.jta.supports.resource.LocalXAResourceDescriptor;
 import org.feisoft.transaction.supports.resource.XAResourceDescriptor;
 import org.feisoft.transaction.supports.serialize.XAResourceDeserializer;
 import org.slf4j.Logger;
@@ -27,8 +22,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-import javax.jms.XAConnectionFactory;
-import javax.jms.XASession;
 import javax.resource.spi.ManagedConnection;
 import javax.resource.spi.ManagedConnectionFactory;
 import javax.sql.XAConnection;
@@ -38,186 +31,131 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class XAResourceDeserializerImpl implements XAResourceDeserializer, ApplicationContextAware {
-	static final Logger logger = LoggerFactory.getLogger(XAResourceDeserializerImpl.class);
 
-	private Map<String, XAResourceDescriptor> cachedResourceMap = new ConcurrentHashMap<String, XAResourceDescriptor>();
-	private ApplicationContext applicationContext;
+    static final Logger logger = LoggerFactory.getLogger(XAResourceDeserializerImpl.class);
 
-	public XAResourceDescriptor deserialize(String identifier) {
+    private Map<String, XAResourceDescriptor> cachedResourceMap = new ConcurrentHashMap<String, XAResourceDescriptor>();
 
-		XAResourceDescriptor cachedResource = this.cachedResourceMap.get(identifier);
-		if (cachedResource != null) {
-			return cachedResource;
-		}
+    private ApplicationContext applicationContext;
 
-		try {
-			Object bean = this.applicationContext.getBean(identifier);
-			XAResourceDescriptor resolvedResource = this.deserializeResource(identifier, bean);
-			if (resolvedResource == null) {
-				logger.error("can not find a matching xa-resource(identifier= {})!", identifier);
-				return null;
-			}
+    public XAResourceDescriptor deserialize(String identifier) {
 
-			this.cachedResourceMap.put(identifier, resolvedResource);
-			return resolvedResource;
-		} catch (BeansException bex) {
-			logger.error("can not find a matching xa-resource(identifier= {})!", identifier);
-			return null;
-		} catch (Exception ex) {
-			logger.error("can not find a matching xa-resource(identifier= {})!", identifier, ex);
-			return null;
-		}
+        XAResourceDescriptor cachedResource = this.cachedResourceMap.get(identifier);
+        if (cachedResource != null) {
+            return cachedResource;
+        }
 
-	}
+        try {
+            Object bean = this.applicationContext.getBean(identifier);
+            XAResourceDescriptor resolvedResource = this.deserializeResource(identifier, bean);
+            if (resolvedResource == null) {
+                logger.error("can not find a matching xa-resource(identifier= {})!", identifier);
+                return null;
+            }
 
-	private XAResourceDescriptor deserializeResource(String identifier, Object bean) throws Exception {
-		if (DataSourceHolder.class.isInstance(bean)) {
-			DataSourceHolder holder = (DataSourceHolder) bean;
-			RecoveredResource xares = new RecoveredResource();
-			xares.setDataSource(holder.getDataSource());
+            this.cachedResourceMap.put(identifier, resolvedResource);
+            return resolvedResource;
+        } catch (BeansException bex) {
+            logger.error("can not find a matching xa-resource(identifier= {})!", identifier);
+            return null;
+        } catch (Exception ex) {
+            logger.error("can not find a matching xa-resource(identifier= {})!", identifier, ex);
+            return null;
+        }
 
-			LocalXAResourceDescriptor descriptor = new LocalXAResourceDescriptor();
-			descriptor.setDelegate(xares);
-			descriptor.setIdentifier(identifier);
+    }
 
-			return descriptor;
-		} else if (javax.sql.DataSource.class.isInstance(bean)) {
-			javax.sql.DataSource dataSource = (javax.sql.DataSource) bean;
-			RecoveredResource xares = new RecoveredResource();
-			xares.setDataSource(dataSource);
+    private XAResourceDescriptor deserializeResource(String identifier, Object bean) throws Exception {
+        if (XADataSource.class.isInstance(bean)) {
+            XADataSource xaDataSource = (XADataSource) bean;
+            XAConnection xaConnection = xaDataSource.getXAConnection();
+            java.sql.Connection connection = null;
+            try {
+                connection = xaConnection.getConnection();
+                XAResource xares = xaConnection.getXAResource();
 
-			LocalXAResourceDescriptor descriptor = new LocalXAResourceDescriptor();
-			descriptor.setDelegate(xares);
-			descriptor.setIdentifier(identifier);
+                CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
+                descriptor.setDelegate(xares);
+                descriptor.setIdentifier(identifier);
+                descriptor.setManaged(xaConnection);
 
-			return descriptor;
-		} else if (XADataSource.class.isInstance(bean)) {
-			XADataSource xaDataSource = (XADataSource) bean;
-			XAConnection xaConnection = xaDataSource.getXAConnection();
-			java.sql.Connection connection = null;
-			try {
-				connection = xaConnection.getConnection();
-				XAResource xares = xaConnection.getXAResource();
+                return descriptor;
+            } catch (Exception ex) {
+                logger.warn(ex.getMessage(), ex);
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(xaConnection);
+                XAResource xares = xaConnection.getXAResource();
 
-				return descriptor;
-			} catch (Exception ex) {
-				logger.warn(ex.getMessage(), ex);
+                CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
+                descriptor.setDelegate(xares);
+                descriptor.setIdentifier(identifier);
+                descriptor.setManaged(xaConnection);
 
-				XAResource xares = xaConnection.getXAResource();
+                return descriptor;
+            } finally {
+                this.closeQuietly(connection);
+            }
+        } else if (ManagedConnectionFactory.class.isInstance(bean)) {
+            ManagedConnectionFactory connectionFactory = (ManagedConnectionFactory) bean;
+            ManagedConnection managedConnection = connectionFactory.createManagedConnection(null, null);
+            javax.resource.cci.Connection connection = null;
+            try {
+                connection = (javax.resource.cci.Connection) managedConnection.getConnection(null, null);
+                XAResource xares = managedConnection.getXAResource();
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(xaConnection);
+                CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
+                descriptor.setDelegate(xares);
+                descriptor.setIdentifier(identifier);
+                descriptor.setManaged(managedConnection);
 
-				return descriptor;
-			} finally {
-				this.closeQuietly(connection);
-			}
-		} else if (XAConnectionFactory.class.isInstance(bean)) {
-			XAConnectionFactory connectionFactory = (XAConnectionFactory) bean;
-			javax.jms.XAConnection xaConnection = connectionFactory.createXAConnection();
-			XASession xaSession = xaConnection.createXASession();
-			javax.jms.Session session = null;
-			try {
-				session = xaSession.getSession();
-				XAResource xares = xaSession.getXAResource();
+                return descriptor;
+            } catch (Exception ex) {
+                logger.warn(ex.getMessage(), ex);
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(xaConnection);
+                XAResource xares = managedConnection.getXAResource();
 
-				return descriptor;
-			} catch (Exception ex) {
-				logger.warn(ex.getMessage(), ex);
+                CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
+                descriptor.setDelegate(xares);
+                descriptor.setIdentifier(identifier);
+                descriptor.setManaged(managedConnection);
 
-				XAResource xares = xaSession.getXAResource();
+                return descriptor;
+            } finally {
+                this.closeQuietly(connection);
+            }
+        } else {
+            return null;
+        }
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(xaConnection);
+    }
 
-				return descriptor;
-			} finally {
-				this.closeQuietly(session);
-			}
-		} else if (ManagedConnectionFactory.class.isInstance(bean)) {
-			ManagedConnectionFactory connectionFactory = (ManagedConnectionFactory) bean;
-			ManagedConnection managedConnection = connectionFactory.createManagedConnection(null, null);
-			javax.resource.cci.Connection connection = null;
-			try {
-				connection = (javax.resource.cci.Connection) managedConnection.getConnection(null, null);
-				XAResource xares = managedConnection.getXAResource();
+    protected void closeQuietly(javax.resource.cci.Connection closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (Exception ex) {
+                logger.debug(ex.getMessage());
+            }
+        }
+    }
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(managedConnection);
+    protected void closeQuietly(java.sql.Connection closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (Exception ex) {
+                logger.debug(ex.getMessage());
+            }
+        }
+    }
 
-				return descriptor;
-			} catch (Exception ex) {
-				logger.warn(ex.getMessage(), ex);
 
-				XAResource xares = managedConnection.getXAResource();
 
-				CommonResourceDescriptor descriptor = new CommonResourceDescriptor();
-				descriptor.setDelegate(xares);
-				descriptor.setIdentifier(identifier);
-				descriptor.setManaged(managedConnection);
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
-				return descriptor;
-			} finally {
-				this.closeQuietly(connection);
-			}
-		} else {
-			return null;
-		}
-
-	}
-
-	protected void closeQuietly(javax.resource.cci.Connection closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (Exception ex) {
-				logger.debug(ex.getMessage());
-			}
-		}
-	}
-
-	protected void closeQuietly(java.sql.Connection closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (Exception ex) {
-				logger.debug(ex.getMessage());
-			}
-		}
-	}
-
-	protected void closeQuietly(javax.jms.Session closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (Exception ex) {
-				logger.debug(ex.getMessage());
-			}
-		}
-	}
-
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
-
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 
 }

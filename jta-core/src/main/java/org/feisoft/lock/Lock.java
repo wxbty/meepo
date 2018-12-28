@@ -1,4 +1,4 @@
-package org.feisoft.jta.lock;
+package org.feisoft.lock;
 
 import java.sql.SQLException;
 

@@ -1,9 +1,9 @@
-package org.feisoft.jta.image.resolvers;
+package org.feisoft.image.resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
 import org.feisoft.common.utils.SqlpraserUtils;
-import org.feisoft.jta.image.BackInfo;
-import org.feisoft.jta.image.Image;
+import org.feisoft.image.Image;
+import org.feisoft.image.BackInfo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

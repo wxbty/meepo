@@ -5,7 +5,6 @@ import org.feisoft.jta.supports.resource.ManagedConnectionFactoryHandler;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
-import javax.jms.XAConnectionFactory;
 import javax.resource.spi.ManagedConnectionFactory;
 import javax.sql.XADataSource;
 import java.lang.reflect.Proxy;
@@ -27,11 +26,7 @@ public class ManagedConnectionFactoryPostProcessor implements BeanPostProcessor 
 			ManagedConnectionFactoryHandler interceptor = new ManagedConnectionFactoryHandler(bean);
 			interceptor.setIdentifier(beanName);
 			return Proxy.newProxyInstance(cl, interfaces, interceptor);
-        } else if (XAConnectionFactory.class.isInstance(bean)) {
-			ManagedConnectionFactoryHandler interceptor = new ManagedConnectionFactoryHandler(bean);
-			interceptor.setIdentifier(beanName);
-			return Proxy.newProxyInstance(cl, interfaces, interceptor);
-		} else if (ManagedConnectionFactory.class.isInstance(bean)) {
+        } else if (ManagedConnectionFactory.class.isInstance(bean)) {
 			ManagedConnectionFactoryHandler interceptor = new ManagedConnectionFactoryHandler(bean);
 			interceptor.setIdentifier(beanName);
 			return Proxy.newProxyInstance(cl, interfaces, interceptor);

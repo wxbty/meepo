@@ -13,7 +13,7 @@
 
 package org.feisoft.transaction.archive;
 
-import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
 import org.feisoft.transaction.supports.resource.XAResourceDescriptor;

@@ -1,22 +1,20 @@
 package org.feisoft.jta;
 
 import org.apache.commons.lang3.StringUtils;
+import org.feisoft.common.utils.ByteUtils;
+import org.feisoft.common.utils.CommonUtils;
 import org.feisoft.jta.resource.XATerminatorImpl;
 import org.feisoft.jta.resource.XATerminatorOptd;
 import org.feisoft.jta.strategy.CommonTransactionStrategy;
 import org.feisoft.jta.strategy.LastResourceOptimizeStrategy;
 import org.feisoft.jta.strategy.SimpleTransactionStrategy;
 import org.feisoft.jta.strategy.VacantTransactionStrategy;
-import org.feisoft.jta.supports.jdbc.LocalXAResource;
 import org.feisoft.jta.supports.resource.CommonResourceDescriptor;
-import org.feisoft.jta.supports.resource.LocalXAResourceDescriptor;
 import org.feisoft.jta.supports.resource.RemoteResourceDescriptor;
 import org.feisoft.jta.supports.resource.UnidentifiedResourceDescriptor;
 import org.feisoft.jta.supports.wire.RemoteCoordinator;
-import org.feisoft.common.utils.ByteUtils;
-import org.feisoft.common.utils.CommonUtils;
-import org.feisoft.transaction.*;
 import org.feisoft.transaction.Transaction;
+import org.feisoft.transaction.*;
 import org.feisoft.transaction.archive.TransactionArchive;
 import org.feisoft.transaction.archive.XAResourceArchive;
 import org.feisoft.transaction.internal.SynchronizationList;
@@ -742,22 +740,6 @@ public class TransactionImpl implements Transaction {
 
         descriptor.setTransactionTimeoutQuietly(this.transactionTimeout);
 
-        if (this.participant != null && (LocalXAResourceDescriptor.class.isInstance(descriptor)
-                || UnidentifiedResourceDescriptor.class.isInstance(descriptor))) {
-            XAResourceDescriptor lro = this.participant.getDescriptor();
-            try {
-                if (lro.isSameRM(descriptor) == false) {
-                    throw new SystemException(
-                            "Only one non-XA resource is allowed to participate in global transaction.");
-                }
-            } catch (XAException ex) {
-                SystemException sysEx = new SystemException();
-                sysEx.initCause(ex);
-                throw sysEx;
-            } catch (RuntimeException ex) {
-                throw new IllegalStateException(ex);
-            }
-        }
 
         boolean success = false;
         try {
@@ -1173,12 +1155,6 @@ public class TransactionImpl implements Transaction {
 
             XAResourceDescriptor descriptor = archive.getDescriptor();
             XAResource delegate = descriptor.getDelegate();
-            boolean localFlag = LocalXAResource.class.isInstance(delegate);
-
-            if (localFlag //
-                    && LastResourceOptimizeStrategy.class.isInstance(this.transactionStrategy)) {
-                throw new SystemException();
-            }
 
             if (archive.isRecovered()) {
                 unCommitExists = archive.isCommitted() ? unCommitExists : true;
@@ -1188,11 +1164,8 @@ public class TransactionImpl implements Transaction {
             }
 
             boolean xidExists = this.recover(archive);
-            if (localFlag) {
-                rollbackExists = xidExists ? rollbackExists : true;
-            } else {
-                unCommitExists = xidExists ? true : unCommitExists;
-            }
+
+            unCommitExists = xidExists ? true : unCommitExists;
 
         }
 
@@ -1244,24 +1217,9 @@ public class TransactionImpl implements Transaction {
 
         XAResourceDescriptor descriptor = archive.getDescriptor();
         XAResource delegate = descriptor.getDelegate();
-        boolean nativeFlag = LocalXAResource.class.isInstance(delegate);
         boolean remoteFlag = RemoteCoordinator.class.isInstance(delegate);
-        if (nativeFlag) {
-            try {
-                ((LocalXAResource) delegate).recoverable(archive.getXid());
-                xidRecovered = true;
-            } catch (XAException ex) {
-                switch (ex.errorCode) {
-                    case XAException.XAER_NOTA:
-                        break;
-                    default:
-                        logger.error("[{}] recover-resource failed. branch= {}",
-                                ByteUtils.byteArrayToString(globalXid.getGlobalTransactionId()),
-                                ByteUtils.byteArrayToString(globalXid.getBranchQualifier()), ex);
-                        throw new SystemException();
-                }
-            }
-        } else if (archive.isIdentified()) {
+
+        if (archive.isIdentified()) {
             Xid thisXid = archive.getXid();
             byte[] thisGlobalTransactionId = thisXid.getGlobalTransactionId();
             byte[] thisBranchQualifier = thisXid.getBranchQualifier();

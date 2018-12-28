@@ -3,8 +3,8 @@ package org.feisoft.jta;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.feisoft.common.utils.ByteUtils;
-import org.feisoft.common.utils.DbPool.DbPoolSource;
-import org.feisoft.jta.image.BackInfo;
+import org.feisoft.DbPool.DbPoolSource;
+import org.feisoft.image.BackInfo;
 import org.feisoft.jta.supports.wire.RemoteCoordinator;
 import org.feisoft.transaction.*;
 import org.feisoft.transaction.Transaction;
@@ -207,16 +207,11 @@ public class TransactionManagerImpl implements TransactionManager, TransactionTi
     }
 
     public Transaction getTransactionQuietly() {
-        try {
-            return this.getTransaction();
-        } catch (SystemException ex) {
-            return null;
-        } catch (RuntimeException ex) {
-            return null;
-        }
+        return this.getTransaction();
+
     }
 
-    public Transaction getTransaction() throws SystemException {
+    public Transaction getTransaction() {
         return this.associatedTxMap.get(Thread.currentThread());
     }
 

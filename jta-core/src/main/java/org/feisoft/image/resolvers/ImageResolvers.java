@@ -1,7 +1,7 @@
-package org.feisoft.jta.image.resolvers;
+package org.feisoft.image.resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
-import org.feisoft.jta.image.Image;
+import org.feisoft.image.Image;
 
 import javax.transaction.xa.XAException;
 import java.sql.SQLException;

@@ -15,7 +15,7 @@
  */
 package org.feisoft.jta.supports.jdbc;
 
-import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 import org.springframework.beans.factory.BeanNameAware;
 

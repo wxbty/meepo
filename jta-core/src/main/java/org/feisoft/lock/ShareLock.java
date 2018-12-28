@@ -1,6 +1,6 @@
-package org.feisoft.jta.lock;
+package org.feisoft.lock;
 
-import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 
 import java.sql.SQLException;

@@ -1,8 +1,8 @@
-package org.feisoft.jta.image;
+package org.feisoft.image;
 
 import org.apache.commons.lang3.StringUtils;
-import org.feisoft.common.utils.DbPool.BoolRowMap;
-import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.DbPool.BoolRowMap;
+import org.feisoft.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -159,9 +159,9 @@ public class BackInfo {
             //找出所有的后像记录，查看和当前记录是否一直，如果不一致，报错人工处理
 
             for (LineFileds lf : line) {
-                List<org.feisoft.jta.image.Field> fields = lf.getFields();
+                List<Field> fields = lf.getFields();
                 Map<String, Object> fds = new HashMap<String, Object>();
-                for (org.feisoft.jta.image.Field field : fields) {
+                for (Field field : fields) {
                     fds.put(field.getName(), field.getValue());
                 }
                 String andPkEquals = "";
@@ -216,10 +216,10 @@ public class BackInfo {
         } else if (isUpdate()) {
             List<LineFileds> line = beforeImage.getLine();
             for (LineFileds lf : line) {
-                List<org.feisoft.jta.image.Field> fields = lf.getFields();
+                List<Field> fields = lf.getFields();
                 Map<String, Object> fds = new HashMap<String, Object>();
                 StringBuffer setSql = new StringBuffer();
-                for (org.feisoft.jta.image.Field field : fields) {
+                for (Field field : fields) {
                     fds.put(field.getName(), field.getValue());
                     if (field.getValue() instanceof String) {
                         setSql.append(" " + field.getName() + "='" + field.getValue() + "',");
@@ -259,10 +259,10 @@ public class BackInfo {
         } else if (isDelete()) {
             List<LineFileds> line = beforeImage.getLine();
             for (LineFileds lf : line) {
-                List<org.feisoft.jta.image.Field> fields = lf.getFields();
+                List<Field> fields = lf.getFields();
                 StringBuffer colSql = new StringBuffer();
                 StringBuffer valSql = new StringBuffer();
-                for (org.feisoft.jta.image.Field field : fields) {
+                for (Field field : fields) {
 
                     colSql.append(" " + field.getName() + ",");
 

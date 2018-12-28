@@ -1,14 +1,14 @@
-package org.feisoft.jta.image.resolvers;
+package org.feisoft.image.resolvers;
 
 import net.sf.jsqlparser.JSQLParserException;
 import org.apache.commons.lang3.StringUtils;
-import org.feisoft.common.utils.DbPool.DbPoolSource;
+import org.feisoft.DbPool.DbPoolSource;
 import org.feisoft.common.utils.SpringBeanUtil;
 import org.feisoft.common.utils.SqlpraserUtils;
-import org.feisoft.jta.image.BackInfo;
-import org.feisoft.jta.image.Field;
-import org.feisoft.jta.image.Image;
-import org.feisoft.jta.image.LineFileds;
+import org.feisoft.image.BackInfo;
+import org.feisoft.image.Field;
+import org.feisoft.image.Image;
+import org.feisoft.image.LineFileds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
@@ -92,9 +92,9 @@ public abstract class BaseResolvers implements ImageResolvers {
 
         for (Map<String, Object> peMap : key_value_list) {
             LineFileds lf = new LineFileds();
-            List<org.feisoft.jta.image.Field> fileds = new ArrayList<org.feisoft.jta.image.Field>();
+            List<Field> fileds = new ArrayList<Field>();
             for (String col : peMap.keySet()) {
-                Field field = new org.feisoft.jta.image.Field();
+                Field field = new Field();
                 field.setName(col);
                 field.setType(peMap.get(col).getClass().getName());
                 field.setValue(peMap.get(col));

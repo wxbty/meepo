@@ -37,7 +37,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Propagation;
 
-import javax.transaction.Status;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
@@ -83,7 +82,7 @@ public class TransactionServiceFilter implements Filter {
             if (StringUtils.isEmpty(transactionContextContent)) {
                 return invoker.invoke(invocation);
             }
-            return this.providerInvokeForSVC(invoker, invocation);
+            return this.providerInvokeForService(invoker, invocation);
         }
     }
 
@@ -197,7 +196,7 @@ public class TransactionServiceFilter implements Filter {
     }
 
 
-    public Result providerInvokeForSVC(Invoker<?> invoker, Invocation invocation) throws RpcException {
+    public Result providerInvokeForService(Invoker<?> invoker, Invocation invocation) throws RpcException {
 
 
         RemoteCoordinatorRegistry coordinatorRegistry = RemoteCoordinatorRegistry.getInstance();
@@ -265,7 +264,7 @@ public class TransactionServiceFilter implements Filter {
             return this.createErrorResultForProvider(rex, propagatedBy, true);
         } finally {
             try {
-                this.afterProviderInvokeForSVC(invocation, request, response);
+                this.afterProviderInvokeForService(invocation, request, response);
             } catch (RpcException rex) {
                 if (failure) {
                     logger.error("Error occurred in remote call!", rex);
@@ -373,8 +372,8 @@ public class TransactionServiceFilter implements Filter {
 
     }
 
-    private void afterProviderInvokeForSVC(Invocation invocation, TransactionRequestImpl request,
-                                           TransactionResponseImpl response) {
+    private void afterProviderInvokeForService(Invocation invocation, TransactionRequestImpl request,
+                                               TransactionResponseImpl response) {
         TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
         TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();
         TransactionInterceptor transactionInterceptor = beanFactory.getTransactionInterceptor();
@@ -403,7 +402,7 @@ public class TransactionServiceFilter implements Filter {
         } else if (RemoteCoordinator.class.getName().equals(interfaceClazz)) {
             return this.consumerInvokeForJTA(invoker, invocation);
         } else {
-            return this.consumerInvokeForSVC(invoker, invocation);
+            return this.consumerInvokeForService(invoker, invocation);
         }
     }
 
@@ -503,7 +502,7 @@ public class TransactionServiceFilter implements Filter {
         return result;
     }
 
-    public Result consumerInvokeForSVC(Invoker<?> invoker, Invocation invocation) throws RpcException {
+    public Result consumerInvokeForService(Invoker<?> invoker, Invocation invocation) throws RpcException {
         RemoteCoordinatorRegistry coordinatorRegistry = RemoteCoordinatorRegistry.getInstance();
         TransactionBeanRegistry beanRegistry = TransactionBeanRegistry.getInstance();
         TransactionBeanFactory beanFactory = beanRegistry.getBeanFactory();

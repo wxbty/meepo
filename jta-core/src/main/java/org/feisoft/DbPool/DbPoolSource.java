@@ -1,4 +1,4 @@
-package org.feisoft.common.utils.DbPool;
+package org.feisoft.DbPool;
 
 import org.feisoft.common.utils.SqlpraserUtils;
 import org.slf4j.Logger;
@@ -121,8 +121,9 @@ public class DbPoolSource {
                 }
             }
 
-        } catch (Exception e) {
-            logger.error("executeUpdate SqlExcepiton", e);
+        } catch (SQLException e) {
+            logger.warn("executeUpdate SqlExcepiton", e);
+            throw e;
         } finally {
             close(con, pstmt, null);
         }
@@ -149,8 +150,9 @@ public class DbPoolSource {
                 if (!result)
                     return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             logger.error("executeQuery SqlExcepiton", e);
+            throw e;
         } finally {
             close(con, pstmt, rs);
         }
@@ -177,8 +179,9 @@ public class DbPoolSource {
                 if (t != null)
                     list.add(t);
             }
-        } catch (Exception e) {
-            logger.error("executeQuery SqlExcepiton", e);
+        } catch (SQLException e) {
+            logger.warn("executeQuery SqlExcepiton", e);
+            throw e;
         } finally {
             close(con, pstmt, rs);
         }
