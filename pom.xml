@@ -46,7 +46,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jta.version>2.0.2.SNAP</jta.version>
+        <jta.version>2.0.2.RELEASE</jta.version>
     </properties>
 
 
