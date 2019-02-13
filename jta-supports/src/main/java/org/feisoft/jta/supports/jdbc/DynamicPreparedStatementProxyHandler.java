@@ -47,6 +47,10 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     List<String> proxyUpdateMethods = Arrays
             .asList("executeUpdate", "execute", "executeBatch", "executeLargeBatch", "executeLargeUpdate");
 
+    private static final ThreadLocal<List<TxcLock>> cacheXLocks = new ThreadLocal<>();
+
+    private static final ThreadLocal<Boolean> cacheSLocks = ThreadLocal.withInitial(() -> false);
+
     private Object realObject;
 
     private String sql;
@@ -344,12 +348,18 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
                                    TransactionImpl transaction) throws JSQLParserException, SQLException {
 
         Assert.notNull(transaction, "Transaction must not be null");
+        //当前线程，是可重入的
+        List<TxcLock> ifExistLocks = DynamicPreparedStatementProxyHandler.cacheXLocks.get();
+        if (ifExistLocks != null) {
+            return ifExistLocks;
+        }
         long atime = System.currentTimeMillis();
         long btime = atime;
         while ((btime - atime <= this.timeOut) && transaction.isTiming()) {
             btime = System.currentTimeMillis();
             List<TxcLock> lockList = this.getMutexLock(gloableXid, branchXid, resolver);
             if (this.lockCurrent(lockList)) {
+                DynamicPreparedStatementProxyHandler.cacheXLocks.set(lockList);
                 return lockList;
             }
             try {
@@ -368,14 +378,20 @@ public class DynamicPreparedStatementProxyHandler implements InvocationHandler {
     private void getSlock(BaseResolvers resolver, String gloableXid, String branchXid)
             throws JSQLParserException, SQLException {
 
+        //当前线程，是可重入的
+        if (DynamicPreparedStatementProxyHandler.cacheSLocks.get()) {
+            return;
+        }
         long atime = System.currentTimeMillis();
 
         long btime;
         do {
             btime = System.currentTimeMillis();
             List<TxcLock> lockList = getShareLock(gloableXid, branchXid, resolver, sql);
-            if (lockCurrent(lockList))
+            if (lockCurrent(lockList)) {
+                DynamicPreparedStatementProxyHandler.cacheSLocks.set(Boolean.TRUE);
                 return;
+            }
 
         } while (btime - atime <= this.timeOut);
         throw new SQLException("Proxy.getLockTimeout");
